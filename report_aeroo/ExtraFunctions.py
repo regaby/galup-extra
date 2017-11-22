@@ -160,8 +160,78 @@ class ExtraFunctions(object):
                 self._text_plain('"wikimarkup" format is not supported! Need to be installed "python-mediawiki" package.'),
             'text_markup': self._text_markup,
             'text_remove_markup': self._text_remove_markup,
+            'sum_expre':self._sum_expre,
+            'pages':self._pages,
+            'pages_line':self._pages_line,
+            'pages_last':self._pages_last,
+            'pages_blank':self._pages_blank,
+            'get_row':self._get_row,
             '__filter': self.__filter, # Don't use in the report template!
         }
+
+    # Metodo para sumarizar con operaciones, por ejemplo "o.cant * o.price"
+    # la expresion es un string y debe respetarse el "o." en cada campo del objeto.
+    def _sum_expre(self, attr, sum_fields):
+        expr = "for o in objects:\n\tsumm+=float(%s)" % sum_fields
+        localspace = {'objects':attr, 'summ':0}
+        exec expr in localspace
+        return localspace['summ']
+
+    # Recupero array de paginas (menos la ultima. Si hubiera 1 retorno vacio)
+    # y defino propiedades de la paginacion.
+    def _pages(self, attr, field_expre='o.id', width=2, rows=20):
+        self.page_field = field_expre
+        self.page_width = width
+        self.page_nrows = rows
+        self.page_index = []
+        self.page_crow = 0
+        trows = 0
+        page = 0
+        expr = "for o in objects:\n\tvalue_list.append(%s)" % field_expre
+        localspace = {'objects':attr, 'value_list':[]}
+        exec expr in localspace
+        for index, item in enumerate(localspace['value_list']):
+            if item==False:
+                item=''
+            trows = trows + ( len(item.zfill(width)) / (width+1) ) + 1
+            if trows > (self.page_nrows * page):
+                page = page + 1
+                if page>1:
+                    self.page_index[len(self.page_index)-1]['to']=(index-1)
+                self.page_index.append({ 'from': index, 'to': len(attr)-1 })
+        # completo lineas vacias
+        self.page_brows = range(1, (self.page_nrows * page)-trows)
+        # Si hay mas de una pagina devuelvo 1 a N-1
+        if page>1: 
+            return range(0, page-1)
+        else:
+            return []
+
+    # Recupero lineas de la pagina page
+
+    def _pages_line(self, attr, page):
+        ret = []
+        if len(self.page_index)>0:
+            current = self.page_index[page]['from']
+            while current <= self.page_index[page]['to']:
+                ret.append(attr[current])
+                current=current+1
+        return ret
+
+    # Recupero lineas de la pagina ultima
+
+    def _pages_last(self, attr):
+        return self._pages_line(attr, len(self.page_index)-1)
+
+    # Recupero filas vacias para completar la ultima pagina (puedo restar con res)
+
+    def _pages_blank(self, attr, res=0):
+        return self.page_brows[0:len(self.page_brows)-res]
+
+    # Recupero fila actual (se inicializa al invocar al metodo page())
+    def _get_row(self, attr):
+        self.page_crow+=1
+        return self.page_crows
 
     def __filter(self, val):
         if isinstance(val, osv.orm.browse_null):
