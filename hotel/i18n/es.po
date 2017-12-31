@@ -20,7 +20,7 @@ msgstr ""
 #. module: hotel
 #: model:ir.ui.menu,name:hotel.menu_open_hotel_folio1_form_tree
 msgid "Generate Folio"
-msgstr "Generar detalles de los servicios ofrecidos"
+msgstr "Generar Folio"
 
 #. module: hotel
 #: view:hotel.folio:0
@@ -46,7 +46,7 @@ msgstr "Nombre de modelo inválido en la definición de acción"
 #. module: hotel
 #: field:hotel.floor,name:0
 msgid "Floor Name"
-msgstr "Nombre de planta"
+msgstr "Nombre del Piso"
 
 #. module: hotel
 #: field:product.product,iscategid:0
@@ -81,7 +81,7 @@ msgstr "a"
 #. module: hotel
 #: wizard_view:hotel.folio.total_folio,init:0
 msgid "Folio List"
-msgstr "Lista de detalles de los servicios ofrecidos"
+msgstr "Lista de Folio"
 
 #. module: hotel
 #: model:ir.ui.menu,name:hotel.menu_open_hotel_services_form
@@ -111,7 +111,7 @@ msgstr "Notas"
 #. module: hotel
 #: view:hotel.floor:0
 msgid " Hotel Floor"
-msgstr " Planta del hotel"
+msgstr " Piso del hotel"
 
 #. module: hotel
 #: rml:folio.total:0
@@ -136,7 +136,7 @@ msgstr "Línea de servicios del hotel"
 #. module: hotel
 #: model:ir.ui.menu,name:hotel.menu_open_hotel_folio1_form_tree_all
 msgid "All Folio"
-msgstr "Todos los detalles de los servicios ofrecidos"
+msgstr "Todos los Folios"
 
 #. module: hotel
 #: view:hotel.room:0
@@ -164,7 +164,7 @@ msgstr "¡Error! Tú no puedes crear categorías recursivas"
 #. module: hotel
 #: model:ir.model,name:hotel.model_hotel_folio
 msgid "hotel folio new"
-msgstr "Nueva hoja de detalles de los servicios ofrecidos por el hotel"
+msgstr "Nueva hoja de Folio"
 
 #. module: hotel
 #: view:hotel.folio:0
@@ -194,7 +194,7 @@ msgstr "Mesas"
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Folio"
-msgstr "Detalles de los servicios ofrecidos"
+msgstr "Folio"
 
 #. module: hotel
 #: rml:folio.total:0
@@ -281,7 +281,7 @@ msgstr "Habitación de hotel"
 #. module: hotel
 #: rml:folio.total:0
 msgid "Folio No."
-msgstr "Detalle de los servicios ofrecidos No."
+msgstr "Folio Nro."
 
 #. module: hotel
 #: view:hotel.folio:0
@@ -301,7 +301,7 @@ msgstr "Cantidad total"
 #. module: hotel
 #: view:hotel.floor:0
 msgid " Hotel Floors"
-msgstr " Plantas de los hoteles"
+msgstr " Pisos de los hoteles"
 
 #. module: hotel
 #: constraint:ir.ui.view:0
@@ -395,12 +395,12 @@ msgstr "Alquiler(UOM)"
 #. module: hotel
 #: model:ir.model,name:hotel.model_hotel_services
 msgid "Hotel Services and its charges"
-msgstr "Servicios del hotel y sus cambios"
+msgstr "Servicios del hotel y sus cargos"
 
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Procurement Corrected"
-msgstr "Procurement Corrected"
+msgstr "Adquisición Corregida"
 
 #. module: hotel
 #: view:hotel.folio:0
@@ -410,18 +410,18 @@ msgstr "Línea de habitación"
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Room No"
-msgstr "Habitación No"
+msgstr "Habitación Nro."
 
 #. module: hotel
 #: view:hotel.services:0
 msgid "Service rate"
-msgstr "Service rate"
+msgstr "Tarifa de Servicio"
 
 #. module: hotel
 #: model:ir.actions.act_window,name:hotel.open_hotel_folio1_form_tree
 #: model:ir.actions.act_window,name:hotel.open_hotel_folio1_form_tree_all
 msgid "Hotel Folio"
-msgstr "Hotel Folio"
+msgstr "Folio"
 
 #. module: hotel
 #: field:hotel.folio,room_lines:0
@@ -448,7 +448,7 @@ msgstr "Tipo de comodidades de las habitaciones del hotel"
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Folio Line"
-msgstr "Folio Line"
+msgstr "Linea de Folio"
 
 #. module: hotel
 #: view:hotel.folio:0
@@ -482,7 +482,7 @@ msgstr "Comodidades de la habitación"
 #. module: hotel
 #: model:product.category,name:hotel.hotel_room_type_3_product_category
 msgid "No Room"
-msgstr "No Habitación"
+msgstr "Nro. Habitación"
 
 #. module: hotel
 #: field:hotel_service.line,service_line_id:0
@@ -502,7 +502,7 @@ msgstr "Variable"
 #. module: hotel
 #: field:hotel.room,floor_id:0
 msgid "Floor No"
-msgstr "Planta No"
+msgstr "Piso Nro."
 
 #. module: hotel
 #: view:hotel.services:0
@@ -524,17 +524,17 @@ msgstr "Historia"
 #. module: hotel
 #: model:ir.actions.act_window,name:hotel.open_hotel_floor_form_tree
 msgid "Floor Structure"
-msgstr "Estructura de las plantas"
+msgstr "Estructura de los Pisos"
 
 #. module: hotel
 #: rml:folio.total:0
 msgid "Net Total :-"
-msgstr "Net Total :-"
+msgstr "Total Neto :-"
 
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Related invoices"
-msgstr "Related invoices"
+msgstr "Facturas relacionadas"
 
 #. module: hotel
 #: selection:hotel.room,avail_status:0
@@ -587,7 +587,7 @@ msgstr "Hotel Folio1"
 #: model:ir.model,name:hotel.model_hotel_floor
 #: model:ir.ui.menu,name:hotel.menu_open_hotel_floor_form_tree
 msgid "Floor"
-msgstr "Planta"
+msgstr "Piso"
 
 #. module: hotel
 #: model:product.category,name:hotel.hotel_room_type_0_product_category
@@ -608,7 +608,7 @@ msgstr "Imprimir informe"
 #: model:ir.actions.report.xml,name:hotel.hotel_folio_details
 #: model:ir.actions.wizard,name:hotel.wizard_hotel_total
 msgid "Folio Total"
-msgstr "Total detalles de servicios ofrecidos"
+msgstr "Total del Folio"
 
 #. module: hotel
 #: model:ir.actions.act_window,name:hotel.open_hotel_room_type_form_tree
@@ -711,7 +711,7 @@ msgstr ""
 "    * Configurar Propiedades\n"
 "    * Configuración de Hotel\n"
 "    * Entradas y Salidas de clientes, facturaciones\n"
-"    * Gestionar detalles de servicios ofrecidos\n"
+"    * Gestionar detalles de Folios\n"
 "    * Pagos\n"
 "\n"
 "    Se proporcionan diferentes informes, principalmente para la estadística "
@@ -726,12 +726,12 @@ msgstr "Informes"
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Related packings"
-msgstr "Related packings"
+msgstr "Packings relacionados"
 
 #. module: hotel
 #: view:hotel.folio:0
 msgid "Folio No"
-msgstr "Folio No"
+msgstr "Folio Nro."
 
 #. module: hotel
 #: view:hotel.room_type:0
@@ -746,7 +746,7 @@ msgstr "Factura corregida"
 #. module: hotel
 #: model:ir.ui.menu,name:hotel.wizard_hotel_menu
 msgid "Hotel Folio Report"
-msgstr "Informe detalles de servicios ofrecidos"
+msgstr "Informe detalles de Folio"
 
 #. module: hotel
 #: view:hotel.folio:0
