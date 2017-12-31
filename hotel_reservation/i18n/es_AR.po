@@ -1,0 +1,2184 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hotel_reservation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-31 22:42+0000\n"
+"PO-Revision-Date: 2017-12-31 20:06-0300\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_AR\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: hotel_reservation
+#: model:mail.template,body_html:hotel_reservation.mail_template_reservation_reminder_24hrs
+msgid ""
+"\n"
+"                <p><left>Hello <strong>${object.partner_id.name}</strong>.</left></p>\n"
+"                <p><left>Greetings from <strong>${object.warehouse_id.name} Hotel</strong>.</left></p> \n"
+"                <p>This email is for reminding you that the Reservation at the <strong>${object.warehouse_id.name} Hotel</strong>.&nbsp;\n"
+"                   % if object.warehouse_id.partner_id.city: \n"
+"                   <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;\n"
+"                   % endif \n"
+"                   % if object.warehouse_id.partner_id.country_id.name:\n"
+"                   <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;\n"
+"                   % endif\n"
+"                    Your checkin has been confirmed on Date <strong>${object.date_order}</strong> . \n"
+"                   Please find all the details regarding to the reservation as listed below:\n"
+"                </p>\n"
+"                <br/>\n"
+"                &nbsp;&nbsp;<strong>Details :</strong><br/>\n"
+"                <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"                &nbsp;&nbsp;Name Of Guest : <strong>${object.partner_id.name}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Arrival : <strong>${object.checkin}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Departure : <strong>${object.checkout}</strong><br />\n"
+"                &nbsp;&nbsp;Reservation Number : <strong>${object.reservation_no}</strong><br />\n"
+"                &nbsp;&nbsp;Number Of Persons : <strong>${object.adults}</strong> Adults and <strong>${object.children}</strong> Childrens<br />\n"
+"                </p>\n"
+"                &nbsp;&nbsp;<strong>Rooms Rates Per Night :</strong><br/>\n"
+"                <br/>\n"
+"                <table border=\"1\" cellpadding=\"4\" style=\"margin-left: 30px;\">\n"
+"                        <tr>\n"
+"                            <th>Room No</th>\n"
+"                            <th>Amount</th>\n"
+"                        </tr>\n"
+"                        %for line in object.reservation_line:\n"
+"                            %for line2 in line.reserve:\n"
+"                                <tr >\n"
+"                                    <td>${line2.product_id.name}</td>\n"
+"                                    <td>${line2.product_id.list_price}</td>\n"
+"                                </tr>\n"
+"                            %endfor\n"
+"                        %endfor\n"
+"                </table>\n"
+"               <br /> \n"
+"               <p>\n"
+"We would appreciate it if you could let us know in case there are any changes in your schedule or program.\n"
+"Please inform us immediately, so that we can refund your money according to Hotel policies.\n"
+"We are sure that you will find our services satisfactory. We look forward to providing you quality services at our hotel. \n"
+"               </p>\n"
+"               <br />\n"
+"<strong>Best Regards<strong>,<br />\n"
+"<br />\n"
+"<strong>Reservations Team <strong><br />\n"
+"[<strong>${object.warehouse_id.name} Hotel</strong>]<br />\n"
+"% if object.warehouse_id.partner_id.street:\n"
+"<strong>${object.warehouse_id.partner_id.street}</strong><br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.city:\n"
+"<strong>${object.warehouse_id.partner_id.city}</strong>,<br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.country_id.name:\n"
+"<strong>${object.warehouse_id.partner_id.country_id.name}</strong>,<br />\n"
+"% endif\n"
+"<br />\n"
+"% if object.warehouse_id.partner_id.website:\n"
+"<strong>${object.warehouse_id.partner_id.website}</strong> <br />\n"
+"% endif\n"
+"             "
+msgstr ""
+"\n"
+"                <p><left>Hello <strong>${object.partner_id.name}</strong>.</left></p>\n"
+"                <p><left>Greetings from <strong>${object.warehouse_id.name} Hotel</strong>.</left></p> \n"
+"                <p>This email is for reminding you that the Reservation at the <strong>${object.warehouse_id.name} Hotel</strong>.&nbsp;\n"
+"                   % if object.warehouse_id.partner_id.city: \n"
+"                   <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;\n"
+"                   % endif \n"
+"                   % if object.warehouse_id.partner_id.country_id.name:\n"
+"                   <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;\n"
+"                   % endif\n"
+"                    Your checkin has been confirmed on Date <strong>${object.date_order}</strong> . \n"
+"                   Please find all the details regarding to the reservation as listed below:\n"
+"                </p>\n"
+"                <br/>\n"
+"                &nbsp;&nbsp;<strong>Details :</strong><br/>\n"
+"                <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"                &nbsp;&nbsp;Name Of Guest : <strong>${object.partner_id.name}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Arrival : <strong>${object.checkin}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Departure : <strong>${object.checkout}</strong><br />\n"
+"                &nbsp;&nbsp;Reservation Number : <strong>${object.reservation_no}</strong><br />\n"
+"                &nbsp;&nbsp;Number Of Persons : <strong>${object.adults}</strong> Adults and <strong>${object.children}</strong> Childrens<br />\n"
+"                </p>\n"
+"                &nbsp;&nbsp;<strong>Rooms Rates Per Night :</strong><br/>\n"
+"                <br/>\n"
+"                <table border=\"1\" cellpadding=\"4\" style=\"margin-left: 30px;\">\n"
+"                        <tr>\n"
+"                            <th>Room No</th>\n"
+"                            <th>Amount</th>\n"
+"                        </tr>\n"
+"                        %for line in object.reservation_line:\n"
+"                            %for line2 in line.reserve:\n"
+"                                <tr >\n"
+"                                    <td>${line2.product_id.name}</td>\n"
+"                                    <td>${line2.product_id.list_price}</td>\n"
+"                                </tr>\n"
+"                            %endfor\n"
+"                        %endfor\n"
+"                </table>\n"
+"               <br /> \n"
+"               <p>\n"
+"We would appreciate it if you could let us know in case there are any changes in your schedule or program.\n"
+"Please inform us immediately, so that we can refund your money according to Hotel policies.\n"
+"We are sure that you will find our services satisfactory. We look forward to providing you quality services at our hotel. \n"
+"               </p>\n"
+"               <br />\n"
+"<strong>Best Regards<strong>,<br />\n"
+"<br />\n"
+"<strong>Reservations Team <strong><br />\n"
+"[<strong>${object.warehouse_id.name} Hotel</strong>]<br />\n"
+"% if object.warehouse_id.partner_id.street:\n"
+"<strong>${object.warehouse_id.partner_id.street}</strong><br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.city:\n"
+"<strong>${object.warehouse_id.partner_id.city}</strong>,<br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.country_id.name:\n"
+"<strong>${object.warehouse_id.partner_id.country_id.name}</strong>,<br />\n"
+"% endif\n"
+"<br />\n"
+"% if object.warehouse_id.partner_id.website:\n"
+"<strong>${object.warehouse_id.partner_id.website}</strong> <br />\n"
+"% endif\n"
+"             "
+
+#. module: hotel_reservation
+#: model:mail.template,body_html:hotel_reservation.mail_template_hotel_reservation
+msgid ""
+"\n"
+"                <p>Hello <strong>${object.partner_id.name}</strong>,</p>\n"
+"                <p>This is to confirm your booking for a room at the <strong>${object.warehouse_id.name} Hotel</strong>,&nbsp;\n"
+"                   % if object.warehouse_id.partner_id.city: \n"
+"                   <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;\n"
+"                   % endif \n"
+"                   % if object.warehouse_id.partner_id.country_id.name:\n"
+"                   <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;\n"
+"                   % endif\n"
+"                   On behalf of the hotel, we would like to express our gratitude to you for choosing our services. \n"
+"                   Please find all the details regarding the confirmation of the reservation on Date <strong>${object.date_order}</strong> are listed below:\n"
+"                </p> \n"
+"                &nbsp;&nbsp;<strong>Details :</strong><br/>\n"
+"                <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"                &nbsp;&nbsp;Name Of Guest : <strong>${object.partner_id.name}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Arrival : <strong>${object.checkin}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Departure : <strong>${object.checkout}</strong><br />\n"
+"                &nbsp;&nbsp;Reservation Number : <strong>${object.reservation_no}</strong><br />\n"
+"                &nbsp;&nbsp;Number Of Persons : <strong>${object.adults}</strong> Adults and <strong>${object.children}</strong> Childrens<br />\n"
+"                </p>\n"
+"                &nbsp;&nbsp;<strong>Rooms Rates Per Night :</strong><br/>\n"
+"                <br/>\n"
+"                <table border=\"1\" cellpadding=\"4\" style=\"margin-left: 30px;\">\n"
+"                        <tr>\n"
+"                            <th>Room No</th>\n"
+"                            <th>Amount</th>\n"
+"                        </tr>\n"
+"                        %for line in object.reservation_line:\n"
+"                            %for line2 in line.reserve:\n"
+"                                <tr >\n"
+"                                    <td>${line2.product_id.name}</td>\n"
+"                                    <td>${line2.product_id.list_price}</td>\n"
+"                                </tr>\n"
+"                            %endfor\n"
+"                        %endfor\n"
+"                </table>\n"
+"               <br /> \n"
+"               <p>\n"
+"We would appreciate it if you could let us know in case there are any changes in your schedule or program. \n"
+"In case you require check-in facilities at an earlier time due to flight changes or any other reasons, kindly inform us. \n"
+"We are sure that you will find our services satisfactory. In case you need to cancel your reservation, \n"
+"please Reply or Call us within 24 hours before the day of the check-in. \n"
+"We look forward to providing you quality services at our hotel. \n"
+"               </p>\n"
+"               <br />\n"
+"<strong>Kind Regards<strong>,<br />\n"
+"<br />\n"
+"<strong>Reservations Team <strong><br />\n"
+"[<strong>${object.warehouse_id.name} Hotel</strong>]<br />\n"
+"% if object.warehouse_id.partner_id.street:\n"
+"<strong>${object.warehouse_id.partner_id.street}</strong><br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.city:\n"
+"<strong>${object.warehouse_id.partner_id.city}</strong>,<br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.country_id.name:\n"
+"<strong>${object.warehouse_id.partner_id.country_id.name}</strong>,<br />\n"
+"% endif\n"
+"<br />\n"
+"% if object.warehouse_id.partner_id.website:\n"
+"<strong>${object.warehouse_id.partner_id.website}</strong> <br />\n"
+"% endif\n"
+"             "
+msgstr ""
+"\n"
+"                <p>Hello <strong>${object.partner_id.name}</strong>,</p>\n"
+"                <p>This is to confirm your booking for a room at the <strong>${object.warehouse_id.name} Hotel</strong>,&nbsp;\n"
+"                   % if object.warehouse_id.partner_id.city: \n"
+"                   <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;\n"
+"                   % endif \n"
+"                   % if object.warehouse_id.partner_id.country_id.name:\n"
+"                   <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;\n"
+"                   % endif\n"
+"                   On behalf of the hotel, we would like to express our gratitude to you for choosing our services. \n"
+"                   Please find all the details regarding the confirmation of the reservation on Date <strong>${object.date_order}</strong> are listed below:\n"
+"                </p> \n"
+"                &nbsp;&nbsp;<strong>Details :</strong><br/>\n"
+"                <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"                &nbsp;&nbsp;Name Of Guest : <strong>${object.partner_id.name}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Arrival : <strong>${object.checkin}</strong><br />\n"
+"                &nbsp;&nbsp;Date Of Departure : <strong>${object.checkout}</strong><br />\n"
+"                &nbsp;&nbsp;Reservation Number : <strong>${object.reservation_no}</strong><br />\n"
+"                &nbsp;&nbsp;Number Of Persons : <strong>${object.adults}</strong> Adults and <strong>${object.children}</strong> Childrens<br />\n"
+"                </p>\n"
+"                &nbsp;&nbsp;<strong>Rooms Rates Per Night :</strong><br/>\n"
+"                <br/>\n"
+"                <table border=\"1\" cellpadding=\"4\" style=\"margin-left: 30px;\">\n"
+"                        <tr>\n"
+"                            <th>Room No</th>\n"
+"                            <th>Amount</th>\n"
+"                        </tr>\n"
+"                        %for line in object.reservation_line:\n"
+"                            %for line2 in line.reserve:\n"
+"                                <tr >\n"
+"                                    <td>${line2.product_id.name}</td>\n"
+"                                    <td>${line2.product_id.list_price}</td>\n"
+"                                </tr>\n"
+"                            %endfor\n"
+"                        %endfor\n"
+"                </table>\n"
+"               <br /> \n"
+"               <p>\n"
+"We would appreciate it if you could let us know in case there are any changes in your schedule or program. \n"
+"In case you require check-in facilities at an earlier time due to flight changes or any other reasons, kindly inform us. \n"
+"We are sure that you will find our services satisfactory. In case you need to cancel your reservation, \n"
+"please Reply or Call us within 24 hours before the day of the check-in. \n"
+"We look forward to providing you quality services at our hotel. \n"
+"               </p>\n"
+"               <br />\n"
+"<strong>Kind Regards<strong>,<br />\n"
+"<br />\n"
+"<strong>Reservations Team <strong><br />\n"
+"[<strong>${object.warehouse_id.name} Hotel</strong>]<br />\n"
+"% if object.warehouse_id.partner_id.street:\n"
+"<strong>${object.warehouse_id.partner_id.street}</strong><br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.city:\n"
+"<strong>${object.warehouse_id.partner_id.city}</strong>,<br />\n"
+"% endif\n"
+"% if object.warehouse_id.partner_id.country_id.name:\n"
+"<strong>${object.warehouse_id.partner_id.country_id.name}</strong>,<br />\n"
+"% endif\n"
+"<br />\n"
+"% if object.warehouse_id.partner_id.website:\n"
+"<strong>${object.warehouse_id.partner_id.website}</strong> <br />\n"
+"% endif\n"
+"             "
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_checkout_qweb
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "#No"
+msgstr "#Nro."
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.hotel_calendar_view
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<calendar string=\"Current Reservation\" date_start=\"checkin\" date_stop=\"dummy\" color=\"partner_id\">\n"
+"                    <field name=\"partner_id\"/>\n"
+"                </calendar>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<calendar string=\"Current Reservation\" date_start=\"checkin\" date_stop=\"dummy\" color=\"partner_id\">\n"
+"                    <field name=\"partner_id\"/>\n"
+"                </calendar>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.assets_backend
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<data name=\"point_of_sale assets\" inherit_id=\"web.assets_backend\">\n"
+"            <xpath expr=\".\" position=\"inside\">\n"
+"                <script type=\"text/javascript\" src=\"/hotel_reservation/static/src/js/hotel_room_summary.js\"/>\n"
+"               <!--  <script type=\"text/javascript\" src=\"/point_of_sale/static/src/js/db.js\"></script> -->\n"
+"                <link rel=\"stylesheet\" href=\"/hotel_reservation/static/src/css/room_summary.css\"/>\n"
+"            </xpath>\n"
+"        </data>\n"
+"    "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<data name=\"point_of_sale assets\" inherit_id=\"web.assets_backend\">\n"
+"            <xpath expr=\".\" position=\"inside\">\n"
+"                <script type=\"text/javascript\" src=\"/hotel_reservation/static/src/js/hotel_room_summary.js\"/>\n"
+"               <!--  <script type=\"text/javascript\" src=\"/point_of_sale/static/src/js/db.js\"></script> -->\n"
+"                <link rel=\"stylesheet\" href=\"/hotel_reservation/static/src/css/room_summary.css\"/>\n"
+"            </xpath>\n"
+"        </data>\n"
+"    "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_folio1_form_inherited
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<field name=\"invoice_status\" position=\"after\">\n"
+"                    <field name=\"reservation_id\" readonly=\"1\"/>\n"
+"                </field>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<field name=\"invoice_status\" position=\"after\">\n"
+"                    <field name=\"reservation_id\" readonly=\"1\"/>\n"
+"                </field>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_folio1_tree_inherited
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<field name=\"name\" position=\"after\">\n"
+"                    <field name=\"reservation_id\"/>\n"
+"                </field>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<field name=\"name\" position=\"after\">\n"
+"                    <field name=\"reservation_id\"/>\n"
+"                </field>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.make_folio_wizard_form_view
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Create Folio\" version=\"8.0\">\n"
+"                    <separator colspan=\"4\" string=\"Do you really want to create the Folio ?\"/>\n"
+"                  <!--  <field name=\"grouped\" /> -->\n"
+"                    <newline/>\n"
+"                    <footer>\n"
+"                        <button name=\"makeFolios\" string=\"Create Folio\" type=\"object\" class=\"oe_highlight\"/>\n"
+"                        or\n"
+"                        <button string=\"Cancel\" class=\"oe_link\" special=\"cancel\"/>\n"
+"                    </footer>\n"
+"                </form>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Create Folio\" version=\"8.0\">\n"
+"                    <separator colspan=\"4\" string=\"Do you really want to create the Folio ?\"/>\n"
+"                  <!--  <field name=\"grouped\" /> -->\n"
+"                    <newline/>\n"
+"                    <footer>\n"
+"                        <button name=\"makeFolios\" string=\"Create Folio\" type=\"object\" class=\"oe_highlight\"/>\n"
+"                        or\n"
+"                        <button string=\"Cancel\" class=\"oe_link\" special=\"cancel\"/>\n"
+"                    </footer>\n"
+"                </form>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.quick_room_reservation_form_view
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Quick Reservation\">\n"
+"                     <header>\n"
+"                         <separator string=\"Quick Reservation\" colspan=\"4\"/>\n"
+"                     </header>\n"
+"                     <sheet>\n"
+"                         <group colspan=\"4\" col=\"4\">\n"
+"                             <field name=\"partner_id\"/>\n"
+"                             <field name=\"room_id\" readonly=\"1\"/>\n"
+"                             <field name=\"check_in\"/>\n"
+"                             <field name=\"check_out\"/>\n"
+"                             <field name=\"warehouse_id\"/>\n"
+"                             <field name=\"pricelist_id\"/>\n"
+"                             <field name=\"partner_invoice_id\"/>\n"
+"                             <field name=\"partner_order_id\"/>\n"
+"                             <field name=\"partner_shipping_id\"/>\n"
+"                         </group>\n"
+"                     </sheet>\n"
+"                     <footer>\n"
+"                         <group colspan=\"2\" col=\"2\">\n"
+"                             <button string=\"Save\" name=\"room_reserve\" type=\"object\" icon=\"gtk-ok\"/>\n"
+"                             <button string=\"Cancel\" special=\"cancel\" icon=\"gtk-cancel\"/>\n"
+"                         </group>\n"
+"                     </footer>\n"
+"                 </form>\n"
+"             "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Quick Reservation\">\n"
+"                     <header>\n"
+"                         <separator string=\"Quick Reservation\" colspan=\"4\"/>\n"
+"                     </header>\n"
+"                     <sheet>\n"
+"                         <group colspan=\"4\" col=\"4\">\n"
+"                             <field name=\"partner_id\"/>\n"
+"                             <field name=\"room_id\" readonly=\"1\"/>\n"
+"                             <field name=\"check_in\"/>\n"
+"                             <field name=\"check_out\"/>\n"
+"                             <field name=\"warehouse_id\"/>\n"
+"                             <field name=\"pricelist_id\"/>\n"
+"                             <field name=\"partner_invoice_id\"/>\n"
+"                             <field name=\"partner_order_id\"/>\n"
+"                             <field name=\"partner_shipping_id\"/>\n"
+"                         </group>\n"
+"                     </sheet>\n"
+"                     <footer>\n"
+"                         <group colspan=\"2\" col=\"2\">\n"
+"                             <button string=\"Save\" name=\"room_reserve\" type=\"object\" icon=\"gtk-ok\"/>\n"
+"                             <button string=\"Cancel\" special=\"cancel\" icon=\"gtk-cancel\"/>\n"
+"                         </group>\n"
+"                     </footer>\n"
+"                 </form>\n"
+"             "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.hotel_reservation_wizard_form_view
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Reservation List\" version=\"7.0\">\n"
+"                    <group col=\"4\">\n"
+"                        <field name=\"date_start\"/>\n"
+"                        <field name=\"date_end\"/>\n"
+"                    </group>\n"
+"                    <footer>\n"
+"                        <button special=\"cancel\" string=\"Cancel\" icon=\"gtk-cancel\"/>\n"
+"                        <button name=\"report_checkin_detail\" string=\"CheckIn List\" type=\"object\" icon=\"gtk-jump-to\"/>\n"
+"                        <button name=\"report_checkout_detail\" string=\"CheckOut List\" type=\"object\" icon=\"gtk-redo\"/>\n"
+"                        <button name=\"report_reservation_detail\" type=\"object\" string=\"Reservation List\" icon=\"gtk-justify-fill\"/>\n"
+"                        <button name=\"report_maxroom_detail\" string=\"Room Used Maximum\" type=\"object\" icon=\"terp-stock_symbol-selection\"/>\n"
+"                   </footer>\n"
+"                </form>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Reservation List\" version=\"7.0\">\n"
+"                    <group col=\"4\">\n"
+"                        <field name=\"date_start\"/>\n"
+"                        <field name=\"date_end\"/>\n"
+"                    </group>\n"
+"                    <footer>\n"
+"                        <button special=\"cancel\" string=\"Cancel\" icon=\"gtk-cancel\"/>\n"
+"                        <button name=\"report_checkin_detail\" string=\"CheckIn List\" type=\"object\" icon=\"gtk-jump-to\"/>\n"
+"                        <button name=\"report_checkout_detail\" string=\"CheckOut List\" type=\"object\" icon=\"gtk-redo\"/>\n"
+"                        <button name=\"report_reservation_detail\" type=\"object\" string=\"Reservation List\" icon=\"gtk-justify-fill\"/>\n"
+"                        <button name=\"report_maxroom_detail\" string=\"Room Used Maximum\" type=\"object\" icon=\"terp-stock_symbol-selection\"/>\n"
+"                   </footer>\n"
+"                </form>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.room_reservation_summary_form_view
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Reservation Summary\">\n"
+"                     <header>\n"
+"                         <separator string=\"Room Reservation Summary\" colspan=\"4\"/>\n"
+"                     </header>\n"
+"                     <sheet>\n"
+"                         <group colspan=\"4\" col=\"4\">\n"
+"                             <label for=\"date_from\" string=\"Summary Period\"/>\n"
+"                             <div>\n"
+"                                 <field name=\"date_from\" class=\"oe_inline\"/>\n"
+"                                 to\n"
+"                                 <field name=\"date_to\" class=\"oe_inline\"/>\n"
+"                             </div>\n"
+"                         </group>\n"
+"                         <notebook>\n"
+"                             <page string=\"Room Summary\">\n"
+"                                 <field name=\"summary_header\" colspan=\"4\" invisible=\"1\"/>\n"
+"                                 <field name=\"room_summary\" colspan=\"4\" invisible=\"1\"/>\n"
+"                                 <widget type=\"Room_Reservation\"/>\n"
+"                             </page>\n"
+"                         </notebook>\n"
+"                     </sheet>\n"
+"                 </form>\n"
+"             "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Reservation Summary\">\n"
+"                     <header>\n"
+"                         <separator string=\"Room Reservation Summary\" colspan=\"4\"/>\n"
+"                     </header>\n"
+"                     <sheet>\n"
+"                         <group colspan=\"4\" col=\"4\">\n"
+"                             <label for=\"date_from\" string=\"Summary Period\"/>\n"
+"                             <div>\n"
+"                                 <field name=\"date_from\" class=\"oe_inline\"/>\n"
+"                                 to\n"
+"                                 <field name=\"date_to\" class=\"oe_inline\"/>\n"
+"                             </div>\n"
+"                         </group>\n"
+"                         <notebook>\n"
+"                             <page string=\"Room Summary\">\n"
+"                                 <field name=\"summary_header\" colspan=\"4\" invisible=\"1\"/>\n"
+"                                 <field name=\"room_summary\" colspan=\"4\" invisible=\"1\"/>\n"
+"                                 <widget type=\"Room_Reservation\"/>\n"
+"                             </page>\n"
+"                         </notebook>\n"
+"                     </sheet>\n"
+"                 </form>\n"
+"             "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_reservation_form
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Reservation\">\n"
+"                    <header>\n"
+"                        <button name=\"send_reservation_maill\" type=\"object\" string=\"Send Reservation Email\" states=\"confirm\" class=\"oe_highlight\"/>\n"
+"                        <button name=\"confirm\" string=\"Confirm\" states=\"draft\" class=\"oe_highlight\"/>\n"
+"                        <button name=\"done\" string=\"Create Folio\" states=\"confirm\" class=\"oe_highlight\"/>\n"
+"                        <button name=\"cancel_reservation\" string=\"Cancel Reservation\" states=\"draft,confirm\" class=\"oe_highlight\" type=\"object\"/>\n"
+"                        <button name=\"set_to_draft_reservation\" string=\"Set to Draft\" states=\"cancel\" class=\"oe_highlight\" type=\"object\"/>\n"
+"                        <field name=\"state\" widget=\"statusbar\"/>\n"
+"                    </header>\n"
+"                    <sheet>\n"
+"                        <label string=\"Reservation No\"/>\n"
+"                        <h1>\n"
+"                            <field name=\"reservation_no\" class=\"oe_inline\"/>\n"
+"                        </h1>\n"
+"                        <group>\n"
+"                            <group colspan=\"4\" col=\"4\">\n"
+"                                <field name=\"date_order\" select=\"1\"/>\n"
+"                                <field name=\"warehouse_id\" select=\"1\"/>\n"
+"                            </group>\n"
+"                            <separator/>\n"
+"                            <group colspan=\"4\" col=\"4\">\n"
+"                                <field name=\"partner_id\" select=\"1\" domain=\"[('customer','=','True')]\" context=\"{'default_customer': 'True'}\"/>\n"
+"                                <field name=\"pricelist_id\" col=\"2\"/>\n"
+"                                <field name=\"partner_order_id\" domain=\"[('parent_id','=',partner_id)]\"/><newline/>\n"
+"                                <field name=\"partner_invoice_id\" domain=\"[('parent_id','=',partner_id)]\"/>\n"
+"                                <field name=\"partner_shipping_id\" domain=\"[('parent_id','=',partner_id)]\" invisible=\"True\"/>\n"
+"                            </group>\n"
+"                            <group colspan=\"4\" col=\"4\">\n"
+"                                <field name=\"checkin\"/>\n"
+"                                <field name=\"checkout\"/>\n"
+"                                <field name=\"adults\"/>\n"
+"                                <field name=\"children\"/>\n"
+"                            </group>\n"
+"                               <field name=\"dummy\" invisible=\"True\"/>\n"
+"                        </group>\n"
+"                        <notebook>\n"
+"                            <page string=\"Reservation Line\">\n"
+"                                <field name=\"reservation_line\" colspan=\"4\" nolabel=\"1\">\n"
+"                                    <form string=\"Reservation Line\">\n"
+"                                        <separator string=\"Room Type\"/>\n"
+"                                        <field name=\"name\" invisible=\"1\"/>\n"
+"                                        <field name=\"categ_id\" select=\"1\" colspan=\"4\" nolabel=\"1\"/>\n"
+"                                        <newline/>\n"
+"                                        <separator string=\"Select Room\"/>\n"
+"                                        <field name=\"reserve\" colspan=\"4\" string=\"Room Number\" nolabel=\"1\"/>\n"
+"                                    </form>\n"
+"                                    <tree string=\"Reservation Line\">\n"
+"                                        <field name=\"reserve\" string=\"Rooms\"/>\n"
+"                                    </tree>\n"
+"                                </field>\n"
+"                            </page>\n"
+"                            <page string=\"History\">\n"
+"                                <field name=\"folio_id\" readonly=\"1\"/>\n"
+"                            </page>\n"
+"                        </notebook>\n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<form string=\"Reservation\">\n"
+"                    <header>\n"
+"                        <button name=\"send_reservation_maill\" type=\"object\" string=\"Send Reservation Email\" states=\"confirm\" class=\"oe_highlight\"/>\n"
+"                        <button name=\"confirm\" string=\"Confirm\" states=\"draft\" class=\"oe_highlight\"/>\n"
+"                        <button name=\"done\" string=\"Create Folio\" states=\"confirm\" class=\"oe_highlight\"/>\n"
+"                        <button name=\"cancel_reservation\" string=\"Cancel Reservation\" states=\"draft,confirm\" class=\"oe_highlight\" type=\"object\"/>\n"
+"                        <button name=\"set_to_draft_reservation\" string=\"Set to Draft\" states=\"cancel\" class=\"oe_highlight\" type=\"object\"/>\n"
+"                        <field name=\"state\" widget=\"statusbar\"/>\n"
+"                    </header>\n"
+"                    <sheet>\n"
+"                        <label string=\"Reservation No\"/>\n"
+"                        <h1>\n"
+"                            <field name=\"reservation_no\" class=\"oe_inline\"/>\n"
+"                        </h1>\n"
+"                        <group>\n"
+"                            <group colspan=\"4\" col=\"4\">\n"
+"                                <field name=\"date_order\" select=\"1\"/>\n"
+"                                <field name=\"warehouse_id\" select=\"1\"/>\n"
+"                            </group>\n"
+"                            <separator/>\n"
+"                            <group colspan=\"4\" col=\"4\">\n"
+"                                <field name=\"partner_id\" select=\"1\" domain=\"[('customer','=','True')]\" context=\"{'default_customer': 'True'}\"/>\n"
+"                                <field name=\"pricelist_id\" col=\"2\"/>\n"
+"                                <field name=\"partner_order_id\" domain=\"[('parent_id','=',partner_id)]\"/><newline/>\n"
+"                                <field name=\"partner_invoice_id\" domain=\"[('parent_id','=',partner_id)]\"/>\n"
+"                                <field name=\"partner_shipping_id\" domain=\"[('parent_id','=',partner_id)]\" invisible=\"True\"/>\n"
+"                            </group>\n"
+"                            <group colspan=\"4\" col=\"4\">\n"
+"                                <field name=\"checkin\"/>\n"
+"                                <field name=\"checkout\"/>\n"
+"                                <field name=\"adults\"/>\n"
+"                                <field name=\"children\"/>\n"
+"                            </group>\n"
+"                               <field name=\"dummy\" invisible=\"True\"/>\n"
+"                        </group>\n"
+"                        <notebook>\n"
+"                            <page string=\"Reservation Line\">\n"
+"                                <field name=\"reservation_line\" colspan=\"4\" nolabel=\"1\">\n"
+"                                    <form string=\"Reservation Line\">\n"
+"                                        <separator string=\"Room Type\"/>\n"
+"                                        <field name=\"name\" invisible=\"1\"/>\n"
+"                                        <field name=\"categ_id\" select=\"1\" colspan=\"4\" nolabel=\"1\"/>\n"
+"                                        <newline/>\n"
+"                                        <separator string=\"Select Room\"/>\n"
+"                                        <field name=\"reserve\" colspan=\"4\" string=\"Room Number\" nolabel=\"1\"/>\n"
+"                                    </form>\n"
+"                                    <tree string=\"Reservation Line\">\n"
+"                                        <field name=\"reserve\" string=\"Rooms\"/>\n"
+"                                    </tree>\n"
+"                                </field>\n"
+"                            </page>\n"
+"                            <page string=\"History\">\n"
+"                                <field name=\"folio_id\" readonly=\"1\"/>\n"
+"                            </page>\n"
+"                        </notebook>\n"
+"                    </sheet>\n"
+"                </form>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.hotel_gantt_view
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<gantt date_start=\"checkin\" date_stop=\"checkout\" string=\"Reservation\" default_group_by=\"partner_id\"/>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<gantt date_start=\"checkin\" date_stop=\"checkout\" string=\"Reservation\" default_group_by=\"partner_id\"/>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_reservation_graph
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<graph string=\"Reservation\" type=\"pie\">\n"
+"                    <field name=\"state\"/>\n"
+"                    <field name=\"reservation_no\"/>\n"
+"                </graph>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<graph string=\"Reservation\" type=\"pie\">\n"
+"                    <field name=\"state\"/>\n"
+"                    <field name=\"reservation_no\"/>\n"
+"                </graph>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_reservation_search
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<search string=\"Reservation\">\n"
+"                    <filter string=\"Current Reservations\" domain=\"[('checkout','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]\" help=\"Current Reservations\"/>\n"
+"                    <filter domain=\"[('state','=','draft')]\" string=\"Draft\"/>\n"
+"                    <filter domain=\"[('state','=','confirm')]\" string=\"Confirm\"/>\n"
+"                    <filter domain=\"[('state','=','cancel')]\" string=\"Cancel\"/>\n"
+"                    <filter domain=\"[('state','=','done')]\" string=\"Done\"/>\n"
+"                    <field name=\"partner_id\" select=\"1\"/>\n"
+"                    <field name=\"reservation_no\"/>\n"
+"                    <field name=\"checkin\"/>\n"
+"                    <field name=\"checkout\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                    <newline/>\n"
+"                    <group expand=\"0\" string=\"Group By\">\n"
+"                        <filter name=\"partner_id\" string=\"Guest Name\" icon=\"terp-personal\" domain=\"[]\" context=\"{'group_by':'partner_id'}\"/>\n"
+"                        <filter string=\"Order By Month\" domain=\"[]\" context=\"{'group_by':'date_order'}\"/>\n"
+"                    </group>\n"
+"                </search>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<search string=\"Reservation\">\n"
+"                    <filter string=\"Current Reservations\" domain=\"[('checkout','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]\" help=\"Current Reservations\"/>\n"
+"                    <filter domain=\"[('state','=','draft')]\" string=\"Draft\"/>\n"
+"                    <filter domain=\"[('state','=','confirm')]\" string=\"Confirm\"/>\n"
+"                    <filter domain=\"[('state','=','cancel')]\" string=\"Cancel\"/>\n"
+"                    <filter domain=\"[('state','=','done')]\" string=\"Done\"/>\n"
+"                    <field name=\"partner_id\" select=\"1\"/>\n"
+"                    <field name=\"reservation_no\"/>\n"
+"                    <field name=\"checkin\"/>\n"
+"                    <field name=\"checkout\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                    <newline/>\n"
+"                    <group expand=\"0\" string=\"Group By\">\n"
+"                        <filter name=\"partner_id\" string=\"Guest Name\" icon=\"terp-personal\" domain=\"[]\" context=\"{'group_by':'partner_id'}\"/>\n"
+"                        <filter string=\"Order By Month\" domain=\"[]\" context=\"{'group_by':'date_order'}\"/>\n"
+"                    </group>\n"
+"                </search>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.report_checkin_qweb
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_checkin_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <br/>\n"
+"                            <br/>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Check-In Guest List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_start'],date=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_end'],date=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>#No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Guest Name</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-In Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room Type</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room No</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_checkout(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.reservation_no\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.partner_id.name\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkin\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_type(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_nos(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_checkin_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <br/>\n"
+"                            <br/>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Check-In Guest List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_start'],date=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_end'],date=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>#No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Guest Name</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-In Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room Type</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room No</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_checkout(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.reservation_no\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.partner_id.name\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkin\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_type(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_nos(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.report_checkout_qweb
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_checkout_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <t t-name=\"report.external_layout_header\">\n"
+"                                <div class=\"header\">\n"
+"                                    <div class=\"row\">\n"
+"                                        <div class=\"col-xs-3\">\n"
+"                                            <img t-if=\"company.logo\" t-att-src=\"'data:image/png;base64,%s' % company.logo\" style=\"max-height: 45px;\"/>\n"
+"                                        </div>\n"
+"                                        <div class=\"col-xs-9 text-right\" style=\"margin-top:20px;\" t-field=\"company.rml_header1\"/>\n"
+"                                    </div>\n"
+"                                    <div class=\"row zero_min_height\">\n"
+"                                        <div class=\"col-xs-12\">\n"
+"                                            <div style=\"border-bottom: 1px solid black;\"/>\n"
+"                                        </div>\n"
+"                                    </div>\n"
+"                                </div>\n"
+"                            </t>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Check-Out Guest List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_start'],date=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_end'],date=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>#No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Guest Name</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-Out Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room Type</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room No</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_checkin(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.reservation_no\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.partner_id.name\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkout\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_type(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_nos(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_checkout_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <t t-name=\"report.external_layout_header\">\n"
+"                                <div class=\"header\">\n"
+"                                    <div class=\"row\">\n"
+"                                        <div class=\"col-xs-3\">\n"
+"                                            <img t-if=\"company.logo\" t-att-src=\"'data:image/png;base64,%s' % company.logo\" style=\"max-height: 45px;\"/>\n"
+"                                        </div>\n"
+"                                        <div class=\"col-xs-9 text-right\" style=\"margin-top:20px;\" t-field=\"company.rml_header1\"/>\n"
+"                                    </div>\n"
+"                                    <div class=\"row zero_min_height\">\n"
+"                                        <div class=\"col-xs-12\">\n"
+"                                            <div style=\"border-bottom: 1px solid black;\"/>\n"
+"                                        </div>\n"
+"                                    </div>\n"
+"                                </div>\n"
+"                            </t>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Check-Out Guest List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_start'],date=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <font t-esc=\"formatLang(data['form']['date_end'],date=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>#No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Guest Name</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-Out Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room Type</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room No</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_checkin(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.reservation_no\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.partner_id.name\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkout\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_type(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"get_room_nos(info.reservation_line)\"/>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.report_maxroom_qweb
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_maxroom_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <br/>\n"
+"                            <br/>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Max Room Used List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_start'],date=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_end'],date=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>Room No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>No of Times used</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_room_used_detail(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"info.get('name')\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"info.get('no_of_times_used')\"/>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_maxroom_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <br/>\n"
+"                            <br/>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Max Room Used List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_start'],date=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_end'],date=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>Room No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>No of Times used</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_room_used_detail(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"info.get('name')\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-esc=\"info.get('no_of_times_used')\"/>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.report_roomres_qweb
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_roomres_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <br/>\n"
+"                            <br/>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Reservation List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_start'],date_time=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_end'],date_time=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>#No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Guest Name</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-In Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-Out Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room Details</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_data(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.reservation_no\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.partner_id.name\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkin\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkout\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <table t-foreach=\"info.reservation_line\" t-as=\"line\">\n"
+"                                            <tr>\n"
+"                                                <td>\n"
+"                                                    <span t-field=\"line.categ_id.name\"/>\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                            <tr t-foreach=\"line.reserve\" t-as=\"o\">\n"
+"                                                <td>\n"
+"                                                    <span t-field=\"o.name\"/>\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<t t-name=\"hotel_reservation.report_roomres_qweb\">\n"
+"            <t t-call=\"report.html_container\">\n"
+"                <t t-foreach=\"docs\" t-as=\"o\">\n"
+"                    <t t-call=\"report.external_layout\">\n"
+"                        <div class=\"page\">\n"
+"                            <br/>\n"
+"                            <br/>\n"
+"                            <div class=\"row\">\n"
+"                                <h2>\n"
+"                                    <span>\n"
+"                                        <center>Reservation List</center>\n"
+"                                    </span>\n"
+"                                </h2>\n"
+"                            </div>\n"
+"                            <div class=\"row mt32 mb32\">\n"
+"                                <div class=\"text-center\">\n"
+"                                    <strong>From:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_start'],date_time=True)\"/>\n"
+"                                    <strong>To:</strong>\n"
+"                                    <span t-esc=\"formatLang(data['form']['date_end'],date_time=True)\"/>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                            <table class=\"table table-condensed\">\n"
+"                                <tr>\n"
+"                                    <td>\n"
+"                                        <strong>#No</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Guest Name</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-In Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Check-Out Date</strong>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong>Room Details</strong>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                                <tr t-foreach=\"get_data(data['form']['date_start'],data['form']['date_end'])\" t-as=\"info\">\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.reservation_no\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.partner_id.name\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkin\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <span t-field=\"info.checkout\"/>\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <table t-foreach=\"info.reservation_line\" t-as=\"line\">\n"
+"                                            <tr>\n"
+"                                                <td>\n"
+"                                                    <span t-field=\"line.categ_id.name\"/>\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                            <tr t-foreach=\"line.reserve\" t-as=\"o\">\n"
+"                                                <td>\n"
+"                                                    <span t-field=\"o.name\"/>\n"
+"                                                </td>\n"
+"                                            </tr>\n"
+"                                        </table>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </div>\n"
+"                    </t>\n"
+"                </t>\n"
+"            </t>\n"
+"        </t>\n"
+"    "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_reservation_tree
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<tree string=\"Reservation\" colors=\"blue:state == 'draft';gray:state == 'done'\">\n"
+"                    <field name=\"reservation_no\"/>\n"
+"                    <field name=\"partner_id\" select=\"1\"/>\n"
+"                    <field name=\"checkin\"/>\n"
+"                    <field name=\"checkout\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                </tree>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<tree string=\"Reservation\" colors=\"blue:state == 'draft';gray:state == 'done'\">\n"
+"                    <field name=\"reservation_no\"/>\n"
+"                    <field name=\"partner_id\" select=\"1\"/>\n"
+"                    <field name=\"checkin\"/>\n"
+"                    <field name=\"checkout\"/>\n"
+"                    <field name=\"state\"/>\n"
+"                </tree>\n"
+"            "
+
+#. module: hotel_reservation
+#: model:ir.ui.view,arch_db:hotel_reservation.view_hotel_room_form_inherited
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//page[@name='information_hotel_room']\" position=\"after\">\n"
+"                    <page string=\"Room Reservation\">\n"
+"                        <separator colspan=\"4\" string=\"Room Reservation Line\"/>\n"
+"                        <field name=\"room_reservation_line_ids\" colspan=\"4\" nolabel=\"1\" string=\"Room Reservation Line\">\n"
+"                            <form string=\" Room line\">\n"
+"                                <group colspan=\"4\" col=\"4\">\n"
+"                                    <field name=\"room_id\"/>\n"
+"                                    <field name=\"check_in\"/>\n"
+"                                    <field name=\"state\"/>\n"
+"                                    <field name=\"check_out\"/>\n"
+"                                    <field name=\"reservation_id\"/>\n"
+"                                    <field name=\"status\"/>\n"
+"                                </group>\n"
+"                            </form>\n"
+"                            <tree>\n"
+"                                <field name=\"room_id\"/>\n"
+"                                <field name=\"check_in\"/>\n"
+"                                <field name=\"check_out\"/>\n"
+"                                <field name=\"state\"/>\n"
+"                                <field name=\"reservation_id\"/>\n"
+"                                <field name=\"status\"/>\n"
+"                            </tree>\n"
+"                        </field>\n"
+"                    </page>\n"
+"                </xpath>\n"
+"            "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//page[@name='information_hotel_room']\" position=\"after\">\n"
+"                    <page string=\"Room Reservation\">\n"
+"                        <separator colspan=\"4\" string=\"Room Reservation Line\"/>\n"
+"                        <field name=\"room_reservation_line_ids\" colspan=\"4\" nolabel=\"1\" string=\"Room Reservation Line\">\n"
+"                            <form string=\" Room line\">\n"
+"                                <group colspan=\"4\" col=\"4\">\n"
+"                                    <field name=\"room_id\"/>\n"
+"                                    <field name=\"check_in\"/>\n"
+"                                    <field name=\"state\"/>\n"
+"                                    <field name=\"check_out\"/>\n"
+"                                    <field name=\"reservation_id\"/>\n"
+"                                    <field name=\"status\"/>\n"
+"                                </group>\n"
+"                            </form>\n"
+"                            <tree>\n"
+"                                <field name=\"room_id\"/>\n"
+"                                <field name=\"check_in\"/>\n"
+"                                <field name=\"check_out\"/>\n"
+"                                <field name=\"state\"/>\n"
+"                                <field name=\"reservation_id\"/>\n"
+"                                <field name=\"status\"/>\n"
+"                            </tree>\n"
+"                        </field>\n"
+"                    </page>\n"
+"                </xpath>\n"
+"            "
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_needaction:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_needaction
+msgid "Action Needed"
+msgstr "Acción necesaria"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,adults:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_adults
+msgid "Adults"
+msgstr "Adultos"
+
+#. module: hotel_reservation
+#: selection:hotel.room.reservation.line,state:0
+msgid "Assigned"
+msgstr "Asignado"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:533
+#, python-format
+msgid ""
+"Before choosing a room,\n"
+" You have to select                              a Check in date or a Check out date in                              the reservation form."
+msgstr ""
+"Antes de elegir una habitación,\n"
+"Debe seleccionar                              una fecha de entrada y salida                              en el formulario de reservación."
+
+#. module: hotel_reservation
+#: selection:hotel.reservation,state:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_check_in
+#: field:quick.room.reservation,check_in:0
+msgid "Check In"
+msgstr "Entradas"
+
+#. module: hotel_reservation
+#: field:hotel.room.reservation.line,check_in:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_check_in
+msgid "Check In Date"
+msgstr "Fecha de entrada"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_check_out
+#: field:quick.room.reservation,check_out:0
+msgid "Check Out"
+msgstr "Hora de salida"
+
+#. module: hotel_reservation
+#: field:hotel.room.reservation.line,check_out:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_check_out
+msgid "Check Out Date"
+msgstr "Fecha de salida"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "Check-In Date"
+msgstr "Fecha de entrada"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkin_qweb
+msgid "Check-In Guest List"
+msgstr "Lista de huespedes de entrada"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkout_qweb
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "Check-Out Date"
+msgstr "Fecha de salida"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkout_qweb
+msgid "Check-Out Guest List"
+msgstr "Lista de huespedes de salida"
+
+#. module: hotel_reservation
+#: model:ir.actions.report.xml,name:hotel_reservation.hotel_checkin_details
+msgid "CheckIn Detail"
+msgstr "Detalles de entrada"
+
+#. module: hotel_reservation
+#: model:ir.actions.report.xml,name:hotel_reservation.hotel_checkout_details
+msgid "CheckOut Detail"
+msgstr "Detalles de salida"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:186
+#, python-format
+msgid "Checkin date should be                 greater than the current date."
+msgstr "La fecha de entrada debe ser                 mayor que la fecha actual"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:189
+#, python-format
+msgid "Checkout date                 should be greater than Checkin date."
+msgstr "La fecha de salida                 debe ser mayor a la fecha de entrada"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:793
+#, python-format
+msgid "Checkout date should be greater                                  than Checkin date."
+msgstr "La fecha de salida debe ser mayor                                  que la fecha de entrada"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:396
+#, python-format
+msgid "Checkout date should be greater                                  than the Checkin date."
+msgstr "La fecha de salida debe ser mayor                                  que la fecha de entrada."
+
+#. module: hotel_reservation
+#: field:hotel.reservation,children:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_children
+msgid "Children"
+msgstr "Niños"
+
+#. module: hotel_reservation
+#: selection:hotel.reservation,state:0
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,create_uid:0
+#: field:hotel.reservation.wizard,create_uid:0
+#: field:hotel.room.reservation.line,create_uid:0
+#: field:hotel_reservation.line,create_uid:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_create_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_create_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_create_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_create_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_create_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_create_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_create_uid
+#: field:quick.room.reservation,create_uid:0
+#: field:room.reservation.summary,create_uid:0
+#: field:wizard.make.folio,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,create_date:0
+#: field:hotel.reservation.wizard,create_date:0
+#: field:hotel.room.reservation.line,create_date:0
+#: field:hotel_reservation.line,create_date:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_create_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_create_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_create_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_create_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_create_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_create_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_create_date
+#: field:quick.room.reservation,create_date:0
+#: field:room.reservation.summary,create_date:0
+#: field:wizard.make.folio,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_partner_id
+#: field:quick.room.reservation,partner_id:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_date_from
+#: field:room.reservation.summary,date_from:0
+msgid "Date From"
+msgstr "Fecha Desde"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,date_order:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_date_order
+msgid "Date Ordered"
+msgstr "Fecha de pedido"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_date_to
+#: field:room.reservation.summary,date_to:0
+msgid "Date To"
+msgstr "Fecha Hasta"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,message_last_post:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Fecha del último mensaje publicado en el registro."
+
+#. module: hotel_reservation
+#: field:hotel.reservation,partner_shipping_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_partner_shipping_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_partner_shipping_id
+#: field:quick.room.reservation,partner_shipping_id:0
+msgid "Delivery Address"
+msgstr "Dirección de Entrega"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,partner_shipping_id:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_partner_shipping_id
+msgid "Delivery addressfor current reservation. "
+msgstr "Dirección de envío para la reserva actual."
+
+#. module: hotel_reservation
+#: field:hotel.reservation,display_name:0
+#: field:hotel.reservation.wizard,display_name:0
+#: field:hotel.room.reservation.line,display_name:0
+#: field:hotel_reservation.line,display_name:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_checkin_qweb_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_checkout_qweb_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_maxroom_qweb_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_roomres_qweb_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_display_name
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_display_name
+#: field:quick.room.reservation,display_name:0
+#: field:report.hotel_reservation.report_checkin_qweb,display_name:0
+#: field:report.hotel_reservation.report_checkout_qweb,display_name:0
+#: field:report.hotel_reservation.report_maxroom_qweb,display_name:0
+#: field:report.hotel_reservation.report_roomres_qweb,display_name:0
+#: field:room.reservation.summary,display_name:0
+#: field:wizard.make.folio,display_name:0
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: hotel_reservation
+#: selection:hotel.reservation,state:0
+msgid "Done"
+msgstr "Realizado"
+
+#. module: hotel_reservation
+#: selection:hotel.reservation,state:0
+msgid "Draft"
+msgstr "Reserva borrador"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,dummy:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_dummy
+msgid "Dummy"
+msgstr "Dummy"
+
+#. module: hotel_reservation
+#: field:hotel.reservation.wizard,date_end:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_date_end
+msgid "End Date"
+msgstr "Fecha Final"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:395
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,checkin:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_checkin
+msgid "Expected-Date-Arrival"
+msgstr "Fecha-Llegada-Prevista"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,checkout:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_checkout
+msgid "Expected-Date-Departure"
+msgstr "Fecha-Salida-Prevista"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,folio_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_folio_id
+msgid "Folio"
+msgstr "Detalles de los servicios ofrecidos"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_follower_ids:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_channel_ids:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seguidores (Canales)"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_partner_ids:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Proveedores)"
+
+#. module: hotel_reservation
+#. openerp-web
+#: code:addons/hotel_reservation/static/src/js/hotel_room_summary.js:12
+#, python-format
+msgid "Form"
+msgstr "Formulario"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_checkout_qweb
+#: view:website:hotel_reservation.report_maxroom_qweb
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "From:"
+msgstr "De:"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_grouped
+#: field:wizard.make.folio,grouped:0
+msgid "Group the Folios"
+msgstr "Grupo de Folios"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,partner_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_partner_id
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_checkout_qweb
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "Guest Name"
+msgstr "Nombre del huesped"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,warehouse_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_warehouse_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_warehouse_id
+#: field:quick.room.reservation,warehouse_id:0
+msgid "Hotel"
+msgstr "Hotel"
+
+#. module: hotel_reservation
+#: model:mail.template,subject:hotel_reservation.mail_template_hotel_reservation
+msgid "Hotel Reservation Detail"
+msgstr "Detalles de reserva de hotel"
+
+#. module: hotel_reservation
+#: model:mail.template,subject:hotel_reservation.mail_template_reservation_reminder_24hrs
+msgid "Hotel Reservation Reminder"
+msgstr "Recordatorio de reserva de hotel"
+
+#. module: hotel_reservation
+#: model:ir.actions.act_window,name:hotel_reservation.action_hotel_reservation_wizard
+#: model:ir.ui.menu,name:hotel_reservation.wizard_res_menu
+msgid "Hotel Reservation Report"
+msgstr "Informe de reserva de hotel"
+
+#. module: hotel_reservation
+#: model:ir.model,name:hotel_reservation.model_hotel_room
+msgid "Hotel Room"
+msgstr "Habitación de hotel"
+
+#. module: hotel_reservation
+#: model:ir.model,name:hotel_reservation.model_hotel_room_reservation_line
+msgid "Hotel Room Reservation"
+msgstr "Reservas"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,reservation_line:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_reservation_line
+msgid "Hotel room reservation details."
+msgstr "Detalles de reserva"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,id:0 field:hotel.reservation.wizard,id:0
+#: field:hotel.room.reservation.line,id:0 field:hotel_reservation.line,id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_checkin_qweb_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_checkout_qweb_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_maxroom_qweb_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_roomres_qweb_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_id
+#: field:quick.room.reservation,id:0
+#: field:report.hotel_reservation.report_checkin_qweb,id:0
+#: field:report.hotel_reservation.report_checkout_qweb,id:0
+#: field:report.hotel_reservation.report_maxroom_qweb,id:0
+#: field:report.hotel_reservation.report_roomres_qweb,id:0
+#: field:room.reservation.summary,id:0 field:wizard.make.folio,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,message_unread:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Si esta marcado, los nuevos mensajes requieren su atención."
+
+#. module: hotel_reservation
+#: help:hotel.reservation,message_needaction:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: hotel_reservation
+#: field:hotel.reservation,partner_invoice_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_partner_invoice_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_partner_invoice_id
+#: field:quick.room.reservation,partner_invoice_id:0
+msgid "Invoice Address"
+msgstr "Dirección de factura"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,partner_invoice_id:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_partner_invoice_id
+msgid "Invoice address for current reservation."
+msgstr "Dirección de factura para la reserva actual."
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_is_follower:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_is_follower
+msgid "Is Follower"
+msgstr "Es un Seguidor"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_last_post:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_last_post
+msgid "Last Message Date"
+msgstr "Fecha de último mensaje"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,__last_update:0
+#: field:hotel.reservation.wizard,__last_update:0
+#: field:hotel.room.reservation.line,__last_update:0
+#: field:hotel_reservation.line,__last_update:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_checkin_qweb___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_checkout_qweb___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_maxroom_qweb___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_report_hotel_reservation_report_roomres_qweb___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary___last_update
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio___last_update
+#: field:quick.room.reservation,__last_update:0
+#: field:report.hotel_reservation.report_checkin_qweb,__last_update:0
+#: field:report.hotel_reservation.report_checkout_qweb,__last_update:0
+#: field:report.hotel_reservation.report_maxroom_qweb,__last_update:0
+#: field:report.hotel_reservation.report_roomres_qweb,__last_update:0
+#: field:room.reservation.summary,__last_update:0
+#: field:wizard.make.folio,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,write_uid:0
+#: field:hotel.reservation.wizard,write_uid:0
+#: field:hotel.room.reservation.line,write_uid:0
+#: field:hotel_reservation.line,write_uid:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_write_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_write_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_write_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_write_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_write_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_write_uid
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_write_uid
+#: field:quick.room.reservation,write_uid:0
+#: field:room.reservation.summary,write_uid:0
+#: field:wizard.make.folio,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización realizada por"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,write_date:0
+#: field:hotel.reservation.wizard,write_date:0
+#: field:hotel.room.reservation.line,write_date:0
+#: field:hotel_reservation.line,write_date:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_write_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_write_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_write_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_write_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_write_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_write_date
+#: model:ir.model.fields,field_description:hotel_reservation.field_wizard_make_folio_write_date
+#: field:quick.room.reservation,write_date:0
+#: field:room.reservation.summary,write_date:0
+#: field:wizard.make.folio,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: hotel_reservation
+#: field:hotel_reservation.line,line_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_line_id
+msgid "Line id"
+msgstr "Line id"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,adults:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_adults
+msgid "List of adults there in guest list. "
+msgstr "Lista de adultos en huespedes"
+
+#. module: hotel_reservation
+#: model:ir.actions.act_window,name:hotel_reservation.act_make_folio
+msgid "Make Folios"
+msgstr "Hacer Folios"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_maxroom_qweb
+msgid "Max Room Used List"
+msgstr "Lista de habitaciones más usadas"
+
+#. module: hotel_reservation
+#: model:ir.actions.report.xml,name:hotel_reservation.hotel_maxroom_details
+msgid "MaxRoom Detail"
+msgstr "Detalle de habitaciones más usadas"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_ids:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: hotel_reservation
+#: field:hotel_reservation.line,name:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_maxroom_qweb
+msgid "No of Times used"
+msgstr "Veces usadas"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_needaction_counter:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de Acciones"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,children:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_children
+msgid "Number of children there in guest list."
+msgstr "Cantidad de niños en la lista de huespedes."
+
+#. module: hotel_reservation
+#: help:hotel.reservation,message_needaction_counter:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,message_unread_counter:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leídos"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,partner_order_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_partner_order_id
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_partner_order_id
+#: field:quick.room.reservation,partner_order_id:0
+msgid "Ordering Contact"
+msgstr "Contacto"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:630
+#, python-format
+msgid "Please Check Rooms Status                                  for %s."
+msgstr "Por favor controle los estados de habitaciones                                  para %s."
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:706
+#, python-format
+msgid "Please Check Time period Date                                  From can't be greater than Date To !"
+msgstr "Por favor controle la fecha desde                                 No puede ser mayor a la fecha hasta !"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:147
+#, python-format
+msgid "Please Select Rooms                     For Reservation."
+msgstr "Por favor, selecciones habitaciones                     para la reserva."
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:143
+#, python-format
+msgid "Please Select Rooms                 For Reservation."
+msgstr "Por favor, selecciones habitaciones                     para la reserva."
+
+#. module: hotel_reservation
+#: help:hotel.reservation,pricelist_id:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_pricelist_id
+msgid "Pricelist for current reservation."
+msgstr "Lista de precios para la reserva actual."
+
+#. module: hotel_reservation
+#: model:ir.model,name:hotel_reservation.model_quick_room_reservation
+msgid "Quick Room Reservation"
+msgstr "Reserva rápida"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:681
+#, python-format
+msgid "Reconcile Write-Off"
+msgstr "Reconcile Write-Off"
+
+#. module: hotel_reservation
+#: field:hotel.room.reservation.line,reservation_id:0
+#: model:ir.model,name:hotel_reservation.model_hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_reservation_id
+msgid "Reservation"
+msgstr "Reserva"
+
+#. module: hotel_reservation
+#: field:hotel.folio,reservation_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_folio_reservation_id
+msgid "Reservation Id"
+msgstr "Reserva"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,reservation_line:0
+#: model:ir.model,name:hotel_reservation.model_hotel_reservation_line
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_reservation_line
+msgid "Reservation Line"
+msgstr "Línea de reserva"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "Reservation List"
+msgstr "Lista de Reserva"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,reservation_no:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_reservation_no
+msgid "Reservation No"
+msgstr "Número de reserva"
+
+#. module: hotel_reservation
+#: model:ir.actions.act_window,name:hotel_reservation.action_hotel_reservation_tree_all
+#: model:ir.ui.menu,name:hotel_reservation.menu_action_hotel_reservation_tree_all
+#: model:ir.ui.menu,name:hotel_reservation.menu_hotel_reservation
+msgid "Reservations"
+msgstr "Reservas"
+
+#. module: hotel_reservation
+#: model:ir.ui.menu,name:hotel_reservation.menu_action_hotel_reservation_summary
+msgid "Reservations Summary"
+msgstr "Resumen de Reservas"
+
+#. module: hotel_reservation
+#: field:hotel_reservation.line,reserve:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_reserve
+msgid "Reserve"
+msgstr "Reservar"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_room_id
+#: field:quick.room.reservation,room_id:0
+msgid "Room"
+msgstr "Habitación"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:153
+#, python-format
+msgid ""
+"Room Capacity                         Exceeded \n"
+" Please Select Rooms According to                         Members Accomodation."
+msgstr ""
+"Capacidad de habitación                         excedida \n"
+"Por favor seleccione una habitación acorde                         A los miembros."
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "Room Details"
+msgstr "Detalles de habitación"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_checkout_qweb
+#: view:website:hotel_reservation.report_maxroom_qweb
+msgid "Room No"
+msgstr "Habitación Nro."
+
+#. module: hotel_reservation
+#: field:hotel.room,room_reservation_line_ids:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_room_reservation_line_ids
+msgid "Room Reserv Line"
+msgstr "Linea de Reserva de Habitación"
+
+#. module: hotel_reservation
+#: model:ir.actions.report.xml,name:hotel_reservation.hotel_roomres_details
+msgid "Room Reservation Detail"
+msgstr "Detalles de Reserva de Habitación"
+
+#. module: hotel_reservation
+#: model:ir.actions.act_window,name:hotel_reservation.action_hotel_reservation_summary
+msgid "Room Reservations Summary"
+msgstr "Resumen de Reservas de habitación"
+
+#. module: hotel_reservation
+#: field:hotel.room.reservation.line,state:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_state
+msgid "Room Status"
+msgstr "Estado de la habitación"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_room_summary
+#: field:room.reservation.summary,room_summary:0
+msgid "Room Summary"
+msgstr "Resumen de Habitación"
+
+#. module: hotel_reservation
+#: field:hotel_reservation.line,categ_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_line_categ_id
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_checkout_qweb
+msgid "Room Type"
+msgstr "Tipo de habitación"
+
+#. module: hotel_reservation
+#: field:hotel.room.reservation.line,room_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_room_id
+msgid "Room id"
+msgstr "Habitación Id"
+
+#. module: hotel_reservation
+#: model:ir.model,name:hotel_reservation.model_room_reservation_summary
+msgid "Room reservation summary"
+msgstr "Resumen reserva de habitación"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,pricelist_id:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_pricelist_id
+msgid "Scheme"
+msgstr "Esquema"
+
+#. module: hotel_reservation
+#: field:hotel.reservation.wizard,date_start:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_wizard_date_start
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,state:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_state
+msgid "State"
+msgstr "Estado"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_room_reservation_summary_summary_header
+#: field:room.reservation.summary,summary_header:0
+msgid "Summary Header"
+msgstr "Resumen de Cabecera"
+
+#. module: hotel_reservation
+#: help:hotel.reservation,partner_order_id:0
+#: model:ir.model.fields,help:hotel_reservation.field_hotel_reservation_partner_order_id
+msgid "The name and address of the contact that requested the order or quotation."
+msgstr "El nombre y dirección del contacto que solicitó el pedido o la cita"
+
+#. module: hotel_reservation
+#: view:website:hotel_reservation.report_checkin_qweb
+#: view:website:hotel_reservation.report_checkout_qweb
+#: view:website:hotel_reservation.report_maxroom_qweb
+#: view:website:hotel_reservation.report_roomres_qweb
+msgid "To:"
+msgstr "Hasta"
+
+#. module: hotel_reservation
+#: selection:hotel.room.reservation.line,state:0
+msgid "Unassigned"
+msgstr "Sin Asignar"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_unread:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_unread
+msgid "Unread Messages"
+msgstr "Mensajes no leídos"
+
+#. module: hotel_reservation
+#: field:hotel.reservation,message_unread_counter:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_reservation_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de Mensajes No Leídos"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:705
+#, python-format
+msgid "User Error!"
+msgstr "Error de usuario!"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:186
+#: code:addons/hotel_reservation/models/hotel_reservation.py:189
+#: code:addons/hotel_reservation/models/hotel_reservation.py:264
+#: code:addons/hotel_reservation/models/hotel_reservation.py:532
+#: code:addons/hotel_reservation/models/hotel_reservation.py:792
+#, python-format
+msgid "Warning"
+msgstr "Advertencia"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:628
+#, python-format
+msgid "Wrong Entry"
+msgstr "Entrada Erronea"
+
+#. module: hotel_reservation
+#: code:addons/hotel_reservation/models/hotel_reservation.py:264
+#, python-format
+msgid "You tried to confirm                 reservation with room those already reserved in this                 reservation period"
+msgstr "Ha tratado de confirmar                 una reservación con habitaciones que ya están reservadas en                 este periodo de reserva"
+
+#. module: hotel_reservation
+#: model:ir.model,name:hotel_reservation.model_hotel_folio
+msgid "hotel folio new"
+msgstr "Nueva hoja de Folio"
+
+#. module: hotel_reservation
+#: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_pricelist_id
+#: field:quick.room.reservation,pricelist_id:0
+msgid "pricelist"
+msgstr "Lista de Precio"
+
+#. module: hotel_reservation
+#: field:hotel.room.reservation.line,status:0
+#: model:ir.model.fields,field_description:hotel_reservation.field_hotel_room_reservation_line_status
+msgid "state"
+msgstr "Estado"
