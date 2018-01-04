@@ -86,6 +86,8 @@
                             <field name="parent_id" domain="[('isroomtype','=',True)]"
                                 select="1" />
                             <field name="isroomtype" invisible="1" />
+                            <field name="capacity" />
+                            <field name="list_price" />
                         </group>
                     </sheet>
                 </form>
@@ -99,6 +101,8 @@
             <field name="arch" type="xml">
                 <tree string=" Hotel Room Type">
                     <field name="complete_name" />
+                    <field name="capacity" />
+                    <field name="list_price" />
                 </tree>
             </field>
         </record>
@@ -303,9 +307,9 @@
                             <page name="information_hotel_room" string="Información">
                                 <group colspan="4" col="4">
                                     <field name="floor_id" />
-                                    <field name="categ_id" select="1" domain="[('isroomtype','=',True)]" />
+                                    <field name="categ_id" select="1" domain="[('isroomtype','=',True)]" invisible="True" />
                                     <field name="product_manager" select="2" string="Responsable" />
-                                    <field name="capacity" />
+                                    <field name="capacity" invisible="True" />
                                     <field name="uom_id" invisible="1" />
                                 </group>
                                 <newline />
@@ -324,7 +328,7 @@
                             <page string="Abastecimiento">
                                 <group colspan="4" col="4">
                                     <field name="active" select="2" />
-                                    <field name="list_price" />
+                                    <field name="list_price" invisible="1" />
                                     <field name="rental" select="2" />
                                     <field name="standard_price" />
                                     <field name="cost_method" string="Método de costeo"/>
@@ -396,10 +400,10 @@
             <field name="arch" type="xml">
                 <tree string="Hotel Room">
                     <field name="name" />
-                    <field name="categ_id" select="1" />
-                    <field name="list_price" string="Room rate" />
+                    <field name="categ_id" select="1" invisible="1" />
+                    <field name="list_price" string="Precio" invisible="1" />
                     <field name="status" />
-                    <field name="capacity" />
+                    <field name="capacity" invisible="1" />
                 </tree>
             </field>
         </record>

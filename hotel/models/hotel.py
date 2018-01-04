@@ -27,6 +27,7 @@ from decimal import Decimal
 import datetime
 import urllib2
 import time
+import openerp.addons.decimal_precision as dp
 
 
 def _offset_format_timestamp1(src_tstamp_str, src_format, dst_format,
@@ -104,6 +105,8 @@ class HotelRoomType(models.Model):
 
     cat_id = fields.Many2one('product.category', 'category', required=True,
                              delegate=True, select=True, ondelete='cascade')
+    capacity = fields.Integer('PAX')
+    list_price = fields.Float('Precio', digits_compute=dp.get_precision('Product Price'))
 
 
 class ProductProduct(models.Model):
