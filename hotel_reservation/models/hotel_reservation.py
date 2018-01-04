@@ -147,8 +147,7 @@ class HotelReservation(models.Model):
                     raise ValidationError(_('Please Select Rooms \
                     For Reservation.'))
                 cap = 0
-                for room in rec.reserve:
-                    cap += room.capacity
+                cap = rec.categ_id.capacity
                 if (self.adults + self.children) > cap:
                         raise ValidationError(_('Room Capacity \
                         Exceeded \n Please Select Rooms According to \
@@ -183,10 +182,10 @@ class HotelReservation(models.Model):
         """
         if self.checkout and self.checkin:
             if self.checkin < self.date_order:
-                raise except_orm(_('Warning'), _('Checkin date should be \
+                raise ValidationError(_('Checkin date should be \
                 greater than the current date.'))
             if self.checkout < self.checkin:
-                raise except_orm(_('Warning'), _('Checkout date \
+                raise ValidationError(_('Checkout date \
                 should be greater than Checkin date.'))
 
     @api.onchange('checkout', 'checkin')
@@ -261,7 +260,7 @@ class HotelReservation(models.Model):
             res = self._cr.fetchone()
             roomcount = res and res[0] or 0.0
             if roomcount:
-                raise except_orm(_('Warning'), _('You tried to confirm \
+                raise ValidationError(_('You tried to confirm \
                 reservation with room those already reserved in this \
                 reservation period'))
             else:
@@ -392,8 +391,7 @@ class HotelReservation(models.Model):
             checkin_date = reservation['checkin']
             checkout_date = reservation['checkout']
             if not self.checkin < self.checkout:
-                raise except_orm(_('Error'),
-                                 _('Checkout date should be greater \
+                raise ValidationError(_('Checkout date should be greater \
                                  than the Checkin date.'))
             duration_vals = (self.onchange_check_dates
                              (checkin_date=checkin_date,
@@ -508,9 +506,8 @@ class HotelReservationLine(models.Model):
     reserve = fields.Many2many('hotel.room',
                                'hotel_reservation_line_room_rel',
                                'room_id', 'hotel_reservation_line_id',
-                               domain="[('isroom','=',True),\
-                               ('categ_id','=',categ_id)]")
-    categ_id = fields.Many2one('product.category', 'Room Type',
+                               domain="[('isroom','=',True)")
+    categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
                                change_default=True)
 
@@ -523,14 +520,11 @@ class HotelReservationLine(models.Model):
         @param self: object pointer
         '''
         hotel_room_obj = self.env['hotel.room']
-        hotel_room_ids = hotel_room_obj.search([('categ_id', '=',
-                                                 self.categ_id.id),
-                                                ('isroom', '=', True)])
+        hotel_room_ids = hotel_room_obj.search([])
         assigned = False
         room_ids = []
         if not self.line_id.checkin:
-            raise except_orm(_('Warning'),
-                             _('Before choosing a room,\n You have to select \
+            raise ValidationError(_('Before choosing a room,\n You have to select \
                              a Check in date or a Check out date in \
                              the reservation form.'))
         for room in hotel_room_ids:
@@ -539,7 +533,7 @@ class HotelReservationLine(models.Model):
                 if(line.check_in >= self.line_id.checkin and
                    line.check_in <= self.line_id.checkout or
                    line.check_out <= self.line_id.checkout and
-                   line.check_out >= self.line_id.checkin):
+                   line.check_out >= self.line_id.checkin) or (line.check_in <= self.line_id.checkin and line.check_out >= self.line_id.checkout):
                     assigned = True
             if not assigned:
                 room_ids.append(room.id)
@@ -625,8 +619,7 @@ class HotelRoom(models.Model):
                 status = {'isroom': False, 'color': 2}
             room.write(status)
             if reservation_line_ids.ids and room_line_ids.ids:
-                raise except_orm(_('Wrong Entry'),
-                                 _('Please Check Rooms Status \
+                raise ValidationError(_('Please Check Rooms Status \
                                  for %s.' % (room.name)))
         return True
 
@@ -702,8 +695,7 @@ class RoomReservationSummary(models.Model):
         summary_header_list = ['Rooms']
         if self.date_from and self.date_to:
             if self.date_from > self.date_to:
-                raise except_orm(_('User Error!'),
-                                 _('Please Check Time period Date \
+                raise ValidationError(_('Please Check Time period Date \
                                  From can\'t be greater than Date To !'))
             d_frm_obj = (datetime.datetime.strptime
                          (self.date_from, DEFAULT_SERVER_DATETIME_FORMAT))
@@ -789,8 +781,7 @@ class QuickRoomReservation(models.TransientModel):
         '''
         if self.check_out and self.check_in:
             if self.check_out < self.check_in:
-                raise except_orm(_('Warning'),
-                                 _('Checkout date should be greater \
+                raise ValidationError(_('Checkout date should be greater \
                                  than Checkin date.'))
 
     @api.onchange('partner_id')
