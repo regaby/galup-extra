@@ -796,6 +796,9 @@ class HotelFolioLine(models.Model):
                                    default=_get_checkin_date)
     checkout_date = fields.Datetime('Check Out', required=True,
                                     default=_get_checkout_date)
+    categ_id = fields.Many2one('hotel.room.type', 'Room Type',
+                               domain="[('isroomtype','=',True)]",
+                               change_default=True)
 #    product_uom = fields.Many2one('product.uom',string='Unit of Measure',
 #                                  required=True, default=_get_uom_id)
 

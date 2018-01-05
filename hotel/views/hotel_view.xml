@@ -634,6 +634,7 @@
                                         <field name="checkin_date" />
                                         <field name="checkout_date" />
                                         <field name="product_id" string="Nro. Habitación" />
+                                        <field name="categ_id" string="Categoria"/>
                                         <!-- <field name="product_uom" string="Rent(UOM)" /> -->
                                         <field name="price_unit" string="Precio" />
                                         <field name="price_subtotal" />
