@@ -435,6 +435,8 @@ class HotelReservation(models.Model):
                         'price_unit': line.categ_id.list_price,
                         'product_uom_qty': ((date_a - date_b).days) + 1,
                         'categ_id' : line.categ_id.id,
+                        'discount_id': reservation.partner_id.discount_id and reservation.partner_id.discount_id.id,
+                        'discount' : reservation.partner_id.discount_id and reservation.partner_id.discount_id.discount,
                     }))
                     res_obj = room_obj.browse([r.id])
                     res_obj.write({'status': 'occupied', 'isroom': False})
