@@ -696,7 +696,7 @@ class RoomReservationSummary(models.Model):
         reservation_line_obj = self.env['hotel.room.reservation.line']
         date_range_list = []
         main_header = []
-        summary_header_list = ['Rooms']
+        summary_header_list = ['Habitaciones']
         if self.date_from and self.date_to:
             if self.date_from > self.date_to:
                 raise ValidationError(_('Please Check Time period Date \
@@ -724,7 +724,7 @@ class RoomReservationSummary(models.Model):
                 room_detail.update({'name': room.name or ''})
                 if not room.room_reservation_line_ids:
                     for chk_date in date_range_list:
-                        room_list_stats.append({'state': 'Free',
+                        room_list_stats.append({'state': 'Libre',
                                                 'date': chk_date})
                 else:
                     for chk_date in date_range_list:
@@ -737,12 +737,12 @@ class RoomReservationSummary(models.Model):
                                                 ('check_out', '>=', chk_date)
                                                 ]))
                             if reservline_ids:
-                                room_list_stats.append({'state': 'Reserved',
+                                room_list_stats.append({'state': 'Reservado',
                                                         'date': chk_date,
                                                         'room_id': room.id})
                                 break
                             else:
-                                room_list_stats.append({'state': 'Free',
+                                room_list_stats.append({'state': 'Libre',
                                                         'date': chk_date,
                                                         'room_id': room.id})
                                 break

@@ -219,13 +219,13 @@
              <field name="name">room.reservation.summary.form</field>
              <field name="model">room.reservation.summary</field>
              <field name="arch" type="xml">
-                 <form string="Reservation Summary">
+                 <form string="Resumen de Reservas">
                      <header>
-                         <separator string="Room Reservation Summary" colspan="4"/>
+                         <separator string="Resumen de Reservas" colspan="4"/>
                      </header>
                      <sheet>
                          <group colspan="4" col="4">
-                             <label for="date_from" string="Summary Period"/>
+                             <label for="date_from" string="Periodo de Resumen"/>
                              <div>
                                  <field name="date_from" class="oe_inline"/>
                                  to
@@ -233,7 +233,7 @@
                              </div>
                          </group>
                          <notebook>
-                             <page string="Room Summary">
+                             <page string="Resumen de Habitaciones">
                                  <field name="summary_header" colspan="4" invisible="1"/>
                                  <field name="room_summary" colspan="4" invisible="1"/>
                                  <widget type="Room_Reservation"></widget>
