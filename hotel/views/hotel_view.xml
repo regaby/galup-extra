@@ -601,6 +601,8 @@
                                                         select="1" domain="[('isroom','=',True)]"
                                                         string="Nro. Habitación" />
                                                     <field name="product_uom" string="Unidad de Medida" />
+                                                    <newline />
+                                                    <field name="categ_id" string="Categoria" required="True"/>
                                                 </group>
                                                 <separator string="Descripción" colspan="4" />
                                                 <field name="name" colspan="4" select="2"

@@ -96,6 +96,8 @@ class ProductCategory(models.Model):
     isroomtype = fields.Boolean('Is Room Type')
     isamenitytype = fields.Boolean('Is Amenities Type')
     isservicetype = fields.Boolean('Is Service Type')
+    rtype_ids = fields.One2many('hotel.room.type', 'cat_id',
+                                    string='Room Type')
 
 
 class HotelRoomType(models.Model):
@@ -873,20 +875,25 @@ class HotelFolioLine(models.Model):
     def product_id_change(self):
         if self.product_id and self.folio_id.partner_id:
             self.name = self.product_id.name
-            self.price_unit = self.product_id.lst_price
+            # self.price_unit = self.product_id.lst_price
             self.product_uom = self.product_id.uom_id
+            self.categ_id = self.product_id.categ_id.rtype_ids.id
             tax_obj = self.env['account.tax']
             prod = self.product_id
-            self.price_unit = tax_obj._fix_tax_included_price(prod.price,
-                                                              prod.taxes_id,
-                                                              self.tax_id)
+            self.price_unit = self.product_id.categ_id.rtype_ids.list_price
+            if self.folio_id.partner_id.discount_id:
+                self.discount_id = self.folio_id.partner_id.discount_id.id
+                self.discount = self.folio_id.partner_id.discount_id.discount
+            # self.price_unit = tax_obj._fix_tax_included_price(prod.price,
+            #                                                   prod.taxes_id,
+            #                                                   self.tax_id)
 
     @api.onchange('product_uom')
     def product_uom_change(self):
         if not self.product_uom:
             self.price_unit = 0.0
             return
-        self.price_unit = self.product_id.lst_price
+        self.price_unit = self.product_id.categ_id.rtype_ids.list_price
         if self.folio_id.partner_id:
             prod = self.product_id.with_context(
                 lang=self.folio_id.partner_id.lang,
@@ -897,9 +904,9 @@ class HotelFolioLine(models.Model):
                 uom=self.product_uom.id
             )
             tax_obj = self.env['account.tax']
-            self.price_unit = tax_obj._fix_tax_included_price(prod.price,
-                                                              prod.taxes_id,
-                                                              self.tax_id)
+            # self.price_unit = tax_obj._fix_tax_included_price(prod.price,
+            #                                                   prod.taxes_id,
+            #                                                   self.tax_id)
 
     @api.onchange('checkin_date', 'checkout_date')
     def on_change_checkout(self):
