@@ -307,7 +307,7 @@
                             <page name="information_hotel_room" string="Información">
                                 <group colspan="4" col="4">
                                     <field name="floor_id" />
-                                    <field name="categ_id" select="1" domain="[('isroomtype','=',True)]" invisible="True" />
+                                    <field name="categ_id" select="1" domain="[('isroomtype','=',True)]" />
                                     <field name="product_manager" select="2" string="Responsable" />
                                     <field name="capacity" invisible="True" />
                                     <field name="uom_id" invisible="1" />
@@ -400,7 +400,7 @@
             <field name="arch" type="xml">
                 <tree string="Hotel Room">
                     <field name="name" />
-                    <field name="categ_id" select="1" invisible="1" />
+                    <field name="categ_id" select="1" />
                     <field name="list_price" string="Precio" invisible="1" />
                     <field name="status" />
                     <field name="capacity" invisible="1" />
