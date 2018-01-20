@@ -430,16 +430,17 @@ class HotelReservation(models.Model):
                                           pricelist_id.id,
                                           uom=r['uom_id'].id
                                           )
+                    room_type_obj = self.env['hotel.room.type']
+                    room_type_ids = room_type_obj.search([('cat_id', '=', prod.categ_id.id)])
                     folio_lines.append((0, 0, {
                         'checkin_date': checkin_date,
                         'checkout_date': checkout_date,
                         'product_id': r.product_id and r.product_id.id,
                         'name': reservation['reservation_no'],
                         'product_uom': r['uom_id'].id,
-                        # 'price_unit': prod.price,
-                        'price_unit': line.categ_id.list_price,
+                        'price_unit': room_type_ids.read(fields=['list_price'])[0]['list_price'],
+                        'categ_id' : room_type_ids and room_type_ids[0].id,
                         'product_uom_qty': ((date_a - date_b).days) + 1,
-                        'categ_id' : line.categ_id.id,
                         'discount_id': reservation.partner_id.discount_id and reservation.partner_id.discount_id.id,
                         'discount' : reservation.partner_id.discount_id and reservation.partner_id.discount_id.discount,
                     }))
@@ -529,10 +530,12 @@ class HotelReservationLine(models.Model):
         @param self: object pointer
         '''
         hotel_room_obj = self.env['hotel.room']
-        # hotel_room_ids = hotel_room_obj.search([])
-        hotel_room_ids = hotel_room_obj.search([('categ_id', '=',
+        if self.categ_id.cat_id.id:
+          hotel_room_ids = hotel_room_obj.search([('categ_id', '=',
                                                   self.categ_id.cat_id.id),
                                                  ('isroom', '=', True)])
+        else:
+          hotel_room_ids = hotel_room_obj.search([])
         assigned = False
         room_ids = []
         if not self.line_id.checkin:
