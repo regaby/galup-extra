@@ -147,7 +147,12 @@ class HotelReservation(models.Model):
                     raise ValidationError(_('Please Select Rooms \
                     For Reservation.'))
                 cap = 0
-                cap = rec.categ_id.capacity
+                # cap = rec.categ_id.capacity
+                for room in rec.reserve:
+                  room_type_obj = self.env['hotel.room.type']
+                  room_type_ids = room_type_obj.search([('cat_id', '=', room.product_id.categ_id.id)])
+                  cap += room_type_ids.read(fields=['capacity'])[0]['capacity']
+                  # cap += room.product_id.categ_id.capacity
                 if (self.adults + self.children) > cap:
                         raise ValidationError(_('Room Capacity \
                         Exceeded \n Please Select Rooms According to \
@@ -510,7 +515,7 @@ class HotelReservationLine(models.Model):
     reserve = fields.Many2many('hotel.room',
                                'hotel_reservation_line_room_rel',
                                'room_id', 'hotel_reservation_line_id',
-                               domain="[('isroom','=',True)")
+                               domain="[('isroom','=',True),('categ_id','=',categ_id)")
     categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
                                change_default=True)
@@ -524,7 +529,10 @@ class HotelReservationLine(models.Model):
         @param self: object pointer
         '''
         hotel_room_obj = self.env['hotel.room']
-        hotel_room_ids = hotel_room_obj.search([])
+        # hotel_room_ids = hotel_room_obj.search([])
+        hotel_room_ids = hotel_room_obj.search([('categ_id', '=',
+                                                  self.categ_id.cat_id.id),
+                                                 ('isroom', '=', True)])
         assigned = False
         room_ids = []
         if not self.line_id.checkin:
