@@ -648,6 +648,10 @@ class RoomReservationSummary(models.Model):
     date_to = fields.Datetime('Date To')
     summary_header = fields.Text('Summary Header')
     room_summary = fields.Text('Room Summary')
+    # month = fields.Selection([(1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'), (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'), 
+    #                           (8, 'Agosto'), (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')],'Mes', 
+    #                           default=lambda *a: time.gmtime()[1])
+    # year = fields.Integer('Año', default=lambda *a: time.gmtime()[0])                             
 
     @api.model
     def default_get(self, fields):
@@ -660,7 +664,7 @@ class RoomReservationSummary(models.Model):
         if self._context is None:
             self._context = {}
         res = super(RoomReservationSummary, self).default_get(fields)
-        if not self.date_from and self.date_to:
+        if not self.date_from and not self.date_to:
             date_today = datetime.datetime.today()
             first_day = datetime.datetime(date_today.year,
                                           date_today.month, 1, 0, 0, 0)
@@ -669,7 +673,7 @@ class RoomReservationSummary(models.Model):
             last_day = datetime.datetime(last_temp_day.year,
                                          last_temp_day.month,
                                          last_temp_day.day, 23, 59, 59)
-            date_froms = first_day.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+            date_froms = date_today.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
             date_ends = last_day.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
             res.update({'date_from': date_froms, 'date_to': date_ends})
         return res

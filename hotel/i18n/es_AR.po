@@ -1106,7 +1106,7 @@ msgstr "Nombre del hotel"
 #: field:hotel.folio,hotel_policy:0
 #: model:ir.model.fields,field_description:hotel.field_hotel_folio_hotel_policy
 msgid "Hotel Policy"
-msgstr "Política del hotel"
+msgstr "Política de Precios"
 
 #. module: hotel
 #: model:ir.actions.act_window,name:hotel.action_hotel_room_form
