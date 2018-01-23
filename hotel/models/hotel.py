@@ -403,10 +403,10 @@ class HotelFolio(models.Model):
         if self.checkin_date >= self.checkout_date:
                 raise ValidationError(_('Check in Date Should be \
                 less than the Check Out Date!'))
-        if self.date_order and self.checkin_date:
-            if self.checkin_date < self.date_order:
-                raise ValidationError(_('Check in date should be \
-                greater than the current date.'))
+        # if self.date_order and self.checkin_date:
+        #     if self.checkin_date < self.date_order:
+        #         raise ValidationError(_('Check in date should be \
+        #         greater than the current date.'))
 
     @api.onchange('checkout_date', 'checkin_date')
     def onchange_dates(self):
