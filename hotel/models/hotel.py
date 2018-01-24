@@ -475,7 +475,7 @@ class HotelFolio(models.Model):
                             prod = room_rec.product_id.name
                             room_obj = h_room_obj.search([('name', '=',
                                                           prod)])
-                            room_obj.write({'isroom': False})
+                            room_obj.write({'isroom': False, 'status': 'occupied'})
                             vals = {'room_id': room_obj.id,
                                     'check_in': rec.checkin_date,
                                     'check_out': rec.checkout_date,
@@ -487,7 +487,7 @@ class HotelFolio(models.Model):
                     for room_rec in rec.room_lines:
                         prod = room_rec.product_id.name
                         room_obj = h_room_obj.search([('name', '=', prod)])
-                        room_obj.write({'isroom': False})
+                        room_obj.write({'isroom': False, 'status': 'occupied'})
                         vals = {'room_id': room_obj.id,
                                 'check_in': rec.checkin_date,
                                 'check_out': rec.checkout_date,
@@ -521,7 +521,7 @@ class HotelFolio(models.Model):
                 room_list = product_obj.browse(list(new_rooms))
                 for rm in room_list:
                     room_obj = h_room_obj.search([('name', '=', rm.name)])
-                    room_obj.write({'isroom': False})
+                    room_obj.write({'isroom': False, 'status': 'occupied'})
                     vals = {'room_id': room_obj.id,
                             'check_in': folio_obj.checkin_date,
                             'check_out': folio_obj.checkout_date,
@@ -532,7 +532,7 @@ class HotelFolio(models.Model):
                 room_list_obj = product_obj.browse(room_lst1)
                 for rom in room_list_obj:
                     room_obj = h_room_obj.search([('name', '=', rom.name)])
-                    room_obj.write({'isroom': False})
+                    room_obj.write({'isroom': False, 'status': 'occupied'})
                     room_vals = {'room_id': room_obj.id,
                                  'check_in': folio_obj.checkin_date,
                                  'check_out': folio_obj.checkout_date,
@@ -627,7 +627,7 @@ class HotelFolio(models.Model):
             for room in room_lst:
                 room_obj = self.env['hotel.room'
                                     ].search([('name', '=', room.name)])
-                room_obj.write({'isroom': True})
+                room_obj.write({'isroom': True, 'status': 'available'})
         return invoice_id
 
     @api.multi
