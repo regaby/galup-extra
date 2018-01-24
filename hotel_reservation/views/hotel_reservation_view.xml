@@ -103,7 +103,6 @@
                     <field name="checkin"/>
                     <field name="checkout"/>
                     <field name="state"/>
-                    <field name="partner_id.main_id_number" string="DNI"/>
                     <newline/>
                     <group expand="0" string="Group By">
                         <filter name="partner_id" string="Guest Name" icon="terp-personal" domain="[]" context="{'group_by':'partner_id'}"/>
