@@ -177,31 +177,31 @@ class HotelRoom(models.Model):
     room_line_ids = fields.One2many('folio.room.line', 'room_id',
                                     string='Room Reservation Line')
 
-    @api.onchange('isroom')
-    def isroom_change(self):
-        '''
-        Based on isroom, status will be updated.
-        ----------------------------------------
-        @param self: object pointer
-        '''
-        if self.isroom is False:
-            self.status = 'occupied'
-        if self.isroom is True:
-            self.status = 'available'
+    # @api.onchange('isroom')
+    # def isroom_change(self):
+    #     '''
+    #     Based on isroom, status will be updated.
+    #     ----------------------------------------
+    #     @param self: object pointer
+    #     '''
+    #     if self.isroom is False:
+    #         self.status = 'occupied'
+    #     if self.isroom is True:
+    #         self.status = 'available'
 
-    @api.multi
-    def write(self, vals):
-        """
-        Overrides orm write method.
-        @param self: The object pointer
-        @param vals: dictionary of fields value.
-        """
-        if 'isroom' in vals and vals['isroom'] is False:
-            vals.update({'color': 2, 'status': 'occupied'})
-        if 'isroom'in vals and vals['isroom'] is True:
-            vals.update({'color': 5, 'status': 'available'})
-        ret_val = super(HotelRoom, self).write(vals)
-        return ret_val
+    # @api.multi
+    # def write(self, vals):
+    #     """
+    #     Overrides orm write method.
+    #     @param self: The object pointer
+    #     @param vals: dictionary of fields value.
+    #     """
+    #     if 'isroom' in vals and vals['isroom'] is False:
+    #         vals.update({'color': 2, 'status': 'occupied'})
+    #     if 'isroom'in vals and vals['isroom'] is True:
+    #         vals.update({'color': 5, 'status': 'available'})
+    #     ret_val = super(HotelRoom, self).write(vals)
+    #     return ret_val
 
     @api.multi
     def set_room_status_occupied(self):
