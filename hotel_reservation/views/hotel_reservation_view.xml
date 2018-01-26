@@ -40,8 +40,12 @@
                                 <field name="partner_shipping_id" domain="[('parent_id','=',partner_id)]" invisible="True"/>
                             </group>
                             <group colspan="4" col="4">
-                                <field name="checkin"/>
-                                <field name="checkout"/>
+                                <field name="checkin" invisible="True"/>
+                                <field name="checkout" invisible="True"/>
+                                <field name="checkin_date" required="True" />
+                                <field name="checkout_date" required="True" />
+                                <field name="checkin_hour" required="True" />
+                                <field name="checkout_hour" required="True" />
                                 <field name="adults"/>
                                 <field name="children"/>
                             </group>
@@ -51,11 +55,11 @@
                             <page string='Lineas de Reserva'>
                                 <field name="reservation_line" colspan="4" nolabel="1" >
                                     <form string="Reservation Line">
-                                        <separator string="Room Type"/>
+                                        <separator string="Filtre por categoria de Habitacion"/>
                                         <field name="name" invisible="1" />
                                         <field name="categ_id" select="1" colspan="4" nolabel="1" />
                                         <newline/>
-                                        <separator string="Select Room"/>
+                                        <separator string="Seleccione la habitacion"/>
                                         <field name="reserve" colspan="4" string="Room Number" nolabel="1" />
                                     </form>
                                     <tree string="Reservation Line">

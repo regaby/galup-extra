@@ -25,6 +25,7 @@ from dateutil.relativedelta import relativedelta
 from openerp import models, fields, api, _
 import datetime
 import time
+from openerp.addons.hotel.models import hotel
 
 
 class HotelFolio(models.Model):
@@ -113,6 +114,20 @@ class HotelReservation(models.Model):
     checkout = fields.Datetime('Expected-Date-Departure', required=True,
                                readonly=True,
                                states={'draft': [('readonly', False)]})
+#------
+    checkin_date = fields.Date('Entrada', required=False,
+                              readonly=True,
+                              states={'draft': [('readonly', False)]})
+    checkout_date = fields.Date('Salida', required=False,
+                               readonly=True,
+                               states={'draft': [('readonly', False)]})
+    checkin_hour = fields.Integer('Hora Entrada', required=False,
+                              readonly=True,
+                              states={'draft': [('readonly', False)]},default=lambda *a: 12)
+    checkout_hour = fields.Integer('Hora Salida', required=False,
+                              readonly=True,
+                              states={'draft': [('readonly', False)]},default=lambda *a: 10)
+#------
     adults = fields.Integer('Adults', size=64, readonly=True,
                             states={'draft': [('readonly', False)]},
                             help='List of adults there in guest list. ')
@@ -130,6 +145,40 @@ class HotelReservation(models.Model):
                                 'order_id', 'invoice_id', string='Folio')
     dummy = fields.Datetime('Dummy')
 
+    @api.onchange('checkin_date', 'checkin_hour')
+    def on_change_checkin_date_our(self):
+        if self._context.get('tz'):
+            to_zone = self._context.get('tz')
+        else:
+            to_zone = 'UTC'
+        if not self.checkin_hour >=0 or not self.checkin_hour <= 24:
+          raise ValidationError(_('Seleccione una hora de entrada entre las 0 y las 23.'))
+        if self.checkin_date:
+          checkin = '%s %s:00:00'%(self.checkin_date, self.checkin_hour)
+          # self.checkin =  checkin
+          self.checkin = hotel._offset_format_timestamp1(checkin,
+                                         '%Y-%m-%d %H:%M:%S',
+                                         '%Y-%m-%d %H:%M:%S',
+                                         ignore_unparsable_time=True,
+                                         context={'tz': to_zone})
+
+    @api.onchange('checkout_date', 'checkout_hour')
+    def on_change_checkout_date_our(self):
+        if self._context.get('tz'):
+            to_zone = self._context.get('tz')
+        else:
+            to_zone = 'UTC'
+        if not self.checkout_hour >=0 or not self.checkout_hour <= 24:
+          raise ValidationError(_('Seleccione una hora de salida entre las 0 y las 23.'))
+        if self.checkout_date:
+          checkout = '%s %s:00:00'%(self.checkout_date, self.checkout_hour)
+          # self.checkin =  checkin
+          self.checkout = hotel._offset_format_timestamp1(checkout,
+                                         '%Y-%m-%d %H:%M:%S',
+                                         '%Y-%m-%d %H:%M:%S',
+                                         ignore_unparsable_time=True,
+                                         context={'tz': to_zone})
+        
     @api.constrains('reservation_line', 'adults', 'children')
     def check_reservation_rooms(self):
         '''
@@ -186,9 +235,9 @@ class HotelReservation(models.Model):
         Checkout date should be greater than the checkin date.
         """
         if self.checkout and self.checkin:
-            if self.checkin < self.date_order:
-                raise ValidationError(_('Checkin date should be \
-                greater than the current date.'))
+            # if self.checkin < self.date_order:
+            #     raise ValidationError(_('Checkin date should be \
+            #     greater than the current date.'))
             if self.checkout < self.checkin:
                 raise ValidationError(_('Checkout date \
                 should be greater than Checkin date.'))
@@ -516,7 +565,7 @@ class HotelReservationLine(models.Model):
     reserve = fields.Many2many('hotel.room',
                                'hotel_reservation_line_room_rel',
                                'room_id', 'hotel_reservation_line_id',
-                               domain="[('isroom','=',True),('categ_id','=',categ_id)")
+                               domain="[('isroom','=',True),('categ_id','=',categ_id)]")
     categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
                                change_default=True)
@@ -535,7 +584,7 @@ class HotelReservationLine(models.Model):
                                                   self.categ_id.cat_id.id),
                                                  ('isroom', '=', True)])
         else:
-          hotel_room_ids = hotel_room_obj.search([])
+          hotel_room_ids = hotel_room_obj.search([('isroom', '=', True)])
         assigned = False
         room_ids = []
         if not self.line_id.checkin:
@@ -626,12 +675,14 @@ class HotelRoom(models.Model):
                         ('check_in', '<=', curr_date),
                         ('check_out', '>=', curr_date)]
             room_line_ids = folio_room_line_obj.search(rom_args)
-            status = {'isroom': True, 'color': 5}
+            if room.status == 'blocked':
+              continue
+            status = {'isroom': True, 'color': 5, 'status': 'available'}
             if reservation_line_ids.ids:
-                status = {'isroom': False, 'color': 2}
+                status = {'isroom': False, 'color': 2, 'status': 'occupied'}
             room.write(status)
             if room_line_ids.ids:
-                status = {'isroom': False, 'color': 2}
+                status = {'isroom': False, 'color': 2, 'status': 'occupied'}
             room.write(status)
             if reservation_line_ids.ids and room_line_ids.ids:
                 raise ValidationError(_('Please Check Rooms Status \
@@ -700,6 +751,22 @@ class RoomReservationSummary(models.Model):
                 'target': 'new',
                 }
 
+    def replace_char(self, output):
+        output = (output.encode('utf-8')).replace('°','.')
+        output = output.replace('Ñ','N')
+        output = output.replace('ñ','n')
+        output = output.replace('á','a')
+        output = output.replace('é','e')
+        output = output.replace('í','i')
+        output = output.replace('ó','o')
+        output = output.replace('ú','u')
+        output = output.replace('Á','A')
+        output = output.replace('É','E')
+        output = output.replace('Í','I')
+        output = output.replace('Ó','O')
+        output = output.replace('Ú','U')
+        return output
+
     @api.onchange('date_from', 'date_to')
     def get_room_summary(self):
         '''
@@ -726,6 +793,7 @@ class RoomReservationSummary(models.Model):
                 val = (str(temp_date.strftime("%a")) + ' ' +
                        str(temp_date.strftime("%b")) + ' ' +
                        str(temp_date.strftime("%d")))
+                val = self.replace_char(val)
                 summary_header_list.append(val)
                 date_range_list.append(temp_date.strftime
                                        (DEFAULT_SERVER_DATETIME_FORMAT))
@@ -737,6 +805,14 @@ class RoomReservationSummary(models.Model):
                 room_detail = {}
                 room_list_stats = []
                 room_detail.update({'name': room.name or ''})
+                # habitacion bloqueada
+                if room.status == 'blocked':
+                    for chk_date in date_range_list:
+                        room_list_stats.append({'state': 'Bloqueado',
+                                                'date': chk_date})
+                    room_detail.update({'value': room_list_stats})
+                    all_room_detail.append(room_detail)
+                    continue
                 if not room.room_reservation_line_ids:
                     for chk_date in date_range_list:
                         room_list_stats.append({'state': 'Libre',
