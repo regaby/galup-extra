@@ -176,6 +176,10 @@ class HotelRoom(models.Model):
     capacity = fields.Integer('Capacity')
     room_line_ids = fields.One2many('folio.room.line', 'room_id',
                                     string='Room Reservation Line')
+    state = fields.Selection([('clean', 'Limpia'),
+                               ('dirty', 'Sucia'),
+                               ],
+                              'Limpieza', default='clean')
 
     # @api.onchange('isroom')
     # def isroom_change(self):
@@ -341,7 +345,7 @@ class HotelFolio(models.Model):
                                     "either the guest has to payment at "
                                     "booking time or check-in "
                                     "check-out time.")
-    duration = fields.Float('Duration in Days', readonly=True,
+    duration = fields.Float('Duration in Days', readonly=False,
                             help="Number of days which will automatically "
                             "count from the check-in and check-out date. ")
     currrency_ids = fields.One2many('currency.exchange', 'folio_no',
@@ -828,10 +832,10 @@ class HotelFolioLine(models.Model):
         if self.checkin_date >= self.checkout_date:
                 raise ValidationError(_('Room line Check In Date Should be \
                 less than the Check Out Date!'))
-        if self.folio_id.date_order and self.checkin_date:
-            if self.checkin_date <= self.folio_id.date_order:
-                raise ValidationError(_('Room line check in date should be \
-                greater than the current date.'))
+        # if self.folio_id.date_order and self.checkin_date:
+        #     if self.checkin_date <= self.folio_id.date_order:
+        #         raise ValidationError(_('Room line check in date should be \
+        #         greater than the current date.'))
 
     @api.multi
     def unlink(self):
