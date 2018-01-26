@@ -23,3 +23,12 @@
 	vertical-align: middle;
 	cursor:pointer;
 }
+.table_blocked
+{
+	background-color: #81a1ba;
+	color: white;
+	text-align: center;
+	min-width:100px;
+	vertical-align: middle;
+	cursor:pointer;
+}
