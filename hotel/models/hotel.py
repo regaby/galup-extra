@@ -151,7 +151,7 @@ class FolioRoomLine(models.Model):
     check_in = fields.Datetime('Check In Date', required=True)
     check_out = fields.Datetime('Check Out Date', required=True)
     folio_id = fields.Many2one('hotel.folio', string='Folio Number')
-    status = fields.Selection(string='state', related='folio_id.state')
+    status = fields.Selection(string='Estado de Factura', related='folio_id.state')
 
 
 class HotelRoom(models.Model):
@@ -312,7 +312,7 @@ class HotelFolio(models.Model):
     _name = 'hotel.folio'
     _description = 'hotel folio new'
     _rec_name = 'order_id'
-    _order = 'id'
+    _order = 'id desc'
     _inherit = ['ir.needaction_mixin']
 
     name = fields.Char('Folio Number', readonly=True, index=True,
