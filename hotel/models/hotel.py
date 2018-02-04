@@ -355,7 +355,7 @@ class HotelFolio(models.Model):
     
     identification_id = fields.Char(related='partner_id.main_id_number', string="Núm. Documento", required=True)
 
-    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True, store=True)
+    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True)
 
     adress_partner = fields.Char(related='partner_id.street', string='Dirección', required=True)
 
