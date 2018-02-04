@@ -574,6 +574,21 @@
                             <page string="Folio">
                                 <group colspan="4" col="4">
                                     <field name="partner_id" string="Huesped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
+                                    <field name="type_doc" options="{'no_open': True, 'no_create': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="identification_id" class="oe_inline"  attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="adress_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="city_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="state_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="country_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="nacionality_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <!-- <field name="birthday_partner" attrs="{'invisible':[('partner_id','=',False)]}"/> -->
+                                    <!-- <field name="gender_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/> -->
+                                    <field name="email_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                </group>
+
+                                 <separator string="" colspan="4"/>
+
+                                <group colspan="4" col="4">
                                     <field name="partner_invoice_id" domain="[('parent_id','=',partner_id)]" />
                                     <field name="pricelist_id" />
                                     <field name="project_id" />

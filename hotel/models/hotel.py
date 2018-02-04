@@ -352,6 +352,29 @@ class HotelFolio(models.Model):
                                     readonly=True)
     hotel_invoice_id = fields.Many2one('account.invoice', 'Invoice')
 
+    
+    identification_id = fields.Char(related='partner_id.main_id_number', string="Núm. Documento", required=True)
+
+    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True, store=True)
+
+    adress_partner = fields.Char(related='partner_id.street', string='Dirección', required=True)
+
+    city_partner = fields.Char(related='partner_id.city', string='Ciudad', required=True)
+
+    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id', required=True)
+
+    country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True)
+
+    nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.country_id', required=True)
+
+    #birthday_partner = fields.Date(related='partner_id.birthday', string='Fecha de nacimiento', required=True)
+
+    #gender_partner = fields.Selection(related='partner_id.gender', type='selection', string='Género', required=True, store=True)
+
+    email_partner = fields.Char(related='partner_id.email', string='Email', required=True)
+
+
+
     @api.multi
     def go_to_currency_exchange(self):
         '''
