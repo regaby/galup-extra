@@ -107,7 +107,7 @@ class HotelReservation(models.Model):
                                           states={'draft':
                                                   [('readonly', False)]},
                                           help="Delivery address"
-                                          "for current reservation. ")
+                                          "for current reservation. ",)
     checkin = fields.Datetime('Expected-Date-Arrival', required=True,
                               readonly=True,
                               states={'draft': [('readonly', False)]})

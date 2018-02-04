@@ -27,7 +27,7 @@
     Odoo Community Association (OCA)",
     "category": "Generic Modules/Hotel Reservation",
     "website": "http://www.serpentcs.com",
-    "depends": ["hotel", "stock", 'mail'],
+    "depends": ["hotel",'partner_identification', "stock", 'mail'],
     "license": "",
     "demo": [
         "views/hotel_reservation_data.xml",
