@@ -371,7 +371,12 @@ class HotelFolio(models.Model):
 
     #gender_partner = fields.Selection(related='partner_id.gender', type='selection', string='Género', required=True, store=True)
 
-    email_partner = fields.Char(related='partner_id.email', string='Email', required=True)
+    email_partner = fields.Char(related='partner_id.email', string='Email')
+
+    @api.onchange('country_partner')
+    def on_change_nacionality(self):
+        self.nacionality_partner = self.country_partner
+
 
 
 
@@ -902,7 +907,7 @@ class HotelFolioLine(models.Model):
     def product_id_change(self):
         if self.product_id and self.folio_id.partner_id:
             self.name = self.product_id.name
-            # self.price_unit = self.product_id.lst_price
+            self.price_unit = self.product_id.lst_price
             self.product_uom = self.product_id.uom_id
             self.categ_id = self.product_id.categ_id.rtype_ids.id
             tax_obj = self.env['account.tax']
@@ -1053,6 +1058,8 @@ class HotelServiceLine(models.Model):
                                        default=_service_checkin_date)
     ser_checkout_date = fields.Datetime('To Date', required=True,
                                         default=_service_checkout_date)
+    quantity = fields.Float(string='Cantidad', default=1)
+
 
     @api.model
     def create(self, vals, check=True):
@@ -1142,7 +1149,7 @@ class HotelServiceLine(models.Model):
                                    DEFAULT_SERVER_DATETIME_FORMAT)[:5]
             diffDate = datetime.datetime(*date_a) - datetime.datetime(*date_b)
             qty = diffDate.days + 1
-            self.product_uom_qty = qty
+            self.product_uom_qty = self.quantity
 
     @api.multi
     def button_confirm(self):
