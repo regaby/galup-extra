@@ -130,7 +130,7 @@ class HotelReservation(models.Model):
 #------
     adults = fields.Integer('Adults', size=64, readonly=True,
                             states={'draft': [('readonly', False)]},
-                            help='List of adults there in guest list. ')
+                            help='List of adults there in guest list. ', default=1)
     children = fields.Integer('Children', size=64, readonly=True,
                               states={'draft': [('readonly', False)]},
                               help='Number of children there in guest list.')
