@@ -158,7 +158,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,gantt</field>
         </record>
-        <menuitem  id="menu_hotel_reservation" name="Reservations" parent="hotel.hotel_management_menu" sequence="1"/>
+        <menuitem  id="menu_hotel_reservation" name="Reservations" parent="hotel.hotel_management_menu" sequence="5"/>
         <menuitem name="Reservations"
         id="menu_action_hotel_reservation_tree_all"
         action="action_hotel_reservation_tree_all"
