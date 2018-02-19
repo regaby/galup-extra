@@ -316,7 +316,7 @@ class HotelFolio(models.Model):
     _inherit = ['ir.needaction_mixin']
 
     name = fields.Char('Folio Number', readonly=True, index=True,
-                       default='New')
+                       default='Nuevo')
     order_id = fields.Many2one('sale.order', 'Order', delegate=True,
                                required=True, ondelete='cascade')
     checkin_date = fields.Datetime('Check In', required=True, readonly=True,
@@ -361,11 +361,15 @@ class HotelFolio(models.Model):
 
     city_partner = fields.Char(related='partner_id.city', string='Ciudad', required=True)
 
-    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id', required=True)
+    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id')
 
     country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True)
 
     nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.country_id', required=True)
+
+    phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
+
+    # car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car') 
 
     #birthday_partner = fields.Date(related='partner_id.birthday', string='Fecha de nacimiento', required=True)
 

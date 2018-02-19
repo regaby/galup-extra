@@ -160,7 +160,7 @@
         </record>
 
         <menuitem id="menu_amenity" name="Amenity"
-            parent="hotel.hotel_configuration_menu" sequence="2" />
+            parent="hotel.hotel_configuration_menu" sequence="2" groups="base.group_configuration"/>
         <menuitem name="Amenity Types"
             id="menu_action_hotel_room_amenities_type_view_form" action="action_hotel_room_amenities_type_view_form"
             sequence="3" parent="hotel.menu_amenity" />
@@ -573,7 +573,7 @@
                         <notebook colspan="4">
                             <page string="Folio">
                                 <group colspan="4" col="4">
-                                    <field name="partner_id" string="Huesped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
+                                    <field name="partner_id" string="Huésped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
                                     <field name="type_doc" options="{'no_open': True, 'no_create': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     
                                     <field name="adress_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
@@ -582,8 +582,9 @@
                                     <field name="state_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="country_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="nacionality_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
-                                    <!-- <field name="birthday_partner" attrs="{'invisible':[('partner_id','=',False)]}"/> -->
-                                    <!-- <field name="gender_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/> -->
+                                   
+                                    <field name="phone_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                              
                                     <field name="email_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                 </group>
 
@@ -733,6 +734,10 @@
                                 </group>
                                 <div class="oe_clear" />
                             </page>
+                            <page string="Facturas relacionadas">
+                                <separator string="Facturas relacionadas" colspan="4" />
+                                <field name="invoice_ids" colspan="4" nolabel="1" />
+                            </page>
                             <page string="Otro datos">
                                 <group>
                                     <field name="user_id" />
@@ -741,10 +746,7 @@
                                     <field name="client_order_ref" />
                                 </group>
                             </page>
-                            <page string="Historial">
-                                <separator string="Facturas relacionadas" colspan="4" />
-                                <field name="invoice_ids" colspan="4" nolabel="1" />
-                            </page>
+                            
                             <!-- <page string="Foreign Exchange" name="foreign exchange">
                                 <separator string="Foreign Exchange" colspan="4" />
                                 <field name="currrency_ids" colspan="4" nolabel="1">
@@ -1043,7 +1045,7 @@
         </record>
         
         <menuitem name="Room by Type" id="menu_hotel_room_category_action"
-            action="hotel_room_category_action" sequence="7" parent="hotel.menu_hotel_room" />
+            action="hotel_room_category_action" sequence="7" parent="hotel.menu_hotel_room" groups="base.group_configuration"/>
 
         <record model="ir.actions.act_window" id="hotel_ty_category_action">
             <field name="name">Amenities by Category</field>
@@ -1082,9 +1084,9 @@
             <field eval="'ir.actions.act_window,%d'%action_room_cate" name="value"/>
         </record>
         
-        <menuitem name="Services by Type" id="menu_hotel_service_category_action"
+        <menuitem name="Services by Type" id="menu_hotel_service_category_action" 
             action="hotel_service_category_action" sequence="10"
-            parent="hotel.menu_hotel_service" />
+            parent="hotel.menu_hotel_service" groups="base.group_configuration"/>
 
         <!--==================================================== Currency ==================================================== -->
 
