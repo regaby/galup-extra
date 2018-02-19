@@ -911,7 +911,7 @@ msgstr "Estructura de los Pisos"
 #: model:ir.model.fields,field_description:hotel.field_hotel_service_line_folio_id
 #: model:ir.ui.menu,name:hotel.menu_all_folio
 msgid "Folio"
-msgstr "Folio"
+msgstr "Folio / Checkin"
 
 #. module: hotel
 #: view:website:hotel.report_hotel_folio
@@ -1015,7 +1015,7 @@ msgstr "Desde:"
 #. module: hotel
 #: model:ir.ui.menu,name:hotel.menu_open_hotel_folio1_form_tree_all
 msgid "Generate Folio"
-msgstr "Folio"
+msgstr "Folio / Checkin"
 
 #. module: hotel
 #: help:hotel.room,packaging_ids:0 help:hotel.room.amenities,packaging_ids:0

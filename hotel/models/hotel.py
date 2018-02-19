@@ -365,21 +365,13 @@ class HotelFolio(models.Model):
 
     country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True)
 
-    nacionality_partner = fields.Many2one('res.country', 'Nacionalidad' , related='partner_id.country_id', required=True)
-
     phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
-
-    # car_partner = fields.Boolean(string='¿Tiene vehículo?', related='partner_id.has_car') 
-
-    #birthday_partner = fields.Date(related='partner_id.birthday', string='Fecha de nacimiento', required=True)
-
-    #gender_partner = fields.Selection(related='partner_id.gender', type='selection', string='Género', required=True, store=True)
 
     email_partner = fields.Char(related='partner_id.email', string='Email')
 
     @api.onchange('country_partner')
     def on_change_nacionality(self):
-        self.nacionality_partner = self.country_partner
+        self.nationality_partner = self.country_partner
 
 
 
