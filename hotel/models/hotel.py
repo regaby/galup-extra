@@ -369,9 +369,7 @@ class HotelFolio(models.Model):
 
     email_partner = fields.Char(related='partner_id.email', string='Email')
 
-    @api.onchange('country_partner')
-    def on_change_nacionality(self):
-        self.nationality_partner = self.country_partner
+    
 
 
 
