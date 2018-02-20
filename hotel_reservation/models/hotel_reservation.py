@@ -816,7 +816,8 @@ class RoomReservationSummary(models.Model):
                 if not room.room_reservation_line_ids:
                     for chk_date in date_range_list:
                         room_list_stats.append({'state': 'Libre',
-                                                'date': chk_date})
+                                                'date': chk_date,
+                                                'room_id': room.id})
                 else:
                     for chk_date in date_range_list:
                         for room_res_line in room.room_reservation_line_ids:
@@ -851,10 +852,10 @@ class QuickRoomReservation(models.TransientModel):
 
     partner_id = fields.Many2one('res.partner', string="Customer",
                                  required=True)
-    check_in = fields.Datetime('Check In', required=True)
-    check_out = fields.Datetime('Check Out', required=True)
+    check_in = fields.Datetime('Check In', required=False)
+    check_out = fields.Datetime('Check Out', required=False)
     room_id = fields.Many2one('hotel.room', 'Room', required=True)
-    warehouse_id = fields.Many2one('stock.warehouse', 'Hotel', required=True)
+    warehouse_id = fields.Many2one('stock.warehouse', 'Hotel', required=True,default=1)
     pricelist_id = fields.Many2one('product.pricelist', 'pricelist',
                                    required=True)
     partner_invoice_id = fields.Many2one('res.partner', 'Invoice Address',
@@ -863,6 +864,12 @@ class QuickRoomReservation(models.TransientModel):
                                        required=True)
     partner_shipping_id = fields.Many2one('res.partner', 'Delivery Address',
                                           required=True)
+    #------
+    checkin_date = fields.Date('Entrada', required=True)
+    checkout_date = fields.Date('Salida', required=True)
+    checkin_hour = fields.Integer('Hora Entrada', required=True,default=lambda *a: 12)
+    checkout_hour = fields.Integer('Hora Salida', required=True,default=lambda *a: 10)
+    #------
 
     @api.onchange('check_out', 'check_in')
     def on_change_check_out(self):
@@ -913,7 +920,12 @@ class QuickRoomReservation(models.TransientModel):
         if self._context:
             keys = self._context.keys()
             if 'date' in keys:
-                res.update({'check_in': self._context['date']})
+                date_out = datetime.datetime.strptime(self._context['date'][0:10], '%Y-%m-%d') + datetime.timedelta(days=1)
+                res.update({
+                    'check_in': self._context['date'],
+                    'checkin_date': self._context['date'][0:10],
+                    'checkout_date': str(date_out)[0:10],
+                })
             if 'room_id' in keys:
                 roomid = self._context['room_id']
                 res.update({'room_id': int(roomid)})
@@ -929,13 +941,20 @@ class QuickRoomReservation(models.TransientModel):
         """
         hotel_res_obj = self.env['hotel.reservation']
         for res in self:
-            (hotel_res_obj.create
-             ({'partner_id': res.partner_id.id,
+            if not res.checkin_hour >=0 or not res.checkin_hour <= 24:
+                raise ValidationError(_('Seleccione una hora de entrada entre las 0 y las 23.'))
+            if not res.checkout_hour >=0 or not res.checkout_hour <= 24:
+                raise ValidationError(_('Seleccione una hora de salida entre las 0 y las 23.'))
+            reservation = {'partner_id': res.partner_id.id,
                'partner_invoice_id': res.partner_invoice_id.id,
                'partner_order_id': res.partner_order_id.id,
                'partner_shipping_id': res.partner_shipping_id.id,
-               'checkin': res.check_in,
-               'checkout': res.check_out,
+               'checkin' : '%s %s:00:00'%(res.checkin_date, res.checkin_hour+3),
+               'checkout' : '%s %s:00:00'%(res.checkout_date, res.checkout_hour+3),
+               'checkin_date': res.checkin_date,
+               'checkin_hour': res.checkin_hour,
+               'checkout_date': res.checkout_date,
+               'checkout_hour': res.checkout_hour,
                'warehouse_id': res.warehouse_id.id,
                'pricelist_id': res.pricelist_id.id,
                'reservation_line': [(0, 0,
@@ -943,5 +962,7 @@ class QuickRoomReservation(models.TransientModel):
                                       'name': (res.room_id and
                                                res.room_id.name or '')
                                       })]
-               }))
+               }
+            reservation_id = hotel_res_obj.create(reservation)
+            print reservation_id.confirmed_reservation()
         return True
