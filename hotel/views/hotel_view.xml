@@ -619,8 +619,7 @@
                                                         context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'uom':product_uom}"
                                                         select="1" domain="[('isroom','=',True)]"
                                                         string="Nro. Habitación" />
-                                                    <field name="product_uom" string="Unidad de Medida" />
-                                                    <newline />
+                                                    <field name="product_uom" string="Unidad de Medida" invisible="1"/>
                                                     <field name="categ_id" string="Categoria" required="True"/>
                                                 </group>
                                                 <separator string="Descripción" colspan="4" />
@@ -630,6 +629,7 @@
                                                     <field name="price_unit" select="2" string="Precio" />
                                                     <field name="discount" />
                                                     <newline />
+                                                    <separator string="Gastos adicionales - Impuestos" colspan="4" />
                                                     <field name="tax_id" colspan="4" nolabel="1" />
                                                     <separator string="Estados" colspan="4" />
                                                     <field name="state" select="2" />
