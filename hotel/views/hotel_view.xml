@@ -678,10 +678,9 @@
                                                         domain="[('isservice','=',True)]"
                                                         context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'hotel':parent.warehouse_id,'uom':product_uom}" options="{'no_open': True, 'no_create': True}"/>
                                                     <field name="product_uom" />
-                                                    <field name="quantity" />
                                                     <field name="product_uom_qty" select="1"
                                                         context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'hotel':parent.warehouse_id,'uom':product_uom}"
-                                                        invisible="1"/>
+                                                        invisible="0"/>
                                                 </group>
                                                 <separator string="Descripción" colspan="4" />
                                                 <field name="name" colspan="4" select="2"

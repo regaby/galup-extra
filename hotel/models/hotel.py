@@ -1052,7 +1052,6 @@ class HotelServiceLine(models.Model):
                                        default=_service_checkin_date)
     ser_checkout_date = fields.Datetime('To Date', required=True,
                                         default=_service_checkout_date)
-    quantity = fields.Float(string='Cantidad', default=1)
 
 
     @api.model
