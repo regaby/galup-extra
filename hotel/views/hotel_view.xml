@@ -516,7 +516,7 @@
             <field name="arch" type="xml">
                 <form string="Folio">
                     <header>
-                        <button name="action_confirm" states="draft" string="Confirmar Venta"
+                        <button name="action_confirm" states="draft" string="Confirmar Checkout"
                             class="btn-primary" type="object" />
                         <!-- <button name="order_confirm" string="Confirm Folio" states="draft" 
                             icon="gtk-apply" class="oe_highlight"/> -->
