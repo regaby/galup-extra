@@ -502,7 +502,8 @@ class HotelReservation(models.Model):
                              (reservation.id, folio.id)
                              )
             reservation.write({'state': 'done'})
-        return True
+        return folio.action_view_folio()
+        # return True
 
     @api.multi
     def onchange_check_dates(self, checkin_date=False, checkout_date=False,

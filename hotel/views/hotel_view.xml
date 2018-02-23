@@ -516,7 +516,7 @@
             <field name="arch" type="xml">
                 <form string="Folio">
                     <header>
-                        <button name="action_confirm" states="draft" string="Confirmar Checkout"
+                        <button name="action_confirm" states="draft" string="Confirmar Checkin"
                             class="btn-primary" type="object" />
                         <!-- <button name="order_confirm" string="Confirm Folio" states="draft" 
                             icon="gtk-apply" class="oe_highlight"/> -->
@@ -532,7 +532,7 @@
                             icon="gtk-new" class="oe_highlight"/> -->
                         <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Crear Factura" type="action" class="btn-primary" states="sale"
-                            attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
+                            attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" groups="hotel.group_hotel_manager"/>
                         <!-- <button name="ship_cancel" string="Cancel Folio" states="shipping_except" 
                             icon="gtk-cancel" class="oe_highlight oe_highlight" /> -->
                         <button name="action_cancel_draft" states="cancel" string="Volver a Borrador"
@@ -547,7 +547,7 @@
                             class="oe_highlight"/> -->
                         <!-- <button name="invoice_cancel" string="Cancel Folio" states="invoice_except" 
                             icon="gtk-cancel" class="oe_highlight"/> -->
-                        <button name="action_done" type="object" string="Finalizar"
+                        <button name="action_done" type="object" string="Realizar Checkout"
                             states="sale" attrs="{'invisible': [('invoice_status', '!=', 'invoiced')]}"
                             help="If a Hotel Folio is done, you cannot modify it manually anymore. However, you will still be able to invoice or deliver. This is used to freeze the Hotel Folio." />
                         <field name="state" select="2" widget="statusbar"

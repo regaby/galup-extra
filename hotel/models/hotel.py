@@ -231,6 +231,32 @@ class HotelRoom(models.Model):
 class HotelFolio(models.Model):
 
     @api.multi
+    def action_view_folio(self):
+        invoice_ids = self
+        imd = self.env['ir.model.data']
+        action = imd.xmlid_to_object('hotel.open_hotel_folio1_form_tree_all')
+        list_view_id = imd.xmlid_to_res_id('hotel.view_hotel_folio1_tree')
+        form_view_id = imd.xmlid_to_res_id('hotel.view_hotel_folio1_form')
+
+        result = {
+            'name': action.name,
+            'help': action.help,
+            'type': action.type,
+            'views': [[list_view_id, 'tree'], [form_view_id, 'form'], [False, 'graph'], [False, 'kanban'], [False, 'calendar'], [False, 'pivot']],
+            'target': action.target,
+            'context': action.context,
+            'res_model': action.res_model,
+        }
+        if len(invoice_ids) > 1:
+            result['domain'] = "[('id','in',%s)]" % invoice_ids.ids
+        elif len(invoice_ids) == 1:
+            result['views'] = [(form_view_id, 'form')]
+            result['res_id'] = invoice_ids.ids[0]
+        else:
+            result = {'type': 'ir.actions.act_window_close'}
+        return result
+
+    @api.multi
     def name_get(self):
         res = []
         disp = ''
@@ -333,7 +359,8 @@ class HotelFolio(models.Model):
     service_lines = fields.One2many('hotel.service.line', 'folio_id',
                                     readonly=True,
                                     states={'draft': [('readonly', False)],
-                                            'sent': [('readonly', False)]},
+                                            'sent': [('readonly', False)],
+                                            'sale': [('readonly', False)]},
                                     help="Hotel services detail provide to"
                                     "customer and it will include in "
                                     "main Invoice.")
@@ -352,22 +379,23 @@ class HotelFolio(models.Model):
                                     readonly=True)
     hotel_invoice_id = fields.Many2one('account.invoice', 'Invoice')
 
-    
-    identification_id = fields.Char(related='partner_id.main_id_number', string="Núm. Documento", required=True)
+    identification_id = fields.Char(related='partner_id.main_id_number', string="Núm. Documento", required=True, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    adress_partner = fields.Char(related='partner_id.street', string='Dirección', required=False, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    city_partner = fields.Char(related='partner_id.city', string='Ciudad', required=False, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id', required=True, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True, readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    phone_partner = fields.Char(related='partner_id.phone', string='Teléfono', readonly=True,
+                                    states={'draft': [('readonly', False)]},)
+    email_partner = fields.Char(related='partner_id.email', string='Email', readonly=True,
+                                    states={'draft': [('readonly', False)]},)
 
-    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True)
-
-    adress_partner = fields.Char(related='partner_id.street', string='Dirección', required=True)
-
-    city_partner = fields.Char(related='partner_id.city', string='Ciudad', required=True)
-
-    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id')
-
-    country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True)
-
-    phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
-
-    email_partner = fields.Char(related='partner_id.email', string='Email')
 
     
 
@@ -691,6 +719,8 @@ class HotelFolio(models.Model):
 
     @api.multi
     def action_confirm(self):
+        if not self.room_lines:
+            raise ValidationError(_('No se puede confirmar folio sin lineas de habitación'))
         for order in self.order_id:
             order.state = 'sale'
             order.order_line._action_procurement_create()

@@ -19,7 +19,7 @@
                             class="oe_highlight" type="object"/>
                         <button name="set_to_draft_reservation" string="Volver a borrador" states="cancel"
                         class="oe_highlight" type="object"/>
-                        <field name="state" widget="statusbar"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sale,done"/>
                     </header>
                     <sheet>
                         <label string="Nro. Reserva"/>
