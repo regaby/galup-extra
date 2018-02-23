@@ -321,7 +321,7 @@
                                 <field name="taxes_id" colspan="4" nolabel='1'
                                     help='Customer taxes apply on the perticular room. ' />
                             </page>
-                            <page string="Comodidades">
+                            <page string="Comodidades" name="Comodidades" >
                                 <separator string="Comodidades" />
                                 <field name="room_amenities" colspan="4" nolabel="1" />
                             </page>
@@ -662,7 +662,7 @@
                                         <field name="state" />
                                     </tree>
                                 </field>
-                                <separator string="Servicios" colspan="4" />
+                                <separator string="Servicios Adicionales" colspan="4" />
                                 <field name="service_lines" colspan="4" string="Servicios"
                                     nolabel="1" context="{'checkin':checkin_date,'checkout':checkout_date}">
                                     <form string="Servicios">
