@@ -379,22 +379,14 @@ class HotelFolio(models.Model):
                                     readonly=True)
     hotel_invoice_id = fields.Many2one('account.invoice', 'Invoice')
 
-    identification_id = fields.Char(related='partner_id.main_id_number', string="Núm. Documento", required=True, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    adress_partner = fields.Char(related='partner_id.street', string='Dirección', required=False, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    city_partner = fields.Char(related='partner_id.city', string='Ciudad', required=False, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id', required=True, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True, readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    phone_partner = fields.Char(related='partner_id.phone', string='Teléfono', readonly=True,
-                                    states={'draft': [('readonly', False)]},)
-    email_partner = fields.Char(related='partner_id.email', string='Email', readonly=True,
-                                    states={'draft': [('readonly', False)]},)
+    identification_id = fields.Char(related='partner_id.main_id_number', string="Núm. Documento", required=True)
+    type_doc = fields.Many2one('res.partner.id_category', 'Tipo Documento'  , related='partner_id.main_id_category_id', required=True)
+    adress_partner = fields.Char(related='partner_id.street', string='Dirección', required=False)
+    city_partner = fields.Char(related='partner_id.city', string='Ciudad', required=False)
+    state_partner = fields.Many2one('res.country.state', 'Provincia'  , related='partner_id.state_id', required=True)
+    country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True)
+    phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
+    email_partner = fields.Char(related='partner_id.email', string='Email')
 
 
     
