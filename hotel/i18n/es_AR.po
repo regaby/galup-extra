@@ -1084,7 +1084,7 @@ msgstr "Informe de Folio"
 #. module: hotel
 #: model:ir.ui.menu,name:hotel.hotel_management_menu
 msgid "Hotel Management"
-msgstr "Gestión del hotel"
+msgstr "Gestión hotel"
 
 #. module: hotel
 #: model:res.groups,name:hotel.group_hotel_user
