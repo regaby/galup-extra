@@ -144,6 +144,7 @@ class HotelReservation(models.Model):
     folio_id = fields.Many2many('hotel.folio', 'hotel_folio_reservation_rel',
                                 'order_id', 'invoice_id', string='Folio')
     dummy = fields.Datetime('Dummy')
+    user_id = fields.Many2one('res.users', string='Creado por', index=True, track_visibility='onchange', default=lambda self: self.env.user)
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):

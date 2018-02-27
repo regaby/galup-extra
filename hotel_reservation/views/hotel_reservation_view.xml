@@ -30,6 +30,8 @@
                             <group colspan="4" col="4">
                                 <field name="date_order" select="1" readonly='1'/>
                                 <field name="warehouse_id" select="1" readonly='1'/>
+                                <field name="user_id" select="1" readonly='1'/>
+
                             </group>
                             <separator/>
                             <group colspan="4" col="4">

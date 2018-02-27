@@ -570,6 +570,8 @@
                         <group colspan="4" col="4">
                             <field name="date_order" readonly='1'/>
                             <field name="warehouse_id" string="Compañía" readonly='1'/>
+                            <field name="user_id" string="Creado por"/>
+                            <newline/>
                             <!-- <field name="invoiced"/> -->
                             <field name="invoice_status" />
                             <field name="hotel_invoice_id" states='progress,done,cancel'
@@ -744,7 +746,6 @@
                             </page>
                             <page string="Otro datos">
                                 <group>
-                                    <field name="user_id" />
                                     <!-- <field name="order_policy" invisible="1"/> -->
                                     <field name="hotel_policy" attrs="{'readonly':[('state','not in',('draft'))]}" />
                                     <field name="client_order_ref" />
@@ -781,7 +782,7 @@
                     <field name="checkout_date" />
                     <field name="name" />
                     <field name="partner_id" select="1" />
-                    <field name="date_order" select="1" />
+                    <field name="date_order" select="1" invisible="1"/>
                     <field name="state" />
                     <field name="amount_total" sum="Total amount" />
                 </tree>
