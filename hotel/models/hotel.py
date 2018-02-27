@@ -354,14 +354,14 @@ class HotelFolio(models.Model):
                        default='Nuevo')
     order_id = fields.Many2one('sale.order', 'Order', delegate=True,
                                required=True, ondelete='cascade')
-    checkin_date = fields.Datetime('Check In', required=True, readonly=True,
+    checkin_date = fields.Datetime('Check In', required=True, readonly=False,
                                    states={'draft': [('readonly', False)]},
                                    default=_get_checkin_date)
-    checkout_date = fields.Datetime('Check Out', required=True, readonly=True,
+    checkout_date = fields.Datetime('Check Out', required=True, readonly=False,
                                     states={'draft': [('readonly', False)]},
                                     default=_get_checkout_date)
     room_lines = fields.One2many('hotel.folio.line', 'folio_id',
-                                 readonly=True,
+                                 readonly=False,
                                  states={'draft': [('readonly', False)],
                                          'sent': [('readonly', False)]},
                                  help="Hotel room reservation detail.")
