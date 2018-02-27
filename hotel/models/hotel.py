@@ -159,6 +159,12 @@ class HotelRoom(models.Model):
     _name = 'hotel.room'
     _description = 'Hotel Room'
 
+    @api.one
+    def _get_price(self):
+        room_type = self.env['hotel.room.type']
+        r_type_id = room_type.search([('cat_id','=',self.product_id.categ_id.id)])
+        self.price = r_type_id.list_price
+
     product_id = fields.Many2one('product.product', 'Product_id',
                                  required=True, delegate=True,
                                  ondelete='cascade')
@@ -180,6 +186,9 @@ class HotelRoom(models.Model):
                                ('dirty', 'Sucia'),
                                ],
                               'Limpieza', default='clean')
+    # list_price = fields.Float(related='product_id.list_price', string="Precio", readonly=True)
+    price = fields.Float(string='Precio',
+        store=False, readonly=True, compute='_get_price')
 
     # @api.onchange('isroom')
     # def isroom_change(self):

@@ -5,7 +5,7 @@
         <!-- web_icon="data/hotel-grey.png" -->
         <!-- web_icon_hover="data/hotel-color.png" -->
         <menuitem id="hotel_configuration_menu" name="Configuration"
-            sequence="100" parent="hotel_management_menu" groups="hotel.group_hotel_manager"/>
+            sequence="100" parent="hotel_management_menu" groups="hotel.group_hotel_manager,hotel.group_hotel_user"/>
         <menuitem id="hotel_report_menu" name="Pdf Reports" sequence="50"
             parent="hotel_management_menu" groups="base.group_configuration"/>
 
@@ -309,23 +309,31 @@
                                     <field name="floor_id" />
                                     <field name="categ_id" select="1" domain="[('isroomtype','=',True)]" />
                                     <field name="product_manager" select="2" string="Responsable" />
+                                    <field name="price" />
                                     <field name="capacity" invisible="True" />
                                     <field name="uom_id" invisible="1" />
                                 </group>
-                                <newline />
-                                <separator colspan='4' string="Impuesto a Proveedor" />
-                                <field name="supplier_taxes_id" colspan="4" nolabel='1'
-                                    help='List of supplier taxes if there any on the defined room. ' />
-                                <newline />
-                                <separator colspan='4' string="Impuesto a Cliente" />
-                                <field name="taxes_id" colspan="4" nolabel='1'
-                                    help='Customer taxes apply on the perticular room. ' />
+                                <group groups="hotel.group_hotel_manager">
+                                    <newline />
+                                    <separator colspan='4' string="Impuesto a Proveedor" />
+                                    <field name="supplier_taxes_id" colspan="4" nolabel='1'
+                                        help='List of supplier taxes if there any on the defined room. ' />
+                                    <newline />
+                                    <separator colspan='4' string="Impuesto a Cliente" />
+                                    <field name="taxes_id" colspan="4" nolabel='1'
+                                        help='Customer taxes apply on the perticular room. ' />
+                                </group>
+                                
+                            </page>
+                            <page string="Descripción" name="description">
+                                <separator string="Descripción" />
+                                <field name="description" colspan="4" nolabel="1" />
                             </page>
                             <page string="Comodidades" name="Comodidades" >
                                 <separator string="Comodidades" />
                                 <field name="room_amenities" colspan="4" nolabel="1" />
                             </page>
-                            <page string="Abastecimiento">
+                            <page string="Abastecimiento" groups="base.group_configuration">
                                 <group colspan="4" col="4">
                                     <field name="active" select="2" />
                                     <field name="list_price" invisible="1" />
@@ -342,10 +350,6 @@
                                     <field name="seller_ids" colspan="4" nolabel="1"
                                         widget="one2many_list" />
                                 </group>
-                            </page>
-                            <page string="Descripción">
-                                <separator string="Descripción" />
-                                <field name="description" colspan="4" nolabel="1" />
                             </page>
                             <page string="Folios">
                                 <separator colspan='4' string="Folios" />
@@ -401,6 +405,7 @@
                 <tree string="Hotel Room">
                     <field name="name" />
                     <field name="categ_id" select="1" />
+                    <field name="price" />
                     <field name="list_price" string="Precio" invisible="1" />
                     <field name="status" />
                     <field name="state" />
