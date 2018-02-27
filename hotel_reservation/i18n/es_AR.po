@@ -138,7 +138,7 @@ msgstr "Niños"
 #. module: hotel_reservation
 #: selection:hotel.reservation,state:0
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr "Confirmado"
 
 #. module: hotel_reservation
 #: field:hotel.reservation,create_uid:0
