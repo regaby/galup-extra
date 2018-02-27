@@ -570,7 +570,7 @@
                         <group colspan="4" col="4">
                             <field name="date_order" readonly='1'/>
                             <field name="warehouse_id" string="Compañía" readonly='1'/>
-                            <field name="user_id" string="Creado por"/>
+                            <field name="user_id" string="Creado por" readonly='1'/>
                             <newline/>
                             <!-- <field name="invoiced"/> -->
                             <field name="invoice_status" />
