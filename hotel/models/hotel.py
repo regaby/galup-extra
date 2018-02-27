@@ -525,18 +525,17 @@ class HotelFolio(models.Model):
             h_room_obj = self.env['hotel.room']
             try:
                 for rec in folio_id:
-                    if not rec.reservation_id:
-                        for room_rec in rec.room_lines:
-                            prod = room_rec.product_id.name
-                            room_obj = h_room_obj.search([('name', '=',
-                                                          prod)])
-                            room_obj.write({'isroom': False, 'status': 'occupied'})
-                            vals = {'room_id': room_obj.id,
-                                    'check_in': rec.checkin_date,
-                                    'check_out': rec.checkout_date,
-                                    'folio_id': rec.id,
-                                    }
-                            folio_room_line_obj.create(vals)
+                    for room_rec in rec.room_lines:
+                        prod = room_rec.product_id.name
+                        room_obj = h_room_obj.search([('name', '=',
+                                                      prod)])
+                        room_obj.write({'isroom': False, 'status': 'occupied'})
+                        vals = {'room_id': room_obj.id,
+                                'check_in': rec.checkin_date,
+                                'check_out': rec.checkout_date,
+                                'folio_id': rec.id,
+                                }
+                        folio_room_line_obj.create(vals)
             except:
                 for rec in folio_id:
                     for room_rec in rec.room_lines:
