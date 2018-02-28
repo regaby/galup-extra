@@ -5,7 +5,7 @@ access_hotel_room_type,hotel.room_type.user,model_hotel_room_type,hotel.group_ho
 access_product_product,product.product.user,product.model_product_product,hotel.group_hotel_user,1,1,1,0
 access_hotel_room_amenities_type,hotel.room_amenities_type.user,model_hotel_room_amenities_type,hotel.group_hotel_user,1,1,1,0
 access_hotel_room_amenities,hotel.room_aminities.user,model_hotel_room_amenities,hotel.group_hotel_user,1,1,1,0
-access_hotel_room,hotel.room.user,model_hotel_room,hotel.group_hotel_user,1,1,0,0
+access_hotel_room,hotel.room.user,model_hotel_room,hotel.group_hotel_user,1,1,1,0
 access_hotel_folio,hotel.folio.user,model_hotel_folio,hotel.group_hotel_user,1,1,1,0
 access_hotel_folio_line,hotel_folio.line.user,model_hotel_folio_line,hotel.group_hotel_user,1,1,1,0
 access_hotel_service_line,hotel_service.line.user,model_hotel_service_line,hotel.group_hotel_user,1,1,1,0
