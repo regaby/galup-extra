@@ -25,6 +25,9 @@
                             <t t-if="status.state == 'Reservado'">
                                 <td class="table_reserved"  style="text-align:center;" ><t t-esc="status.state"/></td>
                             </t>
+                            <t t-if="status.state == 'Ocupado'">
+                                <td class="table_ocupado"  style="text-align:center;" ><t t-esc="status.state"/></td>
+                            </t>
                         </t>
                     </tr>
                 </t>

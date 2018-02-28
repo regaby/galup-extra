@@ -778,6 +778,7 @@ class RoomReservationSummary(models.Model):
         all_detail = []
         room_obj = self.env['hotel.room']
         reservation_line_obj = self.env['hotel.room.reservation.line']
+        folio_line_obj = self.env['folio.room.line']
         date_range_list = []
         main_header = []
         summary_header_list = ['Habitaciones']
@@ -815,31 +816,49 @@ class RoomReservationSummary(models.Model):
                     room_detail.update({'value': room_list_stats})
                     all_room_detail.append(room_detail)
                     continue
-                if not room.room_reservation_line_ids:
+                if not room.room_reservation_line_ids and not room.room_line_ids:
                     for chk_date in date_range_list:
                         room_list_stats.append({'state': 'Libre',
                                                 'date': chk_date,
                                                 'room_id': room.id})
                 else:
                     for chk_date in date_range_list:
-                        for room_res_line in room.room_reservation_line_ids:
-                            reservline_ids = [i.ids for i in
-                                              room.room_reservation_line_ids]
-                            reservline_ids = (reservation_line_obj.search
-                                              ([('id', 'in', reservline_ids),
+                        ocupado = False
+                        reservado = False
+                        for room_fol_line in room.room_line_ids:
+                            folline_ids = [i.ids for i in
+                                              room.room_line_ids]
+                            folline_ids = (folio_line_obj.search
+                                              ([('id', 'in', folline_ids),
                                                 ('check_in', '<=', chk_date),
                                                 ('check_out', '>=', chk_date)
                                                 ]))
-                            if reservline_ids:
-                                room_list_stats.append({'state': 'Reservado',
+                            if folline_ids:
+                                room_list_stats.append({'state': 'Ocupado',
                                                         'date': chk_date,
                                                         'room_id': room.id})
+                                ocupado = True
                                 break
-                            else:
-                                room_list_stats.append({'state': 'Libre',
-                                                        'date': chk_date,
-                                                        'room_id': room.id})
-                                break
+
+                        if ocupado==False:
+                            for room_res_line in room.room_reservation_line_ids:
+                                reservline_ids = [i.ids for i in
+                                                  room.room_reservation_line_ids]
+                                reservline_ids = (reservation_line_obj.search
+                                                  ([('id', 'in', reservline_ids),
+                                                    ('check_in', '<=', chk_date),
+                                                    ('check_out', '>=', chk_date)
+                                                    ]))
+                                if reservline_ids:
+                                    room_list_stats.append({'state': 'Reservado',
+                                                            'date': chk_date,
+                                                            'room_id': room.id})
+                                    reservado = True
+                                    break
+                        if not ocupado and not reservado:
+                            room_list_stats.append({'state': 'Libre',
+                                                         'date': chk_date,
+                                                         'room_id': room.id})
                 room_detail.update({'value': room_list_stats})
                 all_room_detail.append(room_detail)
             main_header.append({'header': summary_header_list})
