@@ -68,6 +68,8 @@
                                         <field name="reserve" string="Habitaciones"/>
                                     </tree>
                                 </field>
+                                <separator string="Observaciones" />
+                                <field name= 'observations' placeholder="Ingrese alguna observación..."/>
                             </page>
                             <page string='Folio'>
                                 <field name= 'folio_id' readonly='1'/>

@@ -536,8 +536,8 @@
                         <!-- <button name="manual_invoice" states="manual" string="Create Invoice" 
                             icon="gtk-new" class="oe_highlight"/> -->
                         <button name="%(sale.action_view_sale_advance_payment_inv)d"
-                            string="Crear Factura" type="action" class="btn-primary" states="sale"
-                            attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" groups="hotel.group_hotel_manager"/>
+                            string="Crear Factura" type="action" class="btn-primary"
+                            attrs="{'invisible': ['|',('invoice_status', '!=', 'to invoice'),('state','!=','done')]}" groups="hotel.group_hotel_manager"/>
                         <!-- <button name="ship_cancel" string="Cancel Folio" states="shipping_except" 
                             icon="gtk-cancel" class="oe_highlight oe_highlight" /> -->
                         <button name="action_cancel_draft" states="cancel" string="Volver a Borrador"
@@ -553,7 +553,7 @@
                         <!-- <button name="invoice_cancel" string="Cancel Folio" states="invoice_except" 
                             icon="gtk-cancel" class="oe_highlight"/> -->
                         <button name="action_done" type="object" string="Realizar Checkout"
-                            states="sale" attrs="{'invisible': [('invoice_status', '!=', 'invoiced')]}"
+                            states="sale" 
                             help="If a Hotel Folio is done, you cannot modify it manually anymore. However, you will still be able to invoice or deliver. This is used to freeze the Hotel Folio." />
                         <field name="state" select="2" widget="statusbar"
                             statusbar_visible="draft,sent,sale,done" />
@@ -739,6 +739,10 @@
                                         widget='monetary' />
                                 </group>
                                 <div class="oe_clear" />
+                            </page>
+                            <page string='Observaciones'>
+                                <separator string="Observaciones" />
+                                <field name= 'observations' placeholder="Ingrese alguna observación..."/>
                             </page>
                             <page string="Facturas relacionadas">
                                 <separator string="Facturas relacionadas" colspan="4" />

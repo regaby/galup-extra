@@ -396,12 +396,8 @@ class HotelFolio(models.Model):
     country_partner = fields.Many2one('res.country', 'País' , related='partner_id.country_id', required=True)
     phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
     email_partner = fields.Char(related='partner_id.email', string='Email')
-
-
+    observations = fields.Text('Observaciones')
     
-
-
-
 
     @api.multi
     def go_to_currency_exchange(self):

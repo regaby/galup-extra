@@ -145,6 +145,7 @@ class HotelReservation(models.Model):
                                 'order_id', 'invoice_id', string='Folio')
     dummy = fields.Datetime('Dummy')
     user_id = fields.Many2one('res.users', string='Creado por', index=True, track_visibility='onchange', default=lambda self: self.env.user)
+    observations = fields.Text('Observaciones')
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):
@@ -463,7 +464,8 @@ class HotelReservation(models.Model):
                 'checkout_date': reservation.checkout,
                 'duration': duration,
                 'reservation_id': reservation.id,
-                'service_lines': reservation['folio_id']
+                'service_lines': reservation['folio_id'],
+                'observations': reservation.observations,
             }
             date_a = (datetime.datetime
                       (*time.strptime(reservation['checkout'],
