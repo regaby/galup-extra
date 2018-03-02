@@ -397,7 +397,7 @@ class HotelFolio(models.Model):
     phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
     email_partner = fields.Char(related='partner_id.email', string='Email')
     observations = fields.Text('Observaciones')
-    
+
 
     @api.multi
     def go_to_currency_exchange(self):
@@ -493,6 +493,10 @@ class HotelFolio(models.Model):
                 additional_hours = abs((dur.seconds / 60) / 60)
                 if additional_hours >= configured_addition_hours:
                     myduration += 1
+        for line in self.room_lines:
+            line.checkin_date = chckin
+            line.checkout_date = chckout
+            line.on_change_checkout()
         self.duration = myduration
 
     @api.model
@@ -652,6 +656,7 @@ class HotelFolio(models.Model):
 
     @api.multi
     def action_done(self):
+        self.checkout_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         self.write({'state': 'done'})
 
     @api.multi
