@@ -1122,6 +1122,7 @@ class HotelServiceLine(models.Model):
             self.price_unit = tax_obj._fix_tax_included_price(prod.price,
                                                               prod.taxes_id,
                                                               self.tax_id)
+            self.product_uom_qty = 1
 
     @api.onchange('product_uom')
     def product_uom_change(self):
