@@ -814,7 +814,8 @@ class RoomReservationSummary(models.Model):
                 if room.status == 'blocked':
                     for chk_date in date_range_list:
                         room_list_stats.append({'state': 'Bloqueado',
-                                                'date': chk_date})
+                                                'date': chk_date,
+                                                'room_id': room.id})
                     room_detail.update({'value': room_list_stats})
                     all_room_detail.append(room_detail)
                     continue
@@ -837,8 +838,9 @@ class RoomReservationSummary(models.Model):
                                                 ]))
                             if folline_ids:
                                 room_list_stats.append({'state': 'Ocupado',
+                                                        'room_id': room.id,
                                                         'date': chk_date,
-                                                        'room_id': room.id})
+                                                        })
                                 ocupado = True
                                 break
 

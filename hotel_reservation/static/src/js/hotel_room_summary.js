@@ -88,6 +88,38 @@ var RoomSummary = form_common.FormWidget.extend(form_common.ReinitializeWidgetMi
                         context: {"room_id": $(this).attr("data"), 'date': $(this).attr("date")},
                 });
             });
+
+            this.$el.find(".table_blocked").bind("click", function(event){
+                self.action_manager.do_action({
+                        type: 'ir.actions.act_window',
+                        res_model: "quick.room.blocked",
+                        views: [[false, 'form']],
+                        target: 'new',
+                        context: {"room_id": $(this).attr("data"), 'date': $(this).attr("date")},
+                });
+            });
+
+            this.$el.find(".table_reserved").bind("click", function(event){
+                self.action_manager.do_action({
+                        type: 'ir.actions.act_window',
+                        res_model: "quick.reservation",
+                        views: [[false, 'form']],
+                        target: 'new',
+                        context: {"room_id": $(this).attr("data"), 'date': $(this).attr("date")},
+                });
+            });
+
+            this.$el.find(".table_ocupado").bind("click", function(event){
+                self.action_manager.do_action({
+                        type: 'ir.actions.act_window',
+                        res_model: "quick.folio",
+                        views: [[false, 'form']],
+                        target: 'new',
+                        context: {"room_id": $(this).attr("data"), 'date': $(this).attr("date")},
+                });
+            });
+
+
         
         },
        

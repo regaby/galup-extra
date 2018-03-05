@@ -13,6 +13,7 @@
 	text-align: center;
 	min-width:100px;
 	vertical-align: middle;
+	cursor:pointer;
 }
 .table_free
 {
@@ -30,6 +31,7 @@
 	text-align: center;
 	min-width:100px;
 	vertical-align: middle;
+	cursor:pointer;
 }
 .table_ocupado
 {
@@ -38,4 +40,5 @@
 	text-align: center;
 	min-width:100px;
 	vertical-align: middle;
+	cursor:pointer;
 }
