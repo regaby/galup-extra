@@ -580,6 +580,8 @@ class HotelReservationLine(models.Model):
         hotel_room_type_obj = self.env['hotel.room.type']
         type_id = hotel_room_type_obj.search([('capacity','=',pax)])
         if type_id:
+            if len(type_id)>1:
+                type_id = type_id[0]
             self.categ_id = type_id.id
         '''
         When you change categ_id it check checkin and checkout are
