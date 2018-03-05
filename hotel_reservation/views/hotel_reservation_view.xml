@@ -55,7 +55,7 @@
                         </group>
                         <notebook>
                             <page string='Lineas de Reserva'>
-                                <field name="reservation_line" colspan="4" nolabel="1" >
+                                <field name="reservation_line" colspan="4" nolabel="1" context="{'default_adults':adults,'default_children':children}">
                                     <form string="Reservation Line">
                                         <separator string="Filtre por categoria de Habitacion"/>
                                         <field name="name" invisible="1" />

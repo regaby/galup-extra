@@ -576,6 +576,11 @@ class HotelReservationLine(models.Model):
 
     @api.onchange('categ_id')
     def on_change_categ(self):
+        pax = self._context['default_adults'] + self._context['default_children']
+        hotel_room_type_obj = self.env['hotel.room.type']
+        type_id = hotel_room_type_obj.search([('capacity','=',pax)])
+        if type_id:
+            self.categ_id = type_id.id
         '''
         When you change categ_id it check checkin and checkout are
         filled or not if not then raise warning
