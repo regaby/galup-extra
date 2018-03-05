@@ -47,7 +47,7 @@ msgstr ""
 #. module: hotel_reservation
 #: selection:hotel.reservation,state:0
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Cancelado"
 
 #. module: hotel_reservation
 #: model:ir.model.fields,field_description:hotel_reservation.field_quick_room_reservation_check_in
