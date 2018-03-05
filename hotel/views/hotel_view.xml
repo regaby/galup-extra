@@ -618,7 +618,7 @@
                                                 <group col="6" colspan="4">
                                                     <field name="checkin_date" />
                                                     <field name="checkout_date" />
-                                                    <separator string="Declaración automática" col="6" colspan="4"/>
+                                                    <separator string="Datos de la Habitación" col="6" colspan="4"/>
                                                     <field name="product_uom_qty"
                                                         context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'uom':product_uom}"
                                                         invisible="1" />
@@ -679,7 +679,7 @@
                                                     <field name="ser_checkin_date" />
                                                     <field name="ser_checkout_date" />
                                                 </group>
-                                                <separator string="Automatic Declaration" col="4" colspan="4" />
+                                                <separator string="Datos del Servicio" col="4" colspan="4" />
                                                 <group col="4" colspan="4">
                                                     <field name="product_id" select="1" string="Servicio"
                                                         domain="[('isservice','=',True)]"
