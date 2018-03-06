@@ -564,6 +564,16 @@ class HotelReservationLine(models.Model):
     _name = "hotel_reservation.line"
     _description = "Reservation Line"
 
+    @api.model
+    def get_categ(self):
+        pax = self._context['default_adults'] + self._context['default_children']
+        hotel_room_type_obj = self.env['hotel.room.type']
+        type_id = hotel_room_type_obj.search([('capacity','=',pax)])
+        if type_id:
+            if len(type_id)>1:
+                type_id = type_id[0]
+            return type_id.id
+
     name = fields.Char('Name', size=64)
     line_id = fields.Many2one('hotel.reservation')
     reserve = fields.Many2many('hotel.room',
@@ -572,17 +582,12 @@ class HotelReservationLine(models.Model):
                                domain="[('isroom','=',True),('categ_id','=',categ_id)]")
     categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
-                               change_default=True)
+                               default=get_categ)
+
+    
 
     @api.onchange('categ_id')
     def on_change_categ(self):
-        pax = self._context['default_adults'] + self._context['default_children']
-        hotel_room_type_obj = self.env['hotel.room.type']
-        type_id = hotel_room_type_obj.search([('capacity','=',pax)])
-        if type_id:
-            if len(type_id)>1:
-                type_id = type_id[0]
-            self.categ_id = type_id.id
         '''
         When you change categ_id it check checkin and checkout are
         filled or not if not then raise warning
