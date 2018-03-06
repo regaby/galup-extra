@@ -26,6 +26,7 @@ from openerp import models, fields, api, _
 import datetime
 import time
 from openerp.addons.hotel.models import hotel
+import openerp.addons.decimal_precision as dp
 
 
 class HotelFolio(models.Model):
@@ -490,7 +491,7 @@ class HotelReservation(models.Model):
                         'product_id': r.product_id and r.product_id.id,
                         'name': reservation['reservation_no'],
                         'product_uom': r['uom_id'].id,
-                        'price_unit': room_type_ids.read(fields=['list_price'])[0]['list_price'],
+                        'price_unit': line.list_price == 0 and room_type_ids.read(fields=['list_price'])[0]['list_price'] or line.list_price,
                         'categ_id' : room_type_ids and room_type_ids[0].id,
                         'product_uom_qty': ((date_a - date_b).days) + 1,
                         'discount_id': reservation.partner_id.discount_id and reservation.partner_id.discount_id.id,
@@ -583,6 +584,7 @@ class HotelReservationLine(models.Model):
     categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
                                default=get_categ)
+    list_price = fields.Float('Precio', digits_compute=dp.get_precision('Product Price'))
 
     
 

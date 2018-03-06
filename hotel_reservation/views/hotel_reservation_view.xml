@@ -63,6 +63,8 @@
                                         <newline/>
                                         <separator string="Seleccione la habitacion"/>
                                         <field name="reserve" colspan="4" string="Habitación" nolabel="1" />
+                                        <separator string="Precio Opcional"/>
+                                        <field name="list_price" />
                                     </form>
                                     <tree string="Reservation Line">
                                         <field name="reserve" string="Habitaciones"/>
