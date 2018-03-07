@@ -567,13 +567,14 @@ class HotelReservationLine(models.Model):
 
     @api.model
     def get_categ(self):
-        pax = self._context['default_adults'] + self._context['default_children']
-        hotel_room_type_obj = self.env['hotel.room.type']
-        type_id = hotel_room_type_obj.search([('capacity','=',pax)])
-        if type_id:
-            if len(type_id)>1:
-                type_id = type_id[0]
-            return type_id.id
+        if 'default_adults' in self._context.keys() and 'default_children' in self._context.keys():
+            pax = self._context['default_adults'] + self._context['default_children']
+            hotel_room_type_obj = self.env['hotel.room.type']
+            type_id = hotel_room_type_obj.search([('capacity','=',pax)])
+            if type_id:
+                if len(type_id)>1:
+                    type_id = type_id[0]
+                return type_id.id
 
     name = fields.Char('Name', size=64)
     line_id = fields.Many2one('hotel.reservation')
