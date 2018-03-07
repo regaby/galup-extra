@@ -3,7 +3,7 @@
 
 
 {
-    'name': 'Attendances',
+    'name': 'Attendances v10.0',
     'version': '2.0',
     'category': 'Human Resources',
     'sequence': 81,
