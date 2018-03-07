@@ -4,7 +4,7 @@
 
         <menuitem id="menu_audit" name="Audit"
             sequence="50"
-            groups="base.group_system"/>
+            web_icon="auditlog,static/description/icon.png"/>
 
 
         <!-- auditlog.rule -->
