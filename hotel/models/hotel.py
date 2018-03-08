@@ -595,14 +595,14 @@ class HotelFolio(models.Model):
                     folio_romline_rec = (folio_room_line_obj.search
                                          ([('folio_id', '=', folio_obj.id)]))
                     folio_romline_rec.write(room_vals)
-        for folio_obj in self:
-            ## elimino los registros viejos
-            for room in room_lst1:
-                if room not in new_rooms:
-                    room_obj = h_room_obj.search([('product_id', '=', room)])
-                    unlink_ids = folio_room_line_obj.search([('folio_id','=',folio_obj.id),('room_id','=',room_obj.id)])
-                    unlink_ids.unlink()
-                    room_obj.write({'isroom': True, 'status': 'available'})
+        # for folio_obj in self:
+        #     ## elimino los registros viejos
+        #     for room in room_lst1:
+        #         if room not in new_rooms:
+        #             room_obj = h_room_obj.search([('product_id', '=', room)])
+        #             unlink_ids = folio_room_line_obj.search([('folio_id','=',folio_obj.id),('room_id','=',room_obj.id)])
+        #             unlink_ids.unlink()
+        #             room_obj.write({'isroom': True, 'status': 'available'})
 
 
 #            if folio_obj.reservation_id:
