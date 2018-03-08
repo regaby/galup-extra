@@ -7,10 +7,14 @@
         <field name="name">hr.attendance.tree</field>
         <field name="model">hr.attendance</field>
         <field name="arch" type="xml">
-            <tree string="Employee attendances">
+            <tree string="Employee attendances" colors="blue:state == 'draft'">
                 <field name="employee_id"/>
                 <field name="check_in"/>
                 <field name="check_out"/>
+                <field name="state"/>
+                <field name="user_id"/>
+                <button name="validate_attendance" states="draft" string="Validar Asistencia"
+                            class="btn-primary" type="object" />
             </tree>
         </field>
     </record>
@@ -20,11 +24,17 @@
         <field name="model">hr.attendance</field>
         <field name="arch" type="xml">
             <form string="Employee attendances">
+                <header>
+                    <button name="validate_attendance" states="draft" string="Validar Asistencia"
+                            class="btn-primary" type="object" />
+                </header>
                 <sheet>
                     <group>
                         <field name="employee_id"/>
                         <field name="check_in"/>
                         <field name="check_out"/>
+                        <field name="state"/>
+                        <field name="user_id"/>
                     </group>
                 </sheet>
             </form>
@@ -40,6 +50,7 @@
                 <field name="department_id"/>
                 <filter name="today" string="Today" domain="[('check_in', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('check_in', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59))]" />
                 <filter string="Current Month" domain="[('check_in', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]" />
+                <filter string="Borrador" domain="[('state', '=', 'draft')]" />
                 <separator/>
                 <filter string="No Check Out" domain="[('check_out', '=', False)]" />
                 <separator/>

@@ -20,6 +20,18 @@ class HrAttendance(models.Model):
     check_in = fields.Datetime(string="Check In", default=fields.Datetime.now, required=True)
     check_out = fields.Datetime(string="Check Out")
     worked_hours = fields.Float(string='Worked Hours', compute='_compute_worked_hours', store=True, readonly=True)
+    state = fields.Selection([('draft', 'Borrador'),
+                               ('validated', 'Validado')],
+                              'Estado', default='draft')
+    user_id = fields.Many2one('res.users', string='Validado por')
+
+    @api.multi
+    def validate_attendance(self):
+        '''
+        @param self: object pointer
+        '''
+        self.write({'state': 'validated','user_id': self.env.user.id})
+        return True
 
     @api.multi
     def name_get(self):

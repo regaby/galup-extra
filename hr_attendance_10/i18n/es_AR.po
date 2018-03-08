@@ -622,7 +622,7 @@ msgstr "Advertencia! La última entrada fue hace más de 12 horas.<br/>Si esto n
 #: code:addons/hr_attendance_10/static/src/xml/attendance.xml:112
 #, python-format
 msgid "Welcome"
-msgstr "Bienvenid"
+msgstr "Bienvenido"
 
 #. module: hr_attendance_10
 #. openerp-web
