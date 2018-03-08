@@ -581,7 +581,7 @@ class HotelReservationLine(models.Model):
     reserve = fields.Many2many('hotel.room',
                                'hotel_reservation_line_room_rel',
                                'room_id', 'hotel_reservation_line_id',
-                               domain="[('isroom','=',True),('categ_id','=',categ_id)]")
+                               domain="[('categ_id','=',categ_id)]")
     categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
                                default=get_categ)
@@ -600,10 +600,9 @@ class HotelReservationLine(models.Model):
         hotel_room_obj = self.env['hotel.room']
         if self.categ_id.cat_id.id:
           hotel_room_ids = hotel_room_obj.search([('categ_id', '=',
-                                                  self.categ_id.cat_id.id),
-                                                 ('isroom', '=', True)])
+                                                  self.categ_id.cat_id.id)])
         else:
-          hotel_room_ids = hotel_room_obj.search([('isroom', '=', True)])
+          hotel_room_ids = hotel_room_obj.search([])
         assigned = False
         room_ids = []
         if not self.line_id.checkin:
