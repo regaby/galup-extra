@@ -840,6 +840,7 @@ class RoomReservationSummary(models.Model):
                                                 'room_id': room.id})
                 else:
                     for chk_date in date_range_list:
+                        chk_date = chk_date[0:10]
                         ocupado = False
                         reservado = False
                         for room_fol_line in room.room_line_ids:
@@ -848,7 +849,7 @@ class RoomReservationSummary(models.Model):
                             folline_ids = (folio_line_obj.search
                                               ([('id', 'in', folline_ids),
                                                 ('check_in', '<=', chk_date),
-                                                ('check_out', '>=', chk_date)
+                                                ('check_out', '>', chk_date)
                                                 ]))
                             if folline_ids:
                                 room_list_stats.append({'state': 'Ocupado',
@@ -865,7 +866,7 @@ class RoomReservationSummary(models.Model):
                                 reservline_ids = (reservation_line_obj.search
                                                   ([('id', 'in', reservline_ids),
                                                     ('check_in', '<=', chk_date),
-                                                    ('check_out', '>=', chk_date)
+                                                    ('check_out', '>', chk_date)
                                                     ]))
                                 if reservline_ids:
                                     room_list_stats.append({'state': 'Reservado',
