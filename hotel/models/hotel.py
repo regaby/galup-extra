@@ -863,9 +863,7 @@ class HotelFolioLine(models.Model):
                                    default=_get_checkin_date)
     checkout_date = fields.Datetime('Check Out', required=True,
                                     default=_get_checkout_date)
-    categ_id = fields.Many2one('hotel.room.type', 'Room Type',
-                               domain="[('isroomtype','=',True)]",
-                               change_default=True)
+    categ_id = fields.Many2one('product.category', 'Categoria'  , related='product_id.categ_id', required=False)
 #    product_uom = fields.Many2one('product.uom',string='Unit of Measure',
 #                                  required=True, default=_get_uom_id)
 
@@ -942,7 +940,7 @@ class HotelFolioLine(models.Model):
             self.name = self.product_id.name
             self.price_unit = self.product_id.lst_price
             self.product_uom = self.product_id.uom_id
-            self.categ_id = self.product_id.categ_id.rtype_ids.id
+            # self.categ_id = self.product_id.categ_id.rtype_ids.id
             tax_obj = self.env['account.tax']
             prod = self.product_id
             self.price_unit = self.product_id.categ_id.rtype_ids.list_price
