@@ -332,7 +332,7 @@ class HotelReservation(models.Model):
                             'state': 'assigned',
                             'reservation_id': reservation.id,
                             }
-                        room_id.write({'isroom': False, 'status': 'occupied'})
+                        # room_id.write({'isroom': False, 'status': 'occupied'})
                         reservation_line_obj.create(vals)
         return True
 
@@ -352,9 +352,9 @@ class HotelReservation(models.Model):
         room_reservation_line.write({'state': 'unassigned'})
         reservation_lines = hotel_res_line_obj.search([('line_id',
                                                         'in', self.ids)])
-        for reservation_line in reservation_lines:
-            reservation_line.reserve.write({'isroom': True,
-                                            'status': 'available'})
+        # for reservation_line in reservation_lines:
+        #     reservation_line.reserve.write({'isroom': True,
+        #                                     'status': 'available'})
         return True
 
     @api.multi
@@ -636,7 +636,7 @@ class HotelReservationLine(models.Model):
                             ('reservation_id', '=', reserv_rec.line_id.id)]
                 myobj = hotel_room_reserv_line_obj.search(hres_arg)
                 if myobj.ids:
-                    rec.write({'isroom': True, 'status': 'available'})
+                    # rec.write({'isroom': True, 'status': 'available'})
                     myobj.unlink()
         return super(HotelReservationLine, self).unlink()
 
@@ -866,7 +866,8 @@ class RoomReservationSummary(models.Model):
                                 reservline_ids = (reservation_line_obj.search
                                                   ([('id', 'in', reservline_ids),
                                                     ('check_in', '<=', chk_date),
-                                                    ('check_out', '>', chk_date)
+                                                    ('check_out', '>', chk_date),
+                                                    ('state','=','assigned')
                                                     ]))
                                 if reservline_ids:
                                     room_list_stats.append({'state': 'Reservado',
