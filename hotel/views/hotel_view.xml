@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <menuitem id="hotel_management_menu" name="Hotel Management" web_icon="hotel,static/description/icon.png"/>
+        <menuitem id="hotel_management_menu" name="Hotel Management" web_icon="hotel,static/description/icon.png" groups="group_hotel_user,group_hotel_manager"/>
         <!-- web_icon="data/hotel-grey.png" -->
         <!-- web_icon_hover="data/hotel-color.png" -->
         <menuitem id="hotel_configuration_menu" name="Configuration"
