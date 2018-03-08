@@ -686,7 +686,9 @@ class HotelRoom(models.Model):
                                room.room_reservation_line_ids]
             reserv_args = [('id', 'in', reserv_line_ids),
                            ('check_in', '<=', curr_date),
-                           ('check_out', '>=', curr_date)]
+                           ('check_out', '>=', curr_date),
+                           ('state','=','assigned')
+                           ]
             reservation_line_ids = reservation_line_obj.search(reserv_args)
             rooms_ids = [room_line.ids for room_line in room.room_line_ids]
             rom_args = [('id', 'in', rooms_ids),
@@ -702,9 +704,9 @@ class HotelRoom(models.Model):
             if room_line_ids.ids:
                 status = {'isroom': False, 'color': 2, 'status': 'occupied'}
             room.write(status)
-            if reservation_line_ids.ids and room_line_ids.ids:
-                raise ValidationError(_('Please Check Rooms Status \
-                                 for %s.' % (room.name)))
+            # if reservation_line_ids.ids and room_line_ids.ids:
+            #     raise ValidationError(_('Please Check Rooms Status \
+            #                      for %s.' % (room.name)))
         return True
 
 
