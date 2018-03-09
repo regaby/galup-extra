@@ -668,6 +668,10 @@ class HotelFolio(models.Model):
         self.write({'state': 'done'})
 
     @api.multi
+    def action_back_to_checkin(self):
+        self.write({'state': 'sale'})
+
+    @api.multi
     def action_invoice_create(self, grouped=False, states=None):
         '''
         @param self: object pointer

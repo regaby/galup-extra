@@ -555,6 +555,8 @@
                         <button name="action_done" type="object" string="Realizar Checkout"
                             states="sale" 
                             help="If a Hotel Folio is done, you cannot modify it manually anymore. However, you will still be able to invoice or deliver. This is used to freeze the Hotel Folio." />
+                        <button name="action_back_to_checkin" type="object" string="Volver a Checkin"
+                            states="done" />
                         <field name="state" select="2" widget="statusbar"
                             statusbar_visible="draft,sent,sale,done" />
                     </header>
