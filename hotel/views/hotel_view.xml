@@ -583,7 +583,7 @@
                             <page string="Folio">
                                 <group colspan="4" col="4">
                                     <field name="partner_id" string="Huésped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
-                                    <field name="type_doc" options="{'no_open': True, 'no_create': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="type_doc" options="{'no_open': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     
                                     <field name="adress_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="identification_id" class="oe_inline"  attrs="{'invisible':[('partner_id','=',False)]}"/>
