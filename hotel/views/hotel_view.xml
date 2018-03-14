@@ -627,7 +627,7 @@
                                                     <field name="product_id"
                                                         context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'uom':product_uom}"
                                                         select="1" domain="[('isroom','=',True)]"
-                                                        string="Nro. Habitación" />
+                                                        string="Nro. Habitación" options="{'no_open': True, 'no_create': True}"/>
                                                     <field name="product_uom" string="Unidad de Medida" invisible="1"/>
                                                     <field name="categ_id" string="Categoria" required="True" readonly='1'/>
                                                 </group>
