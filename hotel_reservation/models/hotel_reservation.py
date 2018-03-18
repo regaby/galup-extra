@@ -492,7 +492,7 @@ class HotelReservation(models.Model):
                         'name': reservation['reservation_no'],
                         'product_uom': r['uom_id'].id,
                         'price_unit': line.list_price == 0 and room_type_ids.read(fields=['list_price'])[0]['list_price'] or line.list_price,
-                        'categ_id' : room_type_ids and room_type_ids[0].id,
+                        # 'categ_id' : room_type_ids and room_type_ids[0].id,
                         'product_uom_qty': ((date_a - date_b).days) + 1,
                         'discount_id': reservation.partner_id.discount_id and reservation.partner_id.discount_id.id,
                         'discount' : reservation.partner_id.discount_id and reservation.partner_id.discount_id.discount,
