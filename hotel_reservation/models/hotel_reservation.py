@@ -988,6 +988,7 @@ class QuickRoomReservation(models.TransientModel):
                 raise ValidationError(_('Seleccione una hora de entrada entre las 0 y las 23.'))
             if not res.checkout_hour >=0 or not res.checkout_hour <= 24:
                 raise ValidationError(_('Seleccione una hora de salida entre las 0 y las 23.'))
+            
             reservation = {'partner_id': res.partner_id.id,
                'partner_invoice_id': res.partner_invoice_id.id,
                'partner_order_id': res.partner_order_id.id,
