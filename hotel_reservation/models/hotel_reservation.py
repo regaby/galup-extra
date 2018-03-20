@@ -27,6 +27,7 @@ import datetime
 import time
 from openerp.addons.hotel.models import hotel
 import openerp.addons.decimal_precision as dp
+from openerp import workflow
 
 
 class HotelFolio(models.Model):
@@ -1008,5 +1009,6 @@ class QuickRoomReservation(models.TransientModel):
                                       })]
                }
             reservation_id = hotel_res_obj.create(reservation)
-            print reservation_id.confirmed_reservation()
+            workflow.trg_validate(self._uid, 'hotel.reservation', reservation_id.id,
+                                      'confirm', self._cr)
         return True
