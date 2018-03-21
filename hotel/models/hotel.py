@@ -507,6 +507,26 @@ class HotelFolio(models.Model):
         @param vals: dictionary of fields value.
         @return: new record set for hotel folio.
         """
+        partner_obj = self.env['res.partner']
+        partner = partner_obj.browse(vals['partner_id'])
+        if 'phone_partner' in vals:
+            partner.write({'phone': vals['phone_partner']})
+        if 'email_partner' in vals:
+            partner.write({'email': vals['email_partner']})
+        if 'city_partner' in vals:
+            partner.write({'city': vals['city_partner']})
+        if 'adress_partner' in vals:
+            partner.write({'street': vals['adress_partner']})
+        if 'state_partner' in vals:
+            partner.write({'state_id': vals['state_partner']})
+        if 'country_partner' in vals:
+            partner.write({'country_id': vals['country_partner']})
+        if 'type_doc' in vals:
+            partner.write({'main_id_category_id': vals['type_doc']})
+        if 'identification_id' in vals:
+            partner.write({'main_id_number': vals['identification_id']})
+
+
         if not 'service_lines' and 'folio_id' in vals:
             tmp_room_lines = vals.get('room_lines', [])
             vals['order_policy'] = vals.get('hotel_policy', 'manual')
