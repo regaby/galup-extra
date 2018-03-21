@@ -499,16 +499,9 @@ class HotelFolio(models.Model):
             line.on_change_checkout()
         self.duration = myduration
 
-    @api.model
-    def create(self, vals, check=True):
-        """
-        Overrides orm create method.
-        @param self: The object pointer
-        @param vals: dictionary of fields value.
-        @return: new record set for hotel folio.
-        """
+    def update_partner(self, vals, partner):
         partner_obj = self.env['res.partner']
-        partner = partner_obj.browse(vals['partner_id'])
+        partner = partner_obj.browse(partner)
         if 'phone_partner' in vals:
             partner.write({'phone': vals['phone_partner']})
         if 'email_partner' in vals:
@@ -527,6 +520,15 @@ class HotelFolio(models.Model):
             partner.write({'main_id_number': vals['identification_id']})
 
 
+    @api.model
+    def create(self, vals, check=True):
+        """
+        Overrides orm create method.
+        @param self: The object pointer
+        @param vals: dictionary of fields value.
+        @return: new record set for hotel folio.
+        """
+        self.update_partner(vals,vals['partner_id'])
         if not 'service_lines' and 'folio_id' in vals:
             tmp_room_lines = vals.get('room_lines', [])
             vals['order_policy'] = vals.get('hotel_policy', 'manual')
@@ -577,6 +579,8 @@ class HotelFolio(models.Model):
         @param self: The object pointer
         @param vals: dictionary of fields value.
         """
+        self.update_partner(vals,self.partner_id.id)
+
         folio_room_line_obj = self.env['folio.room.line']
 #        reservation_line_obj = self.env['hotel.room.reservation.line']
         product_obj = self.env['product.product']
