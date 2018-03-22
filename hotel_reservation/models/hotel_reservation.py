@@ -138,7 +138,8 @@ class HotelReservation(models.Model):
                               help='Number of children there in guest list.')
     reservation_line = fields.One2many('hotel_reservation.line', 'line_id',
                                        'Reservation Line',
-                                       help='Hotel room reservation details.')
+                                       help='Detalle de la reserva. Para modificar, debe volver a borrador',readonly=True,
+                              states={'draft': [('readonly', False)]})
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'),
                               ('cancel', 'Cancel'), ('done', 'Done')],
                              'State', readonly=True,
