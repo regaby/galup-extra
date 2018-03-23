@@ -18,8 +18,8 @@ class HrAttendance(models.Model):
 
     employee_id = fields.Many2one('hr.employee', string="Employee", default=_default_employee, required=True, ondelete='cascade', index=True, readonly=True)
     department_id = fields.Many2one('hr.department', string="Department", related="employee_id.department_id")
-    check_in = fields.Datetime(string="Check In", default=fields.Datetime.now, required=True)
-    check_out = fields.Datetime(string="Check Out")
+    check_in = fields.Datetime(string="Check In", default=fields.Datetime.now, required=True, readonly=True, states={'draft': [('readonly', False)]})
+    check_out = fields.Datetime(string="Check Out", readonly=True, states={'draft': [('readonly', False)]})
     worked_hours = fields.Float(string='Worked Hours', compute='_compute_worked_hours', store=True, readonly=True)
     state = fields.Selection([('draft', 'Borrador'),
                                ('validated', 'Validado')],
