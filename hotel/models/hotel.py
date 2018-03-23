@@ -690,6 +690,11 @@ class HotelFolio(models.Model):
     def action_done(self):
         self.checkout_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         self.write({'state': 'done'})
+        for line in self.room_lines:
+            room_obj = self.env['hotel.room']
+            room_id = room_obj.search([('name','=',line.product_id.name)])
+            room = room_obj.browse(room_id.id)
+            room.state='dirty'
 
     @api.multi
     def action_back_to_checkin(self):
