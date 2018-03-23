@@ -182,7 +182,7 @@ msgstr "Salida a las"
 #: code:addons/hr_attendance_10/static/src/xml/attendance.xml:27
 #, python-format
 msgid "Click to check in"
-msgstr "Click para marcar la salida"
+msgstr "Click para marcar su asistencia"
 
 #. module: hr_attendance_10
 #. openerp-web
@@ -190,7 +190,7 @@ msgstr "Click para marcar la salida"
 #: code:addons/hr_attendance_10/static/src/xml/attendance.xml:31
 #, python-format
 msgid "Click to check out"
-msgstr "Click para marcar la entrada"
+msgstr "Click para marcar su asistencia"
 
 #. module: hr_attendance_10
 #. openerp-web
@@ -492,7 +492,7 @@ msgstr "Mensaje"
 #. module: hr_attendance_10
 #: model:ir.ui.menu,name:hr_attendance_10.menu_hr_attendance_my_attendances
 msgid "My Attendances"
-msgstr "Mis asistencias"
+msgstr "Marcar Asistencia"
 
 #. module: hr_attendance_10
 #: code:addons/galup-extra/hr_attendance_10/models/hr_employee.py:72
@@ -622,7 +622,7 @@ msgstr "Advertencia! La última entrada fue hace más de 12 horas.<br/>Si esto n
 #: code:addons/hr_attendance_10/static/src/xml/attendance.xml:112
 #, python-format
 msgid "Welcome"
-msgstr "Bienvenido"
+msgstr "Bienvenido/a"
 
 #. module: hr_attendance_10
 #. openerp-web

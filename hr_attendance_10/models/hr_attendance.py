@@ -5,6 +5,7 @@ from datetime import datetime
 
 from openerp import models, fields, api, exceptions, _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.exceptions import except_orm, UserError, ValidationError
 
 
 class HrAttendance(models.Model):
@@ -15,15 +16,27 @@ class HrAttendance(models.Model):
     def _default_employee(self):
         return self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
 
-    employee_id = fields.Many2one('hr.employee', string="Employee", default=_default_employee, required=True, ondelete='cascade', index=True)
+    employee_id = fields.Many2one('hr.employee', string="Employee", default=_default_employee, required=True, ondelete='cascade', index=True, readonly=True)
     department_id = fields.Many2one('hr.department', string="Department", related="employee_id.department_id")
     check_in = fields.Datetime(string="Check In", default=fields.Datetime.now, required=True)
     check_out = fields.Datetime(string="Check Out")
     worked_hours = fields.Float(string='Worked Hours', compute='_compute_worked_hours', store=True, readonly=True)
     state = fields.Selection([('draft', 'Borrador'),
                                ('validated', 'Validado')],
-                              'Estado', default='draft')
-    user_id = fields.Many2one('res.users', string='Validado por')
+                              'Estado', default='draft', readonly=True)
+    user_id = fields.Many2one('res.users', string='Validado por', readonly=True)
+
+    @api.multi
+    def unlink(self):
+        """
+        Overrides orm unlink method.
+        @param self: The object pointer
+        @return: True/False.
+        """
+        for attendance in self:
+            if attendance.state not in ['draft']:
+                raise ValidationError(_('Solo puede eliminar un registro en estado Borrador'))
+        return super(HrAttendance, self).unlink()
 
     @api.multi
     def validate_attendance(self):
