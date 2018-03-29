@@ -640,8 +640,9 @@ class HotelFolio(models.Model):
         @param self: The object pointer
         @param vals: dictionary of fields value.
         """
-        self.check_reservation_exists()
-        self.check_folio_exists()
+        if 'state' in vals.keys() and vals['state'] not in ('done'):
+            self.check_reservation_exists()
+            self.check_folio_exists()
         self.update_partner(vals,self.partner_id.id)
 
         folio_room_line_obj = self.env['folio.room.line']
