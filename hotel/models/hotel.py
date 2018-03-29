@@ -520,6 +520,62 @@ class HotelFolio(models.Model):
             partner.write({'main_id_number': vals['identification_id']})
 
 
+    @api.multi
+    def check_reservation_exists(self):
+        for folio in self:
+            self._cr.execute("""select count(*) 
+                             from hotel_reservation as hr 
+                              inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
+                              inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
+                              where (checkin,checkout) overlaps 
+                                ( timestamp %s, timestamp %s ) 
+                                and hr.id <> cast(%s as integer) 
+                                and hr.state = 'confirm' 
+                                and hrlrr.hotel_reservation_line_id in (
+                                  select id from hotel_room where product_id in (select product_id
+                                from hotel_folio as hf 
+                                inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
+                                join sale_order_line sol on (hfl.order_line_id=sol.id)
+                                where hf.id = cast(%s as integer)     ) )""",
+                             (folio.checkin_date, folio.checkout_date,
+                              str(folio.id), str(folio.id)))
+            res = self._cr.fetchone()
+            roomcount = res and res[0] or 0.0
+            if roomcount:
+                raise ValidationError(_('Ha tratado de crear/modificar un folio con habitaciones que ya están reservadas en este periodo de reserva'))
+        return True
+        
+
+    @api.multi
+    def check_folio_exists(self):
+        for folio in self:
+            self._cr.execute("""select count(*)
+                                from hotel_folio as hf 
+                                inner join sale_order so on (hf.order_id=so.id)
+                                inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
+                                join sale_order_line sol on (hfl.order_line_id=sol.id)
+                                inner join folio_room_line frl on (frl.folio_id=hf.id)
+                                join hotel_room hr on (frl.room_id=hr.id)
+                                where (check_in,check_out) overlaps 
+                                                                ( timestamp %s, timestamp %s ) 
+                                and hf.id <> cast(%s as integer) 
+                                                                and so.state not in ('cancel','done')
+                                and hr.product_id=sol.product_id   
+                                and sol.product_id in (select product_id
+                                from hotel_folio as hf 
+                                inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
+                                join sale_order_line sol on (hfl.order_line_id=sol.id)
+                                where hf.id = cast(%s as integer) )
+                """,
+                             (folio.checkin_date, folio.checkout_date,
+                              str(folio.id), str(folio.id)))
+            res = self._cr.fetchone()
+            roomcount = res and res[0] or 0.0
+            if roomcount:
+                raise ValidationError(_('Ha tratado de crear/modificar un folio con una habitacion que ya ha sido registrada en este período'))
+        return True
+
+
     @api.model
     def create(self, vals, check=True):
         """
@@ -570,6 +626,8 @@ class HotelFolio(models.Model):
                                 'folio_id': rec.id,
                                 }
                         folio_room_line_obj.create(vals)
+        folio_id.check_reservation_exists()
+        folio_id.check_folio_exists()
         return folio_id
 
     @api.multi
@@ -579,6 +637,8 @@ class HotelFolio(models.Model):
         @param self: The object pointer
         @param vals: dictionary of fields value.
         """
+        self.check_reservation_exists()
+        self.check_folio_exists()
         self.update_partner(vals,self.partner_id.id)
 
         folio_room_line_obj = self.env['folio.room.line']
