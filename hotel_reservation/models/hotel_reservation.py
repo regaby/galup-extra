@@ -297,23 +297,20 @@ class HotelReservation(models.Model):
         """
         reservation_line_obj = self.env['hotel.room.reservation.line']
         for reservation in self:
-            self._cr.execute("select count(*) from hotel_reservation as hr "
-                             "inner join hotel_reservation_line as hrl on \
-                             hrl.line_id = hr.id "
-                             "inner join hotel_reservation_line_room_rel as \
-                             hrlrr on hrlrr.room_id = hrl.id "
-                             "where (checkin,checkout) overlaps \
-                             ( timestamp %s, timestamp %s ) "
-                             "and hr.id <> cast(%s as integer) "
-                             "and hr.state = 'confirm' "
-                             "and hrlrr.hotel_reservation_line_id in ("
-                             "select hrlrr.hotel_reservation_line_id \
-                             from hotel_reservation as hr "
-                             "inner join hotel_reservation_line as \
-                             hrl on hrl.line_id = hr.id "
-                             "inner join hotel_reservation_line_room_rel \
-                             as hrlrr on hrlrr.room_id = hrl.id "
-                             "where hr.id = cast(%s as integer) )",
+            self._cr.execute("""select count(*) 
+                             from hotel_reservation as hr 
+                              inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
+                              inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
+                              where (checkin,checkout) overlaps 
+                                ( timestamp %s, timestamp %s ) 
+                                and hr.id <> cast(%s as integer) 
+                                and hr.state = 'confirm' 
+                                and hrlrr.hotel_reservation_line_id in (
+                                  select hrlrr.hotel_reservation_line_id 
+                                    from hotel_reservation as hr 
+                                    inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
+                                    inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
+                                  where hr.id = cast(%s as integer) )""",
                              (reservation.checkin, reservation.checkout,
                               str(reservation.id), str(reservation.id)))
             res = self._cr.fetchone()
@@ -695,7 +692,8 @@ class HotelRoom(models.Model):
             rooms_ids = [room_line.ids for room_line in room.room_line_ids]
             rom_args = [('id', 'in', rooms_ids),
                         ('check_in', '<=', curr_date),
-                        ('check_out', '>=', curr_date)]
+                        ('check_out', '>=', curr_date),
+                        ('status','<>','cancel')]
             room_line_ids = folio_room_line_obj.search(rom_args)
             if room.status == 'blocked':
               continue
@@ -853,7 +851,8 @@ class RoomReservationSummary(models.Model):
                             folline_ids = (folio_line_obj.search
                                               ([('id', 'in', folline_ids),
                                                 ('check_in', '<=', chk_date),
-                                                ('check_out', '>', chk_date)
+                                                ('check_out', '>', chk_date),
+                                                ('status', '<>', 'cancel')
                                                 ]))
                             if folline_ids:
                                 room_list_stats.append({'state': 'Ocupado',
