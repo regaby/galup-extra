@@ -529,7 +529,7 @@ class HotelFolio(models.Model):
                               inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
                               where (checkin,checkout) overlaps 
                                 ( timestamp %s, timestamp %s ) 
-                                and hr.id <> cast(%s as integer) 
+                                and hr.partner_id <> cast(%s as integer) 
                                 and hr.state = 'confirm' 
                                 and hrlrr.hotel_reservation_line_id in (
                                   select id from hotel_room where product_id in (select product_id
@@ -538,9 +538,11 @@ class HotelFolio(models.Model):
                                 join sale_order_line sol on (hfl.order_line_id=sol.id)
                                 where hf.id = cast(%s as integer)     ) )""",
                              (folio.checkin_date, folio.checkout_date,
-                              str(folio.id), str(folio.id)))
+                              str(folio.partner_id.id), str(folio.id)))
             res = self._cr.fetchone()
+            # print self._cr.query
             roomcount = res and res[0] or 0.0
+            # print roomcount
             if roomcount:
                 raise ValidationError(_('Ha tratado de crear/modificar un folio con habitaciones que ya están reservadas en este periodo de reserva'))
         return True
@@ -570,6 +572,7 @@ class HotelFolio(models.Model):
                              (folio.checkin_date, folio.checkout_date,
                               str(folio.id), str(folio.id)))
             res = self._cr.fetchone()
+            # print self._cr.query
             roomcount = res and res[0] or 0.0
             if roomcount:
                 raise ValidationError(_('Ha tratado de crear/modificar un folio con una habitacion que ya ha sido registrada en este período'))
