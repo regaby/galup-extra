@@ -523,7 +523,7 @@ class HotelFolio(models.Model):
     @api.multi
     def check_reservation_exists(self):
         for folio in self:
-            self._cr.execute("""select count(*) 
+            self._cr.execute("""select hr.reservation_no
                              from hotel_reservation as hr 
                               inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
                               inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
@@ -544,14 +544,14 @@ class HotelFolio(models.Model):
             roomcount = res and res[0] or 0.0
             # print roomcount
             if roomcount:
-                raise ValidationError(_('Ha tratado de crear/modificar un folio con habitaciones que ya están reservadas en este periodo de reserva'))
+                raise ValidationError(_('Ha tratado de crear/modificar un folio con habitaciones que ya están reservadas en este periodo de reserva. %s'%res))
         return True
         
 
     @api.multi
     def check_folio_exists(self):
         for folio in self:
-            self._cr.execute("""select count(*)
+            self._cr.execute("""select hf.name
                                 from hotel_folio as hf 
                                 inner join sale_order so on (hf.order_id=so.id)
                                 inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
@@ -575,7 +575,7 @@ class HotelFolio(models.Model):
             # print self._cr.query
             roomcount = res and res[0] or 0.0
             if roomcount:
-                raise ValidationError(_('Ha tratado de crear/modificar un folio con una habitacion que ya ha sido registrada en este período'))
+                raise ValidationError(_('Ha tratado de crear/modificar un folio con una habitacion que ya ha sido registrada en este período. %s'%res))
         return True
 
 
