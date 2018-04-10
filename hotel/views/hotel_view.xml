@@ -582,7 +582,7 @@
                         <notebook colspan="4">
                             <page string="Folio">
                                 <group colspan="4" col="4">
-                                    <field name="partner_id" string="Huésped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
+                                    <field name="partner_id" string="Huésped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}" placeholder="Escriba el apellido o DNI para consultar si ya está creado, caso contrario, cree un nuevo huésped ingresando el nombre y apellido y seleccionando la opción crear"/>
                                     <field name="type_doc" options="{'no_open': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     
                                     <field name="adress_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
@@ -817,7 +817,7 @@
                 <search string="Tables Detail">
                     <field name="partner_id" />
                     <field name="name" />
-                    <filter string="Current Booking"
+                    <filter string="Current Booking" name="current_booking"
                         domain="[('checkout_date','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin_date','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]"
                         help="Current Booking" />
                     <group expand="0" string="Group By">
@@ -848,6 +848,7 @@
             <field name="res_model">hotel.folio</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{'search_default_current_booking':1}</field>
         </record>
 
         <menuitem id="menu_all_folio" name="Folio"

@@ -35,7 +35,7 @@
                             </group>
                             <separator/>
                             <group colspan="4" col="4">
-                                <field name="partner_id" select="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}"/>
+                                <field name="partner_id" select="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}" placeholder="Escriba el apellido o DNI para consultar si ya está creado, caso contrario, cree un nuevo huésped ingresando el nombre y apellido y seleccionando la opción crear"/>
                                 <field name="pricelist_id" col="2" invisible="True"/>
                                 <field name="partner_order_id" domain="[('parent_id','=',partner_id)]" invisible="True"/><newline/>
                                 <field name="partner_invoice_id" domain="[('parent_id','=',partner_id)]" invisible="True"/>
@@ -104,7 +104,7 @@
             <field name="model">hotel.reservation</field>
             <field name="arch" type="xml">
                 <search string="Reservation">
-                    <filter string="Current Reservations" domain="[('checkout','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]" help="Current Reservations" />
+                    <filter string="Current Reservations" domain="[('checkin','&gt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]" help="Current Reservations" name="current_booking" />
                     <filter domain="[('state','=','draft')]" string="Draft"/>
                     <filter domain="[('state','=','confirm')]" string="Confirm"/>
                     <filter domain="[('state','=','cancel')]" string="Cancel"/>
@@ -164,6 +164,7 @@
             <field name="res_model">hotel.reservation</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,gantt</field>
+            <field name="context">{'search_default_current_booking':1}</field>
         </record>
         <menuitem  id="menu_hotel_reservation" name="Reservations" parent="hotel.hotel_management_menu" sequence="5"/>
         <menuitem name="Reservations"
