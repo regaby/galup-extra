@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <template id="assets_backend_custum_id" name="custom bar assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/v9c_backend_theme/static/src/css/style.css"/>
+                <script type="text/javascript" src="/v9c_backend_theme/static/src/js/script.js"></script>
+            </xpath>
+        </template>
+
+        <template id="fav_ico" name="Galup Icon" inherit_id="web.layout">
+            <xpath expr="//html/head/link[1]" position="replace">
+                <link rel="shortcut icon"
+                    href="/v9c_backend_theme/static/src/img/favicon.png"
+                    type="image/x-icon" />
+            </xpath>
+        </template>
+
+        <template id="custom_login_layout" inherit_id="web.login_layout" >
+            <xpath expr="//t/div[@class='row']" position="replace">
+                <div class="row">
+                      <div class="col-md-6 col-md-offset-3 o_database_list">
+                        <div class="text-center">
+                          <img t-attf-src="/web/binary/company_logo{{ '?dbname='+db if db else '' }}"/>
+                        </div>
+                        <t t-raw="0"/>
+                        <div class="text-center" t-if="not disable_footer">
+                            <t t-if="not disable_database_manager">
+                                <a class="" href="/web/database/manager">Gestionar bases de datos</a> |
+                            </t>
+                            <a href="https://www.galup.com.ar" target="_blank">Desarrollado por <span>Galup</span></a>
+                        </div>
+                      </div>
+                </div>
+            </xpath>
+        </template>
+
+</odoo>
+

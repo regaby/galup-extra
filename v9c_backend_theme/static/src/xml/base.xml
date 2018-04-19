@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="UserMenu">
+        <t t-jquery=".dropdown-menu" t-operation="replace" >
+            <ul class="dropdown-menu" role="menu">
+                <li class="divider"/>
+                <li><a href="#" data-menu="about">About</a></li>
+                <li><a href="#" data-menu="settings">Preferences</a></li>
+                <li><a href="#" data-menu="logout">Log out</a></li>
+            </ul>
+         </t>
+    </t>
+
+    <t t-extend="UserMenu.about">
+    	<t t-jquery=".container-fluid" t-operation="replace" >
+    		<div class="container-fluid">
+		        <div class="row">
+		            <a class="oe_activate_debug_mode oe_right label label-primary" href="?debug" >Activate the developer mode</a>
+		        </div>
+		    </div>
+		    <div class="row">
+	            <div class="col-sm-offset-2 col-md-offset-2 col-sm-8 col-md-8 user-details">
+	                <div class="user-image">
+	                    <img src="/v9c_backend_theme/static/src/img/logo.png" alt="Galup Sistemas" title="Galup Sistemas" />
+	                </div>
+	                <div class="user-info-block">
+                    <div class="user-heading">
+                        <!-- <h3>
+                            Version <t t-esc="db_info.server_version"/>
+                            (Community Edition)
+                        </h3>
+                        <t t-if="db_info.expiration_date">
+                            <h5>Database expiration: <t t-esc="new moment(db_info.expiration_date).format('LL')"/></h5>
+                        </t> -->
+                        <h3>
+                        	Galup Sistemas
+                        </h3>
+                    </div>
+                    <div class="user-body">
+                        <div class="tab-content">
+                            <div id="settings" class="tab-pane active">
+                                <h4>© 2018</h4>
+                                <p>Galup Sistemas es un producto <a target="_blank" href="https://www.galup.com.ar" style="text-decoration: underline;">Galup Sistemas</a></p>
+                                <!-- <p>Licenced under the terms of <a target="_blank" href="http://www.gnu.org/licenses/lgpl.html" style="text-decoration: underline;">GNU Lesser General Public License</a></p> -->
+                                <p>Para mayor información visite <a target="_blank" href="https://www.galup.com.ar" style="text-decoration: underline;">Galup.com.ar</a></p>
+                                <p>
+                                  <a href="https://www.facebook.com/galupsistemas/" target="_blank"><i class="fa fa-facebook-square fa-3x social-fb"></i></a>
+                                  <!-- <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter-square fa-3x social-tw"></i></a> -->
+                                  <!-- <a href="https://www.odoo.com/web/about/googleplus"><i class="fa fa-google-plus-square fa-3x social-gp"></i></a> -->
+                                  <!-- <a href="https://www.linkedin.com" target="_blank"><i class="fa fa-linkedin-square fa-3x social-lk"></i></a> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+	            </div>
+	        </div>
+
+
+    	</t>
+    </t>
+
+    
+
+
+
+</templates>
