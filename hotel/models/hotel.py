@@ -239,6 +239,21 @@ class HotelRoom(models.Model):
 
 class HotelFolio(models.Model):
 
+    @api.depends('payment_lines.amount')
+    def _amount_all(self):
+        """
+        Compute the total amounts of the SO.
+        """
+        for order in self:
+            amount_payment = residual = 0.0
+            for line in order.payment_lines:
+                amount_payment += line.amount
+                
+            order.update({
+                'amount_payment': amount_payment,
+                'residual': order.amount_total - amount_payment,
+            })
+
     @api.multi
     def action_view_folio(self):
         invoice_ids = self
@@ -373,6 +388,8 @@ class HotelFolio(models.Model):
                                     help="Hotel services detail provide to"
                                     "customer and it will include in "
                                     "main Invoice.")
+    payment_lines = fields.One2many('hotel.payment', 'folio_id',)
+
     hotel_policy = fields.Selection([('prepaid', 'On Booking'),
                                      ('manual', 'On Check In'),
                                      ('picking', 'On Checkout')],
@@ -397,6 +414,8 @@ class HotelFolio(models.Model):
     phone_partner = fields.Char(related='partner_id.phone', string='Teléfono')
     email_partner = fields.Char(related='partner_id.email', string='Email')
     observations = fields.Text('Observaciones')
+    amount_payment = fields.Monetary(string='Monto pagado', store=True, readonly=True, compute='_amount_all', track_visibility='always')
+    residual = fields.Monetary(string='Importe adeudado', store=True, readonly=True, compute='_amount_all', track_visibility='always')
 
 
     @api.multi
@@ -897,6 +916,21 @@ class HotelFolio(models.Model):
         sale_line_obj.write({'invoiced': False, 'state': 'draft',
                              'invoice_lines': [(6, 0, [])]})
         return True
+
+class HotelPayment(models.Model):
+    _name = 'hotel.payment'
+    _description = 'hotel payment'
+
+    folio_id = fields.Many2one('hotel.folio', string='Folio',
+                               ondelete='cascade')
+    payment_date = fields.Datetime('Fecha Pago', required=True,
+                                   default=(lambda *a:
+                                          time.strftime
+                                          (DEFAULT_SERVER_DATETIME_FORMAT)))
+    amount = fields.Float('Monto', digits_compute=dp.get_precision('Product Price'), required=True)
+    user_id = fields.Many2one('res.users', string='Cobrado por', index=True, default=lambda self: self.env.user, required=True,readonly=True)
+
+
 
 
 class HotelFolioLine(models.Model):

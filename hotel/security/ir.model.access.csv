@@ -33,3 +33,4 @@ access_currency_exchange_manager,hotel.currency_exchange.manager,model_currency_
 access_currency_exchange_user,hotel.currency_exchange.user,model_currency_exchange,hotel.group_hotel_user,1,1,1,1
 access_folio_room_line_manager,hotel.folio_room_line.manager,model_folio_room_line,hotel.group_hotel_manager,1,1,1,1
 access_folio_room_line_user,hotel.folio_room_line.user,model_folio_room_line,hotel.group_hotel_user,1,1,1,1
+access_folio_payment,hotel.folio_payment,model_hotel_payment,hotel.group_hotel_user,1,1,1,1

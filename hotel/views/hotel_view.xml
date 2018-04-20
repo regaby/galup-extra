@@ -669,10 +669,33 @@
                                         <field name="categ_id" string="Categoria"/>
                                         <!-- <field name="product_uom" string="Rent(UOM)" /> -->
                                         <field name="price_unit" string="Precio" />
-                                        <field name="price_subtotal" />
-                                        <field name="state" />
+                                        <field name="discount" string="Descuento" />
+                                        <field name="price_total" />
+                                        <!-- <field name="state" /> -->
                                     </tree>
                                 </field>
+                                <separator string="Pagos" colspan="4" />
+                                <field name="payment_lines">
+                                    <tree editable="bottom">
+                                        <field name="user_id"/>
+                                        <field name="payment_date"/>
+                                        <field name="amount"/>
+
+                                    </tree>
+                                </field>
+                                <group colspan="2" class="oe_subtotal_footer oe_right">
+                                    <field name="amount_total" sum="Monto Total" widget='monetary' />
+                                    <field name="amount_payment" sum="Monto Pagado" widget='monetary' />
+                                    
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="residual" />
+                                        <button name="button_dummy" string="Calcular" states="draft"
+                                            type="object" icon="terp-sale" class="oe_highlight" />
+                                    </div>
+                                    <field name="residual" nolabel="1" sum="Monto Adeudado"
+                                        widget='monetary' />
+                                </group>
+                                <div class="oe_clear" />
                                 <separator string="Servicios Adicionales" colspan="4" />
                                 <field name="service_lines" colspan="4" string="Servicios"
                                     nolabel="1" context="{'checkin':checkin_date,'checkout':checkout_date}">
@@ -695,7 +718,7 @@
                                                 </group>
                                                 <separator string="Descripción" colspan="4" />
                                                 <field name="name" colspan="4" select="2"
-                                                    placeholder="---Descripción---" />
+                                                    placeholder="Descripción" />
                                                 <group>
                                                     <field name="price_unit" select="2" />
                                                     <field name="discount" />
@@ -706,16 +729,10 @@
                                                     <separator string="Estados" colspan="4" />
                                                     <field name="state" select="2" />
                                                     <field name="invoice_status" />
-                                                    <!-- <field name="invoiced" select="2"/> -->
+                                                    
                                                 </group>
                                             </page>
-                                            <!-- <page string="Extra Info"> -->
-                                            <!-- <group> -->
-                                            <!-- <field name="product_uos_qty"/> -->
-                                            <!-- <field name="product_uos" /> -->
-                                            <!-- <field name="address_allotment_id" select="2"/> -->
-                                            <!-- </group> -->
-                                            <!-- </page> -->
+                                            
                                             <page string="Historial">
                                                 <separator string="Facturas" colspan="4" />
                                                 <field name="invoice_lines" colspan="4" nolabel="1" />
@@ -731,7 +748,7 @@
                                         <field name="state" />
                                     </tree>
                                 </field>
-                                <group colspan="2" class="oe_subtotal_footer oe_right">
+                                <!-- <group colspan="2" class="oe_subtotal_footer oe_right">
                                     <field name="amount_untaxed" sum="Untaxed amount" widget='monetary' />
                                     <field name="amount_tax" widget='monetary' />
                                     <div class="oe_subtotal_footer_separator oe_inline">
@@ -742,7 +759,7 @@
                                     <field name="amount_total" nolabel="1" sum="Total amount"
                                         widget='monetary' />
                                 </group>
-                                <div class="oe_clear" />
+                                <div class="oe_clear" /> -->
                             </page>
                             <page string='Observaciones'>
                                 <separator string="Observaciones" />
