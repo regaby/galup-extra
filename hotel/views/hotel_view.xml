@@ -674,28 +674,6 @@
                                         <!-- <field name="state" /> -->
                                     </tree>
                                 </field>
-                                <separator string="Pagos" colspan="4" />
-                                <field name="payment_lines">
-                                    <tree editable="bottom">
-                                        <field name="user_id"/>
-                                        <field name="payment_date"/>
-                                        <field name="amount"/>
-
-                                    </tree>
-                                </field>
-                                <group colspan="2" class="oe_subtotal_footer oe_right">
-                                    <field name="amount_total" sum="Monto Total" widget='monetary' />
-                                    <field name="amount_payment" sum="Monto Pagado" widget='monetary' />
-                                    
-                                    <div class="oe_subtotal_footer_separator oe_inline">
-                                        <label for="residual" />
-                                        <button name="button_dummy" string="Calcular" states="draft"
-                                            type="object" icon="terp-sale" class="oe_highlight" />
-                                    </div>
-                                    <field name="residual" nolabel="1" sum="Monto Adeudado"
-                                        widget='monetary' />
-                                </group>
-                                <div class="oe_clear" />
                                 <separator string="Servicios Adicionales" colspan="4" />
                                 <field name="service_lines" colspan="4" string="Servicios"
                                     nolabel="1" context="{'checkin':checkin_date,'checkout':checkout_date}">
@@ -748,7 +726,7 @@
                                         <field name="state" />
                                     </tree>
                                 </field>
-                                <!-- <group colspan="2" class="oe_subtotal_footer oe_right">
+                                <group colspan="2" class="oe_subtotal_footer oe_right">
                                     <field name="amount_untaxed" sum="Untaxed amount" widget='monetary' />
                                     <field name="amount_tax" widget='monetary' />
                                     <div class="oe_subtotal_footer_separator oe_inline">
@@ -759,7 +737,7 @@
                                     <field name="amount_total" nolabel="1" sum="Total amount"
                                         widget='monetary' />
                                 </group>
-                                <div class="oe_clear" /> -->
+                                <div class="oe_clear" />
                             </page>
                             <page string='Observaciones'>
                                 <separator string="Observaciones" />
