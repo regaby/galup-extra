@@ -585,11 +585,13 @@
                                     <field name="partner_id" string="Huésped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}" placeholder="Escriba el apellido o DNI para consultar si ya está creado, caso contrario, cree un nuevo huésped ingresando el nombre y apellido y seleccionando la opción crear"/>
                                     <field name="type_doc" options="{'no_open': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     
+                                    
                                     <field name="adress_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="identification_id" class="oe_inline"  attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="city_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
-                                    <field name="state_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
-                                    <field name="country_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
+                                    <field name="country_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}" options="{'no_create': True}"/>
+                                    <field name="state_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}" domain="[('country_id','=',country_partner)]"/>
+                                    
                                    
                                    
                                     <field name="phone_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
@@ -790,6 +792,7 @@
                     <field name="partner_id" select="1" />
                     <field name="date_order" select="1" invisible="1"/>
                     <field name="state" />
+                    <field name="invoice_status" />
                     <field name="amount_total" sum="Total amount" />
                 </tree>
             </field>
@@ -820,6 +823,11 @@
                     <filter string="Current Booking" name="current_booking"
                         domain="[('checkout_date','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin_date','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]"
                         help="Current Booking" />
+                    <filter domain="[('state','=','draft')]" string="Borrador"/>
+                    <filter domain="[('state','=','sale')]" string="Checkin Realizado"/>
+                    <filter domain="[('state','=','done')]" string="Checkout Realizado"/>
+                    <filter domain="[('state','=','done'),('invoice_status','=','to invoice')]" string="Checkout Realizado/Para facturar"/>
+                    <filter domain="[('state','=','cancel')]" string="Cancelada"/>
                     <group expand="0" string="Group By">
                         <filter string="Order By Month" domain="[]"
                             context="{'group_by':'date_order'}" />
