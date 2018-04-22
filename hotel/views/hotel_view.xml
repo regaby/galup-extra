@@ -674,8 +674,30 @@
                                         <!-- <field name="state" /> -->
                                     </tree>
                                 </field>
+                                <separator string="Pagos" colspan="4" />
+                                <field name="payment_lines">
+                                    <tree editable="bottom">
+                                        <field name="user_id"/>
+                                        <field name="payment_date"/>
+                                        <field name="amount"/>
+
+                                    </tree>
+                                </field>
+                                <group colspan="2" class="oe_subtotal_footer oe_right">
+                                    <field name="amount_total" sum="Monto Total" widget='monetary' />
+                                    <field name="amount_payment" sum="Monto Pagado" widget='monetary' />
+                                    
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="residual" />
+                                        <button name="button_dummy" string="Calcular" states="draft"
+                                            type="object" icon="terp-sale" class="oe_highlight" />
+                                    </div>
+                                    <field name="residual" nolabel="1" sum="Monto Adeudado"
+                                        widget='monetary' />
+                                </group>
+                                <div class="oe_clear" />
                                 <separator string="Servicios Adicionales" colspan="4" />
-                                <field name="service_lines" colspan="4" string="Servicios"
+                                <!-- <field name="service_lines" colspan="4" string="Servicios"
                                     nolabel="1" context="{'checkin':checkin_date,'checkout':checkout_date}">
                                     <form string="Servicios">
                                         <notebook>
@@ -726,15 +748,28 @@
                                         <field name="state" />
                                     </tree>
                                 </field>
+                                 -->
+                                <field name="folio_service_ids">
+                                    <tree editable="bottom">
+                                        <field name="service_date"/>
+                                        <field name="product_id" options="{'no_open': True, 'no_create': True}"/>
+                                        <field name="quantity"/>
+                                        <field name="list_price"/>
+                                        <field name="price_subtotal"/>
+                                        <field name="cobrado" required="True"/>
+                                        <field name="user_id"/>
+                                    </tree>
+                                </field>
                                 <group colspan="2" class="oe_subtotal_footer oe_right">
-                                    <field name="amount_untaxed" sum="Untaxed amount" widget='monetary' />
-                                    <field name="amount_tax" widget='monetary' />
+                                    <field name="service_total" sum="Total" widget='monetary' />
+                                    <field name="service_paid" sum="Monto Cobrado" widget='monetary' />
+                                    
                                     <div class="oe_subtotal_footer_separator oe_inline">
-                                        <label for="amount_total" />
+                                        <label for="service_residual" />
                                         <button name="button_dummy" string="Calcular" states="draft"
                                             type="object" icon="terp-sale" class="oe_highlight" />
                                     </div>
-                                    <field name="amount_total" nolabel="1" sum="Total amount"
+                                    <field name="service_residual" nolabel="1" sum="Monto a Cobrar"
                                         widget='monetary' />
                                 </group>
                                 <div class="oe_clear" />
