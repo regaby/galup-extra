@@ -239,7 +239,7 @@ class HotelRoom(models.Model):
 
 class HotelFolio(models.Model):
 
-    @api.depends('payment_lines.amount')
+    @api.depends('payment_lines.amount','room_lines.price_unit','room_lines.discount','room_lines.tax_id','room_lines.checkin_date','room_lines.checkout_date')
     def _amount_all(self):
         """
         Compute the total amounts of the SO.
@@ -252,6 +252,23 @@ class HotelFolio(models.Model):
             order.update({
                 'amount_payment': amount_payment,
                 'residual': order.amount_total - amount_payment,
+            })
+
+    @api.depends('folio_service_ids.product_id','folio_service_ids.quantity','folio_service_ids.list_price','folio_service_ids.cobrado')
+    def _amount_all_service(self):
+        """
+        Compute the total amounts of the SO.
+        """
+        for order in self:
+            service_total = service_paid = service_residual = 0.0
+            for line in order.folio_service_ids:
+                service_total += line.price_subtotal
+                if line.cobrado=='si':
+                    service_paid += line.price_subtotal
+            order.update({
+                'service_total': service_total,
+                'service_paid': service_paid,
+                'service_residual': service_total - service_paid,
             })
 
     @api.multi
@@ -390,6 +407,8 @@ class HotelFolio(models.Model):
                                     "main Invoice.")
     payment_lines = fields.One2many('hotel.payment', 'folio_id',)
 
+    folio_service_ids = fields.One2many('hotel.folio.service', 'folio_id',)
+
     hotel_policy = fields.Selection([('prepaid', 'On Booking'),
                                      ('manual', 'On Check In'),
                                      ('picking', 'On Checkout')],
@@ -416,6 +435,10 @@ class HotelFolio(models.Model):
     observations = fields.Text('Observaciones')
     amount_payment = fields.Monetary(string='Monto pagado', store=True, readonly=True, compute='_amount_all', track_visibility='always')
     residual = fields.Monetary(string='Importe adeudado', store=True, readonly=True, compute='_amount_all', track_visibility='always')
+
+    service_total = fields.Monetary(string='Total', store=True, readonly=True, compute='_amount_all_service', track_visibility='always')
+    service_paid = fields.Monetary(string='Monto Cobrado', store=True, readonly=True, compute='_amount_all_service', track_visibility='always')
+    service_residual = fields.Monetary(string='Monto a Cobrar', store=True, readonly=True, compute='_amount_all_service', track_visibility='always')
 
 
     @api.multi
@@ -930,7 +953,47 @@ class HotelPayment(models.Model):
     amount = fields.Float('Monto', digits_compute=dp.get_precision('Product Price'), required=True)
     user_id = fields.Many2one('res.users', string='Cobrado por', index=True, default=lambda self: self.env.user, required=True,readonly=True)
 
+class HotelFolioService(models.Model):
+    _name = 'hotel.folio.service'
+    _description = 'hotel folio service'
 
+    @api.depends('quantity','list_price')
+    def _compute_amount(self):
+        """
+        Compute the amounts of the SO line.
+        """
+        for line in self:
+            st = line.list_price * line.quantity
+            line.update({
+                'price_subtotal': st,
+            })
+
+    @api.onchange('product_id')
+    def product_id_change(self):
+        if self.product_id:
+            self.list_price = self.product_id.lst_price
+
+    @api.onchange('cobrado')
+    def product_cobrado(self):
+        if self.cobrado=='si':
+            self.user_id = self.env.user
+        else:
+            self.user_id = False
+
+
+    folio_id = fields.Many2one('hotel.folio', string='Folio',
+                               ondelete='cascade')
+
+    service_date = fields.Datetime('Fecha', required=True,
+                                   default=(lambda *a:
+                                          time.strftime
+                                          (DEFAULT_SERVER_DATETIME_FORMAT)))
+    quantity = fields.Float(string='Cantidad', default=1, required=True)
+    list_price = fields.Float('Precio', digits_compute=dp.get_precision('Product Price'), required=True)
+    user_id = fields.Many2one('res.users', string='Cobrado por',readonly=True)    
+    product_id = fields.Many2one('product.product', string='Producto',readonly=False, domain=[('isservice','=',True)], required=True)
+    cobrado = fields.Selection([('no', 'No'), ('si', 'Si')], 'Cobrado', default='no', required=False)
+    price_subtotal = fields.Float(compute='_compute_amount', string='Subtotal', readonly=True, store=True, track_visibility='always')
 
 
 class HotelFolioLine(models.Model):
