@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="vista_asistencia_tree_view">
+            <field name="name">hr.attendance.view.tree</field>
+            <field name="model">hr.attendance.view</field>
+            
+            <field name="arch" type="xml">
+                <tree string="Vista Asistencias" colors="blue:state == 'draft'">
+                    <field name="employee_id" />
+                    <field name="department_id" />
+                    <field name="check_in" />
+                    <field name="check_out" />
+                    <field name="state" />
+                    <field name="user_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="vista_asistencia_search_view">
+            <field name="name">hr.attendance.view.search</field>
+            <field name="model">hr.attendance.view</field>
+            
+            <field name="arch" type="xml">
+                <search string="Hr Attendance Search">
+                    
+                    <filter icon="terp-go-today" string="Hoy" name="today" domain="[('check_in','&gt;=',current_date),('check_in','&lt;=',current_date)]" />
+                    <separator/>
+                    <filter icon="terp-stock_align_left_24" string="Mis asistencias" domain="[('employee_id.user_id.id', '=', uid)]" />
+                    <field name="employee_id"/>
+                    
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="vista_asistencia_form_view">
+            <field name="name">hr.attendance.view.form</field>
+            <field name="model">hr.attendance.view</field>          
+            <field name="arch" type="xml">
+                <form string="Vista Asistencias">                   
+                        <field name="employee_id" />
+                        <field name="department_id" />
+                        <field name="check_in" />
+                        <field name="check_out" />
+                        <field name="state" />
+                        <field name="user_id" />
+                        
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_vista_asistencia_tree_view">
+            <field name="name">Vista Asistencias</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.attendance.view</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="vista_asistencia_tree_view" />
+        </record>
+
+        <menuitem id="vista_asistencia_menu" name="Vista Asistencias" parent="menu_hr_attendance_manage_attendances" action="action_vista_asistencia_tree_view" />
+
+    
+</odoo>
