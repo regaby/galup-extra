@@ -990,7 +990,7 @@ class HotelFolioService(models.Model):
                                           (DEFAULT_SERVER_DATETIME_FORMAT)))
     quantity = fields.Float(string='Cantidad', default=1, required=True)
     list_price = fields.Float('Precio', digits_compute=dp.get_precision('Product Price'), required=True)
-    user_id = fields.Many2one('res.users', string='Cobrado por',readonly=True)    
+    user_id = fields.Many2one('res.users', string='Cobrado por',readonly=False)    
     product_id = fields.Many2one('product.product', string='Producto',readonly=False, domain=[('isservice','=',True)], required=True)
     cobrado = fields.Selection([('no', 'No'), ('si', 'Si')], 'Cobrado', default='no', required=False)
     price_subtotal = fields.Float(compute='_compute_amount', string='Subtotal', readonly=True, store=True, track_visibility='always')

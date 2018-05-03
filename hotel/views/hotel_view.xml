@@ -757,7 +757,7 @@
                                         <field name="list_price"/>
                                         <field name="price_subtotal"/>
                                         <field name="cobrado" required="True"/>
-                                        <field name="user_id"/>
+                                        <field name="user_id" domain="[('id','=',uid)]"/>
                                     </tree>
                                 </field>
                                 <group colspan="2" class="oe_subtotal_footer oe_right">
