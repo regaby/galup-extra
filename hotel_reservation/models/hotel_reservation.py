@@ -24,6 +24,7 @@ from openerp.exceptions import except_orm, ValidationError
 from dateutil.relativedelta import relativedelta
 from openerp import models, fields, api, _
 import datetime
+from datetime import timedelta
 import time
 from openerp.addons.hotel.models import hotel
 import openerp.addons.decimal_precision as dp
@@ -745,7 +746,8 @@ class RoomReservationSummary(models.Model):
                                          last_temp_day.month,
                                          last_temp_day.day, 23, 59, 59)
             date_froms = date_today.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-            date_ends = last_day.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+            to_date = date_today + timedelta(days=6)
+            date_ends = to_date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
             res.update({'date_from': date_froms, 'date_to': date_ends})
         return res
 
@@ -845,39 +847,35 @@ class RoomReservationSummary(models.Model):
                         chk_date = chk_date[0:10]
                         ocupado = False
                         reservado = False
-                        for room_fol_line in room.room_line_ids:
-                            folline_ids = [i.ids for i in
-                                              room.room_line_ids]
-                            folline_ids = (folio_line_obj.search
-                                              ([('id', 'in', folline_ids),
-                                                ('check_in', '<=', chk_date),
-                                                ('check_out', '>', chk_date),
-                                                ('status', '<>', 'cancel')
-                                                ]))
-                            if folline_ids:
-                                room_list_stats.append({'state': 'Ocupado',
-                                                        'room_id': room.id,
-                                                        'date': chk_date,
-                                                        })
-                                ocupado = True
-                                break
+                        folline_ids = [i.ids for i in
+                                          room.room_line_ids]
+                        folline_ids = (folio_line_obj.search
+                                          ([('id', 'in', folline_ids),
+                                            ('check_in', '<=', chk_date),
+                                            ('check_out', '>', chk_date),
+                                            ('status', '<>', 'cancel')
+                                            ]))
+                        if folline_ids:
+                            room_list_stats.append({'state': 'Ocupado',
+                                                    'room_id': room.id,
+                                                    'date': chk_date,
+                                                    })
+                            ocupado = True
 
                         if ocupado==False:
-                            for room_res_line in room.room_reservation_line_ids:
-                                reservline_ids = [i.ids for i in
-                                                  room.room_reservation_line_ids]
-                                reservline_ids = (reservation_line_obj.search
-                                                  ([('id', 'in', reservline_ids),
-                                                    ('check_in', '<=', chk_date),
-                                                    ('check_out', '>', chk_date),
-                                                    ('state','=','assigned')
-                                                    ]))
-                                if reservline_ids:
-                                    room_list_stats.append({'state': 'Reservado',
-                                                            'date': chk_date,
-                                                            'room_id': room.id})
-                                    reservado = True
-                                    break
+                            reservline_ids = [i.ids for i in
+                                              room.room_reservation_line_ids]
+                            reservline_ids = (reservation_line_obj.search
+                                              ([('id', 'in', reservline_ids),
+                                                ('check_in', '<=', chk_date),
+                                                ('check_out', '>', chk_date),
+                                                ('state','=','assigned')
+                                                ]))
+                            if reservline_ids:
+                                room_list_stats.append({'state': 'Reservado',
+                                                        'date': chk_date,
+                                                        'room_id': room.id})
+                                reservado = True
                         if not ocupado and not reservado:
                             room_list_stats.append({'state': 'Libre',
                                                          'date': chk_date,
