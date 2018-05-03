@@ -89,6 +89,123 @@ We look forward to providing you quality services at our hotel.
              ]]></field>
         </record>
 
+        <record id="mail_template_hotel_reservation2" model="mail.template">
+            <field name="name">Reservas por email</field>
+            <field name="email_from">${(object.warehouse_id.partner_id.email or '')}
+            </field>
+            <field name="subject">Detalle de reserva de hotel</field>
+            <field name="partner_to">${(object.partner_id.id or '')}</field>
+            <field name="model_id" ref="hotel_reservation.model_hotel_reservation" />
+            <field name="auto_delete" eval="True" />
+            <field name="body_html"><![CDATA[
+                <p>Estimado/a <strong>${object.partner_id.name}</strong>,</p>
+
+                <p>Gracias por elegir <strong>${object.warehouse_id.name} </strong>,&nbsp;
+                   % if object.warehouse_id.partner_id.city: 
+                   <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;
+                   % endif 
+                   % if object.warehouse_id.partner_id.country_id.name:
+                   <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;
+                   % endif</p>
+
+                <p>El presente e-mail confirma que Usted tiene reservadas la/s habitaciones que a continuación se detallan, la tarifa
+expresada es la que rige en el momento de efectuada la reserva. Solicitamos que en los días próximos al ingreso
+reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tarifas sin previo aviso.</p>
+
+                <p>Ante cualquier otra consulta no dude en contactarnos.</p>
+                <p>Saludos cordiales,</p>
+
+                &nbsp;&nbsp;<strong>Información del Huésped :</strong><br/>
+                <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+                &nbsp;&nbsp;Nombre : <strong>${object.partner_id.name}</strong><br />
+                &nbsp;&nbsp;Email : <strong>${object.partner_id.email}</strong><br />
+                &nbsp;&nbsp;Teléfono : <strong>${object.partner_id.phone}</strong><br />
+                </p>
+
+                &nbsp;&nbsp;<strong>Detalles de la reserva :</strong><br/>
+                <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+                &nbsp;&nbsp;N° de reserva : <strong>${object.reservation_no}</strong><br />
+                &nbsp;&nbsp;Fecha de la reserva : <strong>${object.date_order}</strong><br />
+                &nbsp;&nbsp;N° de adultos/niñ : <strong>${object.adults}</strong>/<strong>${object.children}</strong> Childrens<br />
+                &nbsp;&nbsp;Fecha de llegada : <strong>${object.checkin_date}</strong> <strong>${object.checkin_hour}</strong><br />
+                &nbsp;&nbsp;Fecha de salida : <strong>${object.checkout_date}</strong> <strong>${object.checkout_hour}</strong><br />
+                </p>
+
+                &nbsp;&nbsp;<strong>Tarifa de habitaciones por noche :</strong><br/>
+                <br/>
+                <table border="1" cellpadding="4" style="margin-left: 30px;">
+                        <tr>
+                            <th>Habitación</th>
+                            <th>Categoria</th>
+                            <th>Monto</th>
+                        </tr>
+                        %for line in object.reservation_line:
+                            %for line2 in line.reserve:
+                                <tr >
+                                    <td>${line2.name}</td>
+                                    <td>${line2.categ_id.name}</td>
+                                    <td>${line2.list_price}</td>
+                                </tr>
+                            %endfor
+                        %endfor
+                </table>
+               <br /> 
+               <p><strong>El presente voucher es la confirmacion de su reserva, debera poseer una garantia 72 hs. antes del ingreso al Hotel, en caso contrario la reserva carece de validez.</strong></p>
+
+              <p><strong>Garantía:</strong></p>
+              <p>1. Tarjeta de Crédito: deberá facilitar el nombre del titular, número, fecha de vencimiento y código de seguridad, la información se recibirá únicamente vía mail (escaneado) o vía fax. Los datos serán utilizados bajo absoluta confidencialidad.</p>
+              <p>2. Depósito Bancario: (únicamente para Argentina) depositando como mínimo una noche de alojamiento por cada habitación reservada. Solicite los datos bancarios luego de recibir esta confirmación.</p>
+
+              <br />
+              <p><strong>Cancelación:</strong></p>
+              <p>Toda cancelación queda anulada una vez recibido el voucher de cancelación, por favor reclamar. En caso de no presentación (no show) se procederá al cobro de una noche de alojamiento en concepto de penalización, por cada habitación reservada. La política de cancelación es hasta las 6 PM del día hábil anterior al ingreso de la reserva.</p>
+
+              <br />
+              <p><strong>Política de Menores y Family Plan:</strong></p>
+              <p>+ Hasta los 4 años inclusive: Cuna o cama adicional sin cargo</p>
+              <p>+ De 5 a 8 años inclusive: Cama adicional con cargo</p>
+              <p>+ A partir de los 9 años: se considera adulto, pagando el total del costo de la habitación que irá a utilizar.</p>
+
+              <br />
+              <p><strong>Cuentas bancarias para realizar prepagos:</strong></p>
+              <p>Los depósitos deberán efectuarse a nombre de SUNSET PORT S. A., CUIT: 30-68513500-7</p>
+              <p><strong>Banco Macro:</strong> Cta Cte en PESOS Nro. 3-009-0008005917-6 Suc. Pto. Iguazu 009</p>
+              <p>CBU: 2850009-6-3000080059176-1</p>
+
+              <br />
+              <p><strong>Nueva Resolución:</strong></p>
+              <p>De acuerdo al decreto 1043/2016 y Art. 5 Resolución conjunta 3971 y 566/2016, a partir del 2 de enero de 2017 se reintegra a los turistas extranjeros, el 21% del IVA por servicios de alojamiento y desayuno. Para poder acceder al reintegro, los requisitos son:</p>
+              <p>- el pago de dichos servicios deberá recibirse mediante: Transferencia de divisas que tengan origen en una entidad bancaria en el exterior o Tarjeta de Crédito emitida en el exterior.</p>
+              <p>- el huésped deberá demostrar su condición de residente en el extranjero (definición según RG 3971 - art. 1° 2do. párrafo) y presentar la siguiente documentación en el hotel:</p>
+              <p>- APELLIDO Y NOMBRE de CADA UNO DE LOS PASAJEROS</p>
+              <p>- NACIONALIDAD, y PAIS DE RESIDENCIA</p>
+              <p>- No DE PASAPORTE / DOCUMENTO DE IDENTIDAD EXTRANJERO</p>
+              <p>- COPIA DEL PASAPORTE / DOCUMENTO DE IDENTIDAD EXTRANJERO</p>
+              <p>- COPIA DEL SELLO DE INGRESO AL PAÍS COMO TURISTA</p>
+              <p>- Dicho Régimen, aplica únicamente para Alojamiento y Desayuno. El resto de los servicios (Ej: restaurante, frigobar,
+masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
+
+
+               <br />
+<strong>Atentamente<strong>,<br />
+<br />
+[<strong>${object.warehouse_id.name}</strong>]<br />
+% if object.warehouse_id.partner_id.street:
+<strong>${object.warehouse_id.partner_id.street}</strong><br />
+% endif
+% if object.warehouse_id.partner_id.city:
+<strong>${object.warehouse_id.partner_id.city}</strong>,<br />
+% endif
+% if object.warehouse_id.partner_id.country_id.name:
+<strong>${object.warehouse_id.partner_id.country_id.name}</strong>,<br />
+% endif
+<br />
+% if object.warehouse_id.partner_id.website:
+<strong>${object.warehouse_id.partner_id.website}</strong> <br />
+% endif
+             ]]></field>
+        </record>
+
 
         <!--Email template for hotel reservation reminder before 24hrs -->
         <record id="mail_template_reservation_reminder_24hrs" model="mail.template">
