@@ -212,6 +212,7 @@ masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
 % if object.warehouse_id.partner_id.website:
 <strong>${object.warehouse_id.partner_id.website}</strong> <br />
 % endif
+<p> <img src="data:image/png;base64,${object.warehouse_id.company_id.logo}" style="width: 150px;height: 80px;" /> </p>
 
 
              ]]></field>
