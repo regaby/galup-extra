@@ -13,7 +13,7 @@
     <!-- </record> -->
     <!-- </data> -->
 
-    <data noupdate="1">
+    <data noupdate="0">
 
         <!--Email template for hotel reservation -->
         <record id="mail_template_hotel_reservation" model="mail.template">
@@ -89,7 +89,7 @@ We look forward to providing you quality services at our hotel.
              ]]></field>
         </record>
 
-        <record id="mail_template_hotel_reservation2" model="mail.template">
+        <record id="mail_template_hotel_reservation3" model="mail.template">
             <field name="name">Reservas por email</field>
             <field name="email_from">${(object.warehouse_id.partner_id.email or '')}
             </field>
@@ -99,15 +99,14 @@ We look forward to providing you quality services at our hotel.
             <field name="auto_delete" eval="True" />
             <field name="body_html"><![CDATA[
                 <p>Estimado/a <strong>${object.partner_id.name}</strong>,</p>
-
                 <p>Gracias por elegir <strong>${object.warehouse_id.name} </strong>,&nbsp;
                    % if object.warehouse_id.partner_id.city: 
                    <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;
                    % endif 
                    % if object.warehouse_id.partner_id.country_id.name:
                    <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;
-                   % endif</p>
-
+                   % endif
+                </p> 
                 <p>El presente e-mail confirma que Usted tiene reservadas la/s habitaciones que a continuación se detallan, la tarifa
 expresada es la que rige en el momento de efectuada la reserva. Solicitamos que en los días próximos al ingreso
 reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tarifas sin previo aviso.</p>
@@ -115,20 +114,26 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                 <p>Ante cualquier otra consulta no dude en contactarnos.</p>
                 <p>Saludos cordiales,</p>
 
+
+                
+
                 &nbsp;&nbsp;<strong>Información del Huésped :</strong><br/>
                 <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
                 &nbsp;&nbsp;Nombre : <strong>${object.partner_id.name}</strong><br />
                 &nbsp;&nbsp;Email : <strong>${object.partner_id.email}</strong><br />
-                &nbsp;&nbsp;Teléfono : <strong>${object.partner_id.phone}</strong><br />
+                &nbsp;&nbsp;Teléfono : 
+                % if object.partner_id.phone: 
+                    <strong>${object.partner_id.phone}</strong><br />
+                % endif 
                 </p>
 
                 &nbsp;&nbsp;<strong>Detalles de la reserva :</strong><br/>
                 <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
                 &nbsp;&nbsp;N° de reserva : <strong>${object.reservation_no}</strong><br />
-                &nbsp;&nbsp;Fecha de la reserva : <strong>${object.date_order}</strong><br />
-                &nbsp;&nbsp;N° de adultos/niñ : <strong>${object.adults}</strong>/<strong>${object.children}</strong> Childrens<br />
-                &nbsp;&nbsp;Fecha de llegada : <strong>${object.checkin_date}</strong> <strong>${object.checkin_hour}</strong><br />
-                &nbsp;&nbsp;Fecha de salida : <strong>${object.checkout_date}</strong> <strong>${object.checkout_hour}</strong><br />
+                &nbsp;&nbsp;Fecha de la reserva : <strong>${object.date_order[8:10]}/${object.date_order[5:7]}/${object.date_order[0:4]} ${object.date_order[11:13]}:${object.date_order[14:16]}</strong><br />
+                &nbsp;&nbsp;N° de adultos/niñ : <strong>${object.adults}</strong>/<strong>${object.children}</strong><br />
+                &nbsp;&nbsp;Fecha de llegada : <strong>${object.checkin_date[8:10]}/${object.checkin_date[5:7]}/${object.checkin_date[0:4]}</strong> - Horario: <strong>${object.checkin_hour}</strong><br />
+                &nbsp;&nbsp;Fecha de salida : <strong>${object.checkout_date[8:10]}/${object.checkout_date[5:7]}/${object.checkout_date[0:4]}</strong> - Horario: <strong>${object.checkout_hour}</strong><br />
                 </p>
 
                 &nbsp;&nbsp;<strong>Tarifa de habitaciones por noche :</strong><br/>
@@ -140,13 +145,17 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                             <th>Monto</th>
                         </tr>
                         %for line in object.reservation_line:
-                            %for line2 in line.reserve:
                                 <tr >
-                                    <td>${line2.name}</td>
-                                    <td>${line2.categ_id.name}</td>
-                                    <td>${line2.list_price}</td>
+                                    <td>${line.reserve.name}</td>
+                                    <td>${line.reserve.categ_id.name}</td>
+                                    <td>
+                                        % if line.list_price:
+                                        ${line.list_price}
+                                        % else:
+                                        ${line.reserve.price}
+                                        % endif
+                                    </td>
                                 </tr>
-                            %endfor
                         %endfor
                 </table>
                <br /> 
@@ -189,7 +198,7 @@ masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
                <br />
 <strong>Atentamente<strong>,<br />
 <br />
-[<strong>${object.warehouse_id.name}</strong>]<br />
+<strong>${object.warehouse_id.name}</strong><br />
 % if object.warehouse_id.partner_id.street:
 <strong>${object.warehouse_id.partner_id.street}</strong><br />
 % endif
@@ -203,6 +212,8 @@ masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
 % if object.warehouse_id.partner_id.website:
 <strong>${object.warehouse_id.partner_id.website}</strong> <br />
 % endif
+
+
              ]]></field>
         </record>
 

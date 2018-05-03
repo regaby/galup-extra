@@ -369,7 +369,7 @@ class HotelReservation(models.Model):
         try:
             template_id = (ir_model_data.get_object_reference
                            ('hotel_reservation',
-                            'mail_template_hotel_reservation2')[1])
+                            'mail_template_hotel_reservation3')[1])
         except ValueError:
             template_id = False
         try:
