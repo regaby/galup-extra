@@ -131,7 +131,7 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                 <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
                 &nbsp;&nbsp;N° de reserva : <strong>${object.reservation_no}</strong><br />
                 &nbsp;&nbsp;Fecha de la reserva : <strong>${object.date_order[8:10]}/${object.date_order[5:7]}/${object.date_order[0:4]} ${object.date_order[11:13]}:${object.date_order[14:16]}</strong><br />
-                &nbsp;&nbsp;N° de adultos/niñ : <strong>${object.adults}</strong>/<strong>${object.children}</strong><br />
+                &nbsp;&nbsp;N° de adultos/niños : <strong>${object.adults}</strong>/<strong>${object.children}</strong><br />
                 &nbsp;&nbsp;Fecha de llegada : <strong>${object.checkin_date[8:10]}/${object.checkin_date[5:7]}/${object.checkin_date[0:4]}</strong> - Horario: <strong>${object.checkin_hour}</strong><br />
                 &nbsp;&nbsp;Fecha de salida : <strong>${object.checkout_date[8:10]}/${object.checkout_date[5:7]}/${object.checkout_date[0:4]}</strong> - Horario: <strong>${object.checkout_hour}</strong><br />
                 </p>
