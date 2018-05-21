@@ -956,6 +956,7 @@ class HotelPayment(models.Model):
 class HotelFolioService(models.Model):
     _name = 'hotel.folio.service'
     _description = 'hotel folio service'
+    _order = 'id desc'
 
     @api.depends('quantity','list_price')
     def _compute_amount(self):
