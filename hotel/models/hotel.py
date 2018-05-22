@@ -944,7 +944,23 @@ class HotelPayment(models.Model):
     _name = 'hotel.payment'
     _description = 'hotel payment'
 
+    @api.multi
+    def recibo(self):
+        datas = {
+             'ids': [],
+             'model': 'recibo_x',
+             'form': self.id,
+             'context': {'active_id': self.id},
+        }
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'recibo_x',
+            'datas': datas,
+        }
+
     folio_id = fields.Many2one('hotel.folio', string='Folio',
+                               ondelete='cascade')
+    reservation_id = fields.Many2one('hotel.reservation', string='Reserva',
                                ondelete='cascade')
     payment_date = fields.Datetime('Fecha Pago', required=True,
                                    default=(lambda *a:

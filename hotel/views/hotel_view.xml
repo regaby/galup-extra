@@ -680,6 +680,7 @@
                                         <field name="user_id"/>
                                         <field name="payment_date"/>
                                         <field name="amount"/>
+                                        <button name="recibo" string="Imprimir Recibo" type="object" class="oe_highlight"/>
 
                                     </tree>
                                 </field>
