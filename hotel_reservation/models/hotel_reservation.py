@@ -76,6 +76,23 @@ class HotelReservation(models.Model):
     _order = 'reservation_no desc'
     _inherit = ['mail.thread', 'ir.needaction_mixin']
 
+    @api.depends('reservation_line.reserve')
+    def _amount_all(self):
+        """
+        Compute the total amounts of the SO.
+        """
+        for order in self:
+            total = 0
+            for line in order.reservation_line:
+                if line.list_price == 0:
+                    for room in line.reserve:
+                        total+=room.price
+                else:
+                    total+=line.list_price
+            order.update({
+                'amount_total': total,
+            })
+
     reservation_no = fields.Char('Reservation No', size=64, readonly=True)
     date_order = fields.Datetime('Date Ordered', required=True, readonly=True,
                                  states={'draft': [('readonly', False)]},
@@ -150,6 +167,8 @@ class HotelReservation(models.Model):
     dummy = fields.Datetime('Dummy')
     user_id = fields.Many2one('res.users', string='Creado por', index=True, track_visibility='onchange', default=lambda self: self.env.user)
     observations = fields.Text('Observaciones')
+    amount_total = fields.Float(string='Total', store=False, readonly=True, compute='_amount_all', track_visibility='always')
+    payment_lines = fields.One2many('hotel.payment', 'reservation_id',)
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):
@@ -585,7 +604,7 @@ class HotelReservationLine(models.Model):
     categ_id = fields.Many2one('hotel.room.type', 'Room Type',
                                domain="[('isroomtype','=',True)]",
                                default=get_categ)
-    list_price = fields.Float('Precio', digits_compute=dp.get_precision('Product Price'))
+    list_price = fields.Float('Precio Opcional', digits_compute=dp.get_precision('Product Price'))
 
     
 

@@ -69,13 +69,38 @@
                                     </form>
                                     <tree string="Reservation Line">
                                         <field name="reserve" string="Habitaciones"/>
+                                        <field name="categ_id" />
+                                        <field name="list_price" />
                                     </tree>
                                 </field>
+                                <group colspan="2" class="oe_subtotal_footer oe_right">
+                                    <field name="amount_total" sum="Monto Total" widget='monetary' />
+                                    <!-- <field name="amount_payment" sum="Monto Pagado" widget='monetary' />
+                                    
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="residual" />
+                                        <button name="button_dummy" string="Calcular" states="draft"
+                                            type="object" icon="terp-sale" class="oe_highlight" />
+                                    </div>
+                                    <field name="residual" nolabel="1" sum="Monto Adeudado"
+                                        widget='monetary' /> -->
+                                </group>
                                 <separator string="Observaciones" />
                                 <field name= 'observations' placeholder="Ingrese alguna observación..."/>
                             </page>
                             <page string='Folio'>
                                 <field name= 'folio_id' readonly='1'/>
+                            </page>
+                            <page string='Pago Anticipado'>
+                                <field name="payment_lines">
+                                    <tree editable="bottom">
+                                        <field name="user_id"/>
+                                        <field name="payment_date"/>
+                                        <field name="amount"/>
+                                        <button name="recibo" string="Imprimir Recibo" type="object" class="oe_highlight"/>
+
+                                    </tree>
+                                </field>
                             </page>
                         </notebook>
                     </sheet>
