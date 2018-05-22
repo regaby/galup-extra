@@ -141,7 +141,7 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                 <table border="1" cellpadding="4" style="margin-left: 30px;">
                         <tr>
                             <th>Habitación</th>
-                            <th>Categoria</th>
+                            <th>Categoría</th>
                             <th>Monto</th>
                         </tr>
                         %for line in object.reservation_line:
@@ -157,9 +157,14 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                                     </td>
                                 </tr>
                         %endfor
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>${object.amount_total}</th>
+                        </tr>
                 </table>
                <br /> 
-               <p><strong>El presente voucher es la confirmacion de su reserva, debera poseer una garantia 72 hs. antes del ingreso al Hotel, en caso contrario la reserva carece de validez.</strong></p>
+               <p><strong>El presente voucher es la confirmación de su reserva, deberá poseer una garantía 72 hs. antes del ingreso al Hotel, en caso contrario la reserva carece de validez.</strong></p>
 
               <p><strong>Garantía:</strong></p>
               <p>1. Tarjeta de Crédito: deberá facilitar el nombre del titular, número, fecha de vencimiento y código de seguridad, la información se recibirá únicamente vía mail (escaneado) o vía fax. Los datos serán utilizados bajo absoluta confidencialidad.</p>
@@ -187,7 +192,7 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
               <p>- el pago de dichos servicios deberá recibirse mediante: Transferencia de divisas que tengan origen en una entidad bancaria en el exterior o Tarjeta de Crédito emitida en el exterior.</p>
               <p>- el huésped deberá demostrar su condición de residente en el extranjero (definición según RG 3971 - art. 1° 2do. párrafo) y presentar la siguiente documentación en el hotel:</p>
               <p>- APELLIDO Y NOMBRE de CADA UNO DE LOS PASAJEROS</p>
-              <p>- NACIONALIDAD, y PAIS DE RESIDENCIA</p>
+              <p>- NACIONALIDAD, y PAÍS DE RESIDENCIA</p>
               <p>- No DE PASAPORTE / DOCUMENTO DE IDENTIDAD EXTRANJERO</p>
               <p>- COPIA DEL PASAPORTE / DOCUMENTO DE IDENTIDAD EXTRANJERO</p>
               <p>- COPIA DEL SELLO DE INGRESO AL PAÍS COMO TURISTA</p>
