@@ -144,18 +144,24 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                             <th>Categoría</th>
                             <th>Monto</th>
                         </tr>
-                        %for line in object.reservation_line:
+                        %for line2 in object.reservation_line:
+                          %for line in line2.reserve:
                                 <tr >
-                                    <td>${line.reserve.name}</td>
-                                    <td>${line.reserve.categ_id.name}</td>
+                                    <td>${line.name}</td>
+                                    <td>${line.categ_id.name}</td>
                                     <td>
-                                        % if line.list_price:
-                                        ${line.list_price}
+                                      % if line.categ_id.name != 'Cochera':
+                                        % if line2.list_price:
+                                        ${line2.list_price}
                                         % else:
-                                        ${line.reserve.price}
+                                        ${line.price}
                                         % endif
+                                      % else:
+                                        0
+                                      % endif
                                     </td>
                                 </tr>
+                          %endfor
                         %endfor
                         <tr>
                             <th></th>
