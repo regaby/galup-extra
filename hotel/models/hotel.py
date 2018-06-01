@@ -696,7 +696,7 @@ class HotelFolio(models.Model):
         if 'state' in vals.keys() and vals['state'] not in ('done'):
             self.check_reservation_exists()
             self.check_folio_exists()
-        if 'checkout_date' in vals.keys():
+        if 'checkout_date' in vals.keys() and self.state!='sale':
             self.check_reservation_exists()
             self.check_folio_exists()
         self.update_partner(vals,self.partner_id.id)
