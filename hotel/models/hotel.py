@@ -682,10 +682,6 @@ class HotelFolio(models.Model):
         @param self: The object pointer
         @param vals: dictionary of fields value.
         """
-        if 'state' in vals.keys() and vals['state'] not in ('done'):
-            self.check_reservation_exists()
-            self.check_folio_exists()
-        self.update_partner(vals,self.partner_id.id)
 
         folio_room_line_obj = self.env['folio.room.line']
 #        reservation_line_obj = self.env['hotel.room.reservation.line']
@@ -696,6 +692,15 @@ class HotelFolio(models.Model):
             for res in rec.room_lines:
                 room_lst1.append(res.product_id.id)
         folio_write = super(HotelFolio, self).write(vals)
+
+        if 'state' in vals.keys() and vals['state'] not in ('done'):
+            self.check_reservation_exists()
+            self.check_folio_exists()
+        if 'checkout_date' in vals.keys():
+            self.check_reservation_exists()
+            self.check_folio_exists()
+        self.update_partner(vals,self.partner_id.id)
+
         room_lst = []
         for folio_obj in self:
             for folio_rec in folio_obj.room_lines:
@@ -867,6 +872,8 @@ class HotelFolio(models.Model):
 
     @api.multi
     def action_confirm(self):
+        self.check_reservation_exists()
+        self.check_folio_exists()
         if not self.room_lines:
             raise ValidationError(_('No se puede confirmar folio sin lineas de habitación'))
         for order in self.order_id:
