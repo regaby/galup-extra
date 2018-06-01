@@ -728,7 +728,7 @@ class HotelFolio(models.Model):
                                  'folio_id': folio_obj.id,
                                  }
                     folio_romline_rec = (folio_room_line_obj.search
-                                         ([('folio_id', '=', folio_obj.id)]))
+                                         ([('folio_id', '=', folio_obj.id),('room_id','=',room_obj.id)]))
                     folio_romline_rec.write(room_vals)
         for folio_obj in self:
             ## elimino los registros viejos
