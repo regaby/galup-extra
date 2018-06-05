@@ -38,6 +38,7 @@
             'views/report_hotel_management.xml',
             'views/hotel_view.xml',
             'views/folio_service_view.xml',
+            'views/folio_payment_view.xml',
             'wizard/hotel_wizard.xml',
     ],
     'css': ['static/src/css/room_kanban.css'],

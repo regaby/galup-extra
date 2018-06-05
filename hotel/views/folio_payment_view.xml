@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_hotel_payment_form">
+            <field name="name">hotel.payment.form</field>
+            <field name="model">hotel.payment</field>
+            <field name="arch" type="xml">
+                <form string=" Lineas de Pagos">
+                    <sheet>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="payment_date"/>
+                            <field name="amount"/>
+                            <field name="journal_id" widget="selection"/>
+                            <field name="folio_id"/>
+                            <field name="reservation_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view of Descuentos -->
+        <record model="ir.ui.view" id="view_hotel_payment_tree">
+            <field name="name">hotel.payment.tree</field>
+            <field name="model">hotel.payment</field>
+            <field name="arch" type="xml">
+                <tree string=" Lineas de Pagos">
+                    <field name="user_id"/>
+                    <field name="payment_date"/>
+                    <field name="amount"/>
+                    <field name="journal_id" />
+                    <field name="folio_id"/>
+                    <field name="reservation_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hotel_payment_search">
+            <field name="name">hotel.payment.search</field>
+            <field name="model">hotel.payment</field>
+            <field name="arch" type="xml">
+                <search string=" Lineas de Pagos">
+                    <field name="user_id"/>
+                    <field name="payment_date"/>
+                    <field name="amount"/>
+                    <field name="folio_id"/>
+                    <field name="reservation_id"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action of Descuentos -->
+        <record model="ir.actions.act_window" id="hotel_payment_action">
+            <field name="name">Lineas de Pagos</field>
+            <field name="res_model">hotel.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Lineas de Pagos" id="menu_hotel_payment"
+            action="hotel_payment_action" sequence="110"
+            parent="hotel.menu_all_folio" />
+        
+    </data>
+</openerp>
