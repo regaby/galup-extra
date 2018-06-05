@@ -537,7 +537,7 @@
                             icon="gtk-new" class="oe_highlight"/> -->
                         <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Crear Factura" type="action" class="btn-primary"
-                            attrs="{'invisible': ['|',('invoice_status', '!=', 'to invoice'),('state','!=','done')]}" />
+                            attrs="{'invisible': ['|',('invoice_status', '!=', 'to invoice')]}" />
                         <!-- <button name="ship_cancel" string="Cancel Folio" states="shipping_except" 
                             icon="gtk-cancel" class="oe_highlight oe_highlight" /> -->
                         <button name="action_cancel_draft" states="cancel" string="Volver a Borrador"
