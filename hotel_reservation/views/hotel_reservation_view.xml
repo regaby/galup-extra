@@ -94,6 +94,7 @@
                             <page string='Pago Anticipado'>
                                 <field name="payment_lines">
                                     <tree editable="bottom">
+                                        <field name="reservation_id" invisible="1"/>
                                         <field name="user_id"/>
                                         <field name="payment_date"/>
                                         <field name="amount"/>

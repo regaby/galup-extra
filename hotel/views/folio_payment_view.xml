@@ -6,7 +6,7 @@
             <field name="name">hotel.payment.form</field>
             <field name="model">hotel.payment</field>
             <field name="arch" type="xml">
-                <form string=" Lineas de Pagos">
+                <form string=" Lineas de Pagos" create="false" edit="false" >
                     <sheet>
                         <group>
                             <field name="user_id"/>
@@ -26,7 +26,7 @@
             <field name="name">hotel.payment.tree</field>
             <field name="model">hotel.payment</field>
             <field name="arch" type="xml">
-                <tree string=" Lineas de Pagos">
+                <tree string=" Lineas de Pagos" create="false" edit="false">
                     <field name="user_id"/>
                     <field name="payment_date"/>
                     <field name="amount"/>

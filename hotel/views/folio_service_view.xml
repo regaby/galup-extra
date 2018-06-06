@@ -6,7 +6,7 @@
             <field name="name">hotel.folio.service.form</field>
             <field name="model">hotel.folio.service</field>
             <field name="arch" type="xml">
-                <form string=" Servicios Adicionales">
+                <form string=" Servicios Adicionales" create="false" edit="false">
                     <sheet>
                         <group>
                             <field name="folio_id"/>
@@ -28,7 +28,7 @@
             <field name="name">hotel.folio.service.tree</field>
             <field name="model">hotel.folio.service</field>
             <field name="arch" type="xml">
-                <tree string=" Servicios Adicionales">
+                <tree string=" Servicios Adicionales" create="false" edit="false">
                     <field name="folio_id"/>
                     <field name="service_date"/>
                     <field name="product_id" options="{'no_open': True, 'no_create': True}"/>
