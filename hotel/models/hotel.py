@@ -976,7 +976,7 @@ class HotelPayment(models.Model):
                                           (DEFAULT_SERVER_DATETIME_FORMAT)))
     amount = fields.Float('Monto', digits_compute=dp.get_precision('Product Price'), required=True)
     user_id = fields.Many2one('res.users', string='Cobrado por', index=True, default=lambda self: self.env.user, required=True,readonly=True)
-    journal_id = fields.Many2one('account.journal', string="Método de Pago", domain="[('type','in',['cash','bank'])]", required=True)
+    journal_id = fields.Many2one('account.journal', string="Método de Pago", domain="[('type','in',['cash','bank'])]", required=False)
 
 class HotelFolioService(models.Model):
     _name = 'hotel.folio.service'

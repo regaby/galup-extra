@@ -98,7 +98,7 @@
                                         <field name="user_id"/>
                                         <field name="payment_date"/>
                                         <field name="amount"/>
-                                        <field name="journal_id"/>
+                                        <field name="journal_id" widget="selection" required="True"/>
                                         <button name="recibo" string="Imprimir Recibo" type="object" class="oe_highlight"/>
 
                                     </tree>
