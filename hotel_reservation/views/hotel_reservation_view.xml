@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+        <record model="ir.ui.view" id="view_hotel_payment_form_inherit">
+            <field name="name">hotel.payment.form</field>
+            <field name="model">hotel.payment</field>
+            <field name="inherit_id" ref="hotel.view_hotel_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="folio_id" position='after'>
+                    <field name="reservation_id"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_hotel_payment_tree_inherit">
+            <field name="name">hotel.payment.tree</field>
+            <field name="model">hotel.payment</field>
+            <field name="inherit_id" ref="hotel.view_hotel_payment_tree"/>
+            <field name="arch" type="xml">
+                <field name="folio_id" position='after'>
+                    <field name="reservation_id"/>
+                </field>
+            </field>
+        </record>
         <!--============================================================
         Reservation
         ============================================================ -->

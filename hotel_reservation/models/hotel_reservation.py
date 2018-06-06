@@ -30,6 +30,11 @@ from openerp.addons.hotel.models import hotel
 import openerp.addons.decimal_precision as dp
 from openerp import workflow
 
+class HotelPayment(models.Model):
+    _inherit = 'hotel.payment'
+
+    reservation_id = fields.Many2one('hotel.reservation', string='Reserva',
+                               ondelete='cascade')
 
 class HotelFolio(models.Model):
 

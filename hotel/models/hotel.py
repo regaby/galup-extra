@@ -968,8 +968,6 @@ class HotelPayment(models.Model):
 
     folio_id = fields.Many2one('hotel.folio', string='Folio',
                                ondelete='cascade')
-    reservation_id = fields.Many2one('hotel.reservation', string='Reserva',
-                               ondelete='cascade')
     payment_date = fields.Datetime('Fecha Pago', required=True,
                                    default=(lambda *a:
                                           time.strftime
