@@ -29,7 +29,7 @@
                 <tree string=" Lineas de Pagos" create="false" edit="false">
                     <field name="user_id"/>
                     <field name="payment_date"/>
-                    <field name="amount"/>
+                    <field name="amount" sum="Total"/>
                     <field name="journal_id" />
                     <field name="folio_id"/>
                     <field name="reservation_id"/>
