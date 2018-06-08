@@ -31,6 +31,7 @@
                     <field name="amount" sum="Total"/>
                     <field name="journal_id" />
                     <field name="folio_id"/>
+                    <field name="invoice_status"/>
                 </tree>
             </field>
         </record>
@@ -44,6 +45,8 @@
                     <field name="payment_date"/>
                     <field name="amount"/>
                     <field name="folio_id"/>
+                    <filter domain="[('invoice_status','=','to invoice')]" name="to_invoice" string="Para Facturar"/>
+                    <filter domain="[('invoice_status','=','invoiced')]" name="invoiced" string="Facturado"/>
                 </search>
             </field>
         </record>

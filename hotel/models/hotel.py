@@ -988,6 +988,12 @@ class HotelPayment(models.Model):
     amount = fields.Float('Monto', digits_compute=dp.get_precision('Product Price'), required=True)
     user_id = fields.Many2one('res.users', string='Cobrado por', index=True, default=lambda self: self.env.user, required=True,readonly=True)
     journal_id = fields.Many2one('account.journal', string="Método de Pago", domain="[('type','in',['cash','bank'])]", required=False)
+    invoice_status = fields.Selection([
+        ('upselling', 'Opertunidad de Upselling'),
+        ('invoiced', 'Facturado'),
+        ('to invoice', 'Para facturar'),
+        ('no', 'Nada que facturar')
+        ], string='Invoice Status', readonly=True, related='folio_id.order_id.invoice_status',)
 
 class HotelFolioService(models.Model):
     _name = 'hotel.folio.service'
