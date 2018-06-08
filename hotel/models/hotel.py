@@ -952,6 +952,19 @@ class HotelPayment(models.Model):
     _description = 'hotel payment'
     _order = 'id desc'
 
+    @api.model
+    def create(self, vals, check=True):
+        """
+        Overrides orm create method.
+        @param self: The object pointer
+        @param vals: dictionary of fields value.
+        @return: new record set for hotel folio line.
+        """
+        if 'amount' in vals and vals['amount']==0:
+            raise UserError(_('El monto debe ser diferente a cero.'))
+        return super(HotelPayment, self).create(vals)
+
+
     @api.multi
     def recibo(self):
         datas = {
