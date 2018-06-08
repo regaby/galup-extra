@@ -67,7 +67,7 @@ class SaleAdvancePaymentInv(models.TransientModel):
         res = super(SaleAdvancePaymentInv,
                     self.with_context(ctx)).create_invoices()
         invoice_obj = self.env['account.invoice']
-        res_id = invoice_obj.search([('origin','=',hotel.name)])
+        res_id = invoice_obj.search([('origin','=',hotel.name),('state','!=','cancel')])
         if hotel and res_id:
             if res_id.partner_id.parent_id:
                 res_id.partner_id = res_id.partner_id.parent_id.id
