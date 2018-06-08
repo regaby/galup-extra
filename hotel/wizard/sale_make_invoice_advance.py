@@ -69,6 +69,7 @@ class SaleAdvancePaymentInv(models.TransientModel):
         invoice_obj = self.env['account.invoice']
         res_id = invoice_obj.search([('origin','=',hotel.name)])
         if hotel and res_id:
+            res_id.partner_id = res_id.partner_id.parent_id.id
             hotel.write({'hotel_invoice_id': res_id.id})
         line_ids = self.env['account.invoice.line'].search([('invoice_id','=',res_id.id)])
         for line in line_ids:
