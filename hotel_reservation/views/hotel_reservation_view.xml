@@ -111,7 +111,7 @@
                             <page string='Folio'>
                                 <field name= 'folio_id' readonly='1'/>
                             </page>
-                            <page string='Pago Anticipado'>
+                            <page string='Pago Anticipado' name="pago_anticipado">
                                 <field name="payment_lines">
                                     <tree editable="bottom">
                                         <field name="reservation_id" invisible="1"/>
