@@ -339,6 +339,33 @@ class HotelReservation(models.Model):
                              (reservation.checkin, reservation.checkout,
                               str(reservation.id), str(reservation.id)))
             res = self._cr.fetchone()
+            # print self._cr.query
+            roomcount = res and res[0] or 0.0
+            if roomcount:
+                raise ValidationError(_('You tried to confirm \
+                reservation with room those already reserved in this \
+                reservation period'))
+            self._cr.execute("""select hf.name,sol.product_id, hr.id
+                                from hotel_folio as hf 
+                                inner join sale_order so on (hf.order_id=so.id)
+                                inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
+                                join sale_order_line sol on (hfl.order_line_id=sol.id)
+                                inner join folio_room_line frl on (frl.folio_id=hf.id)
+                                join hotel_room hr on (frl.room_id=hr.id)
+                                where (check_in,check_out) overlaps 
+                                                                ( timestamp %s, timestamp %s ) 
+                                and so.partner_id <> cast(%s as integer) 
+                                                                and so.state not in ('cancel','done')
+                                and hr.product_id=sol.product_id   
+                                and hr.id in ( select hrlrr.hotel_reservation_line_id 
+                                    from hotel_reservation as hr 
+                                    inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
+                                    inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
+                                  where hr.id = cast(%s as integer))""",
+                             (reservation.checkin, reservation.checkout,
+                              str(reservation.partner_id.id), str(reservation.id)))
+            res = self._cr.fetchone()
+            # print self._cr.query
             roomcount = res and res[0] or 0.0
             if roomcount:
                 raise ValidationError(_('You tried to confirm \
@@ -851,7 +878,7 @@ class RoomReservationSummary(models.Model):
             for room in room_ids:
                 room_detail = {}
                 room_list_stats = []
-                room_detail.update({'name': room.name or ''})
+                room_detail.update({'name': "%s (%s)"%(room.name,room.categ_id.name[0:4]) or ''})
                 # habitacion bloqueada
                 if room.status == 'blocked':
                     for chk_date in date_range_list:
