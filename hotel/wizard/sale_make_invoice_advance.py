@@ -57,6 +57,7 @@ class SaleAdvancePaymentInv(models.TransientModel):
     def create_invoices(self):
         ctx = self.env.context.copy()
         hotel = False
+        invoice_obj = self.env['account.invoice']
         if self._context.get('active_model') == 'hotel.folio':
             hotel_fol = self.env['hotel.folio']
             hotel = hotel_fol.browse(self._context.get('active_ids',
@@ -64,10 +65,13 @@ class SaleAdvancePaymentInv(models.TransientModel):
             ctx.update({'active_ids': [hotel.order_id.id],
                         'active_id': hotel.order_id.id,
                         'invoice_origin': hotel.name})
+        res_id = invoice_obj.search([('origin','=',hotel.name),('state','!=','cancel')])
+        delete = []
+        for r in res_id:
+          delete.append(r.id)
         res = super(SaleAdvancePaymentInv,
                     self.with_context(ctx)).create_invoices()
-        invoice_obj = self.env['account.invoice']
-        res_id = invoice_obj.search([('origin','=',hotel.name),('state','!=','cancel')])
+        res_id = invoice_obj.search([('origin','=',hotel.name),('state','!=','cancel'),('id','not in',delete)])
         if hotel and res_id:
             if res_id.partner_id.parent_id:
                 res_id.partner_id = res_id.partner_id.parent_id.id
