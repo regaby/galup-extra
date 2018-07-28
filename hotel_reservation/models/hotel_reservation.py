@@ -552,6 +552,9 @@ class HotelReservation(models.Model):
                     res_obj.write({'status': 'occupied', 'isroom': False})
             folio_vals.update({'room_lines': folio_lines})
             folio = hotel_folio_obj.create(folio_vals)
+            if reservation.payment_lines:
+              for payment in reservation.payment_lines:
+                payment.folio_id = folio
             self._cr.execute('insert into hotel_folio_reservation_rel'
                              '(order_id, invoice_id) values (%s,%s)',
                              (reservation.id, folio.id)
