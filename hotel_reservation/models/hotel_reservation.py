@@ -519,6 +519,15 @@ class HotelReservation(models.Model):
                 'service_lines': reservation['folio_id'],
                 'observations': reservation.observations,
             }
+            calculate_check = False
+            if reservation.checkin_hour < 12:
+                folio_vals['early_checkin'] = True
+                folio_vals['early_checkin_hour'] = reservation.checkin_hour
+                calculate_check = True
+            if reservation.checkout_hour > 10:
+                folio_vals['late_checkout'] = True
+                folio_vals['late_checkout_hour'] = reservation.checkout_hour
+                calculate_check = True
             date_a = (datetime.datetime
                       (*time.strptime(reservation['checkout'],
                                       DEFAULT_SERVER_DATETIME_FORMAT)[:5]))
@@ -552,6 +561,8 @@ class HotelReservation(models.Model):
                     res_obj.write({'status': 'occupied', 'isroom': False})
             folio_vals.update({'room_lines': folio_lines})
             folio = hotel_folio_obj.create(folio_vals)
+            if calculate_check:
+                folio.calculate_check()
             if reservation.payment_lines:
               for payment in reservation.payment_lines:
                 payment.folio_id = folio
