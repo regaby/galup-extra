@@ -760,6 +760,7 @@
                                         <field name="list_price"/>
                                         <field name="price_subtotal"/>
                                         <field name="cobrado" required="True"/>
+                                        <field name="journal_id" widget="selection" required="False"/>
                                         <field name="user_id" domain="[('id','=',uid)]"/>
                                     </tree>
                                 </field>

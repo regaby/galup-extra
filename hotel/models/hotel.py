@@ -1037,6 +1037,7 @@ class HotelFolioService(models.Model):
     product_id = fields.Many2one('product.product', string='Producto',readonly=False, domain=[('isservice','=',True)], required=True)
     cobrado = fields.Selection([('no', 'No'), ('si', 'Si')], 'Cobrado', default='no', required=False)
     price_subtotal = fields.Float(compute='_compute_amount', string='Subtotal', readonly=True, store=True, track_visibility='always')
+    journal_id = fields.Many2one('account.journal', string="Método de Pago", domain="[('type','in',['cash','bank'])]", required=False)
 
 
 class HotelFolioLine(models.Model):
