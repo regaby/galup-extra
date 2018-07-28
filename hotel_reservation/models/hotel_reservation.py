@@ -173,7 +173,7 @@ class HotelReservation(models.Model):
     user_id = fields.Many2one('res.users', string='Creado por', index=True, track_visibility='onchange', default=lambda self: self.env.user)
     observations = fields.Text('Observaciones')
     amount_total = fields.Float(string='Total', store=False, readonly=True, compute='_amount_all', track_visibility='always')
-    payment_lines = fields.One2many('hotel.payment', 'reservation_id',)
+    payment_lines = fields.One2many('hotel.payment', 'reservation_id','Linea de Pagos')
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):
