@@ -405,7 +405,7 @@ class HotelFolio(models.Model):
                                     help="Hotel services detail provide to"
                                     "customer and it will include in "
                                     "main Invoice.")
-    payment_lines = fields.One2many('hotel.payment', 'folio_id',)
+    payment_lines = fields.One2many('hotel.payment', 'folio_id','Linea de Pagos')
 
     folio_service_ids = fields.One2many('hotel.folio.service', 'folio_id',)
 
