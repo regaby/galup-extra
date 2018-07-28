@@ -854,8 +854,7 @@ class RoomReservationSummary(models.Model):
         output = output.replace('Ú','U')
         return output
 
-    @api.onchange('date_from', 'date_to')
-    def get_room_summary(self):
+    def check_reservation(self, cat_id, date_from, date_to):
         '''
         @param self: object pointer
          '''
@@ -867,14 +866,14 @@ class RoomReservationSummary(models.Model):
         date_range_list = []
         main_header = []
         summary_header_list = ['Habitaciones']
-        if self.date_from and self.date_to:
-            if self.date_from > self.date_to:
+        if date_from and date_to:
+            if date_from > date_to:
                 raise ValidationError(_('Please Check Time period Date \
                                  From can\'t be greater than Date To !'))
             d_frm_obj = (datetime.datetime.strptime
-                         (self.date_from, DEFAULT_SERVER_DATETIME_FORMAT))
+                         (date_from, DEFAULT_SERVER_DATETIME_FORMAT))
             d_to_obj = (datetime.datetime.strptime
-                        (self.date_to, DEFAULT_SERVER_DATETIME_FORMAT))
+                        (date_to, DEFAULT_SERVER_DATETIME_FORMAT))
             temp_date = d_frm_obj
             while(temp_date <= d_to_obj):
                 val = ''
@@ -887,7 +886,10 @@ class RoomReservationSummary(models.Model):
                                        (DEFAULT_SERVER_DATETIME_FORMAT))
                 temp_date = temp_date + datetime.timedelta(days=1)
             all_detail.append(summary_header_list)
-            room_ids = room_obj.search([])
+            if cat_id:
+                room_ids = room_obj.search([('categ_id','=',cat_id)])
+            else:
+                room_ids = room_obj.search([])
             all_room_detail = []
             for room in room_ids:
                 room_detail = {}
@@ -948,9 +950,21 @@ class RoomReservationSummary(models.Model):
                 room_detail.update({'value': room_list_stats})
                 all_room_detail.append(room_detail)
             main_header.append({'header': summary_header_list})
-            self.summary_header = str(main_header)
-            self.room_summary = str(all_room_detail)
+            res = {
+                'summary_header': main_header,
+                'room_summary': all_room_detail,
+            }
         return res
+
+    @api.onchange('date_from', 'date_to')
+    def get_room_summary(self):
+        '''
+        @param self: object pointer
+         '''
+        res = self.check_reservation(False, self.date_from, self.date_to)
+        self.summary_header = str(res['summary_header'])
+        self.room_summary = str(res['room_summary'])
+        return {}
 
 
 class QuickRoomReservation(models.TransientModel):
