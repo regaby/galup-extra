@@ -696,7 +696,7 @@ class HotelFolio(models.Model):
         if 'state' in vals.keys() and vals['state'] not in ('done'):
             self.check_reservation_exists()
             self.check_folio_exists()
-        if 'checkout_date' in vals.keys() and self.state!='sale':
+        if 'checkout_date' in vals.keys() and self.state!='done':
             self.check_reservation_exists()
             self.check_folio_exists()
         self.update_partner(vals,self.partner_id.id)
@@ -799,8 +799,8 @@ class HotelFolio(models.Model):
 
     @api.multi
     def action_done(self):
-        self.checkout_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        self.write({'state': 'done'})
+        # self.checkout_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        self.write({'state': 'done', 'checkout_date': time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)})
         for line in self.room_lines:
             room_obj = self.env['hotel.room']
             room_id = room_obj.search([('name','=',line.product_id.name)])
