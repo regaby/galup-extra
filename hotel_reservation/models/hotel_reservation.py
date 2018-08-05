@@ -322,7 +322,7 @@ class HotelReservation(models.Model):
         """
         reservation_line_obj = self.env['hotel.room.reservation.line']
         for reservation in self:
-            self._cr.execute("""select count(*) 
+            self._cr.execute("""select hr.reservation_no
                              from hotel_reservation as hr 
                               inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
                               inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
@@ -340,12 +340,13 @@ class HotelReservation(models.Model):
                               str(reservation.id), str(reservation.id)))
             res = self._cr.fetchone()
             # print self._cr.query
+            print res
             roomcount = res and res[0] or 0.0
             if roomcount:
-                raise ValidationError(_('You tried to confirm \
-                reservation with room those already reserved in this \
-                reservation period'))
-            self._cr.execute("""select hf.name,sol.product_id, hr.id
+                raise ValidationError(_('Ha tratado de confirmar \
+                una reserva con una habitación que ya ha sido reservada en este\
+                periodo de reserva. %s')%(res))
+            self._cr.execute("""select hf.name
                                 from hotel_folio as hf 
                                 inner join sale_order so on (hf.order_id=so.id)
                                 inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
@@ -366,11 +367,13 @@ class HotelReservation(models.Model):
                               str(reservation.partner_id.id), str(reservation.id)))
             res = self._cr.fetchone()
             # print self._cr.query
+            print res
             roomcount = res and res[0] or 0.0
             if roomcount:
-                raise ValidationError(_('You tried to confirm \
-                reservation with room those already reserved in this \
-                reservation period'))
+                raise ValidationError(_('Ha tratado de confirmar \
+                una reserva con una habitación que ya ha sido ocupada en este\
+                periodo de reserva. %s')%res)
+
             else:
                 self.write({'state': 'confirm'})
                 for line_id in reservation.reservation_line:
