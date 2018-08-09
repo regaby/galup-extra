@@ -217,6 +217,7 @@ class HotelReservation(models.Model):
         @param self: object pointer
         @return: raise a warning depending on the validation
         '''
+        cap = 0
         for reservation in self:
             if len(reservation.reservation_line) == 0:
                 raise ValidationError(_('Please Select Rooms \
@@ -225,17 +226,16 @@ class HotelReservation(models.Model):
                 if len(rec.reserve) == 0:
                     raise ValidationError(_('Please Select Rooms \
                     For Reservation.'))
-                cap = 0
                 # cap = rec.categ_id.capacity
                 for room in rec.reserve:
                   room_type_obj = self.env['hotel.room.type']
                   room_type_ids = room_type_obj.search([('cat_id', '=', room.product_id.categ_id.id)])
                   cap += room_type_ids.read(fields=['capacity'])[0]['capacity']
                   # cap += room.product_id.categ_id.capacity
-                if (self.adults + self.children) > cap:
-                        raise ValidationError(_('Room Capacity \
-                        Exceeded \n Please Select Rooms According to \
-                        Members Accomodation.'))
+            if (self.adults + self.children) > cap:
+                    raise ValidationError(_('Room Capacity \
+                    Exceeded \n Please Select Rooms According to \
+                    Members Accomodation.'))
 
     @api.model
     def _needaction_count(self, domain=None):
@@ -890,7 +890,7 @@ class RoomReservationSummary(models.Model):
                 temp_date = temp_date + datetime.timedelta(days=1)
             all_detail.append(summary_header_list)
             if cat_id:
-                room_ids = room_obj.search([('categ_id','=',cat_id)])
+                room_ids = room_obj.search([('categ_id','in',cat_id)])
             else:
                 room_ids = room_obj.search([])
             all_room_detail = []
