@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="pos_config_tax">
+            <field name="name">pos.config.tax</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="pos_base.pos_base_config"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page" position="inside">
+                    <group>
+                        <field name="display_tax_orderline"/>
+                        <field name="display_tax_receipt"/>
+                        <field name="update_tax"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
