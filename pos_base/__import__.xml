@@ -1,0 +1,17 @@
+<odoo>
+
+    <template id="pos_base_assets" name="pos_base assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"/>
+            <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'/>
+            <script type="text/javascript" src="/pos_base/static/libs/js/bootstrap-notify.js"/>
+            <script type="text/javascript" src="/pos_base/static/libs/js/jquery-barcode-last.min.js"/>
+            <script type="text/javascript" src="/pos_base/static/libs/assets/js/jquery.validate.min.js"/>
+            <link rel="stylesheet" href="/pos_base/static/libs/assets/css/light-bootstrap-dashboard.css"/>
+            <link rel="stylesheet" href="/pos_base/static/libs/assets/css/bootstrap.min.css"/>
+            <link rel="stylesheet" href="/pos_base/static/libs/assets/css/pe-icon-7-stroke.css"/>
+            <link rel="stylesheet" href="/pos_base/static/src/css/pos_base.css"/>
+        </xpath>
+    </template>
+
+</odoo>

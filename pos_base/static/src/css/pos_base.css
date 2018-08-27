@@ -1,0 +1,25 @@
+.item-selected {
+    border: 2px solid #6EC89B !important;
+}
+.pos .price_list {
+    color: #6EC89B;
+}
+.pos .modal-dialog .popup {
+    height: 600px;
+}
+
+.pos .client-detail .label {
+    color: #6EC89B;
+}
+.pos .label {
+    color: black;
+}
+.screen .screen-content {
+    max-width: none;
+}
+.pos .payment-numpad .numpad {
+    width: 350px;
+}
+.pos .payment-numpad .numpad {
+    border-top: none;
+}

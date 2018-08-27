@@ -1,0 +1,23 @@
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="pos_base_config">
+            <field name="name">pos_access_rights</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='features']" position="before">
+                    <group name='pos_config_extend' string="Extend Config">
+                    </group>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Extend Setting">
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
