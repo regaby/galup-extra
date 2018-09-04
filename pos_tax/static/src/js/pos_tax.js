@@ -4,8 +4,6 @@ odoo.define('pos_tax', function (require) {
     var screens = require('point_of_sale.screens');
     var gui = require('point_of_sale.gui');
     var core = require('web.core');
-    var _t = core._t;
-    var rpc = require('web.Model');
     var qweb = core.qweb;
 
     var _super_order_line = models.Orderline.prototype;
@@ -123,7 +121,7 @@ odoo.define('pos_tax', function (require) {
         'name': 'button_change_tax',
         'widget': button_change_tax,
         'condition': function () {
-            return this.pos.config.update_tax;
+            return this.pos.config && this.pos.config.update_tax;
         }
     });
 
