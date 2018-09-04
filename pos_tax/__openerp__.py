@@ -9,7 +9,7 @@
     'website': 'http://posodoo.com',
     'sequence': 0,
     'depends': [
-        'pos_base'
+        'point_of_sale'
     ],
     'demo': [
         'demo/demo_data.xml',
@@ -30,7 +30,6 @@
     },
     'images': ['static/description/icon.png'],
     'support': 'thanhchatvn@gmail.com',
-    # "license": "OPL-1",
     'installable': True,
     'application': True,
     'post_init_hook': 'auto_action_after_install',

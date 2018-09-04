@@ -4,10 +4,10 @@
         <record model="ir.ui.view" id="pos_config_tax">
             <field name="name">pos.config.tax</field>
             <field name="model">pos.config</field>
-            <field name="inherit_id" ref="pos_base.pos_base_config"/>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page" position="inside">
-                    <group>
+                <xpath expr="//group[@name='receipt']" position="before">
+                    <group string="Taxes" name="taxes">
                         <field name="display_tax_orderline"/>
                         <field name="display_tax_receipt"/>
                         <field name="update_tax"/>
