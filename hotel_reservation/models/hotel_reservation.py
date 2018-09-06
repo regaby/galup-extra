@@ -939,7 +939,8 @@ class RoomReservationSummary(models.Model):
                                               ([('id', 'in', reservline_ids),
                                                 ('check_in', '<=', chk_date),
                                                 ('check_out', '>', chk_date),
-                                                ('state','=','assigned')
+                                                ('state','=','assigned'),
+                                                ('status','<>','cancel'),
                                                 ]))
                             if reservline_ids:
                                 room_list_stats.append({'state': 'Reservado',
