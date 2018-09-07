@@ -666,6 +666,7 @@ class HotelReservationLine(models.Model):
         @param self: object pointer
         '''
         hotel_room_obj = self.env['hotel.room']
+        reservation_line_obj = self.env['hotel.room.reservation.line']
         if self.categ_id.cat_id.id:
           hotel_room_ids = hotel_room_obj.search([('categ_id', '=',
                                                   self.categ_id.cat_id.id)])
@@ -679,7 +680,14 @@ class HotelReservationLine(models.Model):
                              the reservation form.'))
         for room in hotel_room_ids:
             assigned = False
-            for line in room.room_reservation_line_ids:
+            reservline_ids = [i.ids for i in
+                              room.room_reservation_line_ids]
+            reservline_ids = (reservation_line_obj.search
+                              ([('id', 'in', reservline_ids),
+                                ('state','=','assigned'),
+                                ('status','<>','cancel'),
+                                ]))
+            for line in reservline_ids:
                 if(line.check_in >= self.line_id.checkin and
                    line.check_in <= self.line_id.checkout or
                    line.check_out <= self.line_id.checkout and
