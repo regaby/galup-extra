@@ -906,6 +906,7 @@ class RoomReservationSummary(models.Model):
                 room_detail = {}
                 room_list_stats = []
                 room_detail.update({'name': "%s (%s)"%(room.name,room.categ_id.name[0:4]) or ''})
+                room_detail.update({'categ_id': room.categ_id.id or False})
                 # habitacion bloqueada
                 if room.status == 'blocked':
                     for chk_date in date_range_list:
