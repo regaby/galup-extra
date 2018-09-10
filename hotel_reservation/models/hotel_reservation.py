@@ -232,7 +232,7 @@ class HotelReservation(models.Model):
                   room_type_ids = room_type_obj.search([('cat_id', '=', room.product_id.categ_id.id)])
                   cap += room_type_ids.read(fields=['capacity'])[0]['capacity']
                   # cap += room.product_id.categ_id.capacity
-            if (self.adults + self.children) > cap:
+            if (self.adults + self.children) > cap and cap != 0:
                     raise ValidationError(_('Room Capacity \
                     Exceeded \n Please Select Rooms According to \
                     Members Accomodation.'))
