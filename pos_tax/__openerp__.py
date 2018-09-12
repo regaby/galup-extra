@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "POS Tax",
-    'version': '1.0.0',
+    'version': '1.1.0',
     'category': 'Point of Sale',
     'author': 'TL Technology',
     'live_test_url': 'http://posodoo.com/web/signup',
@@ -32,5 +32,6 @@
     'support': 'thanhchatvn@gmail.com',
     'installable': True,
     'application': True,
+    'license': 'LGPL-3',
     'post_init_hook': 'auto_action_after_install',
 }
