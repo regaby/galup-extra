@@ -42,6 +42,17 @@
                         <label for="check_owner_required" string="Required"/>
                     </div>
                 </div>
+                <label for="id" string="Check Owner vat (CUIT)" attrs="{'invisible':[('check_info_required','=',False)]}"/>
+                <div colspan="3" attrs="{'invisible':[('check_info_required','=',False)]}">
+                    <div>
+                        <field name="check_owner_vat_visible" class="oe_inline"/>
+                        <label for="check_owner_vat_visible" string="Visible"/>
+                    </div>
+                    <div>
+                        <field name="check_owner_vat_required" class="oe_inline"/>
+                        <label for="check_owner_vat_required" string="Required"/>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>

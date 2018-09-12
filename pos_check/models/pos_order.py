@@ -10,7 +10,8 @@ class PosOrder(models.Model):
             'check_bank_id': ui_paymentline.get('check_bank_id'),
             'check_bank_acc': ui_paymentline.get('check_bank_acc'),
             'check_number': ui_paymentline.get('check_number'),
-            'check_owner': ui_paymentline.get('check_owner')
+            'check_owner': ui_paymentline.get('check_owner'),
+            'check_owner_vat': ui_paymentline.get('check_owner_vat'),
         })
         return res
 
@@ -18,6 +19,28 @@ class PosOrder(models.Model):
         statement_id = super(PosOrder, self).add_payment(cr, uid, order_id, data, context)
         StatementLine = self.pool.get('account.bank.statement.line')
         checkObj = self.pool.get('account.check')
+        ## {'payment_date': u'2018-09-12 02:35:43', 
+        # 'payment_name': False, 
+        # 'statement_id': 42, 
+        # 'journal': 10, 
+        # 'amount': 173, 
+        # 'check_bank_acc': u'111', 
+        # 'check_owner': u'11111', 
+        # 'check_bank_id': 3, 
+        # 'check_number': u'1111'}
+        print data
+        check = {
+            'name' : data['check_number'],
+            'bank_id': data['check_bank_id'],
+            'journal_id': data['journal'],
+            'number': data['check_number'],
+            'amount': data['amount'],
+            'owner_name': data['check_owner'],
+            'owner_vat':  data['check_owner_vat'],
+            'issue_date': data['payment_date'][0:10],
+            'type': 'third_check',
+        }
+        checkObj.create(cr, uid, check,context)
         statement_lines = StatementLine.search(cr, uid, [
             ('statement_id', '=', statement_id),
             ('pos_statement_id', '=', order_id),
@@ -34,7 +57,8 @@ class PosOrder(models.Model):
                     'check_bank_id': check_bank_id,
                     'check_bank_acc': data.get('check_bank_acc'),
                     'check_number': data.get('check_number'),
-                    'check_owner': data.get('check_owner')
+                    'check_owner': data.get('check_owner'),
+                    'check_owner_vat': data.get('check_owner_vat'),
                 }
                 line.write(check_vals)
                 break

@@ -34,6 +34,11 @@ screens.PaymentScreenWidget.include({
                     this.$('input[name=check_owner]').focus();
                     return false;
                 }
+                if(this.options.config_check.owner_vat_required && !infos.check_owner_vat) {
+                    this.$('input[name=check_owner_vat]').addClass('error');
+                    this.$('input[name=check_owner_vat]').focus();
+                    return false;
+                }
                 return true;
             },
             confirm: function(infos){
@@ -66,7 +71,9 @@ screens.PaymentScreenWidget.include({
                     'bank_acc_visible': cashregister.journal.check_bank_acc_visible,
                     'bank_acc_required': cashregister.journal.check_bank_acc_required,
                     'owner_visible': cashregister.journal.check_owner_visible,
-                    'owner_required': cashregister.journal.check_owner_required
+                    'owner_required': cashregister.journal.check_owner_required,
+                    'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
+                    'owner_vat_required': cashregister.journal.check_owner_vat_required,
                 },
                 data: {},
                 confirm: function(infos) {
@@ -118,7 +125,9 @@ screens.PaymentScreenWidget.include({
                         'bank_acc_visible': cashregister.journal.check_bank_acc_visible,
                         'bank_acc_required': cashregister.journal.check_bank_acc_required,
                         'owner_visible': cashregister.journal.check_owner_visible,
-                        'owner_required': cashregister.journal.check_owner_required
+                        'owner_required': cashregister.journal.check_owner_required,
+                        'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
+                        'owner_vat_required': cashregister.journal.check_owner_vat_required,
                     },
                     data: lines[i],
                     confirm: function(infos) {

@@ -51,6 +51,10 @@
                     <span class='label'>Check owner</span>
                     <input t-att-class='widget.options.config_check and widget.options.config_check.owner_required ? "detail required" : "detail"' name='check_owner' t-att-value='widget.options.data ? widget.options.data.check_owner : undefined' placeholder='Check owner'></input>
                 </div>
+                <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.owner_vat_visible">
+                    <span class='label'>CUIT</span>
+                    <input t-att-class='widget.options.config_check and widget.options.config_check.owner_vat_required ? "detail required" : "detail"' name='check_owner_vat' t-att-value='widget.options.data ? widget.options.data.check_owner_vat : undefined' placeholder='CUIT'></input>
+                </div>
                 <div class='footer'>
                     <div class='button confirm'>
                         Confirm 

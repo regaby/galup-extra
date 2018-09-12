@@ -18,6 +18,7 @@ var CheckInfoWidget = PopupWidget.extend({
             'check_bank_acc': this.$('input[name=check_bank_acc]').val(),
             'check_number'  : this.$('input[name=check_number]').val(),
             'check_owner'   : this.$('input[name=check_owner]').val(),
+            'check_owner_vat'   : this.$('input[name=check_owner_vat]').val(),
         };
     },
     click_confirm: function(){

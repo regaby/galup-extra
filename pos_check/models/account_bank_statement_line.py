@@ -9,6 +9,7 @@ class AccountBankStatementLine(models.Model):
     check_bank_acc = fields.Char('Check bank account')
     check_number = fields.Char()
     check_owner = fields.Char()
+    check_owner_vat = fields.Char()
     check_info_required = fields.Boolean(related='journal_id.check_info_required', readonly=True)
     check_bank_name_visible = fields.Boolean(related='journal_id.check_bank_name_visible', readonly=True)
     check_bank_name_required = fields.Boolean(related='journal_id.check_bank_name_required', readonly=True)
@@ -16,3 +17,5 @@ class AccountBankStatementLine(models.Model):
     check_bank_acc_required = fields.Boolean(related='journal_id.check_bank_acc_required', readonly=True)
     check_owner_visible = fields.Boolean(related='journal_id.check_owner_visible', readonly=True)
     check_owner_required = fields.Boolean(related='journal_id.check_owner_required', readonly=True)
+    check_owner_vat_visible = fields.Boolean(related='journal_id.check_owner_vat_visible', readonly=True)
+    check_owner_vat_required = fields.Boolean(related='journal_id.check_owner_vat_required', readonly=True)
