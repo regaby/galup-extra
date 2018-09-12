@@ -39,6 +39,11 @@ screens.PaymentScreenWidget.include({
                     this.$('input[name=check_owner_vat]').focus();
                     return false;
                 }
+                if(this.options.config_check.pay_date_required && !infos.check_pay_date) {
+                    this.$('input[name=check_pay_date]').addClass('error');
+                    this.$('input[name=check_pay_date]').focus();
+                    return false;
+                }
                 return true;
             },
             confirm: function(infos){
@@ -74,6 +79,8 @@ screens.PaymentScreenWidget.include({
                     'owner_required': cashregister.journal.check_owner_required,
                     'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
                     'owner_vat_required': cashregister.journal.check_owner_vat_required,
+                    'pay_date_visible': cashregister.journal.check_pay_date_visible,
+                    'pay_date_required': cashregister.journal.check_pay_date_required,
                 },
                 data: {},
                 confirm: function(infos) {
@@ -128,6 +135,8 @@ screens.PaymentScreenWidget.include({
                         'owner_required': cashregister.journal.check_owner_required,
                         'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
                         'owner_vat_required': cashregister.journal.check_owner_vat_required,
+                        'pay_date_visible': cashregister.journal.check_pay_date_visible,
+                        'pay_date_required': cashregister.journal.check_pay_date_required,
                     },
                     data: lines[i],
                     confirm: function(infos) {

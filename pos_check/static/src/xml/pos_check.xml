@@ -55,6 +55,10 @@
                     <span class='label'>CUIT</span>
                     <input t-att-class='widget.options.config_check and widget.options.config_check.owner_vat_required ? "detail required" : "detail"' name='check_owner_vat' t-att-value='widget.options.data ? widget.options.data.check_owner_vat : undefined' placeholder='CUIT'></input>
                 </div>
+                <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.pay_date_visible">
+                    <span class='label'>Fecha de vencimiento</span>
+                    <input type="date" t-att-class='widget.options.config_check and widget.options.config_check.pay_date_required ? "detail required" : "detail"' name='check_pay_date' t-att-value='widget.options.data ? widget.options.data.check_pay_date : undefined' placeholder='Fecha de vencimiento'></input>
+                </div>
                 <div class='footer'>
                     <div class='button confirm'>
                         Confirm 

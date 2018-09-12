@@ -12,6 +12,7 @@ class PosOrder(models.Model):
             'check_number': ui_paymentline.get('check_number'),
             'check_owner': ui_paymentline.get('check_owner'),
             'check_owner_vat': ui_paymentline.get('check_owner_vat'),
+            'check_pay_date': ui_paymentline.get('check_pay_date'),
         })
         return res
 
@@ -38,6 +39,7 @@ class PosOrder(models.Model):
             'owner_name': data['check_owner'],
             'owner_vat':  data['check_owner_vat'],
             'issue_date': data['payment_date'][0:10],
+            'payment_date': data['check_pay_date'],
             'type': 'third_check',
         }
         checkObj.create(cr, uid, check,context)
@@ -59,6 +61,7 @@ class PosOrder(models.Model):
                     'check_number': data.get('check_number'),
                     'check_owner': data.get('check_owner'),
                     'check_owner_vat': data.get('check_owner_vat'),
+                    'check_pay_date': data.get('check_pay_date'),
                 }
                 line.write(check_vals)
                 break
