@@ -19,6 +19,7 @@
         'data/parameter_data.xml',
         'template/import_library.xml',
         'views/pos_config.xml',
+        'views/account_tax_view.xml'
     ],
     'qweb': [
         'static/src/xml/*.xml'

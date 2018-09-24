@@ -15,6 +15,8 @@ odoo.define('pos_tax', function (require) {
         }
     });
 
+    models.load_fields("account.tax", ['pos_enable']);
+
     var popup_select_tax = PopupWidget.extend({
         template: 'popup_select_tax',
         show: function (options) {
@@ -24,7 +26,12 @@ odoo.define('pos_tax', function (require) {
             var product = this.line_selected.get_product();
             var taxes_ids = product.taxes_id;
             this._super(options);
-            var taxes = this.pos.taxes;
+            var taxes = []
+            for (var i = 0; i < this.pos.taxes.length; i++) {
+                if (this.pos.taxes[i]['pos_enable']) {
+                    taxes.push(this.pos.taxes[i]);
+                }
+            }
             this.taxes_selected = [];
             for (var i = 0; i < taxes.length; i++) {
                 var tax = taxes[i];
