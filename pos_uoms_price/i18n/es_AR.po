@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* pos_uoms_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-26 01:13+0000\n"
+"PO-Revision-Date: 2018-09-26 01:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_uoms_price
+#: model:ir.ui.view,arch_db:pos_uoms_price.assets
+msgid "<?xml version=\"1.0\"?>\n"
+"<data inherit_id=\"point_of_sale.assets\">\n"
+"            <xpath expr=\".\" position=\"inside\">\n"
+"                <link rel=\"stylesheet\" href=\"/pos_uoms_price/static/src/css/pos_uoms_price.css\"/>\n"
+"                <script type=\"text/javascript\" src=\"/pos_uoms_price/static/src/js/pos_uoms_price.js\"/>\n"
+"            </xpath>\n"
+"        </data>\n"
+"\n"
+"    "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<data inherit_id=\"point_of_sale.assets\">\n"
+"            <xpath expr=\".\" position=\"inside\">\n"
+"                <link rel=\"stylesheet\" href=\"/pos_uoms_price/static/src/css/pos_uoms_price.css\"/>\n"
+"                <script type=\"text/javascript\" src=\"/pos_uoms_price/static/src/js/pos_uoms_price.js\"/>\n"
+"            </xpath>\n"
+"        </data>\n"
+"\n"
+"    "
+
+#. module: pos_uoms_price
+#: model:ir.ui.view,arch_db:pos_uoms_price.pos_uoms_price
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='currency_id']\" position=\"after\">\n"
+"                    <field name=\"multi_uoms\"/>\n"
+"                </xpath>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='currency_id']\" position=\"after\">\n"
+"                    <field name=\"multi_uoms\"/>\n"
+"                </xpath>\n"
+"            "
+
+#. module: pos_uoms_price
+#: model:ir.ui.view,arch_db:pos_uoms_price.view_pos_pos_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='lines']/tree/field[@name='product_id']\" position=\"after\">\n"
+"                    <field name=\"uom_id\"/>\n"
+"                </xpath>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='lines']/tree/field[@name='product_id']\" position=\"after\">\n"
+"                    <field name=\"uom_id\"/>\n"
+"                </xpath>\n"
+"            "
+
+#. module: pos_uoms_price
+#: model:ir.ui.view,arch_db:pos_uoms_price.product_product_combo_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//page[1]//group[1]\" position=\"after\">\n"
+"                    <group string=\"UOMs Extra\">\n"
+"                        <group>\n"
+"                            <field name=\"multi_uoms\"/>\n"
+"                        </group>\n"
+"                        <group>\n"
+"                            <field name=\"price_uom_ids\" nolabel=\"1\" attrs=\"{'invisible': [('multi_uoms', '!=', True)]}\" colspan=\"4\">\n"
+"                                <tree string=\"Uoms Price\" editable=\"1\">\n"
+"                                    <field name=\"uom_id\"/>\n"
+"                                    <field name=\"ration\"/>\n"
+"                                    <field name=\"price\"/>\n"
+"                                    <field name=\"root_uom_id\"/>\n"
+"                                </tree>\n"
+"                            </field>\n"
+"                        </group>\n"
+"                    </group>\n"
+"                </xpath>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//page[1]//group[1]\" position=\"after\">\n"
+"                    <group string=\"UOMs Extra\">\n"
+"                        <group>\n"
+"                            <field name=\"multi_uoms\"/>\n"
+"                        </group>\n"
+"                        <group>\n"
+"                            <field name=\"price_uom_ids\" nolabel=\"1\" attrs=\"{'invisible': [('multi_uoms', '!=', True)]}\" colspan=\"4\">\n"
+"                                <tree string=\"Uoms Price\" editable=\"1\">\n"
+"                                    <field name=\"uom_id\"/>\n"
+"                                    <field name=\"ration\"/>\n"
+"                                    <field name=\"price\"/>\n"
+"                                    <field name=\"root_uom_id\"/>\n"
+"                                </tree>\n"
+"                            </field>\n"
+"                        </group>\n"
+"                    </group>\n"
+"                </xpath>\n"
+"            "
+
+#. module: pos_uoms_price
+#. openerp-web
+#: code:addons/pos_uoms_price/static/src/xml/pos_uoms_price.xml:5
+#: code:addons/pos_uoms_price/static/src/xml/pos_uoms_price.xml:11
+#, python-format
+msgid "Change Unit of Measure"
+msgstr "Cambiar Unidad de Medida"
+
+#. module: pos_uoms_price
+#. openerp-web
+#: code:addons/pos_uoms_price/static/src/xml/pos_uoms_price.xml:13
+#, python-format
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_create_uid
+#: field:product.uom.price,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_create_date
+#: field:product.uom.price,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_display_name
+#: field:product.uom.price,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,help:pos_uoms_price.field_product_uom_price_ration
+#: help:product.uom.price,ration:0
+msgid "How much bigger or smaller with Root of unit on this product"
+msgstr "¿Cuánto más grande o más pequeño con la raíz de la unidad en este producto?"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_id
+#: field:product.uom.price,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price___last_update
+#: field:product.uom.price,__last_update:0
+msgid "Last Modified on"
+msgstr "Última Modifiación en"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_write_uid
+#: field:product.uom.price,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_write_date
+#: field:product.uom.price,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: pos_uoms_price
+#: model:ir.model,name:pos_uoms_price.model_pos_order_line
+msgid "Lines of Point of Sale"
+msgstr "Líneas del Terminal Punto de Venta"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_pos_config_multi_uoms
+#: field:pos.config,multi_uoms:0
+msgid "Multi UOMs"
+msgstr "Multi UOMs"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_template_multi_uoms
+#: field:product.template,multi_uoms:0
+msgid "Multi uoms"
+msgstr "Multi UdM's"
+
+#. module: pos_uoms_price
+#: model:ir.model,name:pos_uoms_price.model_pos_order
+msgid "Point of Sale"
+msgstr "Terminal punto de venta"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_price
+#: field:product.uom.price,price:0
+msgid "Price/Item"
+msgstr "Precio/Item"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_product_id
+#: field:product.uom.price,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: pos_uoms_price
+#: model:ir.model,name:pos_uoms_price.model_product_template
+msgid "Product Template"
+msgstr "Plantilla producto"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_root_uom_id
+#: field:product.uom.price,root_uom_id:0
+msgid "Product Unit of Measure"
+msgstr "Unidad de medida del producto"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_ration
+#: field:product.uom.price,ration:0
+msgid "Ration"
+msgstr "Ratio"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_pos_order_line_uom_id
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_uom_price_uom_id
+#: field:pos.order.line,uom_id:0
+#: field:product.uom.price,uom_id:0
+msgid "Uom"
+msgstr "UdM"
+
+#. module: pos_uoms_price
+#: model:ir.model.fields,field_description:pos_uoms_price.field_product_template_price_uom_ids
+#: field:product.template,price_uom_ids:0
+msgid "Uoms Price extra"
+msgstr "Precio Extra UdM's"
+

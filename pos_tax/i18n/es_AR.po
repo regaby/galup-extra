@@ -1,0 +1,135 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* pos_tax
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-26 01:07+0000\n"
+"PO-Revision-Date: 2018-09-26 01:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_tax
+#: model:ir.ui.view,arch_db:pos_tax.assets_pos_tax
+msgid "<?xml version=\"1.0\"?>\n"
+"<data name=\"pos_tax assets\" inherit_id=\"point_of_sale.assets\">\n"
+"        <xpath expr=\".\" position=\"inside\">\n"
+"            <script type=\"text/javascript\" src=\"/pos_tax/static/src/js/pos_tax.js\"/>\n"
+"            <link rel=\"stylesheet\" href=\"/pos_tax/static/src/css/pos_tax.css\"/>\n"
+"        </xpath>\n"
+"    </data>\n"
+""
+msgstr "<?xml version=\"1.0\"?>\n"
+"<data name=\"pos_tax assets\" inherit_id=\"point_of_sale.assets\">\n"
+"        <xpath expr=\".\" position=\"inside\">\n"
+"            <script type=\"text/javascript\" src=\"/pos_tax/static/src/js/pos_tax.js\"/>\n"
+"            <link rel=\"stylesheet\" href=\"/pos_tax/static/src/css/pos_tax.css\"/>\n"
+"        </xpath>\n"
+"    </data>\n"
+""
+
+#. module: pos_tax
+#: model:ir.ui.view,arch_db:pos_tax.view_tax_form_inherit
+msgid "<?xml version=\"1.0\"?>\n"
+"<field name=\"include_base_amount\" position=\"after\">\n"
+"                    <field name=\"pos_enable\"/>\n"
+"                </field>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<field name=\"include_base_amount\" position=\"after\">\n"
+"                    <field name=\"pos_enable\"/>\n"
+"                </field>\n"
+"            "
+
+#. module: pos_tax
+#: model:ir.ui.view,arch_db:pos_tax.pos_config_tax
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//group[@name='receipt']\" position=\"before\">\n"
+"                    <group string=\"Taxes\" name=\"taxes\">\n"
+"                        <field name=\"display_tax_orderline\"/>\n"
+"                        <field name=\"display_tax_receipt\"/>\n"
+"                        <field name=\"update_tax\"/>\n"
+"                    </group>\n"
+"                </xpath>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//group[@name='receipt']\" position=\"before\">\n"
+"                    <group string=\"Taxes\" name=\"taxes\">\n"
+"                        <field name=\"display_tax_orderline\"/>\n"
+"                        <field name=\"display_tax_receipt\"/>\n"
+"                        <field name=\"update_tax\"/>\n"
+"                    </group>\n"
+"                </xpath>\n"
+"            "
+
+#. module: pos_tax
+#. openerp-web
+#: code:addons/pos_tax/static/src/xml/pos_tax.xml:85
+#, python-format
+msgid "Add tax"
+msgstr "Agregar impuesto"
+
+#. module: pos_tax
+#. openerp-web
+#: code:addons/pos_tax/static/src/xml/pos_tax.xml:70
+#, python-format
+msgid "Apply choice"
+msgstr "Aplicar selección"
+
+#. module: pos_tax
+#: model:ir.model.fields,field_description:pos_tax.field_pos_config_update_tax
+#: field:pos.config,update_tax:0
+msgid "Change tax of order"
+msgstr "Cambiar impuesto de orden"
+
+#. module: pos_tax
+#. openerp-web
+#: code:addons/pos_tax/static/src/xml/pos_tax.xml:73
+#, python-format
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: pos_tax
+#: model:ir.model.fields,field_description:pos_tax.field_pos_config_display_tax_orderline
+#: field:pos.config,display_tax_orderline:0
+msgid "Display tax orderline"
+msgstr "Mostrar línea de orden de impuesto"
+
+#. module: pos_tax
+#: model:ir.model.fields,field_description:pos_tax.field_pos_config_display_tax_receipt
+#: field:pos.config,display_tax_receipt:0
+msgid "Display tax receipt"
+msgstr "Mostrar impuesto en recibo"
+
+#. module: pos_tax
+#: model:ir.model,name:pos_tax.model_account_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: pos_tax
+#. openerp-web
+#: code:addons/pos_tax/static/src/xml/pos_tax.xml:7
+#, python-format
+msgid "Tax:"
+msgstr "Impuesto:"
+
+#. module: pos_tax
+#: field:account.tax,pos_enable:0
+#: model:ir.model.fields,field_description:pos_tax.field_account_tax_pos_enable
+msgid "Usar en el POS?"
+msgstr "Usar en el POS?"
+
+#. module: pos_tax
+#. openerp-web
+#: code:addons/pos_tax/static/src/xml/pos_tax.xml:15
+#: code:addons/pos_tax/static/src/xml/pos_tax.xml:23
+#, python-format
+msgid "With tax:"
+msgstr "Con impuesto:"
+

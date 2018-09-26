@@ -1,0 +1,482 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* pos_check
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-26 01:18+0000\n"
+"PO-Revision-Date: 2018-09-26 01:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_check
+#: model:ir.ui.view,arch_db:pos_check.assets_backend
+msgid "<?xml version=\"1.0\"?>\n"
+"<data name=\"pos_check assets\" inherit_id=\"point_of_sale.assets\">\n"
+"        <xpath expr=\".\" position=\"inside\">\n"
+"            <link rel=\"stylesheet\" href=\"/pos_check/static/src/css/screens.css\"/>\n"
+"            <script type=\"text/javascript\" src=\"/pos_check/static/src/js/models.js\"/>\n"
+"            <script type=\"text/javascript\" src=\"/pos_check/static/src/js/popups.js\"/>\n"
+"            <script type=\"text/javascript\" src=\"/pos_check/static/src/js/screens.js\"/>\n"
+"        </xpath>\n"
+"    </data>\n"
+""
+msgstr "<?xml version=\"1.0\"?>\n"
+"<data name=\"pos_check assets\" inherit_id=\"point_of_sale.assets\">\n"
+"        <xpath expr=\".\" position=\"inside\">\n"
+"            <link rel=\"stylesheet\" href=\"/pos_check/static/src/css/screens.css\"/>\n"
+"            <script type=\"text/javascript\" src=\"/pos_check/static/src/js/models.js\"/>\n"
+"            <script type=\"text/javascript\" src=\"/pos_check/static/src/js/popups.js\"/>\n"
+"            <script type=\"text/javascript\" src=\"/pos_check/static/src/js/screens.js\"/>\n"
+"        </xpath>\n"
+"    </data>\n"
+""
+
+#. module: pos_check
+#: model:ir.ui.view,arch_db:pos_check.pos_check_make_payment_view_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<field name=\"payment_name\" position=\"after\">\n"
+"                <field name=\"check_info_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_id\" attrs=\"{'invisible':['|',('check_info_required','=',False),('check_bank_name_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_name_required','=',True)]}\"/>\n"
+"                <field name=\"check_bank_acc\" attrs=\"{'invisible':['|',('check_info_required','=',False),('check_bank_acc_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_acc_required','=',True)]}\"/>\n"
+"                <field name=\"check_number\" attrs=\"{'invisible':[('check_info_required','=',False)], 'required':[('check_info_required','=',True)]}\"/>\n"
+"                <field name=\"check_owner\" attrs=\"{'invisible':['|',('check_info_required','=',False),('check_owner_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_required','=',True)]}\"/>\n"
+"            </field>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<field name=\"payment_name\" position=\"after\">\n"
+"                <field name=\"check_info_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_id\" attrs=\"{'invisible':['|',('check_info_required','=',False),('check_bank_name_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_name_required','=',True)]}\"/>\n"
+"                <field name=\"check_bank_acc\" attrs=\"{'invisible':['|',('check_info_required','=',False),('check_bank_acc_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_acc_required','=',True)]}\"/>\n"
+"                <field name=\"check_number\" attrs=\"{'invisible':[('check_info_required','=',False)], 'required':[('check_info_required','=',True)]}\"/>\n"
+"                <field name=\"check_owner\" attrs=\"{'invisible':['|',('check_info_required','=',False),('check_owner_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_required','=',True)]}\"/>\n"
+"            </field>\n"
+"        "
+
+#. module: pos_check
+#: model:ir.ui.view,arch_db:pos_check.view_pos_check_account_journal_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='amount_authorized_diff']\" position=\"after\">\n"
+"                <separator string=\"Check Info\" colspan=\"4\"/>\n"
+"                <field name=\"check_info_required\" colspan=\"4\"/>\n"
+"                <field name=\"check_auto_fill_amount\" attrs=\"{'invisible':[('check_info_required','=',False)]}\" colspan=\"4\"/>\n"
+"                <label for=\"id\" string=\"Bank name\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_name_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_name_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_name_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_name_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Bank account\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_acc_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_acc_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_acc_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_acc_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Check Owner\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Check Owner vat (CUIT)\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_vat_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_vat_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_vat_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_vat_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Fecha de vencimiento\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_pay_date_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_pay_date_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_pay_date_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_pay_date_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"            </xpath>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='amount_authorized_diff']\" position=\"after\">\n"
+"                <separator string=\"Check Info\" colspan=\"4\"/>\n"
+"                <field name=\"check_info_required\" colspan=\"4\"/>\n"
+"                <field name=\"check_auto_fill_amount\" attrs=\"{'invisible':[('check_info_required','=',False)]}\" colspan=\"4\"/>\n"
+"                <label for=\"id\" string=\"Bank name\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_name_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_name_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_name_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_name_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Bank account\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_acc_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_acc_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_bank_acc_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_bank_acc_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Check Owner\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Check Owner vat (CUIT)\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_vat_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_vat_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_owner_vat_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_owner_vat_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"                <label for=\"id\" string=\"Fecha de vencimiento\" attrs=\"{'invisible':[('check_info_required','=',False)]}\"/>\n"
+"                <div colspan=\"3\" attrs=\"{'invisible':[('check_info_required','=',False)]}\">\n"
+"                    <div>\n"
+"                        <field name=\"check_pay_date_visible\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_pay_date_visible\" string=\"Visible\"/>\n"
+"                    </div>\n"
+"                    <div>\n"
+"                        <field name=\"check_pay_date_required\" class=\"oe_inline\"/>\n"
+"                        <label for=\"check_pay_date_required\" string=\"Required\"/>\n"
+"                    </div>\n"
+"                </div>\n"
+"            </xpath>\n"
+"        "
+
+#. module: pos_check
+#: model:ir.ui.view,arch_db:pos_check.pos_check_pos_order_view_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='statement_ids']/tree\" position=\"inside\">\n"
+"                <field name=\"check_info_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_id\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_bank_name_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_name_required','=',True)]}\"/>\n"
+"                <field name=\"check_bank_acc\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_bank_acc_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_acc_required','=',True)]}\"/>\n"
+"                <field name=\"check_number\" attrs=\"{'readonly':[('check_info_required','=',False)], 'required':[('check_info_required','=',True)]}\"/>\n"
+"                <field name=\"check_owner\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_owner_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_required','=',True)]}\"/>\n"
+"                <field name=\"check_owner_vat\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_owner_vat_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_vat_required','=',True)]}\"/>\n"
+"                <field name=\"check_pay_date\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_pay_date_visible','=',False)], 'required':[('check_info_required','=',True),('check_pay_date_required','=',True)]}\"/>\n"
+"            </xpath>\n"
+"        "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<xpath expr=\"//field[@name='statement_ids']/tree\" position=\"inside\">\n"
+"                <field name=\"check_info_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_name_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_acc_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_visible\" invisible=\"1\"/>\n"
+"                <field name=\"check_owner_required\" invisible=\"1\"/>\n"
+"                <field name=\"check_bank_id\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_bank_name_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_name_required','=',True)]}\"/>\n"
+"                <field name=\"check_bank_acc\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_bank_acc_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_acc_required','=',True)]}\"/>\n"
+"                <field name=\"check_number\" attrs=\"{'readonly':[('check_info_required','=',False)], 'required':[('check_info_required','=',True)]}\"/>\n"
+"                <field name=\"check_owner\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_owner_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_required','=',True)]}\"/>\n"
+"                <field name=\"check_owner_vat\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_owner_vat_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_vat_required','=',True)]}\"/>\n"
+"                <field name=\"check_pay_date\" attrs=\"{'readonly':['|',('check_info_required','=',False),('check_pay_date_visible','=',False)], 'required':[('check_info_required','=',True),('check_pay_date_required','=',True)]}\"/>\n"
+"            </xpath>\n"
+"        "
+
+#. module: pos_check
+#: field:account.journal,check_auto_fill_amount:0
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_auto_fill_amount
+msgid "Auto fill amount?"
+msgstr "¿Autocompletar monto?"
+
+#. module: pos_check
+#: model:ir.model,name:pos_check.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Línea de extracto bancario"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:43
+#: code:addons/pos_check/static/src/xml/pos_check.xml:44
+#, python-format
+msgid "Bank account"
+msgstr "Cuenta Bancaria"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_bank_acc_required:0
+#: field:account.journal,check_bank_acc_required:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_bank_acc_required
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_bank_acc_required
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_bank_acc_required
+#: field:pos.make.payment,check_bank_acc_required:0
+msgid "Bank account number required?"
+msgstr "¿Nro. de Cuenta Bancaria requerida?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_bank_acc_visible:0
+#: field:account.journal,check_bank_acc_visible:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_bank_acc_visible
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_bank_acc_visible
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_bank_acc_visible
+#: field:pos.make.payment,check_bank_acc_visible:0
+msgid "Bank account number visible?"
+msgstr "¿Nro. de Cuenta Bancaria visible?"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:32
+#, python-format
+msgid "Bank name"
+msgstr "Nombre de Banco"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_bank_name_required:0
+#: field:account.journal,check_bank_name_required:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_bank_name_required
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_bank_name_required
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_bank_name_required
+#: field:pos.make.payment,check_bank_name_required:0
+msgid "Bank name required?"
+msgstr "¿Nombre de Banco requerido?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_bank_name_visible:0
+#: field:account.journal,check_bank_name_visible:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_bank_name_visible
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_bank_name_visible
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_bank_name_visible
+#: field:pos.make.payment,check_bank_name_visible:0
+msgid "Bank name visible?"
+msgstr "¿Nombre de Banco visible?"
+
+#. module: pos_check
+#: model:ir.ui.menu,name:pos_check.menu_pos_check_res_bank_form
+msgid "Banks"
+msgstr "Bancos"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:55
+#: code:addons/pos_check/static/src/xml/pos_check.xml:56
+#, python-format
+msgid "CUIT"
+msgstr "CUIT"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:66
+#, python-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_bank_id:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_bank_id
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_bank_id
+#: field:pos.make.payment,check_bank_id:0
+msgid "Check bank"
+msgstr "Banco de Cheque"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_bank_acc:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_bank_acc
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_bank_acc
+#: field:pos.make.payment,check_bank_acc:0
+msgid "Check bank account"
+msgstr "Cuenta bancaria de Cheque"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_info_required:0
+#: field:account.journal,check_info_required:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_info_required
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_info_required
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_info_required
+#: field:pos.make.payment,check_info_required:0
+msgid "Check info required?"
+msgstr "¿Información de cheque requerida?"
+
+#. module: pos_check
+#. openerp-web
+#: field:account.bank.statement.line,check_number:0
+#: code:addons/pos_check/static/src/xml/pos_check.xml:47
+#: code:addons/pos_check/static/src/xml/pos_check.xml:48
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_number
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_number
+#: field:pos.make.payment,check_number:0
+#, python-format
+msgid "Check number"
+msgstr "Número de cheque"
+
+#. module: pos_check
+#. openerp-web
+#: field:account.bank.statement.line,check_owner:0
+#: code:addons/pos_check/static/src/xml/pos_check.xml:51
+#: code:addons/pos_check/static/src/xml/pos_check.xml:52
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_owner
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_owner
+#: field:pos.make.payment,check_owner:0
+#, python-format
+msgid "Check owner"
+msgstr "Titular de cheque"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_owner_required:0
+#: field:account.journal,check_owner_required:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_owner_required
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_owner_required
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_owner_required
+#: field:pos.make.payment,check_owner_required:0
+msgid "Check owner required?"
+msgstr "¿Titular de cheque requerido?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_owner_vat:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_owner_vat
+msgid "Check owner vat"
+msgstr "Responsabilidad frente al IVA"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_owner_vat_required:0
+#: field:account.journal,check_owner_vat_required:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_owner_vat_required
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_owner_vat_required
+msgid "Check owner vat required?"
+msgstr "¿Responsabilidad frente al IVA requerido?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_owner_vat_visible:0
+#: field:account.journal,check_owner_vat_visible:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_owner_vat_visible
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_owner_vat_visible
+msgid "Check owner vat visible?"
+msgstr "¿Responsabilidad frente al IVA visible?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_owner_visible:0
+#: field:account.journal,check_owner_visible:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_owner_visible
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_owner_visible
+#: model:ir.model.fields,field_description:pos_check.field_pos_make_payment_check_owner_visible
+#: field:pos.make.payment,check_owner_visible:0
+msgid "Check owner visible?"
+msgstr "¿Titular del cheque visible?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_pay_date:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_pay_date
+msgid "Check pay date"
+msgstr "Fecha de cobro del Cheque"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_pay_date_required:0
+#: field:account.journal,check_pay_date_required:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_pay_date_required
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_pay_date_required
+msgid "Check pay date required?"
+msgstr "¿Fecha de pago requerido?"
+
+#. module: pos_check
+#: field:account.bank.statement.line,check_pay_date_visible:0
+#: field:account.journal,check_pay_date_visible:0
+#: model:ir.model.fields,field_description:pos_check.field_account_bank_statement_line_check_pay_date_visible
+#: model:ir.model.fields,field_description:pos_check.field_account_journal_check_pay_date_visible
+msgid "Check pay date visible?"
+msgstr "¿Fecha de pago visible?"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:9
+#: code:addons/pos_check/static/src/xml/pos_check.xml:21
+#, python-format
+msgid "Check:"
+msgstr "Cheque:"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:63
+#, python-format
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:59
+#: code:addons/pos_check/static/src/xml/pos_check.xml:60
+#, python-format
+msgid "Fecha de vencimiento"
+msgstr "Fecha de vencimiento"
+
+#. module: pos_check
+#: model:ir.model,name:pos_check.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: pos_check
+#. openerp-web
+#: code:addons/pos_check/static/src/xml/pos_check.xml:30
+#, python-format
+msgid "Please enter check info"
+msgstr "Por favor ingrese la información de cheque"
+
+#. module: pos_check
+#: model:ir.model,name:pos_check.model_pos_order
+msgid "Point of Sale"
+msgstr "Terminal punto de venta"
+
+#. module: pos_check
+#: model:ir.model,name:pos_check.model_pos_make_payment
+msgid "Point of Sale Payment"
+msgstr "Punto de venta. Pago"
+
