@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" inherit_id="point_of_sale.template">
+    <t t-extend="ClientDetails">
+    	 <t t-jquery=".client-details-right" t-operation="append">
+		<div class = 'client-detail' > 
+    		<span class = 'label' > Tipo Documento </span> 
+    		<t t-if = 'partner.website' > 
+        		<input class='detail client-tipo_documento'  name='tipo_documento' t-att-value='partner.main_id_category_id || ""'></input> 
+    		</t> 
+    		<t t-if = '! partner.website' > 
+       			<span class = 'detalle client-custom-field empty' > N / A </span> 
+   		 	</t> 
+		</div>
+		</t> 
+    </t>
+    <t t-extend="ClientDetailsEdit">
+    	 <t t-jquery=".client-details-right" t-operation="append">
+		 <div class='client-detail'>
+        <span class='label'>Partner</span>
+            <select class='type doc-partner' name='main_id_category_id'>
+                 
+                    <t t-foreach='widget.pos.type_doc' t-as='x'>
+                      <option t-att-value='x.name'>
+
+                       <t t-esc='x.name'/>
+                   </option>
+                  </t>
+              </select>
+    </div>
+		</t> 
+    </t>
+</templates>
