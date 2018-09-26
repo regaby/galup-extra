@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import models
+from openerp import models, fields
 
 class PosOrder(models.Model):
     _inherit = "pos.order"
@@ -16,20 +16,35 @@ class PosOrder(models.Model):
         })
         return res
 
+    def _add_operation(
+            self, cr, uid, check_id, operation, partner=None, date=False):
+        for rec in check_id:
+            rec._check_state_change(operation)
+            # agregamos validacion de fechas
+            date = date or fields.Datetime.now()
+            if rec.operation_ids and rec.operation_ids[0].date > date:
+                raise ValidationError(_(
+                    'The date of a new check operation can not be minor than '
+                    'last operation date.\n'
+                    '* Check Id: %s\n'
+                    '* Check Number: %s\n'
+                    '* Operation: %s\n'
+                    '* Operation Date: %s\n'
+                    '* Last Operation Date: %s') % (
+                    rec.id, rec.name, operation, date,
+                    rec.operation_ids[0].date))
+            vals = {
+                'operation': operation,
+                'date': date,
+                'check_id': rec.id,
+                'partner_id': partner and partner.id or False,
+            }
+            rec.operation_ids.create(vals)
+
     def add_payment(self, cr, uid, order_id, data, context=None):
         statement_id = super(PosOrder, self).add_payment(cr, uid, order_id, data, context)
         StatementLine = self.pool.get('account.bank.statement.line')
         checkObj = self.pool.get('account.check')
-        ## {'payment_date': u'2018-09-12 02:35:43', 
-        # 'payment_name': False, 
-        # 'statement_id': 42, 
-        # 'journal': 10, 
-        # 'amount': 173, 
-        # 'check_bank_acc': u'111', 
-        # 'check_owner': u'11111', 
-        # 'check_bank_id': 3, 
-        # 'check_number': u'1111'}
-        print data
         check = {
             'name' : data['check_number'],
             'bank_id': data['check_bank_id'],
@@ -42,7 +57,9 @@ class PosOrder(models.Model):
             'payment_date': data['check_pay_date'],
             'type': 'third_check',
         }
-        checkObj.create(cr, uid, check,context)
+        check_id = checkObj.create(cr, uid, check,context)
+        check_id = checkObj.browse(cr, uid, check_id)
+        self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
         statement_lines = StatementLine.search(cr, uid, [
             ('statement_id', '=', statement_id),
             ('pos_statement_id', '=', order_id),
