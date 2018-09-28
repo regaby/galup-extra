@@ -43,22 +43,24 @@ class PosOrder(models.Model):
 
     def add_payment(self, cr, uid, order_id, data, context=None):
         statement_id = super(PosOrder, self).add_payment(cr, uid, order_id, data, context)
-        StatementLine = self.pool.get('account.bank.statement.line')
-        checkObj = self.pool.get('account.check')
-        check = {
-            'name' : data['check_number'],
-            'bank_id': data['check_bank_id'],
-            'journal_id': data['journal'],
-            'number': data['check_number'],
-            'amount': data['amount'],
-            'owner_name': data['check_owner'],
-            'owner_vat':  data['check_owner_vat'],
-            'issue_date': data['payment_date'][0:10],
-            'payment_date': data['check_pay_date'],
-            'type': 'third_check',
-        }
-        try:
-            check_id = checkObj.create(cr, uid, check,context)
+        try: 
+            print 'order_id', order_id
+            print 'data', data
+            StatementLine = self.pool.get('account.bank.statement.line')
+            checkObj = self.pool.get('account.check')
+            check = {
+                'name' : data['check_number'],
+                'bank_id': data['check_bank_id'],
+                'journal_id': data['journal'],
+                'number': data['check_number'],
+                'amount': data['amount'],
+                'owner_name': data['check_owner'],
+                'owner_vat':  data['check_owner_vat'],
+                'issue_date': data['payment_date'][0:10],
+                'payment_date': data['check_pay_date'],
+                'type': 'third_check',
+            }
+            check_id = checkObj.create(cr, uid, check,context)z
             check_id = checkObj.browse(cr, uid, check_id)
             self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
             statement_lines = StatementLine.search(cr, uid, [
@@ -83,10 +85,7 @@ class PosOrder(models.Model):
                     }
                     line.write(check_vals)
                     break
-            return statement_id
         except Exception, e:
             print e
-            return False
-        
 
-        
+        return statement_id
