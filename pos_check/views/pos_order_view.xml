@@ -13,6 +13,10 @@
                 <field name="check_bank_acc_required" invisible="1"/>
                 <field name="check_owner_visible" invisible="1"/>
                 <field name="check_owner_required" invisible="1"/>
+                <field name="check_owner_vat_visible" invisible="1"/>
+                <field name="check_owner_vat_required" invisible="1"/>
+                <field name="check_pay_date_visible" invisible="1"/>
+                <field name="check_pay_date_required" invisible="1"/>
                 <field name="check_bank_id" attrs="{'readonly':['|',('check_info_required','=',False),('check_bank_name_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_name_required','=',True)]}" />
                 <field name="check_bank_acc" attrs="{'readonly':['|',('check_info_required','=',False),('check_bank_acc_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_acc_required','=',True)]}" />
                 <field name="check_number" attrs="{'readonly':[('check_info_required','=',False)], 'required':[('check_info_required','=',True)]}" />
