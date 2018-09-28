@@ -61,29 +61,30 @@ class PosOrder(models.Model):
             check_id = checkObj.create(cr, uid, check,context)
             check_id = checkObj.browse(cr, uid, check_id)
             self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
+            statement_lines = StatementLine.search(cr, uid, [
+                ('statement_id', '=', statement_id),
+                ('pos_statement_id', '=', order_id),
+                ('journal_id', '=', data['journal']),
+                ('amount', '=', data['amount'])
+            ])
+            for line in StatementLine.browse(cr, uid, statement_lines):
+                if line.journal_id.check_info_required and not line.check_bank_id:
+                    check_bank_id = data.get('check_bank_id')
+                    if isinstance(check_bank_id, (tuple, list)):
+                        check_bank_id = check_bank_id[0]
+
+                    check_vals = {
+                        'check_bank_id': check_bank_id,
+                        'check_bank_acc': data.get('check_bank_acc'),
+                        'check_number': data.get('check_number'),
+                        'check_owner': data.get('check_owner'),
+                        'check_owner_vat': data.get('check_owner_vat'),
+                        'check_pay_date': data.get('check_pay_date'),
+                    }
+                    line.write(check_vals)
+                    break
         except Exception, e:
             print e
-        statement_lines = StatementLine.search(cr, uid, [
-            ('statement_id', '=', statement_id),
-            ('pos_statement_id', '=', order_id),
-            ('journal_id', '=', data['journal']),
-            ('amount', '=', data['amount'])
-        ])
-        for line in StatementLine.browse(cr, uid, statement_lines):
-            if line.journal_id.check_info_required and not line.check_bank_id:
-                check_bank_id = data.get('check_bank_id')
-                if isinstance(check_bank_id, (tuple, list)):
-                    check_bank_id = check_bank_id[0]
-
-                check_vals = {
-                    'check_bank_id': check_bank_id,
-                    'check_bank_acc': data.get('check_bank_acc'),
-                    'check_number': data.get('check_number'),
-                    'check_owner': data.get('check_owner'),
-                    'check_owner_vat': data.get('check_owner_vat'),
-                    'check_pay_date': data.get('check_pay_date'),
-                }
-                line.write(check_vals)
-                break
+        
 
         return statement_id
