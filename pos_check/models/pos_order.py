@@ -57,9 +57,9 @@ class PosOrder(models.Model):
             'payment_date': data['check_pay_date'],
             'type': 'third_check',
         }
-        check_id = checkObj.create(cr, uid, check,context)
-        check_id = checkObj.browse(cr, uid, check_id)
-        self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
+        # check_id = checkObj.create(cr, uid, check,context)
+        # check_id = checkObj.browse(cr, uid, check_id)
+        # self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
         statement_lines = StatementLine.search(cr, uid, [
             ('statement_id', '=', statement_id),
             ('pos_statement_id', '=', order_id),
