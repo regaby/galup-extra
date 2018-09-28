@@ -83,8 +83,10 @@ class PosOrder(models.Model):
                     }
                     line.write(check_vals)
                     break
+            return statement_id
         except Exception, e:
             print e
+            return False
         
 
-        return statement_id
+        
