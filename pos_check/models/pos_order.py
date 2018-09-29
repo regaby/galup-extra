@@ -45,7 +45,7 @@ class PosOrder(models.Model):
         statement_id = super(PosOrder, self).add_payment(cr, uid, order_id, data, context)
         StatementLine = self.pool.get('account.bank.statement.line')
         checkObj = self.pool.get('account.check')
-        if 'check_number' in data.keys():
+        if 'check_number' in data.keys() and data['check_number']:
             check = {
                 'name' : data['check_number'],
                 'bank_id': data['check_bank_id'],
