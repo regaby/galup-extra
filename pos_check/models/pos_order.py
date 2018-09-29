@@ -45,21 +45,22 @@ class PosOrder(models.Model):
         statement_id = super(PosOrder, self).add_payment(cr, uid, order_id, data, context)
         StatementLine = self.pool.get('account.bank.statement.line')
         checkObj = self.pool.get('account.check')
-        check = {
-            'name' : data['check_number'],
-            'bank_id': data['check_bank_id'],
-            'journal_id': data['journal'],
-            'number': data['check_number'],
-            'amount': data['amount'],
-            'owner_name': data['check_owner'],
-            'owner_vat':  data['check_owner_vat'],
-            'issue_date': data['payment_date'][0:10],
-            'payment_date': data['check_pay_date'],
-            'type': 'third_check',
-        }
-        check_id = checkObj.create(cr, uid, check,context)
-        check_id = checkObj.browse(cr, uid, check_id)
-        self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
+        if 'check_number' in data.keys():
+            check = {
+                'name' : data['check_number'],
+                'bank_id': data['check_bank_id'],
+                'journal_id': data['journal'],
+                'number': data['check_number'],
+                'amount': data['amount'],
+                'owner_name': data['check_owner'],
+                'owner_vat':  data['check_owner_vat'],
+                'issue_date': data['payment_date'][0:10],
+                'payment_date': data['check_pay_date'],
+                'type': 'third_check',
+            }
+            check_id = checkObj.create(cr, uid, check,context)
+            check_id = checkObj.browse(cr, uid, check_id)
+            self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
         statement_lines = StatementLine.search(cr, uid, [
             ('statement_id', '=', statement_id),
             ('pos_statement_id', '=', order_id),
