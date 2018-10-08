@@ -115,12 +115,12 @@ odoo.define('pos_tax', function (require) {
                         return self.pos.gui.close_popup();
                     }
                 });
-            } else {
+            } /*else {
                 this.gui.show_popup('alert_result', {
                     title: 'Warning',
                     body: 'Please choice line'
                 })
-            }
+            }*/
         }
     });
 
