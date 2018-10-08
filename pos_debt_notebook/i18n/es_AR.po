@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* tg_pos_debt_notebook
+#	* pos_debt_notebook
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-07 23:55+0000\n"
+"PO-Revision-Date: 2018-10-07 23:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:152
+#, python-format
+msgid "Customer"
+msgstr "Cliente"
+
+#. modules: tg_pos_debt_notebook, pos_debt_notebook
+#. openerp-web
+#: model:ir.model.fields,field_description:pos_debt_notebook.field_res_partner_debt
+#: field:res.partner,debt:0
+#: code:addons/tg_pos_debt_notebook/static/src/xml/tg_pos.xml:12
+#, python-format
+msgid "Debt"
+msgstr "Deuda Cta. Cte."
+
+#. module: pos_debt_notebook
+#: field:account.journal,debt:0
+#: model:ir.model.fields,field_description:pos_debt_notebook.field_account_journal_debt
+msgid "Debt Payment Method"
+msgstr "Método de pago de deuda"
+
+#. module: pos_debt_notebook
+#: model:ir.model.fields,field_description:pos_debt_notebook.field_pos_config_debt_dummy_product_id
+#: field:pos.config,debt_dummy_product_id:0
+msgid "Dummy Product for Debt"
+msgstr "Producto simulado para la deuda"
+
+#. module: pos_debt_notebook
+#: model:ir.model.fields,help:pos_debt_notebook.field_pos_config_debt_dummy_product_id
+#: help:pos.config,debt_dummy_product_id:0
+msgid "Dummy product used when a customer pays his debt without ordering new products. This is a workaround to the fact that Odoo needs to have at least one product on the order to validate the transaction."
+msgstr "Producto ficticio utilizado cuando un cliente paga su deuda sin pedir nuevos productos. Esta es una solución al hecho de que GALUP necesita tener al menos un producto en el pedido para validar la transacción."
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:81
+#, python-format
+msgid "Empty Order"
+msgstr "Orden vacía"
+
+#. module: tg_pos_debt_notebook
+#: code:addons/tg_pos_debt_notebook/__init__.py:8
+#, python-format
+msgid "Error!"
+msgstr "¡Error!"
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:189
+#, python-format
+msgid "Error: No Debt"
+msgstr "Error: Sin deuda"
+
+#. module: pos_debt_notebook
+#: model:ir.model,name:pos_debt_notebook.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: pos_debt_notebook
+#: model:ir.model,name:pos_debt_notebook.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: pos_debt_notebook
+#: model:product.template,name:pos_debt_notebook.product_pay_debt_product_template
+msgid "Pay Debt"
+msgstr "Pagar deuda"
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/xml/tg_pos.xml:32
+#: code:addons/tg_pos_debt_notebook/static/src/xml/tg_pos.xml:39
+#, python-format
+msgid "Pay Full Debt"
+msgstr "Pagar total de deuda"
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:190
+#, python-format
+msgid "The selected customer has no debt."
+msgstr "El cliente seleccionado no tiene deuda."
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:82
+#, python-format
+msgid "There must be at least one product in your order before it can be validated. (Hint: you can use some dummy zero price product)"
+msgstr "Debe haber al menos un producto en su pedido antes de que pueda validarse. (Consejo: puedes usar algún producto de precio cero ficticio)"
+
+#. module: pos_debt_notebook
+#: model:ir.model.fields,help:pos_debt_notebook.field_res_partner_debt
+#: help:res.partner,debt:0
+msgid "This debt value for only current company"
+msgstr "Este valor de deuda solo para la empresa actual."
+
+#. module: pos_debt_notebook
+#: model:product.template,description:pos_debt_notebook.product_pay_debt_product_template
+msgid "This is a dummy product used when a customer pays his debt without ordering new products. This is a workaround to the fact that Odoo needs to have at least one product on the order to validate the transaction."
+msgstr "Este es un producto ficticio que se usa cuando un cliente paga su deuda sin pedir nuevos productos. Esta es una solución al hecho de que GALUP necesita tener al menos un producto en el pedido para validar la transacción."
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:73
+#, python-format
+msgid "Unknown customer"
+msgstr "Cliente desconocido"
+
+#. module: tg_pos_debt_notebook
+#. openerp-web
+#: code:addons/tg_pos_debt_notebook/static/src/js/tg_pos.js:74
+#, python-format
+msgid "You cannot use Debt payment. Select customer first."
+msgstr "No puede usar el método de pago de deuda. Seleccione un cliente primero."
+
+#. module: tg_pos_debt_notebook
+#: code:addons/tg_pos_debt_notebook/__init__.py:8
+#, python-format
+msgid "You have open session of Point of Sale. Please close them first."
+msgstr "Tienes la sesión abierta de Punto de Venta. Por favor, cierrela primero."
+
