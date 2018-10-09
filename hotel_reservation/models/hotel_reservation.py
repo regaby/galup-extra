@@ -81,7 +81,34 @@ class HotelReservation(models.Model):
     _order = 'reservation_no desc'
     _inherit = ['mail.thread', 'ir.needaction_mixin']
 
-    @api.depends('reservation_line.reserve')
+    def _get_dur(self, chckin, chckout):
+        myduration = 0
+        configured_addition_hours = 0
+        if chckin and chckout:
+            server_dt = DEFAULT_SERVER_DATETIME_FORMAT
+            chkin_dt = datetime.datetime.strptime(chckin, server_dt)
+            chkout_dt = datetime.datetime.strptime(chckout, server_dt)
+            dur = chkout_dt - chkin_dt
+            sec_dur = dur.seconds
+            if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
+                myduration = dur.days
+            else:
+                myduration = dur.days + 1
+            if configured_addition_hours > 0:
+                additional_hours = abs((dur.seconds / 60) / 60)
+                if additional_hours >= configured_addition_hours:
+                    myduration += 1
+        return myduration
+
+
+    @api.depends('checkin','checkout')
+    def _get_duration(self):
+        """
+        Compute the total amounts of the SO.
+        """
+        self.duration = self._get_dur(self.checkin, self.checkout)
+
+    @api.depends('reservation_line.reserve','duration')
     def _amount_all(self):
         """
         Compute the total amounts of the SO.
@@ -91,9 +118,9 @@ class HotelReservation(models.Model):
             for line in order.reservation_line:
                 if line.list_price == 0:
                     for room in line.reserve:
-                        total+=room.price
+                        total+=room.price * order.duration
                 else:
-                    total+=line.list_price
+                    total+=line.list_price * order.duration
             order.update({
                 'amount_total': total,
             })
@@ -162,7 +189,7 @@ class HotelReservation(models.Model):
     reservation_line = fields.One2many('hotel_reservation.line', 'line_id',
                                        'Reservation Line',
                                        help='Detalle de la reserva. Para modificar, debe volver a borrador',readonly=True,
-                              states={'draft': [('readonly', False)]})
+                              states={'draft': [('readonly', False)]}, copy=True)
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'),
                               ('cancel', 'Cancel'), ('done', 'Done')],
                              'State', readonly=True,
@@ -174,6 +201,7 @@ class HotelReservation(models.Model):
     observations = fields.Text('Observaciones')
     amount_total = fields.Float(string='Total', store=False, readonly=True, compute='_amount_all', track_visibility='always')
     payment_lines = fields.One2many('hotel.payment', 'reservation_id','Linea de Pagos')
+    duration = fields.Integer(string='Duración', store=False, readonly=True, compute='_get_duration', track_visibility='always')
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):
@@ -627,11 +655,28 @@ class HotelReservation(models.Model):
         vals['reservation_no'] = hotel_reserve
         return super(HotelReservation, self).create(vals)
 
+    @api.multi
+    def copy(self, default=None):
+        '''
+        @param self: object pointer
+        @param default: dict of default values to be set
+        '''
+        default['folio_id'] = False
+        return super(HotelReservation, self).copy(default=default)
+
 
 class HotelReservationLine(models.Model):
 
     _name = "hotel_reservation.line"
     _description = "Reservation Line"
+
+    @api.multi
+    def copy(self, default=None):
+        '''
+        @param self: object pointer
+        @param default: dict of default values to be set
+        '''
+        return super(HotelReservationLine, self).copy(default=default)
 
     @api.model
     def get_categ(self):

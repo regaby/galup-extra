@@ -70,6 +70,7 @@
                                 <field name="checkout_hour" required="True" />
                                 <field name="adults"/>
                                 <field name="children"/>
+                                <field name="duration"/>
                             </group>
                                <field name="dummy" invisible="True"/>
                         </group>
