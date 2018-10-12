@@ -239,7 +239,7 @@ class HotelRoom(models.Model):
 
 class HotelFolio(models.Model):
 
-    @api.depends('payment_lines.amount','room_lines.price_unit','room_lines.discount','room_lines.tax_id','room_lines.checkin_date','room_lines.checkout_date')
+    @api.depends('payment_lines.amount','room_lines.price_unit','room_lines.discount','room_lines.tax_id','room_lines.checkin_date','room_lines.checkout_date','amount_total')
     def _amount_all(self):
         """
         Compute the total amounts of the SO.
@@ -248,7 +248,7 @@ class HotelFolio(models.Model):
             amount_payment = residual = 0.0
             for line in order.payment_lines:
                 amount_payment += line.amount
-                
+
             order.update({
                 'amount_payment': amount_payment,
                 'residual': order.amount_total - amount_payment,
@@ -566,16 +566,16 @@ class HotelFolio(models.Model):
     def check_reservation_exists(self):
         for folio in self:
             self._cr.execute("""select hr.reservation_no
-                             from hotel_reservation as hr 
-                              inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
-                              inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
-                              where (checkin,checkout) overlaps 
-                                ( timestamp %s, timestamp %s ) 
-                                and hr.partner_id <> cast(%s as integer) 
-                                and hr.state = 'confirm' 
+                             from hotel_reservation as hr
+                              inner join hotel_reservation_line as hrl on hrl.line_id = hr.id
+                              inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id
+                              where (checkin,checkout) overlaps
+                                ( timestamp %s, timestamp %s )
+                                and hr.partner_id <> cast(%s as integer)
+                                and hr.state = 'confirm'
                                 and hrlrr.hotel_reservation_line_id in (
                                   select id from hotel_room where product_id in (select product_id
-                                from hotel_folio as hf 
+                                from hotel_folio as hf
                                 inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
                                 join sale_order_line sol on (hfl.order_line_id=sol.id)
                                 where hf.id = cast(%s as integer)     ) )""",
@@ -588,25 +588,25 @@ class HotelFolio(models.Model):
             if roomcount:
                 raise ValidationError(_('Ha tratado de crear/modificar un folio con habitaciones que ya están reservadas en este periodo de reserva. %s'%res))
         return True
-        
+
 
     @api.multi
     def check_folio_exists(self):
         for folio in self:
             self._cr.execute("""select hf.name
-                                from hotel_folio as hf 
+                                from hotel_folio as hf
                                 inner join sale_order so on (hf.order_id=so.id)
                                 inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
                                 join sale_order_line sol on (hfl.order_line_id=sol.id)
                                 inner join folio_room_line frl on (frl.folio_id=hf.id)
                                 join hotel_room hr on (frl.room_id=hr.id)
-                                where (check_in,check_out) overlaps 
-                                                                ( timestamp %s, timestamp %s ) 
-                                and hf.id <> cast(%s as integer) 
+                                where (check_in,check_out) overlaps
+                                                                ( timestamp %s, timestamp %s )
+                                and hf.id <> cast(%s as integer)
                                                                 and so.state not in ('cancel','done')
-                                and hr.product_id=sol.product_id   
+                                and hr.product_id=sol.product_id
                                 and sol.product_id in (select product_id
-                                from hotel_folio as hf 
+                                from hotel_folio as hf
                                 inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
                                 join sale_order_line sol on (hfl.order_line_id=sol.id)
                                 where hf.id = cast(%s as integer) )
@@ -1033,7 +1033,7 @@ class HotelFolioService(models.Model):
                                           (DEFAULT_SERVER_DATETIME_FORMAT)))
     quantity = fields.Float(string='Cantidad', default=1, required=True)
     list_price = fields.Float('Precio', digits_compute=dp.get_precision('Product Price'), required=True)
-    user_id = fields.Many2one('res.users', string='Cobrado por',readonly=False)    
+    user_id = fields.Many2one('res.users', string='Cobrado por',readonly=False)
     product_id = fields.Many2one('product.product', string='Producto',readonly=False, domain=[('isservice','=',True)], required=True)
     cobrado = fields.Selection([('no', 'No'), ('si', 'Si')], 'Cobrado', default='no', required=False)
     price_subtotal = fields.Float(compute='_compute_amount', string='Subtotal', readonly=True, store=True, track_visibility='always')
