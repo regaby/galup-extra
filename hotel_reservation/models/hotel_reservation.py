@@ -108,21 +108,26 @@ class HotelReservation(models.Model):
         """
         self.duration = self._get_dur(self.checkin, self.checkout)
 
-    @api.depends('reservation_line.reserve','duration')
+    @api.depends('reservation_line.reserve', 'duration', 'tax_id')
     def _amount_all(self):
         """
         Compute the total amounts of the SO.
         """
         for order in self:
-            total = 0
+            amount_untaxed = amount_tax = 0.0
             for line in order.reservation_line:
                 if line.list_price == 0:
                     for room in line.reserve:
-                        total+=room.price * order.duration
+                        amount_untaxed += room.price * order.duration
                 else:
-                    total+=line.list_price * order.duration
+                    amount_untaxed += line.list_price * order.duration
+            if self.tax_id:
+                ## aplico iva
+                amount_tax = (amount_untaxed * self.tax_id.amount) / 100
             order.update({
-                'amount_total': total,
+                'amount_untaxed': amount_untaxed,
+                'amount_tax': amount_tax,
+                'amount_total': amount_untaxed + amount_tax,
             })
 
     reservation_no = fields.Char('Reservation No', size=64, readonly=True)
@@ -199,9 +204,12 @@ class HotelReservation(models.Model):
     dummy = fields.Datetime('Dummy')
     user_id = fields.Many2one('res.users', string='Creado por', index=True, track_visibility='onchange', default=lambda self: self.env.user)
     observations = fields.Text('Observaciones')
+    amount_untaxed = fields.Float(string='Subtotal', store=False, readonly=True, compute='_amount_all', track_visibility='always')
+    amount_tax = fields.Float(string='Impuesto', store=False, readonly=True, compute='_amount_all', track_visibility='always')
     amount_total = fields.Float(string='Total', store=False, readonly=True, compute='_amount_all', track_visibility='always')
     payment_lines = fields.One2many('hotel.payment', 'reservation_id','Linea de Pagos')
     duration = fields.Integer(string='Duración', store=False, readonly=True, compute='_get_duration', track_visibility='always')
+    tax_id = fields.Many2one('account.tax', string="Impuesto")
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):
@@ -236,7 +244,7 @@ class HotelReservation(models.Model):
                                          '%Y-%m-%d %H:%M:%S',
                                          ignore_unparsable_time=True,
                                          context={'tz': to_zone})
-        
+
     @api.constrains('reservation_line', 'adults', 'children')
     def check_reservation_rooms(self):
         '''
@@ -351,18 +359,18 @@ class HotelReservation(models.Model):
         reservation_line_obj = self.env['hotel.room.reservation.line']
         for reservation in self:
             self._cr.execute("""select hr.reservation_no
-                             from hotel_reservation as hr 
-                              inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
-                              inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
-                              where (checkin,checkout) overlaps 
-                                ( timestamp %s, timestamp %s ) 
-                                and hr.id <> cast(%s as integer) 
-                                and hr.state = 'confirm' 
+                             from hotel_reservation as hr
+                              inner join hotel_reservation_line as hrl on hrl.line_id = hr.id
+                              inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id
+                              where (checkin,checkout) overlaps
+                                ( timestamp %s, timestamp %s )
+                                and hr.id <> cast(%s as integer)
+                                and hr.state = 'confirm'
                                 and hrlrr.hotel_reservation_line_id in (
-                                  select hrlrr.hotel_reservation_line_id 
-                                    from hotel_reservation as hr 
-                                    inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
-                                    inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
+                                  select hrlrr.hotel_reservation_line_id
+                                    from hotel_reservation as hr
+                                    inner join hotel_reservation_line as hrl on hrl.line_id = hr.id
+                                    inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id
                                   where hr.id = cast(%s as integer) )""",
                              (reservation.checkin, reservation.checkout,
                               str(reservation.id), str(reservation.id)))
@@ -375,21 +383,21 @@ class HotelReservation(models.Model):
                 una reserva con una habitación que ya ha sido reservada en este\
                 periodo de reserva. %s')%(res))
             self._cr.execute("""select hf.name
-                                from hotel_folio as hf 
+                                from hotel_folio as hf
                                 inner join sale_order so on (hf.order_id=so.id)
                                 inner join hotel_folio_line hfl on (hf.id=hfl.folio_id)
                                 join sale_order_line sol on (hfl.order_line_id=sol.id)
                                 inner join folio_room_line frl on (frl.folio_id=hf.id)
                                 join hotel_room hr on (frl.room_id=hr.id)
-                                where (check_in,check_out) overlaps 
-                                                                ( timestamp %s, timestamp %s ) 
-                                and so.partner_id <> cast(%s as integer) 
+                                where (check_in,check_out) overlaps
+                                                                ( timestamp %s, timestamp %s )
+                                and so.partner_id <> cast(%s as integer)
                                                                 and so.state not in ('cancel','done')
-                                and hr.product_id=sol.product_id   
-                                and hr.id in ( select hrlrr.hotel_reservation_line_id 
-                                    from hotel_reservation as hr 
-                                    inner join hotel_reservation_line as hrl on hrl.line_id = hr.id 
-                                    inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id 
+                                and hr.product_id=sol.product_id
+                                and hr.id in ( select hrlrr.hotel_reservation_line_id
+                                    from hotel_reservation as hr
+                                    inner join hotel_reservation_line as hrl on hrl.line_id = hr.id
+                                    inner join hotel_reservation_line_room_rel as hrlrr on hrlrr.room_id = hrl.id
                                   where hr.id = cast(%s as integer))""",
                              (reservation.checkin, reservation.checkout,
                               str(reservation.partner_id.id), str(reservation.id)))
@@ -700,7 +708,7 @@ class HotelReservationLine(models.Model):
                                default=get_categ)
     list_price = fields.Float('Precio Opcional', digits_compute=dp.get_precision('Product Price'))
 
-    
+
 
     @api.onchange('categ_id')
     def on_change_categ(self):
@@ -841,10 +849,10 @@ class RoomReservationSummary(models.Model):
     date_to = fields.Datetime('Date To')
     summary_header = fields.Text('Summary Header')
     room_summary = fields.Text('Room Summary')
-    # month = fields.Selection([(1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'), (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'), 
-    #                           (8, 'Agosto'), (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')],'Mes', 
+    # month = fields.Selection([(1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'), (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'),
+    #                           (8, 'Agosto'), (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')],'Mes',
     #                           default=lambda *a: time.gmtime()[1])
-    # year = fields.Integer('Año', default=lambda *a: time.gmtime()[0])                             
+    # year = fields.Integer('Año', default=lambda *a: time.gmtime()[0])
 
     @api.model
     def default_get(self, fields):
@@ -1125,7 +1133,7 @@ class QuickRoomReservation(models.TransientModel):
                 raise ValidationError(_('Seleccione una hora de entrada entre las 0 y las 23.'))
             if not res.checkout_hour >=0 or not res.checkout_hour <= 24:
                 raise ValidationError(_('Seleccione una hora de salida entre las 0 y las 23.'))
-            
+
             reservation = {'partner_id': res.partner_id.id,
                'partner_invoice_id': res.partner_invoice_id.id,
                'partner_order_id': res.partner_order_id.id,

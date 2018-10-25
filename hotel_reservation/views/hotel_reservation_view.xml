@@ -71,6 +71,7 @@
                                 <field name="adults"/>
                                 <field name="children"/>
                                 <field name="duration"/>
+                                <field name="tax_id" domain="[('name', '=', 'IVA Ventas 21%')]" widget="selection"/>
                             </group>
                                <field name="dummy" invisible="True"/>
                         </group>
@@ -95,9 +96,18 @@
                                     </tree>
                                 </field>
                                 <group colspan="2" class="oe_subtotal_footer oe_right">
-                                    <field name="amount_total" sum="Monto Total" widget='monetary' />
+                                    <field name="amount_untaxed" sum="Subtotal" widget='monetary' />
+                                    <field name="amount_tax" sum="Impuesto" widget='monetary' />
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="Total" />
+                                        <button name="button_dummy" string="Calcular" states="draft"
+                                            type="object" icon="terp-sale" class="oe_highlight" />
+                                    </div>
+                                    <field name="amount_total" nolabel="1" sum="Monto Total"
+                                        widget='monetary' />
+
                                     <!-- <field name="amount_payment" sum="Monto Pagado" widget='monetary' />
-                                    
+
                                     <div class="oe_subtotal_footer_separator oe_inline">
                                         <label for="residual" />
                                         <button name="button_dummy" string="Calcular" states="draft"
@@ -105,6 +115,7 @@
                                     </div>
                                     <field name="residual" nolabel="1" sum="Monto Adeudado"
                                         widget='monetary' /> -->
+
                                 </group>
                                 <separator string="Observaciones" />
                                 <field name= 'observations' placeholder="Ingrese alguna observación..."/>
@@ -273,7 +284,7 @@
                 </field>
             </field>
         </record>
-         
+
          <!-- Form view of room reservation summary-->
          <record model="ir.ui.view" id="room_reservation_summary_form_view">
              <field name="name">room.reservation.summary.form</field>
@@ -349,7 +360,7 @@
              <field name="view_type">form</field>
              <field name="view_mode">form</field>
          </record>
-         
+
          <menuitem name="Reservations Summary"
          id="menu_action_hotel_reservation_summary"
          action="action_hotel_reservation_summary"
