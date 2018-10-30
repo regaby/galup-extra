@@ -574,6 +574,7 @@ class HotelReservation(models.Model):
                       (*time.strptime(reservation['checkin'],
                                       DEFAULT_SERVER_DATETIME_FORMAT)[:5]))
             for line in reservation.reservation_line:
+                taxed_price = 0
                 for r in line.reserve:
                     prod = r.with_context(partner=reservation.partner_id.id,
                                           quantity=1,
@@ -584,13 +585,15 @@ class HotelReservation(models.Model):
                                           )
                     room_type_obj = self.env['hotel.room.type']
                     room_type_ids = room_type_obj.search([('cat_id', '=', prod.categ_id.id)])
+                    if line.list_price and reservation.tax_id:
+                        taxed_price = line.list_price + (line.list_price * reservation.tax_id.amount ) / 100
                     folio_lines.append((0, 0, {
                         'checkin_date': checkin_date,
                         'checkout_date': checkout_date,
                         'product_id': r.product_id and r.product_id.id,
                         'name': reservation['reservation_no'],
                         'product_uom': r['uom_id'].id,
-                        'price_unit': line.list_price == 0 and room_type_ids.read(fields=['list_price'])[0]['list_price'] or line.list_price,
+                        'price_unit': line.list_price == 0 and room_type_ids.read(fields=['list_price'])[0]['list_price'] or taxed_price,
                         # 'categ_id' : room_type_ids and room_type_ids[0].id,
                         'product_uom_qty': ((date_a - date_b).days) + 1,
                         'discount_id': reservation.partner_id.discount_id and reservation.partner_id.discount_id.id,
