@@ -4,13 +4,13 @@
         <t t-jquery='.client-details-right' t-operation='append'>
             <div class='client-detail'>
                 <div>
-                <span class='label'>Tipo_Doc</span>
+                <span class='label'>Tipo Documento</span>
                 <t t-if='partner.main_id_category_id'>
                     <span class='detail client-id'><t t-esc='partner.main_id_category_id[1]'/></span>
                 </t>
             </div>
             <div>
-                <span class='label'>Numeo de documento</span>
+                <span class='label'>Número de documento</span>
                 <t t-if='partner.main_id_number'>
                     <span class='detail client-id'><t t-esc='partner.main_id_number'/></span>
                 </t>
@@ -26,8 +26,8 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Tipo Doc</th>
-                        <th>Numero de documento</th>
+                        <th>Tipo Documento</th>
+                        <th>Número de documento</th>
                     </tr>
                 </thead>
                 <tbody class='client-list-contents'>
@@ -37,32 +37,23 @@
     </t>
     <t t-extend="ClientDetailsEdit">
         <t t-jquery=".client-details-right" t-operation="append">
-		<div>
-                <span class="order-category-id">
-                   <b> Tipo Doc: </b>
-                </span>
-                <select id ="category_id" class="category-id" >
-                     <t t-if="widget.category_id">
-                        <option>
-                            <t t-esc='widget.category_id'/>
-                        </option>
-                    </t>
-                    <option></option>
-                    <t t-foreach="widget.pos.category_id || []" t-as="item">
-                        <t t-if="widget.pos.category_id != item.name">
-                            <option>
-                                <t t-esc='item.name'/>
-                            </option>
-                        </t>
-                    </t>
-                </select>
+            <div class='client-detail'>
+                        <span class='label'>Tipo Doc.</span>
+                        <select class='detail client-address-country needsclick' name='main_id_category_id'>
+                            <option value=''>None</option>
+                            <t t-foreach='widget.pos.category_id' t-as='category'>
+                                <option t-att-value='category.id' t-att-selected="partner.main_id_category_id ? ((category.id === partner.main_id_category_id[0]) ? true : undefined) : undefined">
+                                    <t t-esc='category.name'/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
 
-            </div> 
-            <div>
-             <span class='label'>Numero de documento:</span>
-                <input class='detail required' name='partner.main_id_number' placeholder='Num doc'></input>
+            <div class='client-detail'>
+             <span class='label'>Nro. doc.</span>
+                <input class='detail required' name='main_id_number' t-att-value='partner.main_id_number' placeholder='Número de documento'></input>
             </div>
-	    </t> 
+	    </t>
     </t>
 
 
