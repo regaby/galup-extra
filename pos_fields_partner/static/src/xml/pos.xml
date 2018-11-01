@@ -35,6 +35,16 @@
             </table>
         </t>
     </t>
+    <t t-extend="ClientLine">
+        <t t-jquery=".client-line" t-operation="inner">
+            <td><t t-esc='partner.name' /></td>
+            <td><t t-esc='partner.address' /></td>
+            <td><t t-esc='partner.phone or partner.mobile or ""' /></td>
+            <td><t t-esc='partner.main_id_category_id[1] or ""' /></td>
+            <td><t t-esc='partner.main_id_number' /></td>
+        </t>
+    </t>
+
     <t t-extend="ClientDetailsEdit">
         <t t-jquery=".client-details-right" t-operation="append">
             <div class='client-detail'>
