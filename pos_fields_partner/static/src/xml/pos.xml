@@ -41,7 +41,7 @@
             <td><t t-esc='partner.address' /></td>
             <td><t t-esc='partner.phone or partner.mobile or ""' /></td>
             <td><t t-esc='partner.main_id_category_id[1] or ""' /></td>
-            <td><t t-esc='partner.main_id_number' /></td>
+            <td><t t-esc='partner.main_id_number or ""' /></td>
         </t>
     </t>
 
