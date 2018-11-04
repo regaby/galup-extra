@@ -74,7 +74,7 @@ class PosConfig(osv.osv):
         user = self.pool['res.users'].browse(cr, uid, uid, context=context)
         debt_journal_active = journal_obj.search(cr, SUPERUSER_ID, [
             ('code', '=', 'TDEBT'),
-            ('name', '=', 'Debt Journal'),
+            ('name', '=', 'Cuenta Corriente'),
             ('company_id', '=', user.company_id.id),
             ('debt', '=', True),
         ])
@@ -106,7 +106,7 @@ class PosConfig(osv.osv):
 
         debt_journal_inactive_id = journal_obj.search(cr, SUPERUSER_ID, [
             ('code', '=', 'TDEBT'),
-            ('name', '=', 'Debt Journal'),
+            ('name', '=', 'Cuenta Corriente'),
             ('company_id', '=', user.company_id.id),
             ('debt', '=', False),
         ])
@@ -132,7 +132,7 @@ class PosConfig(osv.osv):
                 'noupdate': True,  # If it's False, target record (res_id) will be removed while module update
             })
             debt_journal = journal_obj.create(cr, SUPERUSER_ID, {
-                'name': 'Debt Journal',
+                'name': 'Cuenta Corriente',
                 'code': 'TDEBT',
                 'type': 'cash',
                 'debt': True,
