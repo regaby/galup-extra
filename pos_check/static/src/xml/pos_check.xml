@@ -33,7 +33,7 @@
                     <select name='check_bank_id' t-att-class='widget.options.config_check and widget.options.config_check.bank_required ? "detail required" : "detail"'>
                         <option value=''>---</option>
                         <t t-foreach='widget.pos.banks' t-as='bank'>
-                            <option t-att-value='bank.id' t-att-selected='widget.options.data and bank.id === widget.options.data.check_bank_id ? true : undefined'> 
+                            <option t-att-value='bank.id' t-att-selected='widget.options.data and bank.id === widget.options.data.check_bank_id ? true : undefined'>
                                 <t t-esc='bank.name'/>
                             </option>
                         </t>
@@ -59,18 +59,22 @@
                     <span class='label'>Fecha de vencimiento</span>
                     <input type="date" t-att-class='widget.options.config_check and widget.options.config_check.pay_date_required ? "detail required" : "detail"' name='check_pay_date' t-att-value='widget.options.data ? widget.options.data.check_pay_date : undefined' placeholder='Fecha de vencimiento'></input>
                 </div>
+                <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.cbu_visible">
+                    <span class='label'>CBU</span>
+                    <input t-att-class='widget.options.config_check and widget.options.config_check.cbu_required ? "detail required" : "detail"' name='check_cbu' t-att-value='widget.options.data ? widget.options.data.check_cbu : undefined' placeholder='CBU'></input>
+                </div>
                 <div class='footer'>
                     <div class='button confirm'>
-                        Confirm 
+                        Confirm
                     </div>
                     <div class='button cancel'>
-                        Cancel 
+                        Cancel
                     </div>
                 </div>
             </div>
         </div>
     </t>
-    
+
     <t t-extend="PaymentScreen-Paymentlines">
         <t t-jquery=".col-name" t-operation="append">
             <t t-if="line.cashregister.journal.check_info_required">

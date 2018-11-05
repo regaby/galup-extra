@@ -20,6 +20,7 @@ var CheckInfoWidget = PopupWidget.extend({
             'check_owner'   : this.$('input[name=check_owner]').val(),
             'check_owner_vat'   : this.$('input[name=check_owner_vat]').val(),
             'check_pay_date'   : this.$('input[name=check_pay_date]').val(),
+            'check_cbu'   : this.$('input[name=check_cbu]').val(),
         };
     },
     click_confirm: function(){

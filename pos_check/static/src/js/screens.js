@@ -44,6 +44,11 @@ screens.PaymentScreenWidget.include({
                     this.$('input[name=check_pay_date]').focus();
                     return false;
                 }
+                if(this.options.config_check.cbu_required && !infos.check_cbu) {
+                    this.$('input[name=check_cbu]').addClass('error');
+                    this.$('input[name=check_cbu]').focus();
+                    return false;
+                }
                 return true;
             },
             confirm: function(infos){
@@ -81,6 +86,8 @@ screens.PaymentScreenWidget.include({
                     'owner_vat_required': cashregister.journal.check_owner_vat_required,
                     'pay_date_visible': cashregister.journal.check_pay_date_visible,
                     'pay_date_required': cashregister.journal.check_pay_date_required,
+                    'cbu_visible': cashregister.journal.check_cbu_visible,
+                    'cbu_required': cashregister.journal.check_cbu_required,
                 },
                 data: {},
                 confirm: function(infos) {
@@ -137,6 +144,8 @@ screens.PaymentScreenWidget.include({
                         'owner_vat_required': cashregister.journal.check_owner_vat_required,
                         'pay_date_visible': cashregister.journal.check_pay_date_visible,
                         'pay_date_required': cashregister.journal.check_pay_date_required,
+                        'cbu_visible': cashregister.journal.check_cbu_visible,
+                        'cbu_required': cashregister.journal.check_cbu_required,
                     },
                     data: lines[i],
                     confirm: function(infos) {
