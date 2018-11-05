@@ -46,6 +46,13 @@ class PosOrder(models.Model):
         StatementLine = self.pool.get('account.bank.statement.line')
         checkObj = self.pool.get('account.check')
         journalObj = self.pool.get('account.journal')
+        statement_lines = StatementLine.search(cr, uid, [
+            ('statement_id', '=', statement_id),
+            ('pos_statement_id', '=', order_id),
+            ('journal_id', '=', data['journal']),
+            ('amount', '=', data['amount'])
+        ])
+        partner = StatementLine.browse(cr, uid, statement_lines).partner_id
         journal = journalObj.browse(cr, uid, data['journal'])
         if 'check_number' in data.keys() and data['check_number'] and journal.is_check:
             print '\n\n\ncreando cheque'
@@ -60,18 +67,13 @@ class PosOrder(models.Model):
                 'issue_date': data['payment_date'][0:10],
                 'payment_date': data['check_pay_date'],
                 'type': 'third_check',
+                'partner_id': partner and partner.id or False,
             }
             check_id = checkObj.create(cr, uid, check,context)
             check_id = checkObj.browse(cr, uid, check_id)
-            self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
+            self._add_operation(cr, uid, check_id, 'holding', partner, data['check_pay_date'])
         else:
             print '\n\n\nno es cheque'
-        statement_lines = StatementLine.search(cr, uid, [
-            ('statement_id', '=', statement_id),
-            ('pos_statement_id', '=', order_id),
-            ('journal_id', '=', data['journal']),
-            ('amount', '=', data['amount'])
-        ])
         for line in StatementLine.browse(cr, uid, statement_lines):
             if line.journal_id.check_info_required and not line.check_bank_id:
                 check_bank_id = data.get('check_bank_id')
