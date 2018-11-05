@@ -17,6 +17,7 @@ class AccountJournal(models.Model):
     check_owner_vat_required = fields.Boolean('Check owner vat required?', default=True)
     check_pay_date_visible = fields.Boolean('Check pay date visible?', default=True)
     check_pay_date_required = fields.Boolean('Check pay date required?', default=True)
+    is_check = fields.Boolean('Es cheque?', default=False)
 
     @api.onchange('check_bank_name_visible', 'check_bank_name_required', 'check_bank_acc_visible',
     'check_bank_acc_required', 'check_owner_visible', 'check_owner_required', 'check_owner_vat_visible', 'check_owner_vat_required',

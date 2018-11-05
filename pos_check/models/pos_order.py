@@ -45,7 +45,10 @@ class PosOrder(models.Model):
         statement_id = super(PosOrder, self).add_payment(cr, uid, order_id, data, context)
         StatementLine = self.pool.get('account.bank.statement.line')
         checkObj = self.pool.get('account.check')
-        if 'check_number' in data.keys() and data['check_number']:
+        journalObj = self.pool.get('account.journal')
+        journal = journalObj.browse(cr, uid, data['journal'])
+        if 'check_number' in data.keys() and data['check_number'] and journal.is_check:
+            print '\n\n\ncreando cheque'
             check = {
                 'name' : data['check_number'],
                 'bank_id': data['check_bank_id'],
@@ -61,6 +64,8 @@ class PosOrder(models.Model):
             check_id = checkObj.create(cr, uid, check,context)
             check_id = checkObj.browse(cr, uid, check_id)
             self._add_operation(cr, uid, check_id, 'holding', False, data['check_pay_date'])
+        else:
+            print '\n\n\nno es cheque'
         statement_lines = StatementLine.search(cr, uid, [
             ('statement_id', '=', statement_id),
             ('pos_statement_id', '=', order_id),

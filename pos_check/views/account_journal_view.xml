@@ -9,6 +9,7 @@
                 <separator string="Check Info" colspan="4"/>
                 <field name="check_info_required" colspan="4"/>
                 <field name="check_auto_fill_amount" attrs="{'invisible':[('check_info_required','=',False)]}" colspan="4"/>
+                <field name="is_check" attrs="{'invisible':[('check_info_required','=',False)]}" colspan="4"/>
                 <label for="id" string="Bank name" attrs="{'invisible':[('check_info_required','=',False)]}"/>
                 <div colspan="3" attrs="{'invisible':[('check_info_required','=',False)]}">
                     <div>

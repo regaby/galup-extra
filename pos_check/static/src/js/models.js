@@ -4,7 +4,7 @@ odoo.define('pos_check.models', function (require) {
 var models = require('point_of_sale.models');
 
 //load new field 'check_info_required', etc
-models.load_fields("account.journal", ['check_info_required', 'check_auto_fill_amount', 'check_bank_name_visible',
+models.load_fields("account.journal", ['check_info_required', 'check_auto_fill_amount', 'is_check', 'check_bank_name_visible',
 'check_bank_name_required', 'check_bank_acc_visible', 'check_bank_acc_required', 'check_owner_visible', 'check_owner_required',
 'check_owner_vat_visible', 'check_owner_vat_required', 'check_pay_date_visible', 'check_pay_date_required']);
 
