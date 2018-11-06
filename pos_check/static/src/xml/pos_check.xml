@@ -63,6 +63,10 @@
                     <span class='label'>CBU</span>
                     <input t-att-class='widget.options.config_check and widget.options.config_check.cbu_required ? "detail required" : "detail"' name='check_cbu' t-att-value='widget.options.data ? widget.options.data.check_cbu : undefined' placeholder='CBU'></input>
                 </div>
+                <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.reference_visible">
+                    <span class='label'>Referencia</span>
+                    <input t-att-class='widget.options.config_check and widget.options.config_check.reference_required ? "detail required" : "detail"' name='reference' t-att-value='widget.options.data ? widget.options.data.reference : undefined' placeholder='Referencia'></input>
+                </div>
                 <div class='footer'>
                     <div class='button confirm'>
                         Confirm

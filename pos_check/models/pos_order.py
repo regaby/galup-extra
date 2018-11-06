@@ -14,6 +14,7 @@ class PosOrder(models.Model):
             'check_owner_vat': ui_paymentline.get('check_owner_vat'),
             'check_pay_date': ui_paymentline.get('check_pay_date'),
             'check_cbu': ui_paymentline.get('check_cbu'),
+            'reference': ui_paymentline.get('reference'),
         })
         return res
 
@@ -89,6 +90,7 @@ class PosOrder(models.Model):
                     'check_owner_vat': data.get('check_owner_vat'),
                     'check_pay_date': data.get('check_pay_date'),
                     'check_cbu': data.get('check_cbu'),
+                    'reference': data.get('reference'),
                 }
                 line.write(check_vals)
                 break

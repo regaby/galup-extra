@@ -49,6 +49,11 @@ screens.PaymentScreenWidget.include({
                     this.$('input[name=check_cbu]').focus();
                     return false;
                 }
+                if(this.options.config_check.reference_required && !infos.reference) {
+                    this.$('input[name=reference]').addClass('error');
+                    this.$('input[name=reference]').focus();
+                    return false;
+                }
                 return true;
             },
             confirm: function(infos){
@@ -88,6 +93,8 @@ screens.PaymentScreenWidget.include({
                     'pay_date_required': cashregister.journal.check_pay_date_required,
                     'cbu_visible': cashregister.journal.check_cbu_visible,
                     'cbu_required': cashregister.journal.check_cbu_required,
+                    'reference_visible': cashregister.journal.reference_visible,
+                    'reference_required': cashregister.journal.reference_required,
                 },
                 data: {},
                 confirm: function(infos) {
@@ -146,6 +153,8 @@ screens.PaymentScreenWidget.include({
                         'pay_date_required': cashregister.journal.check_pay_date_required,
                         'cbu_visible': cashregister.journal.check_cbu_visible,
                         'cbu_required': cashregister.journal.check_cbu_required,
+                        'reference_visible': cashregister.journal.check_reference_visible,
+                        'reference_required': cashregister.journal.check_reference_required,
                     },
                     data: lines[i],
                     confirm: function(infos) {

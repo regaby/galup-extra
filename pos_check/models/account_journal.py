@@ -20,10 +20,13 @@ class AccountJournal(models.Model):
     is_check = fields.Boolean('Es cheque?', default=False)
     check_cbu_visible = fields.Boolean('CBU visible?', default=False)
     check_cbu_required = fields.Boolean('CBU required?', default=False)
+    reference_visible = fields.Boolean('Reference visible?', default=False)
+    reference_required = fields.Boolean('Referece required?', default=False)
 
     @api.onchange('check_bank_name_visible', 'check_bank_name_required', 'check_bank_acc_visible',
     'check_bank_acc_required', 'check_owner_visible', 'check_owner_required', 'check_owner_vat_visible', 'check_owner_vat_required',
-    'check_pay_date_visible', 'check_pay_date_required', 'check_cbu_visible', 'check_cbu_required')
+    'check_pay_date_visible', 'check_pay_date_required', 'check_cbu_visible', 'check_cbu_required',
+    'reference_visible', 'reference_required')
     def _onchange_check_visible_and_required(self):
         if not self.check_bank_name_visible and self.check_bank_name_required:
             self.check_bank_name_required = False
@@ -37,3 +40,5 @@ class AccountJournal(models.Model):
             self.check_pay_date_required = False
         if not self.check_cbu_visible and self.check_cbu_required:
             self.check_cbu_required = False
+        if not self.reference_visible and self.reference_required:
+            self.reference_required = False

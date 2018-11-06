@@ -19,6 +19,8 @@
                 <field name="check_pay_date_required" invisible="1"/>
                 <field name="check_cbu_visible" invisible="1"/>
                 <field name="check_cbu_required" invisible="1"/>
+                <field name="reference_visible" invisible="1"/>
+                <field name="reference_required" invisible="1"/>
                 <field name="check_bank_id" attrs="{'readonly':['|',('check_info_required','=',False),('check_bank_name_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_name_required','=',True)]}" />
                 <field name="check_bank_acc" attrs="{'readonly':['|',('check_info_required','=',False),('check_bank_acc_visible','=',False)], 'required':[('check_info_required','=',True),('check_bank_acc_required','=',True)]}" />
                 <field name="check_number" attrs="{'readonly':[('check_info_required','=',False)], 'required':[('check_info_required','=',True)]}" />
@@ -26,6 +28,7 @@
                 <field name="check_owner_vat" attrs="{'readonly':['|',('check_info_required','=',False),('check_owner_vat_visible','=',False)], 'required':[('check_info_required','=',True),('check_owner_vat_required','=',True)]}" />
                 <field name="check_pay_date" attrs="{'readonly':['|',('check_info_required','=',False),('check_pay_date_visible','=',False)], 'required':[('check_info_required','=',True),('check_pay_date_required','=',True)]}" />
                 <field name="check_cbu" attrs="{'readonly':['|',('check_info_required','=',False),('check_cbu_visible','=',False)], 'required':[('check_info_required','=',True),('check_cbu_required','=',True)]}" />
+                <field name="reference" attrs="{'readonly':['|',('check_info_required','=',False),('reference_visible','=',False)], 'required':[('check_info_required','=',True),('reference_required','=',True)]}" />
             </xpath>
         </field>
     </record>

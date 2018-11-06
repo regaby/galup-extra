@@ -7,7 +7,7 @@ var models = require('point_of_sale.models');
 models.load_fields("account.journal", ['check_info_required', 'check_auto_fill_amount', 'is_check', 'check_bank_name_visible',
 'check_bank_name_required', 'check_bank_acc_visible', 'check_bank_acc_required', 'check_owner_visible', 'check_owner_required',
 'check_owner_vat_visible', 'check_owner_vat_required', 'check_pay_date_visible', 'check_pay_date_required',
-'check_cbu_visible', 'check_cbu_required']);
+'check_cbu_visible', 'check_cbu_required', 'reference_visible', 'reference_required', 'name']);
 
 //load model res.bank
 models.load_models({
@@ -30,6 +30,7 @@ models.Paymentline = models.Paymentline.extend({
         this.check_owner_vat = json.check_owner_vat;
         this.check_pay_date = json.check_pay_date;
         this.check_cbu = json.check_cbu;
+        this.reference = json.reference;
     },
     export_as_JSON: function () {
         return _.extend(paymentline_super.export_as_JSON.apply(this, arguments), {
@@ -40,6 +41,7 @@ models.Paymentline = models.Paymentline.extend({
             check_owner_vat: this.check_owner_vat,
             check_pay_date: this.check_pay_date,
             check_cbu: this.check_cbu,
+            reference: this.reference,
         });
     },
 });
