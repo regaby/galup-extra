@@ -11,7 +11,7 @@ class AccountBankStatementLine(models.Model):
     check_owner = fields.Char()
     check_owner_vat = fields.Char()
     check_pay_date = fields.Date()
-    check_cbu = fields.Char()
+    check_cbu = fields.Char('CBU')
     check_info_required = fields.Boolean(related='journal_id.check_info_required', readonly=True)
     check_bank_name_visible = fields.Boolean(related='journal_id.check_bank_name_visible', readonly=True)
     check_bank_name_required = fields.Boolean(related='journal_id.check_bank_name_required', readonly=True)
