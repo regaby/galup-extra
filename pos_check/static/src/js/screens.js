@@ -69,6 +69,26 @@ screens.PaymentScreenWidget.include({
             },
         });
     },
+
+    get_config_check: function(cashregister) {
+        return {
+            'bank_visible': cashregister.journal.check_bank_name_visible,
+            'bank_required': cashregister.journal.check_bank_name_required,
+            'bank_acc_visible': cashregister.journal.check_bank_acc_visible,
+            'bank_acc_required': cashregister.journal.check_bank_acc_required,
+            'owner_visible': cashregister.journal.check_owner_visible,
+            'owner_required': cashregister.journal.check_owner_required,
+            'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
+            'owner_vat_required': cashregister.journal.check_owner_vat_required,
+            'pay_date_visible': cashregister.journal.check_pay_date_visible,
+            'pay_date_required': cashregister.journal.check_pay_date_required,
+            'cbu_visible': cashregister.journal.check_cbu_visible,
+            'cbu_required': cashregister.journal.check_cbu_required,
+            'reference_visible': cashregister.journal.reference_visible,
+            'reference_required': cashregister.journal.reference_required,
+        }
+    },
+
     click_paymentmethods: function(id) {
         var self = this;
         var cashregister = null;
@@ -84,22 +104,7 @@ screens.PaymentScreenWidget.include({
             if (cashregister.journal.name == 'Efectivo' && product_name == 'RETIRAR DINERO') {
                 console.log('retiro dinero....')
                 this.show_popup_check_info({
-                    config_check: {
-                        'bank_visible': cashregister.journal.check_bank_name_visible,
-                        'bank_required': cashregister.journal.check_bank_name_required,
-                        'bank_acc_visible': cashregister.journal.check_bank_acc_visible,
-                        'bank_acc_required': cashregister.journal.check_bank_acc_required,
-                        'owner_visible': cashregister.journal.check_owner_visible,
-                        'owner_required': cashregister.journal.check_owner_required,
-                        'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
-                        'owner_vat_required': cashregister.journal.check_owner_vat_required,
-                        'pay_date_visible': cashregister.journal.check_pay_date_visible,
-                        'pay_date_required': cashregister.journal.check_pay_date_required,
-                        'cbu_visible': cashregister.journal.check_cbu_visible,
-                        'cbu_required': cashregister.journal.check_cbu_required,
-                        'reference_visible': cashregister.journal.reference_visible,
-                        'reference_required': cashregister.journal.reference_required,
-                    },
+                    config_check: this.get_config_check(cashregister),
                     data: {},
                     confirm: function(infos) {
                         //merge infos to new paymentline
@@ -111,22 +116,7 @@ screens.PaymentScreenWidget.include({
                 console.log(cashregister.journal.name)
                 console.log('else...')
                 this.show_popup_check_info({
-                    config_check: {
-                        'bank_visible': cashregister.journal.check_bank_name_visible,
-                        'bank_required': cashregister.journal.check_bank_name_required,
-                        'bank_acc_visible': cashregister.journal.check_bank_acc_visible,
-                        'bank_acc_required': cashregister.journal.check_bank_acc_required,
-                        'owner_visible': cashregister.journal.check_owner_visible,
-                        'owner_required': cashregister.journal.check_owner_required,
-                        'owner_vat_visible': cashregister.journal.check_owner_vat_visible,
-                        'owner_vat_required': cashregister.journal.check_owner_vat_required,
-                        'pay_date_visible': cashregister.journal.check_pay_date_visible,
-                        'pay_date_required': cashregister.journal.check_pay_date_required,
-                        'cbu_visible': cashregister.journal.check_cbu_visible,
-                        'cbu_required': cashregister.journal.check_cbu_required,
-                        'reference_visible': cashregister.journal.reference_visible,
-                        'reference_required': cashregister.journal.reference_required,
-                    },
+                    config_check: this.get_config_check(cashregister),
                     data: {},
                     confirm: function(infos) {
                         //merge infos to new paymentline
