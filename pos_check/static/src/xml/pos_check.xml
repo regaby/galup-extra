@@ -53,7 +53,7 @@
                 </div>
                 <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.owner_vat_visible">
                     <span class='label'>CUIT</span>
-                    <input t-att-class='widget.options.config_check and widget.options.config_check.owner_vat_required ? "detail required" : "detail"' name='check_owner_vat' t-att-value='widget.options.data ? widget.options.data.check_owner_vat : undefined' placeholder='CUIT'></input>
+                    <input t-att-class='widget.options.config_check and widget.options.config_check.owner_vat_required ? "detail required" : "detail"' name='check_owner_vat' t-att-value='widget.options.data ? widget.options.data.check_owner_vat : undefined' placeholder='CUIT' maxlength="11"></input>
                 </div>
                 <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.pay_date_visible">
                     <span class='label'>Fecha de vencimiento</span>
@@ -61,7 +61,7 @@
                 </div>
                 <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.cbu_visible">
                     <span class='label'>CBU</span>
-                    <input t-att-class='widget.options.config_check and widget.options.config_check.cbu_required ? "detail required" : "detail"' name='check_cbu' t-att-value='widget.options.data ? widget.options.data.check_cbu : undefined' placeholder='CBU'></input>
+                    <input t-att-class='widget.options.config_check and widget.options.config_check.cbu_required ? "detail required" : "detail"' name='check_cbu' t-att-value='widget.options.data ? widget.options.data.check_cbu : undefined' placeholder='CBU' maxlength="22"></input>
                 </div>
                 <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.reference_visible">
                     <span class='label'>Referencia</span>
