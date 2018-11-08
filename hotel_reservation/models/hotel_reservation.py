@@ -590,6 +590,8 @@ class HotelReservation(models.Model):
                     room_type_ids = room_type_obj.search([('cat_id', '=', prod.categ_id.id)])
                     if line.list_price and reservation.tax_id:
                         taxed_price = line.list_price + (line.list_price * reservation.tax_id.amount ) / 100
+                    if reservation.dolar_rate:
+                        taxed_price = taxed_price * reservation.dolar_rate
                     folio_lines.append((0, 0, {
                         'checkin_date': checkin_date,
                         'checkout_date': checkout_date,
