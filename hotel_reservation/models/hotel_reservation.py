@@ -108,7 +108,7 @@ class HotelReservation(models.Model):
         """
         self.duration = self._get_dur(self.checkin, self.checkout)
 
-    @api.depends('reservation_line.reserve', 'duration', 'tax_id')
+    @api.depends('reservation_line.reserve', 'duration', 'tax_id', 'dolar_rate')
     def _amount_all(self):
         """
         Compute the total amounts of the SO.
@@ -121,6 +121,8 @@ class HotelReservation(models.Model):
                         amount_untaxed += room.price * order.duration
                 else:
                     amount_untaxed += line.list_price * order.duration
+            if self.dolar_rate:
+                amount_untaxed = amount_untaxed * self.dolar_rate
             if self.tax_id:
                 ## aplico iva
                 amount_tax = (amount_untaxed * self.tax_id.amount) / 100
@@ -210,6 +212,7 @@ class HotelReservation(models.Model):
     payment_lines = fields.One2many('hotel.payment', 'reservation_id','Linea de Pagos')
     duration = fields.Integer(string='Duración', store=False, readonly=True, compute='_get_duration', track_visibility='always')
     tax_id = fields.Many2one('account.tax', string="Impuesto")
+    dolar_rate = fields.Float('Cotización dolar', readonly=False, default=0)
 
     @api.onchange('checkin_date', 'checkin_hour')
     def on_change_checkin_date_our(self):
