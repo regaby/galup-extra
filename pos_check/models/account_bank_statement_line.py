@@ -28,3 +28,5 @@ class AccountBankStatementLine(models.Model):
     check_cbu_required = fields.Boolean(related='journal_id.check_cbu_required', readonly=True)
     reference_visible = fields.Boolean(related='journal_id.reference_visible', readonly=True)
     reference_required = fields.Boolean(related='journal_id.reference_required', readonly=True)
+    check_number_visible = fields.Boolean(related='journal_id.check_number_visible', readonly=True)
+    check_number_required = fields.Boolean(related='journal_id.check_number_required', readonly=True)

@@ -24,7 +24,7 @@ screens.PaymentScreenWidget.include({
                     this.$('input[name=check_bank_acc]').focus();
                     return false;
                 }
-                if(!infos.check_number) {
+                if(this.options.config_check.number_required && !infos.check_number) {
                     this.$('input[name=check_number]').addClass('error');
                     this.$('input[name=check_number]').focus();
                     return false;
@@ -86,6 +86,8 @@ screens.PaymentScreenWidget.include({
             'cbu_required': cashregister.journal.check_cbu_required,
             'reference_visible': cashregister.journal.reference_visible,
             'reference_required': cashregister.journal.reference_required,
+            'number_visible': cashregister.journal.check_number_visible,
+            'number_required': cashregister.journal.check_number_required,
         }
     },
 
@@ -181,6 +183,8 @@ screens.PaymentScreenWidget.include({
                         'cbu_required': cashregister.journal.check_cbu_required,
                         'reference_visible': cashregister.journal.check_reference_visible,
                         'reference_required': cashregister.journal.check_reference_required,
+                        'number_visible': cashregister.journal.check_number_visible,
+                        'number_required': cashregister.journal.check_number_required,
                     },
                     data: lines[i],
                     confirm: function(infos) {

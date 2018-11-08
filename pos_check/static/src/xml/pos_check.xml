@@ -43,7 +43,7 @@
                     <span class='label'>Bank account</span>
                     <input t-att-class='widget.options.config_check and widget.options.config_check.bank_acc_required ? "detail required" : "detail"' name='check_bank_acc' t-att-value='widget.options.data ? widget.options.data.check_bank_acc : undefined' placeholder='Bank account'></input>
                 </div>
-                <div class='checkinfo-detail'>
+                <div class='checkinfo-detail' t-if="widget.options.config_check and widget.options.config_check.number_visible">
                     <span class='label'>Check number</span>
                     <input class='detail required' name='check_number' t-att-value='widget.options.data ? widget.options.data.check_number : undefined' placeholder='Check number'></input>
                 </div>

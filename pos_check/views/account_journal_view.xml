@@ -10,6 +10,19 @@
                 <field name="check_info_required" colspan="4"/>
                 <field name="check_auto_fill_amount" attrs="{'invisible':[('check_info_required','=',False)]}" colspan="4"/>
                 <field name="is_check" attrs="{'invisible':[('check_info_required','=',False)]}" colspan="4"/>
+
+                <label for="id" string="Check number" attrs="{'invisible':[('check_info_required','=',False)]}"/>
+                <div colspan="3" attrs="{'invisible':[('check_info_required','=',False)]}">
+                    <div>
+                        <field name="check_number_visible" class="oe_inline"/>
+                        <label for="check_number_visible" string="Visible"/>
+                    </div>
+                    <div>
+                        <field name="check_number_required" class="oe_inline"/>
+                        <label for="check_number_required" string="Required"/>
+                    </div>
+                </div>
+
                 <label for="id" string="Bank name" attrs="{'invisible':[('check_info_required','=',False)]}"/>
                 <div colspan="3" attrs="{'invisible':[('check_info_required','=',False)]}">
                     <div>
