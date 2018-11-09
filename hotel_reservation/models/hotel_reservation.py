@@ -577,7 +577,7 @@ class HotelReservation(models.Model):
                       (*time.strptime(reservation['checkin'],
                                       DEFAULT_SERVER_DATETIME_FORMAT)[:5]))
             for line in reservation.reservation_line:
-                taxed_price = 0
+                taxed_price = line.list_price
                 for r in line.reserve:
                     prod = r.with_context(partner=reservation.partner_id.id,
                                           quantity=1,
@@ -589,7 +589,7 @@ class HotelReservation(models.Model):
                     room_type_obj = self.env['hotel.room.type']
                     room_type_ids = room_type_obj.search([('cat_id', '=', prod.categ_id.id)])
                     if line.list_price and reservation.tax_id:
-                        taxed_price = line.list_price + (line.list_price * reservation.tax_id.amount ) / 100
+                        taxed_price += (line.list_price * reservation.tax_id.amount) / 100
                     if reservation.dolar_rate:
                         taxed_price = taxed_price * reservation.dolar_rate
                     folio_lines.append((0, 0, {
