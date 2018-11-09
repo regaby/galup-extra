@@ -70,7 +70,7 @@ screens.PaymentScreenWidget.include({
         });
     },
 
-    get_config_check: function(cashregister) {
+    get_config_check: function(cashregister, partner_name, main_id_number) {
         return {
             'bank_visible': cashregister.journal.check_bank_name_visible,
             'bank_required': cashregister.journal.check_bank_name_required,
@@ -88,6 +88,8 @@ screens.PaymentScreenWidget.include({
             'reference_required': cashregister.journal.reference_required,
             'number_visible': cashregister.journal.check_number_visible,
             'number_required': cashregister.journal.check_number_required,
+            'partner_name': partner_name,
+            'main_id_number': main_id_number,
         }
     },
 
@@ -101,12 +103,18 @@ screens.PaymentScreenWidget.include({
             }
         }
         var order = this.pos.get_order();
+        var partner_name = ''
+        var main_id_number = ''
+        if (order.changed.client) {
+            partner_name = order.changed.client.name;
+            main_id_number = order.changed.client.main_id_number;
+        }
         var product_name = order.selected_orderline.product.display_name;
         if (cashregister.journal.check_info_required) {
             if (cashregister.journal.name == 'Efectivo' && product_name == 'RETIRAR DINERO') {
                 console.log('retiro dinero....')
                 this.show_popup_check_info({
-                    config_check: this.get_config_check(cashregister),
+                    config_check: this.get_config_check(cashregister, partner_name, main_id_number),
                     data: {},
                     confirm: function(infos) {
                         //merge infos to new paymentline
@@ -118,7 +126,7 @@ screens.PaymentScreenWidget.include({
                 console.log(cashregister.journal.name)
                 console.log('else...')
                 this.show_popup_check_info({
-                    config_check: this.get_config_check(cashregister),
+                    config_check: this.get_config_check(cashregister, partner_name, main_id_number),
                     data: {},
                     confirm: function(infos) {
                         //merge infos to new paymentline

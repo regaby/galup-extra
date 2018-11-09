@@ -10,16 +10,26 @@ var CheckInfoWidget = PopupWidget.extend({
         options = options || {};
         this._super(options);
         this.renderElement();
+        var partner_name = options.config_check.partner_name;
+        var cuit = options.config_check.main_id_number;
+        this.$('input[name=check_owner_vat]').val(cuit);
+        this.$('input[name=check_owner]').val(partner_name);
         this.$('.popup-checkinfo .detail')[0].focus()
     },
     get_infos: function() {
-        var cuit = this.$('input[name=check_owner_vat]').val();
-        var cbu = this.$('input[name=check_cbu]').val();
-        if (cuit.length != 11) {
+        var cuit = ''
+        var cbu = ''
+        if (this.$('input[name=check_cbu]').val() != undefined) {
+            cbu = this.$('input[name=check_cbu]').val();
+        }
+        if (this.$('input[name=check_owner_vat]').val() != undefined) {
+            cuit = this.$('input[name=check_owner_vat]').val();
+        }
+        if (cuit.length > 0 && cuit.length != 11) {
             this.gui.show_popup('error',('El campo CUIT debe tener 11 caracteres'));
             return {};
         }
-        if (cbu.length != 22) {
+        if (cbu.length > 0 && cbu.length != 22) {
             this.gui.show_popup('error',('El campo CBU debe tener 22 caracteres'));
             return {};
         }
