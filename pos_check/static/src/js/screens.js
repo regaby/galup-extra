@@ -109,7 +109,9 @@ screens.PaymentScreenWidget.include({
             partner_name = order.changed.client.name;
             main_id_number = order.changed.client.main_id_number;
         }
-        var product_name = order.selected_orderline.product.display_name;
+        if (order.selected_orderline) {
+            var product_name = order.selected_orderline.product.display_name;
+        }
         if (cashregister.journal.check_info_required) {
             if (cashregister.journal.name == 'Efectivo' && product_name == 'RETIRAR DINERO') {
                 console.log('retiro dinero....')
