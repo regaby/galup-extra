@@ -13,14 +13,24 @@ var CheckInfoWidget = PopupWidget.extend({
         this.$('.popup-checkinfo .detail')[0].focus()
     },
     get_infos: function() {
+        var cuit = this.$('input[name=check_owner_vat]').val();
+        var cbu = this.$('input[name=check_cbu]').val();
+        if (cuit.length != 11) {
+            this.gui.show_popup('error',('El campo CUIT debe tener 11 caracteres'));
+            return {};
+        }
+        if (cbu.length != 22) {
+            this.gui.show_popup('error',('El campo CBU debe tener 22 caracteres'));
+            return {};
+        }
         return {
             'check_bank_id' : parseInt(this.$('select[name=check_bank_id]').val()) || undefined,
             'check_bank_acc': this.$('input[name=check_bank_acc]').val(),
             'check_number'  : this.$('input[name=check_number]').val(),
             'check_owner'   : this.$('input[name=check_owner]').val(),
-            'check_owner_vat'   : this.$('input[name=check_owner_vat]').val(),
+            'check_owner_vat'   : cuit,
             'check_pay_date'   : this.$('input[name=check_pay_date]').val(),
-            'check_cbu'   : this.$('input[name=check_cbu]').val(),
+            'check_cbu'   : cbu,
             'reference'   : this.$('input[name=reference]').val(),
         };
     },
