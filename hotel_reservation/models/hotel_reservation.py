@@ -827,6 +827,10 @@ class HotelRoom(models.Model):
                            ('state','=','assigned')
                            ]
             reservation_line_ids = reservation_line_obj.search(reserv_args)
+            if reservation_line_ids.reservation_id.state == "cancel":
+                status = {'isroom': True, 'color': 5, 'status': 'available'}
+                room.write(status)
+                continue
             rooms_ids = [room_line.ids for room_line in room.room_line_ids]
             rom_args = [('id', 'in', rooms_ids),
                         ('check_in', '<=', curr_date),
