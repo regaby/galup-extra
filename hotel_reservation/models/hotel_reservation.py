@@ -818,27 +818,25 @@ class HotelRoom(models.Model):
         now = datetime.datetime.now()
         curr_date = now.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         for room in self.search([]):
-            reserv_line_ids = [reservation_line.ids for
-                               reservation_line in
-                               room.room_reservation_line_ids]
-            reserv_args = [('id', 'in', reserv_line_ids),
-                           ('check_in', '<=', curr_date),
-                           ('check_out', '>=', curr_date),
-                           ('state','=','assigned')
-                           ]
-            reservation_line_ids = reservation_line_obj.search(reserv_args)
-            if reservation_line_ids.reservation_id.state == "cancel":
-                status = {'isroom': True, 'color': 5, 'status': 'available'}
-                room.write(status)
-                continue
+            sql = """select rl.id from hotel_room_reservation_line rl
+                                inner join hotel_reservation r on (rl.reservation_id=r.id)
+                                where rl.id in (%s)
+                                and check_in <= '%s'
+                                and check_out >= '%s'
+                                and r.state <> 'cancel'"""%(\
+                                  ','.join(str(x) for x in room.room_reservation_line_ids.ids), \
+                                  curr_date, curr_date)
+            self._cr.execute(sql)
+            line_ids = self._cr.fetchone()
+            reservation_line_ids = reservation_line_obj.browse(line_ids)
             rooms_ids = [room_line.ids for room_line in room.room_line_ids]
             rom_args = [('id', 'in', rooms_ids),
                         ('check_in', '<=', curr_date),
                         ('check_out', '>=', curr_date),
-                        ('status','<>','cancel')]
+                        ('status', '<>', 'cancel')]
             room_line_ids = folio_room_line_obj.search(rom_args)
             if room.status == 'blocked':
-              continue
+                continue
             status = {'isroom': True, 'color': 5, 'status': 'available'}
             if reservation_line_ids.ids:
                 status = {'isroom': False, 'color': 2, 'status': 'occupied'}
