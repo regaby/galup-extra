@@ -223,13 +223,8 @@ class HotelReservation(models.Model):
         if not self.checkin_hour >=0 or not self.checkin_hour <= 24:
           raise ValidationError(_('Seleccione una hora de entrada entre las 0 y las 23.'))
         if self.checkin_date:
-          checkin = '%s %s:00:00'%(self.checkin_date, self.checkin_hour)
-          # self.checkin =  checkin
-          self.checkin = hotel._offset_format_timestamp1(checkin,
-                                         '%Y-%m-%d %H:%M:%S',
-                                         '%Y-%m-%d %H:%M:%S',
-                                         ignore_unparsable_time=True,
-                                         context={'tz': to_zone})
+          checkin = '%s %s:00:00'%(self.checkin_date, self.checkin_hour+3)
+          self.checkin = checkin
 
     @api.onchange('checkout_date', 'checkout_hour')
     def on_change_checkout_date_our(self):
@@ -240,13 +235,8 @@ class HotelReservation(models.Model):
         if not self.checkout_hour >=0 or not self.checkout_hour <= 24:
           raise ValidationError(_('Seleccione una hora de salida entre las 0 y las 23.'))
         if self.checkout_date:
-          checkout = '%s %s:00:00'%(self.checkout_date, self.checkout_hour)
-          # self.checkin =  checkin
-          self.checkout = hotel._offset_format_timestamp1(checkout,
-                                         '%Y-%m-%d %H:%M:%S',
-                                         '%Y-%m-%d %H:%M:%S',
-                                         ignore_unparsable_time=True,
-                                         context={'tz': to_zone})
+          checkout = '%s %s:00:00'%(self.checkout_date, self.checkout_hour+3)
+          self.checkout = checkout
 
     @api.constrains('reservation_line', 'adults', 'children')
     def check_reservation_rooms(self):
