@@ -85,12 +85,12 @@ class PosOrder(models.Model):
                 check_vals = {
                     'check_bank_id': check_bank_id,
                     'check_bank_acc': data.get('check_bank_acc'),
-                    'check_number': data.get('check_number'),
+                    'check_number': data.get('check_number') and data.get('check_number') or '-',
                     'check_owner': data.get('check_owner'),
                     'check_owner_vat': data.get('check_owner_vat'),
                     'check_pay_date': data.get('check_pay_date'),
                     'check_cbu': data.get('check_cbu'),
-                    'reference': data.get('reference'),
+                    'reference': data.get('reference') and data.get('reference') or '-',
                 }
                 line.write(check_vals)
                 break
