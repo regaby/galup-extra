@@ -357,7 +357,7 @@ msgstr "¿Información de cheque requerida?"
 #: field:pos.make.payment,check_number:0
 #, python-format
 msgid "Check number"
-msgstr "Número de cheque"
+msgstr "Nro. Comprobante"
 
 #. module: pos_check
 #. openerp-web
