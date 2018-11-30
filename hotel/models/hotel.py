@@ -1234,7 +1234,8 @@ class HotelFolioLine(models.Model):
             if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
                 myduration = dur.days
             else:
-                myduration = dur.days + 1
+                # myduration = dur.days + 1
+                myduration = dur.days
         self.product_uom_qty = myduration
 
     @api.multi
