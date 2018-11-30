@@ -513,6 +513,7 @@ class HotelFolio(models.Model):
         @param self: object pointer
         @return: Duration and checkout_date
         '''
+        # import pdb;pdb.set_trace()
         company_obj = self.env['res.company']
         configured_addition_hours = 0
         company_ids = company_obj.search([])
@@ -530,7 +531,8 @@ class HotelFolio(models.Model):
             if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
                 myduration = dur.days
             else:
-                myduration = dur.days + 1
+                # myduration = dur.days + 1
+                myduration = dur.days
             if configured_addition_hours > 0:
                 additional_hours = abs((dur.seconds / 60) / 60)
                 if additional_hours >= configured_addition_hours:
