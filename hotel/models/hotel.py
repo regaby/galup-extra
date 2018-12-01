@@ -531,8 +531,8 @@ class HotelFolio(models.Model):
             if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
                 myduration = dur.days
             else:
-                # myduration = dur.days + 1
-                myduration = dur.days
+                myduration = dur.days + 1
+                # myduration = dur.days
             if configured_addition_hours > 0:
                 additional_hours = abs((dur.seconds / 60) / 60)
                 if additional_hours >= configured_addition_hours:
@@ -1234,8 +1234,8 @@ class HotelFolioLine(models.Model):
             if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
                 myduration = dur.days
             else:
-                # myduration = dur.days + 1
-                myduration = dur.days
+                myduration = dur.days + 1
+                # myduration = dur.days
         self.product_uom_qty = myduration
 
     @api.multi
