@@ -528,11 +528,11 @@ class HotelFolio(models.Model):
             chkout_dt = datetime.datetime.strptime(chckout, server_dt)
             dur = chkout_dt - chkin_dt
             sec_dur = dur.seconds
-            if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
+            additional_hours = abs((dur.seconds / 60) / 60)
+            if additional_hours <= 12:
                 myduration = dur.days
             else:
                 myduration = dur.days + 1
-                # myduration = dur.days
             if configured_addition_hours > 0:
                 additional_hours = abs((dur.seconds / 60) / 60)
                 if additional_hours >= configured_addition_hours:
@@ -1231,11 +1231,11 @@ class HotelFolioLine(models.Model):
             chkout_dt = datetime.datetime.strptime(chckout, server_dt)
             dur = chkout_dt - chkin_dt
             sec_dur = dur.seconds
-            if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
+            additional_hours = abs((dur.seconds / 60) / 60)
+            if additional_hours <= 12:
                 myduration = dur.days
             else:
                 myduration = dur.days + 1
-                # myduration = dur.days
         self.product_uom_qty = myduration
 
     @api.multi
