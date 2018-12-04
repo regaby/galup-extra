@@ -107,7 +107,8 @@ class HotelReservation(models.Model):
         """
         Compute the total amounts of the SO.
         """
-        self.duration = self._get_dur(self.checkin, self.checkout)
+        for folio in self:
+            folio.duration = self._get_dur(folio.checkin, folio.checkout)
 
     @api.depends('reservation_line.reserve', 'duration', 'tax_id', 'dolar_rate')
     def _amount_all(self):
