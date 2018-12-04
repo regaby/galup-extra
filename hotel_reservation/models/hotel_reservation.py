@@ -600,7 +600,7 @@ class HotelReservation(models.Model):
             folio_vals.update({'room_lines': folio_lines})
             folio = hotel_folio_obj.create(folio_vals)
             ## confirmo el folio...
-            # folio.action_confirm()
+            folio.action_confirm()
             ## escribo bb_id
             if calculate_check:
                 folio.calculate_check()
