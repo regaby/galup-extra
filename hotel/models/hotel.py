@@ -386,14 +386,14 @@ class HotelFolio(models.Model):
                        default='Nuevo')
     order_id = fields.Many2one('sale.order', 'Order', delegate=True,
                                required=True, ondelete='cascade')
-    checkin_date = fields.Datetime('Check In', required=True, readonly=False,
+    checkin_date = fields.Datetime('Check In', required=True, readonly=True,
                                    states={'draft': [('readonly', False)]},
                                    default=_get_checkin_date)
-    checkout_date = fields.Datetime('Check Out', required=True, readonly=False,
+    checkout_date = fields.Datetime('Check Out', required=True, readonly=True,
                                     states={'draft': [('readonly', False)]},
                                     default=_get_checkout_date)
     room_lines = fields.One2many('hotel.folio.line', 'folio_id',
-                                 readonly=False,
+                                 readonly=True,
                                  states={'draft': [('readonly', False)],
                                          'sent': [('readonly', False)]},
                                  help="Hotel room reservation detail.")
@@ -417,7 +417,8 @@ class HotelFolio(models.Model):
                                     "either the guest has to payment at "
                                     "booking time or check-in "
                                     "check-out time.")
-    duration = fields.Float('Duration in Days', readonly=False,
+    duration = fields.Float('Duration in Days', readonly=True,
+                            states={'draft': [('readonly', False)]},
                             help="Number of days which will automatically "
                             "count from the check-in and check-out date. ")
     currrency_ids = fields.One2many('currency.exchange', 'folio_no',
