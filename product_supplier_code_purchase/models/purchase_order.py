@@ -9,21 +9,18 @@ from openerp import api, fields, models
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
-    @api.multi
-    def _compute_product_supplier_code(self):
+    @api.onchange('product_id')
+    def product_id_onchange(self):
         product_supplierinfo_obj = self.env['product.supplierinfo']
-        for line in self:
-            partner = line.order_id.partner_id
-            product = line.product_id
-            if product and partner:
-                supplier_info = product_supplierinfo_obj.search([
-                    '|', ('product_tmpl_id', '=', product.product_tmpl_id.id),
-                    ('product_id', '=', product.id),
-                    ('name', '=', partner.id)], limit=1)
-                if supplier_info:
-                    code = supplier_info.product_code or ''
-                    line.product_supplier_code = code
-        return True
+        partner = self.order_id.partner_id
+        product = self.product_id
+        if product and partner:
+            supplier_info = product_supplierinfo_obj.search([
+                '|', ('product_tmpl_id', '=', product.product_tmpl_id.id),
+                ('product_id', '=', product.id),
+                ('name', '=', partner.id)], limit=1)
+            if supplier_info:
+                code = supplier_info.product_code or ''
+                self.product_supplier_code = code
 
-    product_supplier_code = fields.Char(string='Product Supplier Code',
-                                        compute=_compute_product_supplier_code)
+    product_supplier_code = fields.Char(string='Product Supplier Code')
