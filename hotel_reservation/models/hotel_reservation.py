@@ -58,8 +58,9 @@ class HotelFolio(models.Model):
                 for reservation in folio_obj.reservation_id:
                     reservation_obj = (reservation_line_obj.search
                                        ([('reservation_id', '=',
-                                          reservation.id)]))
-                    if len(reservation_obj) == 1:
+                                          reservation.id),
+                                         ('state', '=', 'assigned')]))
+                    if len(reservation_obj) >= 1:
                         for line_id in reservation.reservation_line:
                             line_id = line_id.reserve
                             for room_id in line_id:
@@ -598,6 +599,9 @@ class HotelReservation(models.Model):
                     res_obj.write({'status': 'occupied', 'isroom': False})
             folio_vals.update({'room_lines': folio_lines})
             folio = hotel_folio_obj.create(folio_vals)
+            ## confirmo el folio...
+            # folio.action_confirm()
+            ## escribo bb_id
             if calculate_check:
                 folio.calculate_check()
             if reservation.payment_lines:
