@@ -818,7 +818,7 @@ class HotelRoom(models.Model):
                                 where rl.id in (%s)
                                 and check_in <= '%s'
                                 and check_out >= '%s'
-                                and r.state <> 'cancel'"""%(\
+                                and r.state not in ('cancel','done') """%(\
                                   ','.join(str(x) for x in room.room_reservation_line_ids.ids), \
                                   curr_date, curr_date)
             self._cr.execute(sql)
