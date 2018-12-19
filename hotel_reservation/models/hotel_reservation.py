@@ -958,12 +958,12 @@ class RoomReservationSummary(models.Model):
             if cat_id:
                 room_ids = room_obj.search([('categ_id','in',cat_id)])
             else:
-                room_ids = room_obj.search([])
+                room_ids = room_obj.search([],order="categ_id desc")
             all_room_detail = []
             for room in room_ids:
                 room_detail = {}
                 room_list_stats = []
-                room_detail.update({'name': "%s (%s)"%(room.name,room.categ_id.name[0:4]) or ''})
+                room_detail.update({'name': "%s (%s)"%(room.name,room.categ_id.name[0:13]) or ''})
                 room_detail.update({'categ_id': room.categ_id.id or False})
                 # habitacion bloqueada
                 if room.status == 'blocked':
