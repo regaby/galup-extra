@@ -990,7 +990,7 @@ class RoomReservationSummary(models.Model):
                                           ([('id', 'in', folline_ids),
                                             ('check_in', '<=', chk_date),
                                             ('check_out', '>', chk_date),
-                                            ('status', '<>', 'cancel')
+                                            ('status', 'not in', ['cancel','draft'])
                                             ]))
                         if folline_ids:
                             room_list_stats.append({'state': 'Ocupado',
