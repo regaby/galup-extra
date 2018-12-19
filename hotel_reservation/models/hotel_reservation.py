@@ -1008,6 +1008,7 @@ class RoomReservationSummary(models.Model):
                                                 ('check_out', '>', chk_date),
                                                 ('state','=','assigned'),
                                                 ('status','<>','cancel'),
+                                                # ('status','not in',['cancel','done']),
                                                 ]))
                             if reservline_ids:
                                 room_list_stats.append({'state': 'Reservado',
@@ -1138,7 +1139,10 @@ class QuickRoomReservation(models.TransientModel):
                 raise ValidationError(_('Seleccione una hora de entrada entre las 0 y las 23.'))
             if not res.checkout_hour >=0 or not res.checkout_hour <= 24:
                 raise ValidationError(_('Seleccione una hora de salida entre las 0 y las 23.'))
-
+            date_order = time.strftime('%Y-%m-%d')
+            if res.checkin_date < date_order:
+               raise except_orm(_('Warning'), _('La fecha de entrada debe ser \
+               mayor o igual que la fecha del día.'))
             reservation = {'partner_id': res.partner_id.id,
                'partner_invoice_id': res.partner_invoice_id.id,
                'partner_order_id': res.partner_order_id.id,
