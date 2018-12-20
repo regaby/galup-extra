@@ -818,7 +818,8 @@ class HotelRoom(models.Model):
                                 where rl.id in (%s)
                                 and check_in <= '%s'
                                 and check_out >= '%s'
-                                and r.state not in ('cancel','done') """%(\
+                                and r.state not in ('cancel','done')
+                                and rl.state not in ('unassigned')"""%(\
                                   ','.join(str(x) for x in room.room_reservation_line_ids.ids), \
                                   curr_date, curr_date)
             self._cr.execute(sql)
@@ -854,6 +855,8 @@ class RoomReservationSummary(models.Model):
     date_to = fields.Datetime('Date To')
     summary_header = fields.Text('Summary Header')
     room_summary = fields.Text('Room Summary')
+    # esto se agregara para filtrar por categoria
+    # category_id = fields.Many2one('')
     # month = fields.Selection([(1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'), (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'),
     #                           (8, 'Agosto'), (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')],'Mes',
     #                           default=lambda *a: time.gmtime()[1])
