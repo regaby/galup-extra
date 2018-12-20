@@ -958,7 +958,7 @@ class RoomReservationSummary(models.Model):
             if cat_id:
                 room_ids = room_obj.search([('categ_id','in',cat_id)])
             else:
-                room_ids = room_obj.search([],order="categ_id desc")
+                room_ids = room_obj.search([],order="sequence")
             all_room_detail = []
             for room in room_ids:
                 room_detail = {}

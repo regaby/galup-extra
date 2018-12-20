@@ -310,6 +310,7 @@
                                     <field name="categ_id" select="1" domain="[('isroomtype','=',True)]" />
                                     <field name="product_manager" select="2" string="Responsable" />
                                     <field name="price" />
+                                    <field name="sequence" />
                                     <field name="capacity" invisible="True" />
                                     <field name="uom_id" invisible="1" />
                                 </group>
@@ -323,7 +324,7 @@
                                     <field name="taxes_id" colspan="4" nolabel='1'
                                         help='Customer taxes apply on the perticular room. ' />
                                 </group>
-                                
+
                             </page>
                             <page string="Descripción" name="description">
                                 <separator string="Descripción" />
@@ -403,6 +404,7 @@
             <field name="model">hotel.room</field>
             <field name="arch" type="xml">
                 <tree string="Hotel Room">
+                    <field name="sequence" widget="handle" />
                     <field name="name" />
                     <field name="categ_id" select="1" />
                     <field name="price" />
@@ -523,22 +525,22 @@
                     <header>
                         <button name="action_confirm" states="draft" string="Confirmar Checkin"
                             class="btn-primary" type="object" />
-                        <!-- <button name="order_confirm" string="Confirm Folio" states="draft" 
+                        <!-- <button name="order_confirm" string="Confirm Folio" states="draft"
                             icon="gtk-apply" class="oe_highlight"/> -->
-                        <!-- <button name="invoice_recreate" string="Recreate Invoice" states="invoice_except" 
+                        <!-- <button name="invoice_recreate" string="Recreate Invoice" states="invoice_except"
                             icon="gtk-redo" class="oe_highlight"/> -->
-                        <!-- <button name="invoice_corrected" string="Invoice Corrected" states="invoice_except" 
+                        <!-- <button name="invoice_corrected" string="Invoice Corrected" states="invoice_except"
                             icon="gtk-paste-v" class="oe_highlight"/> -->
-                        <!-- <button name="ship_recreate" string="Recreate Procurement" states="shipping_except" 
+                        <!-- <button name="ship_recreate" string="Recreate Procurement" states="shipping_except"
                             icon="gtk-redo" class="oe_highlight"/> -->
-                        <!-- <button name="ship_corrected" string="Procurement Corrected" states="shipping_except" 
+                        <!-- <button name="ship_corrected" string="Procurement Corrected" states="shipping_except"
                             icon="gtk-paste-v" class="oe_highlight"/> -->
-                        <!-- <button name="manual_invoice" states="manual" string="Create Invoice" 
+                        <!-- <button name="manual_invoice" states="manual" string="Create Invoice"
                             icon="gtk-new" class="oe_highlight"/> -->
                         <button name="%(sale.action_view_sale_advance_payment_inv)d"
                             string="Crear Factura" type="action" class="btn-primary"
                             attrs="{'invisible': ['|',('invoice_status', '!=', 'to invoice')]}" />
-                        <!-- <button name="ship_cancel" string="Cancel Folio" states="shipping_except" 
+                        <!-- <button name="ship_cancel" string="Cancel Folio" states="shipping_except"
                             icon="gtk-cancel" class="oe_highlight oe_highlight" /> -->
                         <button name="action_cancel_draft" states="cancel" string="Volver a Borrador"
                             type="object" icon="gtk-file" class="oe_highlight" />
@@ -546,14 +548,14 @@
                             type="object" icon="gtk-cancel" class="oe_highlight" />
                         <button name="action_cancel" string="Cancelar Folio" states="draft"
                             icon="gtk-cancel" type="object" class="oe_highlight" />
-                        <!-- <button name="action_cancel" string="Cancel Folio" states="manual,progress" 
+                        <!-- <button name="action_cancel" string="Cancel Folio" states="manual,progress"
                             type="object" icon="gtk-cancel" class="oe_highlight"/> -->
-                        <!-- <button name="cancel" string="Cancel Folio" states="draft" icon="gtk-cancel" 
+                        <!-- <button name="cancel" string="Cancel Folio" states="draft" icon="gtk-cancel"
                             class="oe_highlight"/> -->
-                        <!-- <button name="invoice_cancel" string="Cancel Folio" states="invoice_except" 
+                        <!-- <button name="invoice_cancel" string="Cancel Folio" states="invoice_except"
                             icon="gtk-cancel" class="oe_highlight"/> -->
                         <button name="action_done" type="object" string="Realizar Checkout"
-                            states="sale" 
+                            states="sale"
                             help="If a Hotel Folio is done, you cannot modify it manually anymore. However, you will still be able to invoice or deliver. This is used to freeze the Hotel Folio." />
                         <button name="action_back_to_checkin" type="object" string="Volver a Checkin"
                             states="done" />
@@ -584,18 +586,18 @@
                                 <group colspan="4" col="4">
                                     <field name="partner_id" string="Huésped" required="1" domain="[('customer','=','True')]" context="{'default_customer': 'True'}" placeholder="Escriba el apellido o DNI para consultar si ya está creado, caso contrario, cree un nuevo huésped ingresando el nombre y apellido y seleccionando la opción crear"/>
                                     <field name="type_doc" options="{'no_open': True}" placeholder="Categoría" class="oe_inline" attrs="{'invisible':[('partner_id','=',False)]}"/>
-                                    
-                                    
+
+
                                     <field name="adress_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="identification_id" class="oe_inline"  attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="city_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                     <field name="country_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}" options="{'no_create': True}"/>
                                     <field name="state_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}" domain="[('country_id','=',country_partner)]"/>
-                                    
-                                   
-                                   
+
+
+
                                     <field name="phone_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
-                              
+
                                     <field name="email_partner" class="oe_inline" on_change="1" modifiers="{}" attrs="{'invisible':[('partner_id','=',False)]}"/>
                                 </group>
 
@@ -689,7 +691,7 @@
                                 <group colspan="2" class="oe_subtotal_footer oe_right">
                                     <field name="amount_total" sum="Monto Total" widget='monetary' />
                                     <field name="amount_payment" sum="Monto Pagado" widget='monetary' />
-                                    
+
                                     <div class="oe_subtotal_footer_separator oe_inline">
                                         <label for="residual" />
                                         <button name="button_dummy" string="Calcular" states="draft"
@@ -732,10 +734,10 @@
                                                     <separator string="Estados" colspan="4" />
                                                     <field name="state" select="2" />
                                                     <field name="invoice_status" />
-                                                    
+
                                                 </group>
                                             </page>
-                                            
+
                                             <page string="Historial">
                                                 <separator string="Facturas" colspan="4" />
                                                 <field name="invoice_lines" colspan="4" nolabel="1" />
@@ -767,7 +769,7 @@
                                 <group colspan="2" class="oe_subtotal_footer oe_right">
                                     <field name="service_total" sum="Total" widget='monetary' />
                                     <field name="service_paid" sum="Monto Cobrado" widget='monetary' />
-                                    
+
                                     <div class="oe_subtotal_footer_separator oe_inline">
                                         <label for="service_residual" />
                                         <button name="button_dummy" string="Calcular" states="draft"
@@ -793,7 +795,7 @@
                                     <field name="client_order_ref" />
                                 </group>
                             </page>
-                            
+
                             <!-- <page string="Foreign Exchange" name="foreign exchange">
                                 <separator string="Foreign Exchange" colspan="4" />
                                 <field name="currrency_ids" colspan="4" nolabel="1">
@@ -898,7 +900,7 @@
         <menuitem name="Generate Folio" id="menu_open_hotel_folio1_form_tree_all"
             action="open_hotel_folio1_form_tree_all" sequence="5" parent="menu_all_folio" string="Folio / Checkin" />
 
-        <!--======================================================== Hotel Service 
+        <!--======================================================== Hotel Service
             Type ======================================================== -->
 
         <!-- Form view of hotel service type -->
@@ -944,7 +946,7 @@
             action="open_hotel_service_type_form_tree" sequence="9"
             parent="hotel.menu_hotel_service" />
 
-        <!--======================================================== Hotel Service 
+        <!--======================================================== Hotel Service
             ======================================================== -->
 
         <!-- Form view of hotel service -->
@@ -1097,7 +1099,7 @@
             <field name="name">Rooms</field>
             <field eval="'ir.actions.act_window,%d'%action_room_cate" name="value"/>
         </record>
-        
+
         <menuitem name="Room by Type" id="menu_hotel_room_category_action"
             action="hotel_room_category_action" sequence="7" parent="hotel.menu_hotel_room" groups="base.group_configuration"/>
 
@@ -1117,7 +1119,7 @@
             <field name="name">Amenities</field>
             <field eval="'ir.actions.act_window,%d'%action_room_cate" name="value"/>
         </record>
-        
+
         <menuitem name="Amenities by Type" id="menu_hotel_ty_category_action"
             action="hotel_ty_category_action" sequence="4" parent="hotel.menu_amenity" />
 
@@ -1130,15 +1132,15 @@
             <field name="view_type">tree</field>
             <field name="view_id" ref="product_category_tree_view" />
         </record>
-        
+
         <record id="ir_service_category_open" model="ir.values">
             <field eval="'tree_but_open'" name="key2"/>
             <field eval="'product.category'" name="model"/>
             <field name="name">Services</field>
             <field eval="'ir.actions.act_window,%d'%action_room_cate" name="value"/>
         </record>
-        
-        <menuitem name="Services by Type" id="menu_hotel_service_category_action" 
+
+        <menuitem name="Services by Type" id="menu_hotel_service_category_action"
             action="hotel_service_category_action" sequence="10"
             parent="hotel.menu_hotel_service" groups="base.group_configuration"/>
 

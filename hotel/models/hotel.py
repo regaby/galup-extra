@@ -158,6 +158,7 @@ class HotelRoom(models.Model):
 
     _name = 'hotel.room'
     _description = 'Hotel Room'
+    _order = 'sequence'
 
     @api.one
     def _get_price(self):
@@ -189,6 +190,7 @@ class HotelRoom(models.Model):
     # list_price = fields.Float(related='product_id.list_price', string="Precio", readonly=True)
     price = fields.Float(string='Precio',
         store=False, readonly=True, compute='_get_price')
+    sequence = fields.Integer('Sequence')
 
     # @api.onchange('isroom')
     # def isroom_change(self):
