@@ -37,7 +37,7 @@ class object_merger(orm.TransientModel):
                 }
 
     _defaults = {
-                 'delete_if_not_active': False,
+                 'delete_if_not_active': True,
                  }
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
@@ -141,6 +141,8 @@ class object_merger(orm.TransientModel):
                 continue
             res_id = model_obj._columns.get('res_id')
             if res_id:
+                if model_obj._table == 'mail_followers':
+                    continue
                 requete = False
                 if isinstance(res_id, fields.integer) or isinstance(res_id, fields.many2one):
                     requete = "UPDATE %s SET res_id = %s " \
@@ -161,12 +163,9 @@ class object_merger(orm.TransientModel):
                 if requete:
                     cr.execute(requete)
         unactive_object_ids = model_pool.search(cr, uid, [('id', 'in', object_ids), ('id', '<>', object_id)], context=context)
-        if model_pool._columns.get('active', False):
-            model_pool.write(cr, uid, unactive_object_ids, {'active': False}, context=context)
-        else:
-            read_data = self.read(cr, uid, ids[0], ['delete_if_not_active'], context=context)
-            if read_data['delete_if_not_active']:
-                model_pool.unlink(cr, uid, unactive_object_ids, context=context)
+        read_data = self.read(cr, uid, ids[0], ['delete_if_not_active'], context=context)
+        if read_data['delete_if_not_active']:
+            model_pool.unlink(cr, uid, unactive_object_ids, context=context)
         # Try to limit multiplication of records in mail_followers table:
         requete = "DELETE FROM mail_followers WHERE id IN" \
             "(SELECT id FROM (SELECT COUNT(id) AS total, MAX(id) as id," \
