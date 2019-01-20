@@ -12,6 +12,7 @@
     ],
     'qweb': [
         'static/src/xml/pos.xml',
+        'static/src/xml/pos_payment.xml',
     ],
     'installable': True,
 }
