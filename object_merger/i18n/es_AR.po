@@ -1,0 +1,211 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* object_merger
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-19 21:19+0000\n"
+"PO-Revision-Date: 2019-01-19 21:19+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: object_merger
+#: model:ir.ui.view,arch_db:object_merger.view_object_merger_settings
+msgid "<?xml version=\"1.0\"?>\n"
+"<form string=\"Configure Object Merger\" version=\"7.0\" class=\"oe_form_configuration\">\n"
+"                    <header>\n"
+"                        <button string=\"Apply\" type=\"object\" name=\"install\" class=\"oe_highlight\"/>\n"
+"                        or\n"
+"                        <button string=\"Cancel\" type=\"object\" name=\"cancel\" class=\"oe_link\"/>\n"
+"                    </header>\n"
+"                    <separator string=\"Object MergerConfiguration\"/>\n"
+"                    <group name=\"object_merger_config\">\n"
+"                        <div name=\"object_merger\">\n"
+"                       		<group colspan=\"8\">\n"
+"	  							<field name=\"models_ids\" colspan=\"4\" nolabel=\"1\"/>\n"
+"							</group>\n"
+"                        </div>\n"
+"                    </group>\n"
+"                </form>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<form string=\"Configure Object Merger\" version=\"7.0\" class=\"oe_form_configuration\">\n"
+"                    <header>\n"
+"                        <button string=\"Apply\" type=\"object\" name=\"install\" class=\"oe_highlight\"/>\n"
+"                        or\n"
+"                        <button string=\"Cancel\" type=\"object\" name=\"cancel\" class=\"oe_link\"/>\n"
+"                    </header>\n"
+"                    <separator string=\"Object MergerConfiguration\"/>\n"
+"                    <group name=\"object_merger_config\">\n"
+"                        <div name=\"object_merger\">\n"
+"                       		<group colspan=\"8\">\n"
+"	  							<field name=\"models_ids\" colspan=\"4\" nolabel=\"1\"/>\n"
+"							</group>\n"
+"                        </div>\n"
+"                    </group>\n"
+"                </form>\n"
+"            "
+
+#. module: object_merger
+#: model:ir.ui.view,arch_db:object_merger.view_object_merge_form
+msgid "<?xml version=\"1.0\"?>\n"
+"<form string=\"Merge Entries\" version=\"7.0\">\n"
+"	                <group>\n"
+"	                    <separator string=\"to_replace\"/>\n"
+"	                </group>\n"
+"	                <footer>\n"
+"	                    <button string=\"Merge Entries\" name=\"action_merge\" type=\"object\" class=\"oe_highlight\"/>\n"
+"	                    or\n"
+"	                    <button string=\"Cancel\" class=\"oe_link\" special=\"cancel\"/>\n"
+"	                </footer>\n"
+"                </form>\n"
+"            "
+msgstr "<?xml version=\"1.0\"?>\n"
+"<form string=\"Merge Entries\" version=\"7.0\">\n"
+"	                <group>\n"
+"	                    <separator string=\"to_replace\"/>\n"
+"	                </group>\n"
+"	                <footer>\n"
+"	                    <button string=\"Unificar Registros\" name=\"action_merge\" type=\"object\" class=\"oe_highlight\"/>\n"
+"	                    or\n"
+"	                    <button string=\"Cancelar\" class=\"oe_link\" special=\"cancel\"/>\n"
+"	                </footer>\n"
+"                </form>\n"
+"            "
+
+#. module: object_merger
+#: code:addons/object_merger/wizard/object_merger.py:85
+#: code:addons/object_merger/wizard/object_merger.py:95
+#, python-format
+msgid "Configuration Error!"
+msgstr "Error en Configuración"
+
+#. module: object_merger
+#: model:ir.actions.act_window,name:object_merger.action_object_merger_settings
+msgid "Configure Object Merger"
+msgstr "Configurar Object Merger"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_create_uid
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_create_uid
+#: field:object.merger,create_uid:0
+#: field:object.merger.settings,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_create_date
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_create_date
+#: field:object.merger,create_date:0
+#: field:object.merger.settings,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_delete_if_not_active
+#: field:object.merger,delete_if_not_active:0
+msgid "Delete records if not active field"
+msgstr "Borrar registros si no están activados"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_display_name
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_display_name
+#: field:object.merger,display_name:0
+#: field:object.merger.settings,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_id
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_id
+#: field:object.merger,id:0
+#: field:object.merger.settings,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: object_merger
+#: help:ir.model,object_merger_model:0
+#: model:ir.model.fields,help:object_merger.field_ir_model_object_merger_model
+msgid "If checked, by default the Object Merger configuration will get this module in the list"
+msgstr "Si está tildado, por defecto la configuración del Object Merger tomará este módulo en la lista."
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger___last_update
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings___last_update
+#: field:object.merger,__last_update:0
+#: field:object.merger.settings,__last_update:0
+msgid "Last Modified on"
+msgstr "Última Modifiación en"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_write_uid
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_write_uid
+#: field:object.merger,write_uid:0
+#: field:object.merger.settings,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_write_date
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_write_date
+#: field:object.merger,write_date:0
+#: field:object.merger.settings,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: object_merger
+#: model:ir.model,name:object_merger.model_object_merger
+msgid "Merge objects"
+msgstr "Unificar Registros"
+
+#. module: object_merger
+#: code:addons/object_merger/res_config.py:100
+#: code:addons/object_merger/res_config.py:110
+#, python-format
+msgid "Merger"
+msgstr "Unificador"
+
+#. module: object_merger
+#: model:ir.model,name:object_merger.model_ir_model
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_settings_models_ids
+#: field:object.merger.settings,models_ids:0
+msgid "Models"
+msgstr "Modelos"
+
+#. module: object_merger
+#: model:ir.model.fields,field_description:object_merger.field_object_merger_name
+#: field:object.merger,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: object_merger
+#: field:ir.model,object_merger_model:0
+#: model:ir.model.fields,field_description:object_merger.field_ir_model_object_merger_model
+#: model:ir.ui.menu,name:object_merger.menu_object_merger_settings
+msgid "Object Merger"
+msgstr "Unificador de Objetos"
+
+#. module: object_merger
+#: code:addons/object_merger/wizard/object_merger.py:96
+#, python-format
+msgid "Please select one value to keep"
+msgstr "Por favor seleccione un valor a mantener"
+
+#. module: object_merger
+#: code:addons/object_merger/wizard/object_merger.py:86
+#, python-format
+msgid "The is no active model defined!"
+msgstr "No es un modelo activo definido"
+
+#. module: object_merger
+#: code:addons/object_merger/res_config.py:124
+#, python-format
+msgid "To keep"
+msgstr "a mantener"
+
