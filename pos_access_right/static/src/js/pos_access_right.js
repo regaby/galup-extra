@@ -171,10 +171,17 @@ screens.NumpadWidget
             var group_discount_id = this.pos.config.group_discount_id[0];
             var group_change_unit_price_id = this.pos.config.group_change_unit_price_id[0];
             var gui = this.gui;
+            var is_allowed = [];
+            var v_this = this;
+            var v_event = event;
+            is_allowed[0] = true;
             records.then(function(result){
                 groups_id = result[0]['groups_id'];
                 if (event.currentTarget.attributes['data-mode'].nodeValue == 'discount' &&
                         groups_id.indexOf(group_discount_id) == -1) {
+                    $('.selected-mode').removeClass('selected-mode');
+                    $(".mode-button[data-mode='quantity']").addClass('selected-mode');
+                    is_allowed[0] = false;
                     gui.show_popup('error',{
                         'title': _t('Discount - Unauthorized function'),
                         'body':  _t('Please ask your manager to do it.'),
@@ -182,14 +189,23 @@ screens.NumpadWidget
                 }
                 else if (event.currentTarget.attributes['data-mode'].nodeValue == 'price' &&
                         groups_id.indexOf(group_change_unit_price_id) == -1) {
+                    $('.selected-mode').removeClass('selected-mode');
+                    $(".mode-button[data-mode='quantity']").addClass('selected-mode');
+                    is_allowed[0] = false;
                     gui.show_popup('error',{
                         'title': _t('Change Unit Price - Unauthorized function'),
                         'body':  _t('Please ask your manager to do it.'),
                     });
                 }
+
             }
-            );
-            return this._super(event);
+            ).then(function(result){
+                if (is_allowed[0]) {
+                    var newMode = v_event.currentTarget.attributes['data-mode'].nodeValue;
+                    return v_this.state.changeMode(newMode);
+                }
+            });
+
 
         },
     });
