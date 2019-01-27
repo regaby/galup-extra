@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields
+from openerp.tools import float_is_zero
+from openerp.exceptions import UserError, ValidationError
+import time
+from openerp.tools.translate import _
 
 class PosOrder(models.Model):
     _inherit = "pos.order"
@@ -96,3 +100,55 @@ class PosOrder(models.Model):
                 break
 
         return statement_id
+
+    def _process_order(self, cr, uid, order, context=None):
+        """
+            Heredo este método para corregir referencia en pago negativo (retirar dinero)
+        """
+        prec_acc = self.pool.get('decimal.precision').precision_get(cr, uid, 'Account')
+        session = self.pool.get('pos.session').browse(cr, uid, order['pos_session_id'], context=context)
+
+        if session.state == 'closing_control' or session.state == 'closed':
+            session_id = self._get_valid_session(cr, uid, order, context=context)
+            session = self.pool.get('pos.session').browse(cr, uid, session_id, context=context)
+            order['pos_session_id'] = session_id
+
+        order_id = self.create(cr, uid, self._order_fields(cr, uid, order, context=context),context)
+        journal_ids = set()
+        for payments in order['statement_ids']:
+            if not float_is_zero(payments[2]['amount'], precision_digits=prec_acc):
+                self.add_payment(cr, uid, order_id, self._payment_fields(cr, uid, payments[2], context=context), context=context)
+            else:
+                v_payment = payments[2]
+            journal_ids.add(payments[2]['journal_id'])
+
+        if session.sequence_number <= order['sequence_number']:
+            session.write({'sequence_number': order['sequence_number'] + 1})
+            session.refresh()
+
+        if not float_is_zero(order['amount_return'], precision_digits=prec_acc):
+            cash_journal = session.cash_journal_id.id
+            if not cash_journal:
+                # Select for change one of the cash journals used in this payment
+                cash_journal_ids = self.pool['account.journal'].search(cr, uid, [
+                    ('type', '=', 'cash'),
+                    ('id', 'in', list(journal_ids)),
+                ], limit=1, context=context)
+                if not cash_journal_ids:
+                    # If none, select for change one of the cash journals of the POS
+                    # This is used for example when a customer pays by credit card
+                    # an amount higher than total amount of the order and gets cash back
+                    cash_journal_ids = [statement.journal_id.id for statement in session.statement_ids
+                                        if statement.journal_id.type == 'cash']
+                    if not cash_journal_ids:
+                        raise UserError(_("No cash statement found for this session. Unable to record returned cash."))
+                cash_journal = cash_journal_ids[0]
+            v_dicc = self._payment_fields(cr, uid, v_payment, context=context)
+            v_dicc.update({'amount': -order['amount_return'],
+                'payment_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+                'payment_name': _('return'),
+                'journal': cash_journal,
+            })
+            self.add_payment(cr, uid, order_id, v_dicc, context=context)
+
+        return order_id
