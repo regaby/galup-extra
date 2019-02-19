@@ -32,7 +32,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
-                        <th>Phone</th>
+                        <th>Deuda Cta. Cte.</th>
                         <th>Responsabilidad AFIP</th>
                         <th>Tipo Documento</th>
                         <th>Número de documento</th>
@@ -47,7 +47,7 @@
         <t t-jquery=".client-line" t-operation="inner">
             <td><t t-esc='partner.name' /></td>
             <td><t t-esc='partner.address' /></td>
-            <td><t t-esc='partner.phone or partner.mobile or ""' /></td>
+            <td t-attf-class="detail client-debt #{partner.debt gt 0 and 'positive' or partner.debt lt 0 and 'negative' or 'empty'}"><t t-esc='widget.format_currency(partner.debt) or ""' /></td>
             <td><t t-esc='partner.afip_responsability_type_id[1] or ""' /></td>
             <td><t t-esc='partner.main_id_category_id[1] or ""' /></td>
             <td><t t-esc='partner.main_id_number or ""' /></td>

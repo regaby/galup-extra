@@ -4,6 +4,7 @@
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/pos_fields_partner/static/src/js/pos.js"></script>
             <script type="text/javascript" src="/pos_fields_partner/static/src/js/screens.js"></script>
+            <link rel="stylesheet" href="/pos_fields_partner/static/src/css/tg_pos.css" id="pos_fields_partner-stylesheet"/>
         </xpath>
     </template>
 </odoo>

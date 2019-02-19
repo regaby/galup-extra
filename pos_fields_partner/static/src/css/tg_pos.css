@@ -1,0 +1,7 @@
+td.detail.client-debt.positive{
+    color: red;
+}
+
+td.detail.client-debt.negative{
+    color: green;
+}
