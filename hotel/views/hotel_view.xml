@@ -766,6 +766,7 @@
                                         <field name="user_id" domain="[('id','=',uid)]"/>
                                     </tree>
                                 </field>
+                                <button name="recibo" string="Imprimir Recibo" type="object" class="oe_highlight"/>
                                 <group colspan="2" class="oe_subtotal_footer oe_right">
                                     <field name="service_total" sum="Total" widget='monetary' />
                                     <field name="service_paid" sum="Monto Cobrado" widget='monetary' />

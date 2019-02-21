@@ -378,6 +378,20 @@ class HotelFolio(models.Model):
         '''
         return self.env['sale.order']._invoiced_search(obj, name, args)
 
+    @api.multi
+    def recibo(self):
+        datas = {
+             'ids': [],
+             'model': 'hotel.folio',
+             'form': self.id,
+             'context': {'active_id': self.id},
+        }
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'recibo_x',
+            'datas': datas,
+        }
+
     _name = 'hotel.folio'
     _description = 'hotel folio new'
     _rec_name = 'order_id'
