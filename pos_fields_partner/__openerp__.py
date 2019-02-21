@@ -9,6 +9,7 @@
     'depends': ['point_of_sale'],
     'data': [
         'views/pos_fields_partner.xml',
+        'views/report_receipt.xml',
     ],
     'qweb': [
         'static/src/xml/pos.xml',

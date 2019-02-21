@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="report_receipt"
+          inherit_id="point_of_sale.report_receipt"
+          name="Add taxes detail">
+    <xpath expr="//div[@class='col-xs-12 text-center']" position="replace">
+        <div class="col-xs-12 text-center">
+            <h2 t-esc="o.user_id.company_id.name"/>
+            <div t-field="o.partner_id"
+                t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true, "phone_icons": true}'/>
+            <span t-esc="o.pos_reference[6:]"/><br/>
+            Fecha: <span t-field="o.date_order"/><br/>
+        </div>
+    </xpath>
+</template>
+
+
+</data>
+</openerp>
