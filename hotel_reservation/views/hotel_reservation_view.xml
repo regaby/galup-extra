@@ -337,6 +337,7 @@
                             <field name="checkin_hour" />
                             <field name="checkout_hour" />
                             <field name="list_price" />
+                            <field name="observations" />
                              <field name="warehouse_id" invisible="1"/>
                              <field name="pricelist_id" invisible="1"/>
                              <field name="partner_invoice_id" invisible="1"/>

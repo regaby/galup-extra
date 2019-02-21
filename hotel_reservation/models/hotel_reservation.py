@@ -1066,6 +1066,7 @@ class QuickRoomReservation(models.TransientModel):
     checkin_hour = fields.Integer('Hora Entrada', required=True,default=lambda *a: 12)
     checkout_hour = fields.Integer('Hora Salida', required=True,default=lambda *a: 10)
     list_price = fields.Float('Precio Opcional', digits_compute=dp.get_precision('Product Price'))
+    observations = fields.Text('Observaciones')
     #------
 
     @api.onchange('check_out', 'check_in')
@@ -1163,7 +1164,8 @@ class QuickRoomReservation(models.TransientModel):
                                       'name': (res.room_id and
                                                res.room_id.name or ''),
                                       'list_price': res.list_price and res.list_price or False,
-                                      })]
+                                      })],
+               'observations': res.observations,
                }
             reservation_id = hotel_res_obj.create(reservation)
             workflow.trg_validate(self._uid, 'hotel.reservation', reservation_id.id,
