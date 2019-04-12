@@ -345,7 +345,7 @@ class HotelFolio(models.Model):
             to_zone = 'UTC'
         tm_delta = datetime.timedelta(days=1)
         return datetime.datetime.strptime(_offset_format_timestamp1
-                                          (time.strftime("%Y-%m-%d 12:00:00"),
+                                          (time.strftime("%Y-%m-%d 10:00:00"),
                                            '%Y-%m-%d %H:%M:%S',
                                            '%Y-%m-%d %H:%M:%S',
                                            ignore_unparsable_time=True,
