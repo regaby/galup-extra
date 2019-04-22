@@ -91,7 +91,8 @@ class HotelReservation(models.Model):
             chkout_dt = datetime.datetime.strptime(chckout, server_dt)
             dur = chkout_dt - chkin_dt
             sec_dur = dur.seconds
-            if (not dur.days and not sec_dur) or (dur.days and not sec_dur):
+            additional_hours = abs((dur.seconds / 60) / 60)
+            if additional_hours <= 12:
                 myduration = dur.days
             else:
                 myduration = dur.days + 1
