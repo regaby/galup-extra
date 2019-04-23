@@ -35,7 +35,7 @@
                         <button name="send_reservation_maill" type="object" string="Enviar reserva por email" states="confirm" class="oe_highlight"/>
                         <button name="confirm" string="Confirmar" states="draft" class="oe_highlight"/>
                         <button name="done" string="Crear Folio" states="confirm" class="oe_highlight"/>
-                        <button name="cancel" string="Cancelar Reserva" states="draft,confirm"
+                        <button name="cancel" string="Cancelar Reserva" states="draft,confirm,done"
                             class="oe_highlight" />
                         <button name="draft" string="Volver a borrador" states="cancel"
                         class="oe_highlight" />

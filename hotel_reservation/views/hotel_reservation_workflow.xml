@@ -7,8 +7,8 @@
             <field name="on_create">True</field>
         </record>
 
-        # ---------------------------------------------- 
-        #       Activity 
+        # ----------------------------------------------
+        #       Activity
        # ----------------------------------------------
         <record model="workflow.activity" id="act_draft">
             <field name="wkf_id" ref="wkf_reservation" />
@@ -24,7 +24,7 @@
         <record model="workflow.activity" id="act_done">
             <field name="wkf_id" ref="wkf_reservation" />
             <field name="name">done</field>
-            <field name="flow_stop">True</field>
+            <field name="flow_stop">False</field>
             <field name="kind">function</field>
             <field name="action">_create_folio()</field>
         </record>
@@ -65,6 +65,12 @@
             <field name="act_to" ref="act_draft" />
             <field name="signal">draft</field>
             <field name="condition">set_to_draft_reservation()</field>
+        </record>
+
+        <record model="workflow.transition" id="t6">
+            <field name="act_from" ref="act_done" />
+            <field name="act_to" ref="act_cancel" />
+            <field name="signal">cancel</field>
         </record>
 
     </data>
