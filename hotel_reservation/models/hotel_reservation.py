@@ -1002,10 +1002,17 @@ class RoomReservationSummary(models.Model):
                                             ('status', 'not in', ['cancel','draft'])
                                             ]))
                         if folline_ids:
+                            folio = folline_ids.folio_id
+                            ttip = "%s - %s \n%s noche(s) desde %s hasta %s"%(folio.name,
+                                                                              folio.partner_id.name,
+                                                                              folio.duration,
+                                                                              folio.checkin_date[0:10],
+                                                                              folio.checkout_date[0:10],
+                                                                             )
                             room_list_stats.append({'state': 'Ocupado',
                                                     'room_id': room.id,
                                                     'date': chk_date,
-                                                    })
+                                                    'tooltip': ttip})
                             ocupado = True
 
                         if not ocupado:
@@ -1018,9 +1025,18 @@ class RoomReservationSummary(models.Model):
                                                 # ('status','not in',['cancel','done']),
                                                 ]))
                             if reservline_ids:
+                                reserv = reservline_ids.reservation_id
+                                ttip = "%s - %s \n%s noche(s) desde %s hasta %s"%(reserv.reservation_no,
+                                                                                  reserv.partner_id.name,
+                                                                                  reserv.duration,
+                                                                                  reserv.checkin_date,
+                                                                                  reserv.checkout_date,
+                                                                                 )
+
                                 room_list_stats.append({'state': 'Reservado',
                                                         'date': chk_date,
-                                                        'room_id': room.id})
+                                                        'room_id': room.id,
+                                                        'tooltip': ttip})
                                 reservado = True
                         if not ocupado and not reservado:
                             pre_date = chk_date2.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
@@ -1073,7 +1089,8 @@ class RoomReservationSummary(models.Model):
                         if not ocupado and not reservado and not late_checkout and not early_checkin :
                             room_list_stats.append({'state': 'Libre',
                                                          'date': chk_date,
-                                                         'room_id': room.id})
+                                                         'room_id': room.id,
+                                                         'tooltip': 'Precio: $%s'%(room.price)})
                 room_detail.update({'value': room_list_stats})
                 all_room_detail.append(room_detail)
             main_header.append({'header': summary_header_list})

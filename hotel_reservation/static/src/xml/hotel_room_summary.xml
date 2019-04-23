@@ -17,16 +17,17 @@
                         <td style="text-align:center;position:absolute;background-color:#FFF"><t t-esc="detail.name"/></td>
                         <t t-foreach="detail.value" t-as="status">
                             <t t-if="status.state == 'Libre'">
-                                <td class="table_free"  t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;"><t t-esc="status.state"/></td>
+                                <td class="table_free"  t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;"><div class="tooltip2"><t t-esc="status.state"/><span class="tooltiptext2"><t t-esc="status.tooltip"/></span></div></td>
                             </t>
                             <t t-if="status.state == 'Bloqueado'">
                                 <td class="table_blocked" t-att-data = "status.room_id"  style="text-align:center;" ><t t-esc="status.state"/></td>
                             </t>
                             <t t-if="status.state == 'Reservado'">
-                                <td class="table_reserved" t-att-data = "status.room_id" t-att-date = "status.date"  style="text-align:center;" ><t t-esc="status.state"/></td>
+                                <td class="table_reserved" t-att-data = "status.room_id" t-att-date = "status.date"  style="text-align:center;" ><div class="tooltip2"><t t-esc="status.state"/><span class="tooltiptext2"><t t-esc="status.tooltip"/></span></div></td>
+
                             </t>
                             <t t-if="status.state == 'Ocupado'">
-                                <td class="table_ocupado" t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;" ><t t-esc="status.state"/></td>
+                                <td class="table_ocupado" t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;" ><div class="tooltip2"><t t-esc="status.state"/><span class="tooltiptext2"><t t-esc="status.tooltip"/></span></div></td>
                             </t>
                             <t t-if="status.state == 'Late Checkout'">
                                 <td class="table_late_checkout" t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;" ><t t-esc="status.state"/></td>
