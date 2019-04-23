@@ -42,3 +42,12 @@
 	vertical-align: middle;
 	cursor:pointer;
 }
+.table_late_checkout, .table_early_checkin
+{
+	background-color: gray;
+	color: white;
+	text-align: center;
+	min-width:100px;
+	vertical-align: middle;
+	cursor:pointer;
+}

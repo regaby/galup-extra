@@ -856,7 +856,7 @@ class RoomReservationSummary(models.Model):
     date_to = fields.Datetime('Date To')
     summary_header = fields.Text('Summary Header')
     room_summary = fields.Text('Room Summary')
-    # esto se agregara para filtrar por categoria
+    # TODO: esto se agregara para filtrar por categoria
     # category_id = fields.Many2one('')
     # month = fields.Selection([(1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'), (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'),
     #                           (8, 'Agosto'), (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')],'Mes',
@@ -987,10 +987,14 @@ class RoomReservationSummary(models.Model):
                                                 'room_id': room.id})
                 else:
                     for chk_date in date_range_list:
+                        chk_date2 = (datetime.datetime.strptime
+                         (chk_date, DEFAULT_SERVER_DATETIME_FORMAT))
+
                         chk_date = chk_date[0:10]
                         ocupado = False
                         reservado = False
-                        early_late_check = False
+                        late_checkout = False
+                        early_checkin = False
                         folline_ids = (folio_line_obj.search
                                           ([('id', 'in', folline_idss),
                                             ('check_in', '<=', chk_date),
@@ -1004,7 +1008,7 @@ class RoomReservationSummary(models.Model):
                                                     })
                             ocupado = True
 
-                        if ocupado==False:
+                        if not ocupado:
                             reservline_ids = (reservation_line_obj.search
                                               ([('id', 'in', reservline_idss),
                                                 ('check_in', '<=', chk_date),
@@ -1019,6 +1023,54 @@ class RoomReservationSummary(models.Model):
                                                         'room_id': room.id})
                                 reservado = True
                         if not ocupado and not reservado:
+                            pre_date = chk_date2.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+                            reservline_ids = (reservation_line_obj.search
+                                              ([('id', 'in', reservline_idss),
+                                                ('check_in', '<=', pre_date[0:10]),
+                                                ('check_out', '>', "%s %s"%(pre_date[0:10], '15:00:00')),
+                                                ('check_out', '<=', "%s %s"%(pre_date[0:10], '23:59:59')),
+                                                ('state','=','assigned'),
+                                                ('status','<>','cancel'),
+                                                # ('status','not in',['cancel','done']),
+                                                ]))
+                            folline_ids = (folio_line_obj.search
+                                          ([('id', 'in', folline_idss),
+                                            ('check_in', '<=', pre_date[0:10]),
+                                            ('check_out', '>', "%s %s"%(pre_date[0:10], '15:00:00')),
+                                            ('check_out', '<=', "%s %s"%(pre_date[0:10], '23:59:59')),
+                                            ('status', 'not in', ['cancel','draft'])
+                                            ]))
+                            if reservline_ids or folline_ids:
+                                room_list_stats.append({'state': 'Late Checkout',
+                                                        'date': chk_date,
+                                                        'room_id': room.id})
+                                late_checkout = True
+                        # if not ocupado and not reservado and not late_checkout:
+                        #     temp_date = chk_date2 + datetime.timedelta(days=1)
+                        #     pre_date = temp_date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+                        #     reservline_ids = (reservation_line_obj.search
+                        #                       ([('id', 'in', reservline_idss),
+                        #                         ('check_out', '>=', pre_date[0:10]),
+                        #                         ('check_in', '<', "%s %s"%(pre_date[0:10], '13:00:00')),
+                        #                         ('check_in', '>=', "%s %s"%(pre_date[0:10], '00:00:00')),
+                        #                         ('state','=','assigned'),
+                        #                         ('status','<>','cancel'),
+                        #                         # ('status','not in',['cancel','done']),
+                        #                         ]))
+                        #     folline_ids = (folio_line_obj.search
+                        #                   ([('id', 'in', folline_idss),
+                        #                     ('check_out', '>=', pre_date[0:10]),
+                        #                     ('check_in', '<', "%s %s"%(pre_date[0:10], '13:00:00')),
+                        #                     ('check_in', '>=', "%s %s"%(pre_date[0:10], '00:00:00')),
+                        #                     ('status', 'not in', ['cancel','draft'])
+                        #                     ]))
+                        #     if reservline_ids or folline_ids:
+                        #         room_list_stats.append({'state': 'Early Checkin',
+                        #                                 'date': chk_date,
+                        #                                 'room_id': room.id})
+                        #         early_checkin = True
+
+                        if not ocupado and not reservado and not late_checkout and not early_checkin :
                             room_list_stats.append({'state': 'Libre',
                                                          'date': chk_date,
                                                          'room_id': room.id})

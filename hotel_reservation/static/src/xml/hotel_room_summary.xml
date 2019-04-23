@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>  
+<?xml version="1.0" encoding="UTF-8"?>
 
 <templates id="hotel_template" xml:space="preserve">
 
@@ -8,7 +8,7 @@
                 <t t-foreach="widget.summary_header" t-as="header_detail">
                 <tr>
                     <t t-foreach="header_detail.header" t-as="date">
-                        <th class="table_header" style="text-align:center;"><t t-esc="date"/></th>  
+                        <th class="table_header" style="text-align:center;"><t t-esc="date"/></th>
                     </t>
                 </tr>
                 </t>
@@ -27,6 +27,12 @@
                             </t>
                             <t t-if="status.state == 'Ocupado'">
                                 <td class="table_ocupado" t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;" ><t t-esc="status.state"/></td>
+                            </t>
+                            <t t-if="status.state == 'Late Checkout'">
+                                <td class="table_late_checkout" t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;" ><t t-esc="status.state"/></td>
+                            </t>
+                            <t t-if="status.state == 'Early Checkin'">
+                                <td class="table_early_checkin" t-att-data = "status.room_id" t-att-date = "status.date" style="text-align:center;" ><t t-esc="status.state"/></td>
                             </t>
                         </t>
                     </tr>
