@@ -967,6 +967,8 @@ class RoomReservationSummary(models.Model):
             for room in room_ids:
                 room_detail = {}
                 room_list_stats = []
+                folline_idss = [i.ids for i in room.room_line_ids]
+                reservline_idss = [i.ids for i in room.room_reservation_line_ids]
                 room_detail.update({'name': "%s (%s)"%(room.name,room.categ_id.name[0:13]) or ''})
                 room_detail.update({'categ_id': room.categ_id.id or False})
                 # habitacion bloqueada
@@ -988,10 +990,9 @@ class RoomReservationSummary(models.Model):
                         chk_date = chk_date[0:10]
                         ocupado = False
                         reservado = False
-                        folline_ids = [i.ids for i in
-                                          room.room_line_ids]
+                        early_late_check = False
                         folline_ids = (folio_line_obj.search
-                                          ([('id', 'in', folline_ids),
+                                          ([('id', 'in', folline_idss),
                                             ('check_in', '<=', chk_date),
                                             ('check_out', '>', chk_date),
                                             ('status', 'not in', ['cancel','draft'])
@@ -1004,10 +1005,8 @@ class RoomReservationSummary(models.Model):
                             ocupado = True
 
                         if ocupado==False:
-                            reservline_ids = [i.ids for i in
-                                              room.room_reservation_line_ids]
                             reservline_ids = (reservation_line_obj.search
-                                              ([('id', 'in', reservline_ids),
+                                              ([('id', 'in', reservline_idss),
                                                 ('check_in', '<=', chk_date),
                                                 ('check_out', '>', chk_date),
                                                 ('state','=','assigned'),
