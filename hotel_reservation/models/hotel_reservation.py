@@ -856,8 +856,8 @@ class RoomReservationSummary(models.Model):
     date_to = fields.Datetime('Date To')
     summary_header = fields.Text('Summary Header')
     room_summary = fields.Text('Room Summary')
-    # TODO: esto se agregara para filtrar por categoria
-    # category_id = fields.Many2one('')
+    categ_id = fields.Many2one('hotel.room.type', 'Room Type',
+                               domain="[('isroomtype','=',True)]")
     # month = fields.Selection([(1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'), (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'),
     #                           (8, 'Agosto'), (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')],'Mes',
     #                           default=lambda *a: time.gmtime()[1])
@@ -1083,12 +1083,13 @@ class RoomReservationSummary(models.Model):
             }
         return res
 
-    @api.onchange('date_from', 'date_to')
+    @api.onchange('date_from', 'date_to', 'categ_id')
     def get_room_summary(self):
         '''
         @param self: object pointer
          '''
-        res = self.check_reservation(False, self.date_from, self.date_to)
+        cat_id = self.categ_id and [self.categ_id.cat_id.id] or False
+        res = self.check_reservation(cat_id, self.date_from, self.date_to)
         self.summary_header = str(res['summary_header'])
         self.room_summary = str(res['room_summary'])
         return {}

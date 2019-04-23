@@ -303,6 +303,7 @@
                                  <field name="date_from" class="oe_inline"/>
                                  a
                                  <field name="date_to" class="oe_inline"/>
+                                 <field name="categ_id" class="oe_inline" widget="selection"/>
                              </div>
                          </group>
                          <notebook>
