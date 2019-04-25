@@ -818,8 +818,10 @@ class HotelFolio(models.Model):
 
     @api.multi
     def action_done(self):
-        # self.checkout_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-        self.write({'state': 'done', 'checkout_date': time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)})
+        now = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        if now[0:10] != self.checkout_date[0:10]:
+            raise ValidationError(_('No se puede realizar un checkout en una fecha diferente a la fecha de salida del folio.'))
+        self.write({'state': 'done', 'checkout_date': now})
         for line in self.room_lines:
             room_obj = self.env['hotel.room']
             room_id = room_obj.search([('name','=',line.product_id.name)])
