@@ -30,6 +30,10 @@ from openerp.addons.hotel.models import hotel
 import openerp.addons.decimal_precision as dp
 from openerp import workflow
 
+import logging
+
+LOGGER = logging.getLogger(__name__)
+
 class HotelPayment(models.Model):
     _inherit = 'hotel.payment'
 
@@ -934,8 +938,6 @@ class RoomReservationSummary(models.Model):
         res = {}
         all_detail = []
         room_obj = self.env['hotel.room']
-        reservation_line_obj = self.env['hotel.room.reservation.line']
-        folio_line_obj = self.env['folio.room.line']
         date_range_list = []
         main_header = []
         summary_header_list = ['Habitaciones']
@@ -948,7 +950,7 @@ class RoomReservationSummary(models.Model):
             d_to_obj = (datetime.datetime.strptime
                         (date_to, DEFAULT_SERVER_DATETIME_FORMAT))
             temp_date = d_frm_obj
-            while(temp_date <= d_to_obj):
+            while temp_date <= d_to_obj:
                 val = ''
                 val = (str(temp_date.strftime("%a")) + ' ' +
                        str(temp_date.strftime("%b")) + ' ' +
@@ -960,16 +962,15 @@ class RoomReservationSummary(models.Model):
                 temp_date = temp_date + datetime.timedelta(days=1)
             all_detail.append(summary_header_list)
             if cat_id:
-                room_ids = room_obj.search([('categ_id','in',cat_id)])
+                room_ids = room_obj.search([('categ_id', 'in', cat_id)])
             else:
-                room_ids = room_obj.search([],order="sequence")
+                room_ids = room_obj.search([], order="sequence")
             all_room_detail = []
             for room in room_ids:
+                price = room.price
                 room_detail = {}
                 room_list_stats = []
-                folline_idss = [i.ids for i in room.room_line_ids]
-                reservline_idss = [i.ids for i in room.room_reservation_line_ids]
-                room_detail.update({'name': "%s (%s)"%(room.name,room.categ_id.name[0:13]) or ''})
+                room_detail.update({'name': "%s (%s)"%(room.name, room.categ_id.name[0:13]) or ''})
                 room_detail.update({'categ_id': room.categ_id.id or False})
                 # habitacion bloqueada
                 if room.status == 'blocked':
@@ -988,74 +989,77 @@ class RoomReservationSummary(models.Model):
                 else:
                     for chk_date in date_range_list:
                         chk_date2 = (datetime.datetime.strptime
-                         (chk_date, DEFAULT_SERVER_DATETIME_FORMAT))
+                                     (chk_date, DEFAULT_SERVER_DATETIME_FORMAT))
 
                         chk_date = chk_date[0:10]
                         ocupado = False
                         reservado = False
                         late_checkout = False
                         early_checkin = False
-                        folline_ids = (folio_line_obj.search
-                                          ([('id', 'in', folline_idss),
-                                            ('check_in', '<=', chk_date),
-                                            ('check_out', '>', chk_date),
-                                            ('status', 'not in', ['cancel','draft'])
-                                            ]))
+                        self._cr.execute("""SELECT f.id
+                                                FROM "folio_room_line"
+                                                join hotel_folio f on (folio_room_line.folio_id=f.id)
+                                                join sale_order s on (f.order_id=s.id)
+                                                WHERE (((("folio_room_line"."room_id" = %s)
+                                                AND  ("folio_room_line"."check_in" <= '%s  23:59:59'))
+                                                AND  ("folio_room_line"."check_out" > '%s 23:59:59'))
+                                                and s.state not in ('cancel','draft')
+                                                ) ORDER BY "folio_room_line"."id"
+                          """%(room.id, chk_date, chk_date))
+                        folline_ids = self._cr.fetchone()
                         if folline_ids:
-                            folio = folline_ids.folio_id
-                            ttip = "%s - %s \n%s noche(s) desde %s hasta %s"%(folio.name,
-                                                                              folio.partner_id.name,
-                                                                              folio.duration,
-                                                                              folio.checkin_date[0:10],
-                                                                              folio.checkout_date[0:10],
-                                                                             )
                             room_list_stats.append({'state': 'Ocupado',
                                                     'room_id': room.id,
                                                     'date': chk_date,
-                                                    'tooltip': ttip})
+                                                    'res_id': folline_ids[0]
+                                                   })
                             ocupado = True
 
                         if not ocupado:
-                            reservline_ids = (reservation_line_obj.search
-                                              ([('id', 'in', reservline_idss),
-                                                ('check_in', '<=', chk_date),
-                                                ('check_out', '>', chk_date),
-                                                ('state','=','assigned'),
-                                                ('status','<>','cancel'),
-                                                # ('status','not in',['cancel','done']),
-                                                ]))
+                            self._cr.execute("""SELECT r.id
+                                                FROM "hotel_room_reservation_line"
+                                                join hotel_reservation r on ("hotel_room_reservation_line".reservation_id=r.id)
+                                                WHERE ((((("hotel_room_reservation_line"."room_id" = %s)
+                                                AND  ("hotel_room_reservation_line"."check_in" <= '%s  23:59:59'))
+                                                AND  ("hotel_room_reservation_line"."check_out" > '%s  23:59:59'))
+                                                AND  ("hotel_room_reservation_line"."state" = 'assigned'))
+                                                and r.state != 'cancel'
+                                                ) ORDER BY "hotel_room_reservation_line"."id"
+                              """%(room.id, chk_date, chk_date))
+                            reservline_ids = self._cr.fetchone()
                             if reservline_ids:
-                                reserv = reservline_ids.reservation_id
-                                ttip = "%s - %s \n%s noche(s) desde %s hasta %s"%(reserv.reservation_no,
-                                                                                  reserv.partner_id.name,
-                                                                                  reserv.duration,
-                                                                                  reserv.checkin_date,
-                                                                                  reserv.checkout_date,
-                                                                                 )
-
                                 room_list_stats.append({'state': 'Reservado',
                                                         'date': chk_date,
                                                         'room_id': room.id,
-                                                        'tooltip': ttip})
+                                                        'res_id': reservline_ids[0]
+                                                       })
                                 reservado = True
                         if not ocupado and not reservado:
                             pre_date = chk_date2.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-                            reservline_ids = (reservation_line_obj.search
-                                              ([('id', 'in', reservline_idss),
-                                                ('check_in', '<=', pre_date[0:10]),
-                                                ('check_out', '>', "%s %s"%(pre_date[0:10], '15:00:00')),
-                                                ('check_out', '<=', "%s %s"%(pre_date[0:10], '23:59:59')),
-                                                ('state','=','assigned'),
-                                                ('status','<>','cancel'),
-                                                # ('status','not in',['cancel','done']),
-                                                ]))
-                            folline_ids = (folio_line_obj.search
-                                          ([('id', 'in', folline_idss),
-                                            ('check_in', '<=', pre_date[0:10]),
-                                            ('check_out', '>', "%s %s"%(pre_date[0:10], '15:00:00')),
-                                            ('check_out', '<=', "%s %s"%(pre_date[0:10], '23:59:59')),
-                                            ('status', 'not in', ['cancel','draft'])
-                                            ]))
+                            self._cr.execute("""SELECT "folio_room_line".id
+                                                FROM "folio_room_line"
+                                                join hotel_folio f on (folio_room_line.folio_id=f.id)
+                                                join sale_order s on (f.order_id=s.id)
+                                                WHERE ((((("folio_room_line"."room_id" = %s)
+                                                AND  ("folio_room_line"."check_in" <= '%s 23:59:59'))
+                                                AND  ("folio_room_line"."check_out" > '%s 15:00:00'))
+                                                AND  ("folio_room_line"."check_out" <= '%s 23:59:59'))
+                                                and s.state not in ('cancel','draft')
+                                                ) ORDER BY "folio_room_line"."id"
+                              """%(room.id, pre_date[0:10], pre_date[0:10], pre_date[0:10]))
+                            folline_ids = self._cr.fetchone()
+                            self._cr.execute("""SELECT "hotel_room_reservation_line".id
+                                                FROM "hotel_room_reservation_line"
+                                                join hotel_reservation r on ("hotel_room_reservation_line".reservation_id=r.id)
+                                                WHERE (((((("hotel_room_reservation_line"."room_id" = %s)
+                                                AND  ("hotel_room_reservation_line"."check_in" <= '%s'))
+                                                AND  ("hotel_room_reservation_line"."check_out" > '%s 15:00:00'))
+                                                AND  ("hotel_room_reservation_line"."check_out" <= '%s 23:59:59'))
+                                                AND  ("hotel_room_reservation_line"."state" = 'assigned'))
+                                                and r.state != 'cancel'
+                                                ) ORDER BY "hotel_room_reservation_line"."id"
+                              """%(room.id, pre_date[0:10], pre_date[0:10], pre_date[0:10]))
+                            reservline_ids = self._cr.fetchone()
                             if reservline_ids or folline_ids:
                                 room_list_stats.append({'state': 'Late Checkout',
                                                         'date': chk_date,
@@ -1088,9 +1092,10 @@ class RoomReservationSummary(models.Model):
 
                         if not ocupado and not reservado and not late_checkout and not early_checkin :
                             room_list_stats.append({'state': 'Libre',
-                                                         'date': chk_date,
-                                                         'room_id': room.id,
-                                                         'tooltip': 'Precio: $%s'%(room.price)})
+                                                    'date': chk_date,
+                                                    'room_id': room.id,
+                                                    'tooltip': 'Precio: $%s'%(price),
+                                                   })
                 room_detail.update({'value': room_list_stats})
                 all_room_detail.append(room_detail)
             main_header.append({'header': summary_header_list})
@@ -1100,15 +1105,39 @@ class RoomReservationSummary(models.Model):
             }
         return res
 
+    def get_tooltip(self, state, res_id):
+        if state == 'Ocupado':
+            sql = """select f.name || ' - ' || p.name || ' ' || duration || ' noche(s) desde ' ||
+                        substring(checkin_date::text,0,11) || ' hasta ' || substring(checkout_date::text,0,11)
+                        from hotel_folio f
+                        join sale_order s on (f.order_id=s.id)
+                        join res_partner p on (s.partner_id=p.id)
+                        where f.id = %s"""%res_id
+        else:
+            sql = """select reservation_no || ' - ' || p.name || ' desde ' || checkin_date || '
+                        hasta ' || checkout_date
+                        from hotel_reservation r
+                        join res_partner p on (r.partner_id=p.id)
+                        where r.id = %s"""%res_id
+        self._cr.execute(sql)
+        ress = self._cr.fetchone()
+        return ress[0]
+
     @api.onchange('date_from', 'date_to', 'categ_id')
     def get_room_summary(self):
         '''
         @param self: object pointer
          '''
+        ahora = time.time()
         cat_id = self.categ_id and [self.categ_id.cat_id.id] or False
         res = self.check_reservation(cat_id, self.date_from, self.date_to)
+        for room in res['room_summary']:
+            for value in room['value']:
+                if value['state'] in ['Ocupado', 'Reservado']:
+                    value['tooltip'] = self.get_tooltip(value['state'], value['res_id'])
         self.summary_header = str(res['summary_header'])
         self.room_summary = str(res['room_summary'])
+        LOGGER.info("--- %s seconds ---" % (time.time() - ahora))
         return {}
 
 
