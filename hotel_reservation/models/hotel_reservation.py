@@ -1109,14 +1109,14 @@ class RoomReservationSummary(models.Model):
         if state == 'Ocupado':
             sql = """select f.name || ' - ' || p.name || ' ' || duration || ' noche(s) desde ' ||
                         substring(checkin_date::text,0,11) || ' hasta ' || substring(checkout_date::text,0,11) || ' ' ||
-                        f.observations
+                        coalesce(f.observations,'')
                         from hotel_folio f
                         join sale_order s on (f.order_id=s.id)
                         join res_partner p on (s.partner_id=p.id)
                         where f.id = %s"""%res_id
         else:
             sql = """select reservation_no || ' - ' || p.name || ' desde ' || checkin_date || '
-                        hasta ' || checkout_date || ' ' || r.observations
+                        hasta ' || checkout_date || ' ' || coalesce(r.observations,'')
                         from hotel_reservation r
                         join res_partner p on (r.partner_id=p.id)
                         where r.id = %s"""%res_id
