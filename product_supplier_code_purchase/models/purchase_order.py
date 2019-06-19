@@ -23,4 +23,41 @@ class PurchaseOrderLine(models.Model):
                 code = supplier_info.product_code or ''
                 self.product_supplier_code = code
 
+    def update_product_info(self, order, product, product_supplier_code):
+        product_supplierinfo_obj = self.env['product.supplierinfo']
+        supplier_info = product_supplierinfo_obj.search([
+            '|', ('product_tmpl_id', '=', product.product_tmpl_id.id),
+            ('product_id', '=', product.id),
+            ('name', '=', order.partner_id.id)], limit=1)
+        if supplier_info:
+            supplier_info.product_code = product_supplier_code
+        else:
+            sup_info = {
+                'product_tmpl_id': product.product_tmpl_id.id,
+                'product_id': product.id,
+                'name': order.partner_id.id,
+                'product_code': product_supplier_code,
+            }
+            product_supplierinfo_obj.create(sup_info)
+
+    @api.model
+    def create(self, vals):
+        if 'product_supplier_code' in vals and 'product_id' in vals and 'order_id' in vals:
+            order = self.env['purchase.order'].browse(vals['order_id'])
+            product = self.env['product.product'].browse(vals['product_id'])
+            self.update_product_info(order, product, vals['product_supplier_code'])
+        return super(PurchaseOrderLine, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        if 'product_id' in vals:
+            product = self.env['product.product'].browse(vals['product_id'])
+        else:
+            product = self.product_id
+        order = self.order_id
+        if 'product_supplier_code' in vals:
+            self.update_product_info(order, product, vals['product_supplier_code'])
+        return super(PurchaseOrderLine, self).write(vals)
+
+
     product_supplier_code = fields.Char(string='Product Supplier Code')
