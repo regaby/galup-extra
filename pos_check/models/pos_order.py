@@ -115,9 +115,11 @@ class PosOrder(models.Model):
 
         order_id = self.create(cr, uid, self._order_fields(cr, uid, order, context=context),context)
         journal_ids = set()
+        v_payment = False
         for payments in order['statement_ids']:
             if not float_is_zero(payments[2]['amount'], precision_digits=prec_acc):
                 self.add_payment(cr, uid, order_id, self._payment_fields(cr, uid, payments[2], context=context), context=context)
+                v_payment = payments[2]
             else:
                 v_payment = payments[2]
             journal_ids.add(payments[2]['journal_id'])
