@@ -27,15 +27,15 @@
             <field name="body_html"><![CDATA[
                 <p>Hello <strong>${object.partner_id.name}</strong>,</p>
                 <p>This is to confirm your booking for a room at the <strong>${object.warehouse_id.name} Hotel</strong>,&nbsp;
-                   % if object.warehouse_id.partner_id.city: 
+                   % if object.warehouse_id.partner_id.city:
                    <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;
-                   % endif 
+                   % endif
                    % if object.warehouse_id.partner_id.country_id.name:
                    <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;
                    % endif
-                   On behalf of the hotel, we would like to express our gratitude to you for choosing our services. 
+                   On behalf of the hotel, we would like to express our gratitude to you for choosing our services.
                    Please find all the details regarding the confirmation of the reservation on Date <strong>${object.date_order}</strong> are listed below:
-                </p> 
+                </p>
                 &nbsp;&nbsp;<strong>Details :</strong><br/>
                 <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
                 &nbsp;&nbsp;Name Of Guest : <strong>${object.partner_id.name}</strong><br />
@@ -60,13 +60,13 @@
                             %endfor
                         %endfor
                 </table>
-               <br /> 
+               <br />
                <p>
-We would appreciate it if you could let us know in case there are any changes in your schedule or program. 
-In case you require check-in facilities at an earlier time due to flight changes or any other reasons, kindly inform us. 
-We are sure that you will find our services satisfactory. In case you need to cancel your reservation, 
-please Reply or Call us within 24 hours before the day of the check-in. 
-We look forward to providing you quality services at our hotel. 
+We would appreciate it if you could let us know in case there are any changes in your schedule or program.
+In case you require check-in facilities at an earlier time due to flight changes or any other reasons, kindly inform us.
+We are sure that you will find our services satisfactory. In case you need to cancel your reservation,
+please Reply or Call us within 24 hours before the day of the check-in.
+We look forward to providing you quality services at our hotel.
                </p>
                <br />
 <strong>Kind Regards<strong>,<br />
@@ -100,13 +100,13 @@ We look forward to providing you quality services at our hotel.
             <field name="body_html"><![CDATA[
                 <p>Estimado/a <strong>${object.partner_id.name}</strong>,</p>
                 <p>Gracias por elegir <strong>${object.warehouse_id.name} </strong>,&nbsp;
-                   % if object.warehouse_id.partner_id.city: 
+                   % if object.warehouse_id.partner_id.city:
                    <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;
-                   % endif 
+                   % endif
                    % if object.warehouse_id.partner_id.country_id.name:
                    <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;
                    % endif
-                </p> 
+                </p>
                 <p>El presente e-mail confirma que Usted tiene reservadas la/s habitaciones que a continuación se detallan, la tarifa
 expresada es la que rige en el momento de efectuada la reserva. Solicitamos que en los días próximos al ingreso
 reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tarifas sin previo aviso.</p>
@@ -115,41 +115,35 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                 <p>Saludos cordiales,</p>
 
 
-                
+
 
                 &nbsp;&nbsp;<strong>Información del Huésped :</strong><br/>
                 <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
-                &nbsp;&nbsp;Nombre : <strong>${object.partner_id.name}</strong><br />
-                &nbsp;&nbsp;Email : <strong>${object.partner_id.email}</strong><br />
-                &nbsp;&nbsp;Teléfono : 
-                % if object.partner_id.phone: 
-                    <strong>${object.partner_id.phone}</strong><br />
-                % endif 
+                &nbsp;&nbsp;Nombre : <strong>${object.partner_id.name}</strong><br>
+                &nbsp;&nbsp;Email : <strong>${object.partner_id.email}</strong><br>
+                &nbsp;&nbsp;Teléfono :
+                % if object.partner_id.phone:
+                    <strong>${object.partner_id.phone}</strong><br>
+                % endif
                 </p>
 
                 &nbsp;&nbsp;<strong>Detalles de la reserva :</strong><br/>
                 <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
-                &nbsp;&nbsp;N° de reserva : <strong>${object.reservation_no}</strong><br />
-                &nbsp;&nbsp;Fecha de la reserva : <strong>${object.date_order[8:10]}/${object.date_order[5:7]}/${object.date_order[0:4]} ${object.date_order[11:13]}:${object.date_order[14:16]}</strong><br />
-                &nbsp;&nbsp;N° de adultos/niños : <strong>${object.adults}</strong>/<strong>${object.children}</strong><br />
-                &nbsp;&nbsp;Fecha de llegada : <strong>${object.checkin_date[8:10]}/${object.checkin_date[5:7]}/${object.checkin_date[0:4]}</strong> - Horario: <strong>${object.checkin_hour}</strong><br />
-                &nbsp;&nbsp;Fecha de salida : <strong>${object.checkout_date[8:10]}/${object.checkout_date[5:7]}/${object.checkout_date[0:4]}</strong> - Horario: <strong>${object.checkout_hour}</strong><br />
+                &nbsp;&nbsp;N° de reserva : <strong>${object.reservation_no}</strong><br>
+                &nbsp;&nbsp;Fecha de la reserva : <strong>${object.date_order[8:10]}/${object.date_order[5:7]}/${object.date_order[0:4]} ${object.date_order[11:13]}:${object.date_order[14:16]}</strong><br>
+                &nbsp;&nbsp;N° de adultos/niños : <strong>${object.adults}</strong>/<strong>${object.children}</strong><br>
+                &nbsp;&nbsp;Fecha de llegada : <strong>${object.checkin_date[8:10]}/${object.checkin_date[5:7]}/${object.checkin_date[0:4]}</strong> - Horario: <strong>14</strong><br>
+                &nbsp;&nbsp;Fecha de salida : <strong>${object.checkout_date[8:10]}/${object.checkout_date[5:7]}/${object.checkout_date[0:4]}</strong> - Horario: <strong>${object.checkout_hour}</strong><br>
                 </p>
 
-                &nbsp;&nbsp;<strong>Tarifa de habitaciones por noche :</strong><br/>
-                <br/>
-                <table border="1" cellpadding="4" style="margin-left: 30px;">
-                        <tr>
-                            <th>Habitación</th>
-                            <th>Categoría</th>
-                            <th>Monto</th>
-                        </tr>
-                        %for line2 in object.reservation_line:
+                &nbsp;&nbsp;<strong>Tarifa de habitaciones por noche :</strong><br>
+                <br>
+
+<strong>Habitación - Categoría - Monto</strong><br>
+%for line2 in object.reservation_line:
                           %for line in line2.reserve:
-                                <tr >
-                                    <td>${line.name}</td>
-                                    <td>${line.categ_id.name}</td>
-                                    <td>
+${line.name} -
+${line.categ_id.name} -
                                       % if line.categ_id.name != 'Cochera':
                                         % if line2.list_price:
                                         ${line2.list_price}
@@ -158,18 +152,12 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                                         % endif
                                       % else:
                                         0
-                                      % endif
-                                    </td>
-                                </tr>
-                          %endfor
+                                      % endif<br>
+
+ %endfor
                         %endfor
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>${object.amount_total}</th>
-                        </tr>
-                </table>
-               <br /> 
+<strong>TOTAL: </strong> ${object.amount_total} <br>
+ <br>
                <p><strong>El presente voucher es la confirmación de su reserva, deberá poseer una garantía 72 hs. antes del ingreso al Hotel, en caso contrario la reserva carece de validez.</strong></p>
 
               <p><strong>Garantía:</strong></p>
@@ -225,9 +213,6 @@ masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
 % if object.warehouse_id.partner_id.website:
 <strong>${object.warehouse_id.partner_id.website}</strong> <br />
 % endif
-
-
-
              ]]></field>
         </record>
 
@@ -243,15 +228,15 @@ masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
             <field name="auto_delete" eval="True" />
             <field name="body_html"><![CDATA[
                 <p><left>Hello <strong>${object.partner_id.name}</strong>.</left></p>
-                <p><left>Greetings from <strong>${object.warehouse_id.name} Hotel</strong>.</left></p> 
+                <p><left>Greetings from <strong>${object.warehouse_id.name} Hotel</strong>.</left></p>
                 <p>This email is for reminding you that the Reservation at the <strong>${object.warehouse_id.name} Hotel</strong>.&nbsp;
-                   % if object.warehouse_id.partner_id.city: 
+                   % if object.warehouse_id.partner_id.city:
                    <strong>${object.warehouse_id.partner_id.city}</strong>,&nbsp;
-                   % endif 
+                   % endif
                    % if object.warehouse_id.partner_id.country_id.name:
                    <strong>${object.warehouse_id.partner_id.country_id.name}</strong>.&nbsp;
                    % endif
-                    Your checkin has been confirmed on Date <strong>${object.date_order}</strong> . 
+                    Your checkin has been confirmed on Date <strong>${object.date_order}</strong> .
                    Please find all the details regarding to the reservation as listed below:
                 </p>
                 <br/>
@@ -279,11 +264,11 @@ masajes, spa); no están beneficiados y deben facturarse con IVA)</p>
                             %endfor
                         %endfor
                 </table>
-               <br /> 
+               <br />
                <p>
 We would appreciate it if you could let us know in case there are any changes in your schedule or program.
 Please inform us immediately, so that we can refund your money according to Hotel policies.
-We are sure that you will find our services satisfactory. We look forward to providing you quality services at our hotel. 
+We are sure that you will find our services satisfactory. We look forward to providing you quality services at our hotel.
                </p>
                <br />
 <strong>Best Regards<strong>,<br />
