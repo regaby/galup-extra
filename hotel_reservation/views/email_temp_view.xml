@@ -139,12 +139,19 @@ reconfirme los precios y condiciones vigentes, el hotel podrá modificar las tar
                 &nbsp;&nbsp;<strong>Tarifa de habitaciones por noche :</strong><br>
                 <br>
 
-<strong>Habitación - Categoría - Monto</strong><br>
-%for line2 in object.reservation_line:
+                <table border="1" cellpadding="4" style="margin-left: 30px;">
+                        <tr>
+                            <th>Habitación</th>
+                            <th>Categoría</th>
+                            <th>Monto</th>
+                        </tr>
+                        %for line2 in object.reservation_line:
                           %for line in line2.reserve:
-${line.name} -
-${line.categ_id.name} -
-                                      % if line.categ_id.name != 'Cochera':
+                                <tr >
+                                    <td>${line.name}</td>
+                                    <td>${line.categ_id.name}</td>
+                                    <td>$
+                                    % if line.categ_id.name != 'Cochera':
                                         % if line2.list_price:
                                         ${line2.list_price}
                                         % else:
@@ -152,36 +159,60 @@ ${line.categ_id.name} -
                                         % endif
                                       % else:
                                         0
-                                      % endif<br>
-
- %endfor
+                                      % endif
+                                    </td>
+                                </tr>
+                            %endfor
                         %endfor
-<strong>TOTAL: </strong> ${object.amount_total} <br>
+                        %for payment in object.payment_lines:
+                        <tr>
+                            <td>
+                                SEÑA
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                ${payment.amount}
+                            </td>
+                        </tr>
+                        % endfor
+                        <tr>
+                            <td>
+                                TOTAL
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                ${object.amount_total}
+                            </td>
+                        </tr>
+                </table>
  <br>
-               <p><strong>El presente voucher es la confirmación de su reserva, deberá poseer una garantía 72 hs. antes del ingreso al Hotel, en caso contrario la reserva carece de validez.</strong></p>
+               <p><strong>El presente voucher es la confirmación de su reserva.</strong></p>
 
-              <p><strong>Garantía:</strong></p>
-              <p>1. Tarjeta de Crédito: deberá facilitar el nombre del titular, número, fecha de vencimiento y código de seguridad, la información se recibirá únicamente vía mail (escaneado) o vía fax. Los datos serán utilizados bajo absoluta confidencialidad.</p>
-              <p>2. Depósito Bancario: (únicamente para Argentina) depositando como mínimo una noche de alojamiento por cada habitación reservada. Solicite los datos bancarios luego de recibir esta confirmación.</p>
-
-              <br />
               <p><strong>Cancelación:</strong></p>
-              <p>Toda cancelación queda anulada una vez recibido el voucher de cancelación, por favor reclamar. En caso de no presentación (no show) se procederá al cobro de una noche de alojamiento en concepto de penalización, por cada habitación reservada. La política de cancelación es hasta las 6 PM del día hábil anterior al ingreso de la reserva.</p>
+              <p>Aclaración*: Una vez realizada la seña para confirmar su reservación la misma NO se reintegra.
+
+</p>
+              <p>*Si cancela su reservación 24 hs antes del día de su llegada la seña realizada queda a su favor como un crédito para usarlo en otra estadía en nuestro hotel. El plazo para usar dicho crédito a favor es de tres meses a partir de la fecha de su reserva cancelada.</p>
+              <p>*Si cancela su reserva con un tiempo menor a 24 hs antes de su llegada o el mismo día de su llegada pierden el monto de la seña, ya que se lo toma como garantía al no haber vendido la habitación.</p>
               <p>Pasadas las 23 hs. Y sin previo aviso de demora por parte del cliente, La reserva queda automáticamente cancelada. Sin excepción a reclamos.
  Queda usted debidamente notificado.</p>
 
               <br />
               <p><strong>Política de Menores y Family Plan:</strong></p>
-              <p>+ Hasta los 4 años inclusive: Cuna o cama adicional con cargo</p>
-              <p>+ De 5 a 8 años inclusive: Cama adicional con cargo</p>
-              <p>+ A partir de los 9 años: se considera adulto, pagando el total del costo de la habitación que irá a utilizar.</p>
+              <p>+ Hasta los 2 años inclusive: Practicuna o cama adicional con cargo</p>
+              <p>+ De 3 a 6 años inclusive: Cama adicional con cargo</p>
+              <p>+ A partir de los 7 años: se considera adulto, pagando el total del costo de la habitación que irá a utilizar.</p>
 
               <br />
               <p><strong>Cuentas bancarias para realizar prepagos:</strong></p>
-              <p>Los depósitos deberán efectuarse a nombre de VERON RAMON RUBEN CUIL: 20162542738 </p>
-              <p><strong>Banco Macro:</strong> Nº CUENTA: 302109415778799</p>
-              <p><strong>CBU:</strong> 2850021830094157787991</p>
-              <p><strong>Alias:</strong> AVEMARAPARTHOTEL</p>  
+              <p>Cuenta corriente BCO MACRO-</p>
+              <p>Nº CUENTA: 302109415778799</p>
+              <p>CBU: 2850021830094157787991</p>
+              <p>VERON RAMON RUBEN</p>
+              <p>CUIL: 20162542738</p>
+              <p>ALIAS: AVEMARAPARTHOTEL</p>
 
               <br />
               <p><strong>Nueva Resolución:</strong></p>
